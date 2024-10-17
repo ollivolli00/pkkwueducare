@@ -350,7 +350,8 @@
                     </div>
                 </div>
             </div>
-            <button class="btn btn-register mt-5 mx-auto" style=" border: 1px dotted #ccc;">Daftar</button>
+           <a href="#" style="color: white; border-radius: 5px; padding: 5px 30px; background: #1a73e8; font-family: Cairo;">DAFTAR</a>
+
         </div>
     </div>
 

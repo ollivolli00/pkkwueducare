@@ -182,6 +182,20 @@
        <input class="w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" id="tanggal-lahir" type="date"/>
       </div>
      </div>
+  <div class="mb-6">
+  <label class="block text-gray-700 font-bold mb-2" for="jenis_kelamin">
+    Jenis Kelamin
+  </label>
+  <div class="relative">
+    <select class="w-full appearance-none px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white text-gray-700" style="line-height: 1.5;">
+      <option value="" disabled selected>Pilih Jenis Kelamin</option>
+      <option value="laki-laki">Laki-laki</option>
+      <option value="perempuan">Perempuan</option>
+</select>
+  </div>
+</div>
+
+
      <div class="mb-6">
       <label class="block text-gray-700 font-bold mb-2" for="email">
        Email

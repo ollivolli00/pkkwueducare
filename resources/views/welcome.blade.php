@@ -420,37 +420,37 @@
                 <!-- Beasiswa BCA -->
                 <div class="col-lg-3">
                     <div class="border rounded-lg p-4 flex flex-col items-center min-w-[250px]">
-                        <img alt="Logo of Bank BCA" class="mb-4" height="50" src="https://placehold.co/100x50" width="100"/>
+                        <img alt="Logo of Bank BCA" class="mb-4" height="100" src="img/bcakcil.png" width="100"/>
                         <h5 class="text-lg font-bold">Beasiswa BCA</h5>
                         <p class="text-gray-600 mb-4">by Bank BCA</p>
-                        <button class="bg-gray-200 text-gray-800 py-2 px-4 rounded">DAFTAR</button>
+                        <a href="{{'bca'}}" style="color: white; border-radius: 5px; padding: 5px 30px; background: #7fad39; font-family: Cairo;">DAFTAR</a>
                     </div>
                 </div>
                 <!-- Beasiswa Djarum Plus -->
                 <div class="col-lg-3">
                     <div class="border rounded-lg p-4 flex flex-col items-center min-w-[250px]">
-                        <img alt="Logo of PT Djarum" class="mb-4" height="50" src="https://placehold.co/100x50" width="100"/>
+                        <img alt="Logo of PT Djarum" class="mb-4" height="100" src="img/djrumkcl.png" width="100"/>
                         <h5 class="text-lg font-bold">Beasiswa Djarum Plus</h5>
                         <p class="text-gray-600 mb-4">by PT Djarum</p>
-                        <button class="bg-gray-200 text-gray-800 py-2 px-4 rounded">DAFTAR</button>
+                        <a href="{{'djarum'}}" style="color: white; border-radius: 5px; padding: 5px 30px; background: #7fad39; font-family: Cairo;">DAFTAR</a>
                     </div>
                 </div>
                 <!-- Beasiswa LPDP -->
                 <div class="col-lg-3">
                     <div class="border rounded-lg p-4 flex flex-col items-center min-w-[250px]">
-                        <img alt="Logo of Kemenkeu RI" class="mb-4" height="50" src="https://placehold.co/100x50" width="100"/>
+                        <img alt="Logo of Kemenkeu RI" class="mb-4" height="100" src="img/lpdp.png" width="100"/>
                         <h5 class="text-lg font-bold">Beasiswa LPDP</h5>
                         <p class="text-gray-600 mb-4">by Kemenkeu RI</p>
-                        <button class="bg-gray-200 text-gray-800 py-2 px-4 rounded">DAFTAR</button>
+                        <a href="{{'lpdp'}}" style="color: white; border-radius: 5px; padding: 5px 30px; background: #7fad39; font-family: Cairo;">DAFTAR</a>
                     </div>
                 </div>
                 <!-- Beasiswa Unggulan -->
                 <div class="col-lg-3">
                     <div class="border rounded-lg p-4 flex flex-col items-center min-w-[250px]">
-                        <img alt="Logo of Kemendikburistek" class="mb-4" height="50" src="https://placehold.co/100x50" width="100"/>
+                        <img alt="Logo of Kemendikburistek" class="mb-4" height="100" src="img/unggul.png" width="100"/>
                         <h5 class="text-lg font-bold">Beasiswa Unggulan</h5>
                         <p class="text-gray-600 mb-4">by Kemendikburistek</p>
-                        <button class="bg-gray-200 text-gray-800 py-2 px-4 rounded">DAFTAR</button>
+                        <a href="{{'unggulan'}}" style="color: white; border-radius: 5px; padding: 5px 30px; background: #7fad39; font-family: Cairo;">DAFTAR</a>
                     </div>
                 </div>
             </div>
