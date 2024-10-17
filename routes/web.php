@@ -40,6 +40,18 @@ Route::get('/lpdp', function () {
 Route::get('/unggulan', function () {
     return view('isikonten3');
 });
+Route::get('/applist-1', function () {
+    return view('perusahaan.applist1');
+});
+Route::get('/applist-2', function () {
+    return view('perusahaan.applist2');
+});
+Route::get('/uplist', function () {
+    return view('perusahaan.uplist');
+});
+Route::get('/applistup', function () {
+    return view('perusahaan.aplistup');
+});
 // Route::get('/dashboard', function () {
 //     return view('perusahaan.home')->middleware('auth');
 // });
