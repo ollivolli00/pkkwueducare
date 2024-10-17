@@ -333,7 +333,7 @@
             </div>
 
             <div class="benefits mt-4">
-                <h4>Benefit Yang Didapat Melalui Beasiswa BCA</h4>
+                <h4>Benefit Yang Didapat Melalui Beasiswa Unggulan</h4>
                 <div class="row text-center">
                     <div class="col-md-3 mt-3">
                         <div class="card">
