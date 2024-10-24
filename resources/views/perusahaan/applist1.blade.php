@@ -275,8 +275,8 @@
                         <td><a href="mailto:reginaa@gmail.com">reginaa@gmail.com</a></td>
                         <td>08119540957</td>
                         <td>
-                            <img src="gmbr.png" alt="File Icon">
-                            <img src="gmbr.png" alt="File Icon">
+                            <img src="img/gmbr.png" alt="File Icon">
+                            <img src="img/gmbr.png" alt="File Icon">
                             + 5 more
                         </td>
                     </tr>
@@ -286,8 +286,8 @@
                         <td><a href="mailto:rereee@gmail.com">rereee@gmail.com</a></td>
                         <td>08133359018</td>
                         <td>
-                            <img src="gmbr.png" alt="File Icon">
-                            <img src="gmbr.png" alt="File Icon">
+                            <img src="img/gmbr.png" alt="File Icon">
+                            <img src="img/gmbr.png" alt="File Icon">
                             + 5 more
                         </td>
                     </tr>
@@ -297,8 +297,8 @@
                         <td><a href="mailto:navaa@gmail.com">navaa@gmail.com</a></td>
                         <td>081249590572</td>
                         <td>
-                            <img src="gmbr.png" alt="File Icon">
-                            <img src="gmbr.png" alt="File Icon">
+                            <img src="img/gmbr.png" alt="File Icon">
+                            <img src="img/gmbr.png" alt="File Icon">
                             + 5 more
                         </td>
                     </tr>
@@ -308,8 +308,8 @@
                         <td><a href="mailto:liddiaa@gmail.com">liddiaa@gmail.com</a></td>
                         <td>083110601563</td>
                         <td>
-                            <img src="gmbr.png" alt="File Icon">
-                            <img src="gmbr.png" alt="File Icon">
+                            <img src="img/gmbr.png" alt="File Icon">
+                            <img src="img/gmbr.png" alt="File Icon">
                             + 5 more
                         </td>
                     </tr>
@@ -319,8 +319,8 @@
                         <td><a href="mailto:daverda@gmail.com">daverda@gmail.com</a></td>
                         <td>085236593477</td>
                         <td>
-                            <img src="gmbr.png" alt="File Icon">
-                            <img src="gmbr.png" alt="File Icon">
+                            <img src="img/gmbr.png" alt="File Icon">
+                            <img src="img/gmbr.png" alt="File Icon">
                             + 5 more
                         </td>
                     </tr>

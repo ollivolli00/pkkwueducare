@@ -261,7 +261,7 @@
             <div class="col-md-4">
                 <div class="card">
                     <div class="d-flex align-items-center">
-                        <img src="bcakcil.png" alt="BCA Logo" width="135" height="135"/>
+                        <img src="img/bcakcil.png" alt="BCA Logo" width="135" height="135"/>
                         <div class="ms-4 card-body">
                             <h4>Beasiswa S1</h4>
                             <p>by Bank BCA</p>
@@ -271,7 +271,7 @@
                 </div>
                 <div class="card mt-5">
                     <div class="d-flex align-items-center">
-                        <img src="bcakcil.png" alt="BCA Logo" width="135" height="135"/>
+                        <img src="img/bcakcil.png" alt="BCA Logo" width="135" height="135"/>
                         <div class="ms-4 card-body">
                             <h4>Beasiswa S3</h4>
                             <p>by Bank BCA</p>
@@ -283,7 +283,7 @@
             <div class="col-md-4">
                 <div class="card">
                     <div class="d-flex align-items-center">
-                        <img src="bcakcil.png" alt="BCA Logo" width="135" height="135"/>
+                        <img src="img/bcakcil.png" alt="BCA Logo" width="135" height="135"/>
                         <div class="ms-4 card-body">
                             <h4>Beasiswa S2</h4>
                             <p>by Bank BCA</p>
