@@ -274,19 +274,19 @@
                     <p>rapor.png</p>
                 </div>
                 <div class="col-md-3 file-item">
-                    <img src="gmbr.png" alt="PNG file icon">
+                    <img src="img/gmbr.png" alt="PNG file icon">
                     <p>rapor(2).png</p>
                 </div>
                 <div class="col-md-3 file-item">
-                    <img src="gmbr.png" alt="PNG file icon">
+                    <img src="img/gmbr.png" alt="PNG file icon">
                     <p>rapor(3).png</p>
                 </div>
                 <div class="col-md-3 file-item">
-                    <img src="gmbr.png" alt="PNG file icon">
+                    <img src="img/gmbr.png" alt="PNG file icon">
                     <p>pasfoto.png</p>
                 </div>
                 <div class="col-md-3 file-item">
-                    <img src="gmbr.png" alt="PNG file icon">
+                    <img src="img/gmbr.png" alt="PNG file icon">
                     <p>akte.png</p>
                 </div>
             </div>
