@@ -40,6 +40,9 @@ Route::get('/lpdp', function () {
 Route::get('/unggulan', function () {
     return view('isikonten3');
 });
+Route::get('/dashboard', function () {
+    return view('perusahaan.home');
+});
 Route::get('/applist-1', function () {
     return view('perusahaan.applist1');
 });
