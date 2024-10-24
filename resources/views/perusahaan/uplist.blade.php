@@ -249,9 +249,9 @@
                 <h5>Nama Perusahaan</h5>
                 <p>perusahaan@gmail.com</p>
             </div>
-            <a class="nav-link" href="#"><i class="fas fa-upload"></i> Upload</a>
-            <a class="nav-link active" href="#"><i class="fas fa-list"></i> Uploaded List</a>
-            <a class="nav-link" href="#"><i class="fas fa-users"></i> Applicants List</a>
+            <a class="nav-link" href={{'dashboard'}}><i class="fas fa-upload"></i> Upload</a>
+            <a class="nav-link active" href={{'uplist'}}><i class="fas fa-list"></i> Uploaded List</a>
+            <a class="nav-link" href={{'applist-1'}}><i class="fas fa-users"></i> Applicants List</a>
         </div>
         <a class="nav-link" href="#"><i class="fas fa-sign-out-alt"></i> Log Out</a>
     </div>

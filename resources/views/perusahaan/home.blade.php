@@ -23,7 +23,7 @@
     </div>
     <div class="w-full">
      <div class="flex items-center w-full py-4 px-6 bg-gray-400 text-white">
-     <a class="flex items-center w-full py-4 px-6" href="#"> 
+     <a class="flex items-center w-full py-4 px-6" href={{'dashboard'}}> 
      <i class="fas fa-upload mr-2">
       </i>
       <span>
@@ -32,7 +32,7 @@
      </a>
      </div>
      <div class="flex items-center w-full py-4 px-6">
-     <a class="flex items-center w-full py-4 px-6" href="#">
+     <a class="flex items-center w-full py-4 px-6" href={{'uplist'}}>
      <i class="fas fa-list mr-2">
       </i>
       <span>
@@ -41,7 +41,7 @@
      </a>
       </div>
      <div class="flex items-center w-full py-4 px-6">
-     <a class="flex items-center w-full py-4 px-6" href="#">
+     <a class="flex items-center w-full py-4 px-6" href={{'applist-1'}}>
       <i class="fas fa-users mr-2">
       </i>
       <span>

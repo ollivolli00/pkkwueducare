@@ -249,9 +249,9 @@
                 <p>perusahaan@gmail.com</p>
             </div>
             <nav class="nav flex-column">
-                <a class="nav-link" href="#"><i class="fas fa-upload"></i> Upload</a>
-                <a class="nav-link" href="#"><i class="fas fa-list"></i> Uploaded List</a>
-                <a class="nav-link active" href="#"><i class="fas fa-users"></i> Applicants List</a>
+                <a class="nav-link" href={{'dashboard'}}><i class="fas fa-upload"></i> Upload</a>
+                <a class="nav-link" href={{'uplist'}}><i class="fas fa-list"></i> Uploaded List</a>
+                <a class="nav-link active" href={{'applist-1'}}><i class="fas fa-users"></i> Applicants List</a>
                 <a class="nav-link" href="#"><i class="fas fa-sign-out-alt"></i> Log Out</a>
             </nav>
         </div>
