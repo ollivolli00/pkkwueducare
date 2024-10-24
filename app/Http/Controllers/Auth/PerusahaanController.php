@@ -29,19 +29,24 @@ class PerusahaanController extends Controller
         return view('perusahaan.home');
     }
     public function loginn(Request $request)
-    {
-        $emailperusahaan = $request->input('emailperusahaan');
-        $password = $request->input('password');
-    
-        $user = Perusahaansign::where('emailperusahaan', $emailperusahaan)->first();
-    
-        if ($user && Hash::check($password, $user->password)) {
-            Auth::login($user);
-            return redirect()->route('dashboard');
-        }
-    
-        return $this->sendFailedLoginResponse($request);
+{
+    $emailperusahaan = $request->input('emailperusahaan');
+    $password = $request->input('password');
+
+    // Tambahkan debug di sini
+    dd($emailperusahaan, $password);
+
+    $user = Perusahaansign::where('emailperusahaan', $emailperusahaan)->first();
+
+    if ($user && Hash::check($password, $user->password)) {
+        Auth::login($user);
+        dd('Logged in successfully:', auth()->user()); // Cek user yang sedang login
+        return redirect()->route('home');
     }
+    
+    return $this->sendFailedLoginResponse($request);
+}
+
     protected function attemptLogin(Request $request)
     {
         $emailperusahaan = $request->input('emailperusahaan');

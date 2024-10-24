@@ -15,10 +15,10 @@
     <div class="flex flex-col items-center mb-8">
      <img alt="User Avatar" class="rounded-full mb-2" height="80" src="https://storage.googleapis.com/a1aa/image/ERQpynA4VbbrDVqqueT7TXE3RbEYCHyk4K5zrItCv4JNeOlTA.jpg" width="80"/>
      <span class="font-semibold">
-      Nama Perusahaan
+     {{ Auth::user()->namaperusahaan }}
      </span>
      <span class="text-gray-500">
-      perusahaan@gmail.com
+     {{ Auth::user()->emailperusahaan }}
      </span>
     </div>
     <div class="w-full">
@@ -51,13 +51,13 @@
      </div>
     <div class="mt-auto mb-8">
      <div class="flex items-center w-full py-4 px-6">
-     <a class="flex items-center w-full py-4 px-6" href="#">
-      <i class="fas fa-sign-out-alt mr-2">
-      </i>
-      <span>
-       Log Out
-      </span>
-      </a>
+     <form method="POST" action="{{ route('logout') }}">
+        @csrf
+        <button type="submit" class="flex items-center w-full py-4 px-6">
+            <i class="fas fa-sign-out-alt mr-2"></i>
+            <span>Log Out</span>
+        </button>
+    </form>
       </div>
      </div>
     </div>

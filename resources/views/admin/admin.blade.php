@@ -71,7 +71,14 @@
                 <a class="nav-link" href="#"><i class="fas fa-database"></i> Data Users</a>
                 <a class="nav-link" href="#"><i class="fas fa-star"></i> User Choice's</a>
                 <a class="nav-link" href="#"><i class="fas fa-upload"></i> Upload</a>
-                <a class="nav-link" href="#"><i class="fas fa-sign-out-alt"></i> Log Out</a>
+                <form method="POST" action="{{ route('logout') }}">
+        @csrf
+        <button type="submit" class="flex items-center w-full py-4 px-6">
+            <i class="fas fa-sign-out-alt mr-2"></i>
+            <span>Log Out</span>
+        </button>
+    </form>
+
             </nav>
         </div>
         <div class="content flex-grow-1">

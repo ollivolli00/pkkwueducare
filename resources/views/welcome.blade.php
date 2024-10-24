@@ -113,11 +113,12 @@
                 <li><a href="{{'/'}}" style="text-align:center; ">Home</a></li>   
               <li>  <a href="{{ 'about' }}" style="text-align:center; ">About</a>   
             </li>    
-@guest
+            @guest
 <li>
-    <a href="{{ 'signup' }}" style="text-align:center; color:white; padding: 10px 15px 12px; background: #7fad39;">Daftar Sebagai Perusahaan</a>
-    </li>
-    @endguest
+    <a href="{{ route('signup') }}" style="text-align:center; color:white; padding: 10px 15px 12px; background: #7fad39;">Daftar Sebagai Perusahaan</a>
+</li>
+@endguest
+
 <li class="nav-item dropdown">
     @auth
         <a id="navbarDropdown" class="nav-link dropdown-toggle" href="" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>

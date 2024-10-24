@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('namabelakang');
             $table->string('emailperusahaan')->unique();
             $table->timestamp('email_verified_at')->nullable();
+            $table->tinyInteger('type')->default(2);
             $table->string('namaperusahaan');
             $table->string('password');
             $table->rememberToken();

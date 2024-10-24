@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\Auth\PerusahaansignController;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\Auth\PerusahaanController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
@@ -20,8 +22,18 @@ Route::get('/', function () {
 });
 
 Auth::routes();
+Route::middleware(['auth', 'multiAuthUser:user'])->group(function () {
+  
+    Route::get('/home', [HomeController::class, 'index'])->name('dashboard');
+});
+ 
+// Super Admin Routes
+Route::middleware(['auth', 'multiAuthUser:admin'])->group(function () {
+  
+    Route::get('/admin/dashboard', [HomeController::class, 'AdminDashboard'])->name('admin');
+});  
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/profil', function () {
     return view('profil');
 });
@@ -55,11 +67,15 @@ Route::get('/uplist', function () {
 Route::get('/applistup', function () {
     return view('perusahaan.aplistup');
 });
-// Route::get('/dashboard', function () {
-//     return view('perusahaan.home')->middleware('auth');
-// });
-Route::get('/signup', [App\Http\Controllers\Auth\PerusahaansignController::class, 'showSignupForm'])->name('signup');
-Route::post('/signup', [App\Http\Controllers\Auth\PerusahaansignController::class, 'create'])->name('signup.post');
-Route::get('/signin', 'App\Http\Controllers\Auth\PerusahaanController@showLoginForm')->name('loginn');
-Route::post('/signin', 'App\Http\Controllers\Auth\PerusahaanController@loginn')->name('loginn.post');
-Route::get('/dashboard', [App\Http\Controllers\Auth\PerusahaanController::class, 'dashboard'])->name('dashboard');
+
+Route::get('/signup', [PerusahaansignController::class, 'showSignupForm'])->name('signup');
+Route::post('/signup', [PerusahaansignController::class, 'create'])->name('signup.post');
+Route::get('/signin', [PerusahaanController::class, 'showLoginForm'])->name('loginn');
+Route::post('/signin', [PerusahaanController::class, 'loginn'])->name('loginn.post');
+
+Route::middleware(['auth', 'multiAuthUser:2'])->group(function () {
+    Route::get('/dashboard', [PerusahaanController::class, 'dashboard'])->name('dashboard');
+});
+
+
+
