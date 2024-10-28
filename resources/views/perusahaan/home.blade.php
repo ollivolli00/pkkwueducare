@@ -14,12 +14,13 @@
     </div>
     <div class="flex flex-col items-center mb-8">
      <img alt="User Avatar" class="rounded-full mb-2" height="80" src="https://storage.googleapis.com/a1aa/image/ERQpynA4VbbrDVqqueT7TXE3RbEYCHyk4K5zrItCv4JNeOlTA.jpg" width="80"/>
+    
      <span class="font-semibold">
-     {{ Auth::user()->namaperusahaan }}
-     </span>
-     <span class="text-gray-500">
-     {{ Auth::user()->emailperusahaan }}
-     </span>
+     {{ $dataPerusahaan->namaperusahaan ?? 'Nama Perusahaan Tidak Tersedia' }}
+</span>
+<span class="text-gray-500">
+{{ $dataPerusahaan->emailperusahaan ?? 'Email Perusahaan Tidak Tersedia' }}
+</span>
     </div>
     <div class="w-full">
      <div class="flex items-center w-full py-4 px-6 bg-gray-400 text-white">

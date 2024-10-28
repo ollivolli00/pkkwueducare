@@ -22,6 +22,7 @@ return new class extends Migration
             $table->tinyInteger('type')->default(2);
             $table->string('namaperusahaan');
             $table->string('password');
+            $table->string('role')->default('perusahaan');
             $table->rememberToken();
             $table->timestamps();
         });

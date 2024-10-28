@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\Auth;
+
 use Illuminate\Support\Facades\Hash;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -17,49 +18,50 @@ class PerusahaanController extends Controller
     public function __construct()
     {
         $this->middleware('guest')->except('logout');
-        $this->middleware('auth')->only('logout');
     }
+
     public function showLoginForm()
     {
         return view('auth.loginp');
     }
     
-    public function dashboard()
+    public function dashboard(Request $request, string $id)
     {
-        return view('perusahaan.home');
-    }
-    public function loginn(Request $request)
-{
-    $emailperusahaan = $request->input('emailperusahaan');
-    $password = $request->input('password');
+        // Pastikan pengguna adalah perusahaan yang sudah login
+        if (Auth::guard('perusahaan')->check()) {
+            $perusahaan = Auth::guard('perusahaan')->user(); // Ambil data pengguna perusahaan yang login
 
-    // Tambahkan debug di sini
-    dd($emailperusahaan, $password);
+            // Ambil data perusahaan berdasarkan ID
+            $dataPerusahaan = Perusahaansign::findOrFail($id); // Pastikan ID perusahaan sesuai
 
-    $user = Perusahaansign::where('emailperusahaan', $emailperusahaan)->first();
-
-    if ($user && Hash::check($password, $user->password)) {
-        Auth::login($user);
-        dd('Logged in successfully:', auth()->user()); // Cek user yang sedang login
-        return redirect()->route('home');
-    }
-    
-    return $this->sendFailedLoginResponse($request);
-}
-
-    protected function attemptLogin(Request $request)
-    {
-        $emailperusahaan = $request->input('emailperusahaan');
-        $password = $request->input('password');
-
-        $user = Perusahaansign::where('emailperusahaan', $emailperusahaan)->first();
-
-        if (!$emailperusahaan || !Hash::check($password, $emailperusahaan->password)) {
-            return false;
+            return view('perusahaan.home', compact('dataPerusahaan'));
         }
 
-        $this->guard()->login($user);
+        return redirect()->route('login'); // Redirect jika tidak ada pengguna yang login
+    }
 
-        return true;
+    public function loginn(Request $request)
+    {
+        $this->validate($request, [
+            'emailperusahaan' => 'required|email',
+            'password' => 'required',
+        ]);
+
+        // Mencari user berdasarkan email
+        $user = Perusahaansign::where('emailperusahaan', $request->input('emailperusahaan'))->first();
+
+        if ($user && Hash::check($request->input('password'), $user->password)) {
+            Auth::login($user);
+            return redirect()->intended($this->redirectTo); // Arahkan ke dashboard
+        }
+
+        return $this->sendFailedLoginResponse($request);
+    }
+
+    protected function sendFailedLoginResponse(Request $request)
+    {
+        return redirect()->back()
+            ->withErrors(['emailperusahaan' => 'These credentials do not match our records.'])
+            ->withInput($request->only('emailperusahaan'));
     }
 }

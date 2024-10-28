@@ -32,6 +32,9 @@ Route::middleware(['auth', 'multiAuthUser:admin'])->group(function () {
   
     Route::get('/admin/dashboard', [HomeController::class, 'AdminDashboard'])->name('admin');
 });  
+Route::middleware(['auth', 'perusahaan'])->group(function () {
+    Route::get('/dashboard', [PerusahaanController::class, 'dashboard'])->name('perusahaan.dashboard');
+});
 
 // Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/profil', function () {
@@ -73,9 +76,9 @@ Route::post('/signup', [PerusahaansignController::class, 'create'])->name('signu
 Route::get('/signin', [PerusahaanController::class, 'showLoginForm'])->name('loginn');
 Route::post('/signin', [PerusahaanController::class, 'loginn'])->name('loginn.post');
 
-Route::middleware(['auth', 'multiAuthUser:2'])->group(function () {
-    Route::get('/dashboard', [PerusahaanController::class, 'dashboard'])->name('dashboard');
-});
+// Route::middleware(['auth', 'multiAuthUser:2'])->group(function () {
+//     Route::get('/dashboard', [PerusahaanController::class, 'dashboard'])->name('dashboard');
+// });
 
 
 

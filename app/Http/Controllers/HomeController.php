@@ -1,8 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
-use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
@@ -28,5 +27,12 @@ class HomeController extends Controller
     public function AdminDashboard()
     {
         return view('admin.admin');
+    }
+    public function PerusahaanDashboard()
+    {
+        // Mengambil pengguna yang sedang login
+        $perusahaan = Auth::user(); // Ambil data pengguna yang sedang login
+
+        return view('perusahaan.home', compact('perusahaan')); // Kirim data pengguna ke view
     }
 }
