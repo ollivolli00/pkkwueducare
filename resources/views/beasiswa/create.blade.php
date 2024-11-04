@@ -64,37 +64,72 @@
     </div>
    </div>
    <!-- Main Content -->
+   <form action="{{ route('beasiswa.store') }}" method="POST">
+   @csrf
    <div class="w-4/5 p-8">
    <div class="bg-gray-300 h-40 flex justify-center items-center mb-8" style="max-width: 100%; max-height: 100%">
   <label class="cursor-pointer w-full h-full flex justify-center items-center relative">
     <i id="icon1" class="fas fa-plus text-4xl text-gray-500"></i>
-    <input class="hidden" id="fileInput1" onchange="handleFileUpload(event, 'preview1', 'icon1', 'changeButton1')" type="file"/>
+    <input class="hidden @error('image1') is-invalid @enderror" id="image1" onchange="handleFileUpload(event, 'preview1', 'icon1', 'changeButton1')" type="file"/>
+    @error('image1')
+                        <div class="alert alert-danger mt-2">
+                            {{ $message }}
+                        </div>
+                    @enderror  
   </label>
+  
   <img alt="File Preview" class="hidden relative w-full h-full object-cover" id="preview1" style="max-width: 100%; max-height: 100%; min-width: 100%; min-height: 100%; border-radius: 10px; object-fit: cover; object-position: center;">
   <button id="changeButton1" class="hidden absolute top-2 right-2 bg-white text-gray-800 px-3 py-1 text-sm rounded hover:bg-gray-100" onclick="triggerFileInput('fileInput1')">Change File</button>
 </div>
+
     <div class="flex mb-8">
     <div class="w-1/4 flex justify-center items-center border-2 border-gray-400 relative">
   <label class="cursor-pointer w-full h-full flex justify-center items-center relative">
     <i id="icon2" class="fas fa-plus text-4xl text-gray-500 absolute"></i>
-    <input class="hidden" id="fileInput2" onchange="handleFileUpload(event, 'preview2', 'icon2', 'changeButton2')" type="file"/>
+    <input class="hidden @error('image2') is-invalid @enderror" id="image2" onchange="handleFileUpload(event, 'preview2', 'icon2', 'changeButton2')" type="file"/>
+    @error('image2')
+                        <div class="alert alert-danger mt-2">
+                            {{ $message }}
+                        </div>
+                    @enderror  
   </label>
+  
   <img alt="File Preview" class="hidden absolute top-0 left-0 w-full h-full object-cover" id="preview2" style="max-width: 100%; max-height: 100%; min-width: 100%; min-height: 100%; object-fit: cover; object-position: center;">
   <!-- Add a "Change File" button -->
   <button id="changeButton2" class="hidden absolute top-2 right-2 bg-white text-gray-800 px-3 py-1 text-sm rounded hover:bg-gray-100" onclick="triggerFileInput('fileInput1')">Change File</button>
 </div>
      <div class="w-3/4 flex flex-col justify-center pl-4">
-      <input class="border-2 border-gray-400 p-2 mb-2" placeholder="Add Your Title" type="text"/>
-      <input class="border-2 border-gray-400 p-2 mb-2" placeholder="Add Your Company Name" type="text"/>
-      <input class="border-2 border-gray-400 p-2" placeholder="Add Your Deadline" type="text"/>
-     </div>
+      <input class="border-2 border-gray-400 p-2 mb-2 @error('namabeasiswa') is-invalid @enderror" id="namabeasiswa" placeholder="Add Your Title" type="text"/>
+      @error('namabeasiswa')
+                        <div class="alert alert-danger mt-2">
+                            {{ $message }}
+                        </div>
+                    @enderror  
+      <input class="border-2 border-gray-400 p-2 mb-2 @error('namaperusahaan') is-invalid @enderror" id="namaperusahaan" placeholder="Add Your Company Name" type="text"/>
+      @error('namaperusahaan')
+                        <div class="alert alert-danger mt-2">
+                            {{ $message }}
+                        </div>
+                    @enderror  
+      <input class="border-2 border-gray-400 p-2 @error('batasbeasiswa') is-invalid @enderror" id="batasbeasiswa" placeholder="Add Your Deadline" type="date"/>
+      @error('batasbeasiswa')
+                        <div class="alert alert-danger mt-2">
+                            {{ $message }}
+                        </div>
+                    @enderror   
+    </div>
     </div>
     <div class="flex mb-8">
      <div class="w-1/4 flex flex-col justify-center items-center border-2 border-gray-400 p-2">
       <i class="fas fa-pencil-alt mb-2">
       </i>
-      <input class="border-2 border-gray-400 p-2 mb-2" placeholder="Add Your Requirements" type="text"/>
-      <textarea class="border-2 border-gray-400 p-2" placeholder="Add Your Description"></textarea>
+      <input class="border-2 border-gray-400 p-2 mb-2 @error('minipersyaratan') is-invalid @enderror" id="minipersyaratan" placeholder="Add Your Requirements" type="text"/>
+      @error('minipersyaratan')
+                        <div class="alert alert-danger mt-2">
+                            {{ $message }}
+                        </div>
+                    @enderror  
+      <textarea class="border-2 border-gray-400 p-2 @error('miniisi') is-invalid @enderror" id="miniisi" placeholder="Add Your Description"></textarea>
      </div>
      <div class="w-1/4 flex justify-center items-center border-2 border-gray-400 ml-4">
       <i class="fas fa-plus">
@@ -102,24 +137,18 @@
      </div>
     </div>
     <div class="flex flex-col mb-8">
-     <input class="border-2 border-gray-400 p-2 mb-2" placeholder="Add Your Title" type="text"/>
-     <textarea class="border-2 border-gray-400 p-2" placeholder="Add Your Description"></textarea>
-    </div>
-    <div class="flex flex-col mb-8">
-     <span class="text-gray-500 mb-2">
-      (optional)
-     </span>
-     <div class="flex">
-      <div class="w-1/4 flex flex-col justify-center items-center border-2 border-gray-400 p-2">
-       <i class="fas fa-pencil-alt mb-2">
-       </i>
-       <textarea class="border-2 border-gray-400 p-2" placeholder="Add Your Description"></textarea>
-      </div>
-      <div class="w-1/4 flex justify-center items-center border-2 border-gray-400 ml-4">
-       <i class="fas fa-plus">
-       </i>
-      </div>
-     </div>
+     <input class="border-2 border-gray-400 p-2 mb-2 @error('persyaratan') is-invalid @enderror" id="persyaratan" placeholder="Add Your Title" type="text"/>
+     @error('persyaratan')
+                        <div class="alert alert-danger mt-2">
+                            {{ $message }}
+                        </div>
+                    @enderror  
+     <textarea class="border-2 border-gray-400 p-2 @error('isipersyaratan') is-invalid @enderror" id="isipersyaratan" placeholder="Add Your Description"></textarea>
+     @error('isipersyaratan')
+                        <div class="alert alert-danger mt-2">
+                            {{ $message }}
+                        </div>
+                    @enderror  
     </div>
     <div class="flex flex-col mb-8">
      <input class="border-2 border-gray-400 p-2 mb-2" placeholder="Add The Title of Your Scholarship Benefits" type="text"/>
@@ -135,13 +164,11 @@
      </div>
     </div>
     <div class="flex justify-center">
-     <button class="bg-blue-200 text-white py-2 px-8 rounded-full">
+     <button type="submit" class="bg-blue-200 text-white py-2 px-8 rounded-full">
       DAFTAR
      </button>
+</form>
     </div>
-    <a class="nav-link active" href={{'create'}}>
-                    <i class="fas fa-users"></i> pencet
-                </a>
    </div>
   </div>
   <script>

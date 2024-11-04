@@ -25,7 +25,7 @@ class PerusahaansignController extends Controller
         return Validator::make($data, [
             'namadepan' => ['required', 'string', 'max:255'],
             'namabelakang' => ['required', 'string', 'max:255'],
-            'emailperusahaan' => ['required', 'string', 'email', 'max:255', 'unique:perusahaansign'],
+            'emailperusahaan' => ['required', 'string', 'email', 'max:255', 'unique:perusahaansigns'],
             'namaperusahaan' => ['required', 'string', 'max:255'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
         ]);

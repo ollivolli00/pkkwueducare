@@ -20,7 +20,9 @@ use Illuminate\Support\Facades\Auth;
 Route::get('/', function () {
     return view('welcome');
 });
-
+Route::get('/create', function () {
+    return view('beasiswa.create');
+});
 Auth::routes();
 Route::middleware(['auth', 'multiAuthUser:user'])->group(function () {
   
