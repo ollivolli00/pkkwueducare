@@ -139,7 +139,7 @@
       DAFTAR
      </button>
     </div>
-    <a class="nav-link active" href={{'create'}}>
+    <a class="nav-link active" href="{{route('beasiswa.create')}}">
                     <i class="fas fa-users"></i> pencet
                 </a>
    </div>

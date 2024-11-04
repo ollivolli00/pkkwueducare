@@ -3,6 +3,7 @@
 use App\Http\Controllers\Auth\PerusahaansignController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Auth\PerusahaanController;
+use App\Http\Controllers\BeasiswaController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
@@ -20,9 +21,7 @@ use Illuminate\Support\Facades\Auth;
 Route::get('/', function () {
     return view('welcome');
 });
-Route::get('/create', function () {
-    return view('beasiswa.create');
-});
+Route::resource('beasiswa', BeasiswaController::class);
 Auth::routes();
 Route::middleware(['auth', 'multiAuthUser:user'])->group(function () {
   
@@ -62,13 +61,13 @@ Route::get('/dashboard', function () {
 });
 Route::get('/applist-1', function () {
     return view('perusahaan.applist1');
-});
+})->name('applist-1');
 Route::get('/applist-2', function () {
     return view('perusahaan.applist2');
-});
+})->name('applist-2');
 Route::get('/uplist', function () {
     return view('perusahaan.uplist');
-});
+})->name('uplist');
 Route::get('/applistup', function () {
     return view('perusahaan.aplistup');
 });
