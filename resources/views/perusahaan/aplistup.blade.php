@@ -1,7 +1,7 @@
 <html>
  <head>
   <title>
-   Educare - BCA Beasiswa S3
+   Educare - {{$beasiswa->namabeasiswa}}
   </title>
   <script src="https://cdn.tailwindcss.com">
   </script>
