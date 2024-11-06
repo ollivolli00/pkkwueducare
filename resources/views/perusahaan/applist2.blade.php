@@ -245,14 +245,27 @@
         <div class="sidebar">
             <div class="profile">
                 <img src="https://placehold.co/100x100" alt="Profile Picture">
-                <h5>Nama Perusahaan</h5>
-                <p>perusahaan@gmail.com</p>
+                @auth('perusahaan')
+    <span class="font-semibold">
+        {{ Auth::guard('perusahaan')->user()->namaperusahaan }}
+    </span>
+    <span class="text-gray-500">
+        {{ Auth::guard('perusahaan')->user()->emailperusahaan ?? 'Email Perusahaan Tidak Tersedia' }}
+    </span>
+@endauth
             </div>
             <nav class="nav flex-column">
                 <a class="nav-link" href={{'dashboard'}}><i class="fas fa-upload"></i> Upload</a>
                 <a class="nav-link" href={{'uplist'}}><i class="fas fa-list"></i> Uploaded List</a>
                 <a class="nav-link active" href={{'applist-1'}}><i class="fas fa-users"></i> Applicants List</a>
-                <a class="nav-link" href="#"><i class="fas fa-sign-out-alt"></i> Log Out</a>
+                <form method="POST" action="{{ route('logout') }}">
+        @csrf
+        <button type="submit" class="nav-link">
+            <i class="fas fa-sign-out-alt mr-2"></i>
+            <span>Log Out</span>
+        </button>
+    </form>
+            
             </nav>
         </div>
 

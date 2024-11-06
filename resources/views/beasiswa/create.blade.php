@@ -47,9 +47,13 @@
                         </a>
                     </li>
                     <li class="flex items-center justify-center text-gray-800 hover:text-blue-600 cursor-pointer">
-                        <a class="nav-link" href="#">
-                            <i class="fas fa-sign-out-alt mr-2"></i> Log Out
-                        </a>
+                    <form method="POST" action="{{ route('logout') }}">
+        @csrf
+        <button type="submit" class="flex items-center w-full py-4 px-6">
+            <i class="fas fa-sign-out-alt mr-2"></i>
+            <span>Log Out</span>
+        </button>
+    </form>
                     </li>
                 </ul>
             </div>
