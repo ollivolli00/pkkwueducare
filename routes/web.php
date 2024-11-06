@@ -67,9 +67,8 @@ Route::get('/applist-2', function () {
     return view('perusahaan.applist2');
 })->name('applist-2');
 Route::get('uplist', [BeasiswaController::class, 'index'])->name('beasiswa.index');
-Route::get('/applistup', function () {
-    return view('perusahaan.aplistup');
-});
+// routes/web.php
+Route::get('/beasiswa/{id}', 'BeasiswaController@show')->name('beasiswa.show');
 
 Route::get('/signup', [PerusahaansignController::class, 'showSignupForm'])->name('signup');
 Route::post('/signup', [PerusahaansignController::class, 'create'])->name('signup.post');

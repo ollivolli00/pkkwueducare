@@ -283,7 +283,7 @@
                         <div class="ms-4 card-body">
                             <h4>{{ $beasiswa->namabeasiswa }}</h4>
                             <p>{{ $beasiswa->namaperusahaan }}</p>
-                            <a href="">VIEW</a>
+                            <a href="{{route('beasiswa.show', $beasiswa->id)}}">VIEW</a>
                         </div>
                     </div>
                 </div>
