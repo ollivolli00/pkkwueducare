@@ -17,29 +17,28 @@ class PerusahaanController extends Controller
 
     public function __construct()
     {
-        $this->middleware('guest')->except('logout');
+        $this->middleware('guest:perusahaan')->except('logout'); // Middleware untuk perusahaan
     }
 
     public function showLoginForm()
     {
         return view('auth.loginp');
     }
-    
+
     public function dashboard(Request $request, string $id)
     {
         // Pastikan pengguna adalah perusahaan yang sudah login
-        if (Auth::guard('perusahaan')->check()) {
+        if (Auth::guard('perusahaan')->check()) { // Ganti 'perusahaansigns' dengan 'perusahaan'
             $perusahaan = Auth::guard('perusahaan')->user(); // Ambil data pengguna perusahaan yang login
-
+    
             // Ambil data perusahaan berdasarkan ID
             $dataPerusahaan = Perusahaansign::findOrFail($id); // Pastikan ID perusahaan sesuai
-
-            return view('perusahaan.home', compact('dataPerusahaan'));
+    
+            return view('beasiswa.create', compact('dataPerusahaan'));
         }
-
+    
         return redirect()->route('login'); // Redirect jika tidak ada pengguna yang login
     }
-
     public function loginn(Request $request)
     {
         $this->validate($request, [
@@ -51,7 +50,7 @@ class PerusahaanController extends Controller
         $user = Perusahaansign::where('emailperusahaan', $request->input('emailperusahaan'))->first();
 
         if ($user && Hash::check($request->input('password'), $user->password)) {
-            Auth::login($user);
+            Auth::guard('perusahaan')->login($user); // Gunakan guard perusahaan
             return redirect()->intended($this->redirectTo); // Arahkan ke dashboard
         }
 
@@ -63,5 +62,11 @@ class PerusahaanController extends Controller
         return redirect()->back()
             ->withErrors(['emailperusahaan' => 'These credentials do not match our records.'])
             ->withInput($request->only('emailperusahaan'));
+    }
+
+    public function logout(Request $request)
+    {
+        Auth::guard('perusahaan')->logout(); // Logout pengguna perusahaan
+        return redirect('/'); // Redirect setelah logout
     }
 }

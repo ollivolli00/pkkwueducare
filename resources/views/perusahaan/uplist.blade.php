@@ -256,44 +256,31 @@
         <a class="nav-link" href="#"><i class="fas fa-sign-out-alt"></i> Log Out</a>
     </div>
 
+   
     <div class="content">
-        <div class="row">
+    <div class="row">
+        @forelse($beasiswas as $beasiswa)
             <div class="col-md-4">
-                <div class="card">
+                <div class="card mt-4">
                     <div class="d-flex align-items-center">
-                        <img src="img/bcakcil.png" alt="BCA Logo" width="135" height="135"/>
+                        <!-- Pastikan path gambar benar -->
+                        <img src="{{ asset('storage/images/' . $beasiswa->image1) }}" alt="BCA Logo" width="135" height="135"/>
                         <div class="ms-4 card-body">
-                            <h4>Beasiswa S1</h4>
-                            <p>by Bank BCA</p>
-                            <a href="">VIEW</a> <!-- Tautan ditambahkan di sini -->
-                        </div>
-                    </div>
-                </div>
-                <div class="card mt-5">
-                    <div class="d-flex align-items-center">
-                        <img src="img/bcakcil.png" alt="BCA Logo" width="135" height="135"/>
-                        <div class="ms-4 card-body">
-                            <h4>Beasiswa S3</h4>
-                            <p>by Bank BCA</p>
-                            <a href="">VIEW</a> <!-- Tautan ditambahkan di sini -->
+                            <h4>{{ $beasiswa->namabeasiswa }}</h4>
+                            <p>{{ $beasiswa->namaperusahaan }}</p>
+                            <a href="">VIEW</a>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="col-md-4">
-                <div class="card">
-                    <div class="d-flex align-items-center">
-                        <img src="img/bcakcil.png" alt="BCA Logo" width="135" height="135"/>
-                        <div class="ms-4 card-body">
-                            <h4>Beasiswa S2</h4>
-                            <p>by Bank BCA</p>
-                            <a href="">VIEW</a> <!-- Tautan ditambahkan di sini -->
-                        </div>
-                    </div>
-                </div>
+        @empty
+            <div class="col-12">
+                <p class="alert alert-danger">Belum ada beasiswa yang tersedia.</p>
             </div>
-        </div>
+        @endforelse
     </div>
+</div>
+
             <!-- Js Plugins -->
             <script src="js/jquery-3.3.1.min.js"></script>
     <script src="js/bootstrap.min.js"></script>

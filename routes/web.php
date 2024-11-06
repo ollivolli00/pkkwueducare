@@ -58,16 +58,15 @@ Route::get('/unggulan', function () {
 });
 Route::get('/dashboard', function () {
     return view('perusahaan.home');
-});
+})->name('dashboard');
+
 Route::get('/applist-1', function () {
     return view('perusahaan.applist1');
 })->name('applist-1');
 Route::get('/applist-2', function () {
     return view('perusahaan.applist2');
 })->name('applist-2');
-Route::get('/uplist', function () {
-    return view('perusahaan.uplist');
-})->name('uplist');
+Route::get('uplist', [BeasiswaController::class, 'index'])->name('beasiswa.index');
 Route::get('/applistup', function () {
     return view('perusahaan.aplistup');
 });

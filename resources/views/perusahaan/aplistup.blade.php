@@ -1,313 +1,243 @@
-<!DOCTYPE html>
-<html lang="zxx">
+<html>
+ <head>
+  <title>
+   Educare - BCA Beasiswa S3
+  </title>
+  <script src="https://cdn.tailwindcss.com">
+  </script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
+<style>
+    .sidebar {
+    width: 250px; /* Lebar sidebar */
+    background-color: #f8f9fa; /* Warna latar belakang sidebar */
+    height: 100vh; /* Tinggi sidebar */
+    position: fixed; /* Posisi tetap */
+    border-right: 1px solid #dee2e6; /* Garis pemisah */
+    display: flex;
+    flex-direction: column; /* Mengatur elemen sidebar secara vertikal */
+    justify-content: space-between; /* Mengatur jarak antara elemen */
+}
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="description" content="Ogani Template">
-    <meta name="keywords" content="Ogani, unica, creative, html">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>EDUCARE</title>
+.sidebar .profile {
+    text-align: center; /* Pusatkan teks */
+    padding: 20px; /* Jarak dalam profile */
+}
 
-    <!-- Google Font -->
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;900&display=swap" rel="stylesheet">
-    @vite(['resources/sass/app.scss', 'resources/js/app.js'])
-    <!-- Css Styles -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
-        crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+.sidebar .profile img {
+    width: 80px; /* Lebar gambar profile */
+    height: 80px; /* Tinggi gambar profile */
+    border-radius: 50%; /* Membuat gambar menjadi bulat */
+}
 
-    <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css">
-    <link rel="stylesheet" href="css/font-awesome.min.css" type="text/css">
-    <link rel="stylesheet" href="css/elegant-icons.css" type="text/css">
-    <link rel="stylesheet" href="css/nice-select.css" type="text/css">
-    <link rel="stylesheet" href="css/jquery-ui.min.css" type="text/css">
-    <link rel="stylesheet" href="css/owl.carousel.min.css" type="text/css">
-    <link rel="stylesheet" href="css/slicknav.min.css" type="text/css">
-    <link rel="stylesheet" href="css/style.css" type="text/css">
-</head>    
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-        }
+.sidebar .profile h5 {
+    margin-top: 10px; /* Jarak atas judul */
+    font-size: 16px; /* Ukuran font judul */
+}
 
-        .sidebar {
-            background-color: #f8f9fa;
-            height: 100vh;
-            padding: 20px;
-            border-right: 1px solid #ddd;
-        }
+.sidebar .profile p {
+    font-size: 14px; /* Ukuran font untuk email */
+    color: #6c757d; /* Warna font untuk email */
+}
 
-        .sidebar .profile {
-            text-align: center;
-            margin-bottom: 20px;
-        }
+.sidebar .nav-link {
+    font-size: 16px; /* Ukuran font untuk link */
+    color: #000; /* Warna font untuk link */
+    padding: 15px 20px; /* Jarak dalam link */
+    text-decoration: none; /* Menghilangkan garis bawah */
+    display: flex; /* Mengatur link menjadi flex */
+    align-items: center; /* Memusatkan elemen di dalam link */
+}
 
-        .sidebar .profile img {
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-        }
+.sidebar .nav-link:hover {
+    background-color: #e9ecef; /* Warna latar belakang saat hover */
+}
 
-        .sidebar .profile h5 {
-            margin: 10px 0 5px;
-        }
-
-        .sidebar .profile p {
-            margin: 0;
-            color: #6c757d;
-        }
-
-        .sidebar .nav-link {
-            color: #000;
-            font-weight: bold;
-            margin: 10px 0;
-        }
-
-        .sidebar .nav-link.active {
-            background-color: #6c757d;
-            color: #fff;
-            border-radius: 5px;
-        }
-
-        .content {
-            padding: 50px; 
-            flex-grow: 1;
-        }
-
-        .file-item {
-            text-align: center;
-            margin-bottom: 20px;
-        }
-
-        .file-item img {
-            width: 100px;
-            height: 170px;
-        }
-
-        .file-item p {
-            margin: 10px 0 0;
-        }
-
-        .btn-back {
-            background-color: #bebebea4;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 5px;
-            margin-top: 30px;
-        }
-
-        /* Mengatur posisi tombol back */
-        .btn-container {
-            text-align: right; /* Mengatur posisi tombol ke kanan tapi tidak terlalu mepet */
-        }
-       
-    </style>
+.sidebar .nav-link.active {
+    background-color: #adb5bd; /* Warna latar belakang untuk link aktif */
+    color: #fff; /* Warna font untuk link aktif */
+}
+</style> 
 </head>
-<body>
-    <!-- Page Preloder -->
-    <div id="preloder">
-        <div class="loader"></div>
-    </div>
-
-    <!-- Humberger Begin -->
-    <div class="humberger__menu__overlay"></div>
-    <div class="humberger__menu__wrapper">
-        <div class="humberger__menu__logo">
-            <a href="#"><img src="img/logo.png" alt=""></a>
-        </div>
-        <div class="humberger__menu__cart">
-            <ul>
-                <li><a href="#"><i class="fa fa-heart"></i> <span>1</span></a></li>
-                <li><a href="#"><i class="fa fa-shopping-bag"></i> <span>3</span></a></li>
-            </ul>
-            <div class="header__cart__price">item: <span>$150.00</span></div>
-        </div>
-        <div class="humberger__menu__widget">
-            <div class="header__top__right__language">
-                <img src="img/language.png" alt="">
-                <div>English</div>
-                <span class="arrow_carrot-down"></span>
-                <ul>
-                    <li><a href="#">Spanis</a></li>
-                    <li><a href="#">English</a></li>
+ <body class="bg-gray-100 font-sans">
+  <div class="flex">
+  <div class="w-1/5 bg-white h-scrfulleen shadow-lg">
+            <div class="flex flex-col items-center py-8">
+                <img alt="Educare Logo" class="mb-4" height="50" src="https://storage.googleapis.com/a1aa/image/TstEQNtfdBxbFCt6fLkuAApv2BtYFfAfQI81qt1YUr7M2G5OB.jpg" width="50"/>
+                <h1 class="text-blue-600 text-xl font-bold">EDUCARE</h1>
+            </div>
+            <div class="flex flex-col items-center mt-8">
+                <img alt="User  Avatar" class="rounded-full mb-4" height="100" src="https://storage.googleapis.com/a1aa/image/TsPTHHQA9PLmIZY2P9D0HASO0e0SXKHpfutawnKUyYyYKRnTA.jpg" width="100"/>
+                <p class="text-gray-800 font-semibold">Nama Perusahaan</p>
+                <p class="text-gray-600">perusahaan@gmail.com</p>
+            </div>
+            <div class="mt-8">
+                <ul class="space-y-4">
+                    <li class="flex items-center justify-center text-gray-800 hover:text-blue-600 cursor-pointer">
+                        <a class="nav-link" href="{{ 'dashboard' }}">
+                            <i class="fas fa-upload mr-2"></i> Upload
+                        </a>
+                    </li>
+                    <li class="flex items-center justify-center text-white bg-gray-400 hover:bg-gray-500 cursor-pointer py-2">
+                        <a class="nav-link active" href="{{ 'uplist' }}">
+                            <i class="fas fa-list mr-2"></i> Uploaded List
+                        </a>
+                    </li>
+                    <li class="flex items-center justify-center text-gray-800 hover:text-blue-600 cursor-pointer">
+                        <a class="nav-link" href="{{ 'applist-1' }}">
+                            <i class="fas fa-users mr-2"></i> Applicants List
+                        </a>
+                    </li>
+                    <li class="flex items-center justify-center text-gray-800 hover:text-blue-600 cursor-pointer">
+                        <a class="nav-link" href="#">
+                            <i class="fas fa-sign-out-alt mr-2"></i> Log Out
+                        </a>
+                    </li>
                 </ul>
             </div>
-            <div class="header__top__right__auth">
-                <a href="#"><i class="fa fa-user"></i> Login</a>
-            </div>
         </div>
-        <nav class="humberger__menu__nav mobile-menu">
-            <ul>
-                <li class="active"><a href="/">Home</a></li>
-                <li><a href="./shop-grid.html">Shop</a></li>
-                <li><a href="#">Pages</a>
-                    <ul class="header__menu__dropdown">
-                        <li><a href="./shop-details.html">Shop Details</a></li>
-                        <li><a href="./shoping-cart.html">Shoping Cart</a></li>
-                        <li><a href="./checkout.html">Check Out</a></li>
-                        <li><a href="./blog-details.html">Blog Details</a></li>
-                    </ul>
-                </li>
-                <li><a href="./blog.html">Blog</a></li>
-                <li><a href="./contact.html">Contact</a></li>
-            </ul>
-        </nav>
-        <div id="mobile-menu-wrap"></div>
-        <div class="header__top__right__social">
-            <a href="#"><i class="fa fa-facebook"></i></a>
-            <a href="#"><i class="fa fa-twitter"></i></a>
-            <a href="#"><i class="fa fa-linkedin"></i></a>
-            <a href="#"><i class="fa fa-pinterest-p"></i></a>
-        </div>
-        <div class="humberger__menu__contact">
-            <ul>
-                <li><i class="fa fa-envelope"></i> hello@colorlib.com</li>
-                <li>Free Shipping for all Order of $99</li>
-            </ul>
-        </div>
+
+   <!-- Main Content -->
+   <div class="w-5/6 p-8">
+    <div class="flex items-center mb-8">
+     <img alt="BCA Logo" class="mr-4" height="50" src="https://storage.googleapis.com/a1aa/image/8AqxOeN50lwebEczm8d6mmrPd174tUwZUevvosOTDFSBbjcnA.jpg" width="50"/>
+     <div>
+      <h2 class="text-2xl font-bold">
+       Beasiswa S3
+      </h2>
+      <p class="text-gray-600">
+       by Bank BCA
+      </p>
+      <p class="text-gray-500">
+       Batas Waktu: 14/09/2024
+      </p>
+     </div>
     </div>
-    <!-- Humberger End -->
-    <!-- Header Section Begin -->
-    <header class="header">
-        <!-- <div class="header__top">
-            <div class="container">
-                <div class="row">
-                  
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div> -->
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-3">
-                    <div class="header__logo">
-                        <a href="./index.html"><img src="img/logo.png" alt="" width="150px;" height="50px;"></a>
-                    </div>
-                </div>
-                <!-- <div class="col-lg-6">
-    <nav class="header__menu">
-        <ul>
-
-                <li><a href="{{'/'}}" style="text-align:center; ">Home</a></li>   
-              <li>  <a href="{{ 'about' }}" style="text-align:center; ">About</a>   
-            </li>    
-@guest
-<li>
-    <a href="{{ 'signup' }}" style="text-align:center; color:white; padding: 10px 15px 12px; background: #7fad39;">Daftar Sebagai Perusahaan</a>
-    </li>
-    @endguest
-<li class="nav-item dropdown">
-    @auth
-        <a id="navbarDropdown" class="nav-link dropdown-toggle" href="" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-            {{ Auth::user()->name }}
-        </a>
-        <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-        <a href="{{'profil'}}">Profile</a>   
-        <a class="dropdown-item" href="{{ route('logout') }}"
-               onclick="event.preventDefault();
-                             document.getElementById('logout-form').submit();">
-                {{ __('Logout') }}
-            </a>
-            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                @csrf
-            </form>
-        </div>
-    @else
-        <a href="{{ route('login') }}" style="color:white; padding: 10px 15px 12px; background: #7fad39;">Login</a>
-    @endauth
-</li>
-
-        </ul>
-        </nav>
-</div>         -->
-</div>
-        </div>
-            </div>
-            <div class="humberger__open">
-                <i class="fa fa-bars"></i>
-            </div>
-        </div>
-    </header>
-        
-
-    <!-- Header Section End -->
-
-    <div class="d-flex">
-        <!-- Sidebar -->
-        <div class="sidebar">
-            <div class="profile">
-                <img src="#" alt="Profile Picture">
-                <h5>Nama Perusahaan</h5>
-                <p>perusahaan@gmail.com</p>
-            </div>
-            <nav class="nav flex-column">
-                <a class="nav-link" href={{'dashboard'}}>
-                    <i class="fas fa-upload"></i> Upload
-                </a>
-                <a class="nav-link" href={{'uplist'}}>
-                    <i class="fas fa-list"></i> Uploaded List
-                </a>
-                <a class="nav-link active" href={{'applist-1'}}>
-                    <i class="fas fa-users"></i> Applicants List
-                </a>
-                <a class="nav-link" href="#">
-                    <i class="fas fa-sign-out-alt"></i> Log Out
-                </a>
-            </nav>
-        </div>
-
-        <!-- Content -->
-        <div class="content">
-            <div class="row">
-                <div class="col-md-3 file-item">
-                    <img src="img/gmbr.png" alt="PNG file icon">
-                    <p>KK.png</p>
-                </div>
-                <div class="col-md-3 file-item">
-                    <img src="img/gmbr.png" alt="PNG file icon">
-                    <p>KTP.png</p>
-                </div>
-                <div class="col-md-3 file-item">
-                    <img src="img/gmbr.png" alt="PNG file icon">
-                    <p>rapor.png</p>
-                </div>
-                <div class="col-md-3 file-item">
-                    <img src="img/gmbr.png" alt="PNG file icon">
-                    <p>rapor(2).png</p>
-                </div>
-                <div class="col-md-3 file-item">
-                    <img src="img/gmbr.png" alt="PNG file icon">
-                    <p>rapor(3).png</p>
-                </div>
-                <div class="col-md-3 file-item">
-                    <img src="img/gmbr.png" alt="PNG file icon">
-                    <p>pasfoto.png</p>
-                </div>
-                <div class="col-md-3 file-item">
-                    <img src="img/gmbr.png" alt="PNG file icon">
-                    <p>akte.png</p>
-                </div>
-            </div>
-            
-            <!-- Wrapper untuk tombol Back -->
-            <div class="btn-container">
-                <button class="btn-back">Back</button>
-            </div>
-        </div>
+    <div class="flex justify-center space-x-4 mb-8">
+     <div class="bg-white p-4 rounded-lg shadow-md text-center">
+      <p class="text-gray-600">
+       Pendidikan
+      </p>
+      <p class="font-bold">
+       Minimal pendidikan S3/Sederajat
+      </p>
+     </div>
+     <div class="bg-white p-4 rounded-lg shadow-md text-center">
+      <p class="text-gray-600">
+       Usia
+      </p>
+      <p class="font-bold">
+       Maksimal 30 tahun
+      </p>
+     </div>
+     <div class="bg-white p-4 rounded-lg shadow-md text-center">
+      <p class="text-gray-600">
+       Periode Program
+      </p>
+      <p class="font-bold">
+       2.5 Tahun
+      </p>
+     </div>
+     <div class="bg-white p-4 rounded-lg shadow-md text-center">
+      <p class="text-gray-600">
+       Program Pendidikan
+      </p>
+      <p class="font-bold">
+       Banking dan Perbankan &amp; Teknik Informatika
+      </p>
+     </div>
     </div>
-
-    <!-- Bootstrap JS -->
-             <!-- Js Plugins -->
-    <script src="js/jquery-3.3.1.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-    <script src="js/jquery.nice-select.min.js"></script>
-    <script src="js/jquery-ui.min.js"></script>
-    <script src="js/jquery.slicknav.js"></script>
-    <script src="js/mixitup.min.js"></script>
-    <script src="js/owl.carousel.min.js"></script>
-    <script src="js/main.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-pZg1SIos8VTfR4HZTF0FbTfneFnIz0RoU09NcCd43jkhKexiWrnS1KuD+Jz1QoRp" crossorigin="anonymous"></script>
-</body>
+    <div class="mb-8">
+     <h3 class="text-xl font-bold mb-4">
+      Persyaratan
+     </h3>
+     <ul class="list-disc list-inside text-gray-700">
+      <li>
+       Warga negara Indonesia
+      </li>
+      <li>
+       Siswa/siswi kelas X / lulusn SMA/SMK
+      </li>
+      <li>
+       Rata-rata nilai rapor kelas X, XI, dan XII minimal 7.50
+      </li>
+      <li>
+       Rata-rata nilai Matematika kelas X, XI, dan XII (IPA, IPS) atau nilai Produktif kelas X, XI, dan XII khusus SMK minimal 7.50
+      </li>
+      <li>
+       Silakan mengisi angka 0.00 pada kolom nilai rapor kelas XI semester 2 (jika nilai rapor belum keluar)
+      </li>
+      <li>
+       Tidak pernah tinggal kelas dari SD-SMA/SMK
+      </li>
+      <li>
+       Tidak pernah terlibat narkoba dan pelanggaran hukum lainnya
+      </li>
+      <li>
+       Lulus dalam proses seleksi (Seleksi Administrasi, Tes Online, Tes Psikologi, Wawancara I, Wawancara II &amp; Tes Kesehatan)
+      </li>
+     </ul>
+    </div>
+    <div class="flex justify-center space-x-4 mb-8">
+     <div class="bg-white p-4 rounded-lg shadow-md text-center">
+      <p class="text-gray-600">
+       Lokasi
+      </p>
+      <p class="font-bold">
+       Berterakreditasi A
+      </p>
+      <p class="text-gray-600">
+       Bogor
+      </p>
+     </div>
+     <div class="bg-white p-4 rounded-lg shadow-md text-center">
+      <p class="text-gray-600">
+       Jam Belajar
+      </p>
+      <p class="font-bold">
+       Senin - Jumat
+      </p>
+      <p class="text-gray-600">
+       08:00 - 17:00 WIB
+      </p>
+     </div>
+    </div>
+    <div class="mb-8">
+     <h3 class="text-xl font-bold mb-4">
+      Benefit Yang Didapat Melalui Beasiswa BCA
+     </h3>
+     <div class="flex justify-center space-x-4">
+      <div class="bg-white p-4 rounded-lg shadow-md text-center">
+       <img alt="Benefit 1" class="mb-4" height="100" src="https://storage.googleapis.com/a1aa/image/QHbIvdiTuc5hL1owJeTB8RfEZHI4NqDiaAj36nFp9PJntRuTA.jpg" width="100"/>
+       <p class="text-gray-600">
+        Disediakan buku pelajaran dan penunjang lainnya serta fasilitas laptop (khusus angkatan PPTI)
+       </p>
+      </div>
+      <div class="bg-white p-4 rounded-lg shadow-md text-center">
+       <img alt="Benefit 2" class="mb-4" height="100" src="https://storage.googleapis.com/a1aa/image/Q00aqrCSkha5AJZ6pLJjxvP00Vp5f0S9ce7sONFP6mBfajcnA.jpg" width="100"/>
+       <p class="text-gray-600">
+        Bebas biaya pendidikan dan mendapatkan uang saku bulanan
+       </p>
+      </div>
+      <div class="bg-white p-4 rounded-lg shadow-md text-center">
+       <img alt="Benefit 3" class="mb-4" height="100" src="https://storage.googleapis.com/a1aa/image/R8gu4dwdxYbHBhS7sRjg8sTv6nQJetEezIk8A1kViLdltRuTA.jpg" width="100"/>
+       <p class="text-gray-600">
+        Mendapatkan kesempatan magang dan penawaran kerja di BCA
+       </p>
+      </div>
+      <div class="bg-white p-4 rounded-lg shadow-md text-center">
+       <img alt="Benefit 4" class="mb-4" height="100" src="https://storage.googleapis.com/a1aa/image/RfrMHvYVFnVjN6pj6epweuf3KFBFNtMS2xedM28e6hwnYbk7E.jpg" width="100"/>
+       <p class="text-gray-600">
+        Dormitory, shuttle bus, dan makan siang
+       </p>
+      </div>
+     </div>
+    </div>
+    <div class="flex justify-center">
+     <button class="bg-blue-600 text-white px-8 py-2 rounded-full">
+      DAFTAR
+     </button>
+    </div>
+   </div>
+  </div>
+ </body>
 </html>

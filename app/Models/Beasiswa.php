@@ -9,6 +9,6 @@ class Beasiswa extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'image1', 'image2', 'namabeasiswa', 'namaperusahaan', 'batasbeasiswa', 'minipersyaratan', 'miniisi', 'persyaratan', 'isipersyaratan', 'image3', 'judul benefit', 'isi benefit'
+        'image1', 'image2', 'namabeasiswa', 'namaperusahaan', 'batasbeasiswa', 'minipersyaratan', 'miniisi', 'persyaratan', 'isipersyaratan', 'image3', 'judul_benefit', 'isi_benefit'
             ];
 }

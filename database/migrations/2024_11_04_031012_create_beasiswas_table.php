@@ -25,8 +25,8 @@ return new class extends Migration
             $table->string('persyaratan');
             $table->text('isipersyaratan');
             $table->string('image3');
-            $table->string('judul benefit');
-            $table->string('isi benefit');
+            $table->string('judul_benefit');
+            $table->string('isi_benefit');
             $table->timestamps();
         });
     }

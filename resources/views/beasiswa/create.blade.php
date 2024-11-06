@@ -3,6 +3,7 @@
   <title>Dashboard</title>
   <script src="https://cdn.tailwindcss.com">
   </script>
+   <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;900&display=swap" rel="stylesheet">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
  </head>
  <style>
@@ -10,65 +11,50 @@
     margin-bottom: 10px; /* Atur sesuai kebutuhan */
 }
  </style>
- <div class="bg-gray-100">
+ <div class="bg-gray-100 font-sans">
   <div class="flex">
-   <!-- Sidebar -->
-   <div class="w-1/5 bg-gray-200 h-[calc(100vh+800px)] flex flex-col items-center py-8">
-    <div class="flex items-center mb-8">
-    <img alt="Educare Logo" class="mr-2" height="40" src="{{ asset('img/logo.png') }}" width="200"/>
-    </div>
-    <div class="flex flex-col items-center mb-8">
-     <img alt="User Avatar" class="rounded-full mb-2" height="80" src="https://storage.googleapis.com/a1aa/image/ERQpynA4VbbrDVqqueT7TXE3RbEYCHyk4K5zrItCv4JNeOlTA.jpg" width="80"/>
-    
-     <span class="font-semibold">
-     {{ $dataPerusahaan->namaperusahaan ?? 'Nama Perusahaan Tidak Tersedia' }}
-</span>
-<span class="text-gray-500">
-{{ $dataPerusahaan->emailperusahaan ?? 'Email Perusahaan Tidak Tersedia' }}
-</span>
-    </div>
-    <div class="w-full">
-     <div class="flex items-center w-full py-4 px-6 bg-gray-400 text-white">
-     <a class="flex items-center w-full py-4 px-6" href={{route ('dashboard')}}> 
-     <i class="fas fa-upload mr-2">
-      </i>
-      <span>
-       Upload
-      </span>
-     </a>
-     </div>
-     <div class="flex items-center w-full py-4 px-6">
-     <a class="flex items-center w-full py-4 px-6" href={{route ('uplist')}}>
-     <i class="fas fa-list mr-2">
-      </i>
-      <span>
-       Uploaded List
-      </span>
-     </a>
-      </div>
-     <div class="flex items-center w-full py-4 px-6">
-     <a class="flex items-center w-full py-4 px-6" href={{route ('applist-1')}}>
-      <i class="fas fa-users mr-2">
-      </i>
-      <span>
-       Applicants List
-      </span>
-      </a>
-     </div>
-    <div class="mt-auto mb-8">
-     <div class="flex items-center w-full py-4 px-6">
-     <form method="POST" action="{{ route('logout') }}">
-        @csrf
-        <button type="submit" class="flex items-center w-full py-4 px-6">
-            <i class="fas fa-sign-out-alt mr-2"></i>
-            <span>Log Out</span>
-        </button>
-    </form>
-      </div>
-     </div>
-    </div>
-   </div>
-   <!-- Main Content -->
+  <div class="w-1/5 bg-white h-scrfulleen shadow-lg">
+            <div class="flex flex-col items-center py-8">
+                <img alt="Educare Logo" class="mb-4" height="50" src="https://storage.googleapis.com/a1aa/image/TstEQNtfdBxbFCt6fLkuAApv2BtYFfAfQI81qt1YUr7M2G5OB.jpg" width="50"/>
+                <h1 class="text-blue-600 text-xl font-bold">EDUCARE</h1>
+            </div>
+            <div class="flex flex-col items-center mt-8">
+                <img alt="User  Avatar" class="rounded-full mb-4" height="100" src="https://storage.googleapis.com/a1aa/image/TsPTHHQA9PLmIZY2P9D0HASO0e0SXKHpfutawnKUyYyYKRnTA.jpg" width="100"/>
+                @auth('perusahaan')
+    <span class="font-semibold">
+        {{ Auth::guard('perusahaan')->user()->namaperusahaan }}
+    </span>
+    <span class="text-gray-500">
+        {{ Auth::guard('perusahaan')->user()->emailperusahaan ?? 'Email Perusahaan Tidak Tersedia' }}
+    </span>
+@endauth
+            </div>
+            <div class="mt-8">
+                <ul class="space-y-4">
+                    <li class="flex items-center justify-center text-gray-800 hover:text-blue-600 cursor-pointer">
+                        <a class="nav-link" href="{{ route('dashboard') }}">
+                            <i class="fas fa-upload mr-2"></i> Upload
+                        </a>
+                    </li>
+                    <li class="flex items-center justify-center text-white bg-gray-400 hover:bg-gray-500 cursor-pointer py-2">
+                        <a class="nav-link active" href="{{ route('beasiswa.index') }}">
+                            <i class="fas fa-list mr-2"></i> Uploaded List
+                        </a>
+                    </li>
+                    <li class="flex items-center justify-center text-gray-800 hover:text-blue-600 cursor-pointer">
+                        <a class="nav-link" href="{{ route('applist-1' )}}">
+                            <i class="fas fa-users mr-2"></i> Applicants List
+                        </a>
+                    </li>
+                    <li class="flex items-center justify-center text-gray-800 hover:text-blue-600 cursor-pointer">
+                        <a class="nav-link" href="#">
+                            <i class="fas fa-sign-out-alt mr-2"></i> Log Out
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+  <!-- Main Content -->
    
    <div class="w-4/5 p-8">
    <form action="{{ route('beasiswa.store') }}" method="POST" enctype="multipart/form-data">
@@ -202,9 +188,10 @@
 </div>
 
 <div class="flex justify-center mt-4"> <!-- Tambahkan margin top untuk memberi jarak -->
-    <button type="submit" class="bg-blue-600 text-white py-2 px-8 rounded-full">
-        DAFTAR
-    </button>
+<button type="submit" class="bg-blue-600 text-white py-2 px-8 rounded-full">
+  Simpan
+</button>
+
 </div>
     <a class="nav-link active" href="{{route('beasiswa.create')}}">
                     <i class="fas fa-users"></i> pencet
@@ -246,5 +233,5 @@
 }
 </script>
 
- </body>
+ </di>
 </html>
