@@ -20,7 +20,7 @@ class PerusahaanMiddleware
             // Menyimpan data perusahaan ke dalam request agar bisa diakses di controller
             $request->attributes->set('perusahaan', $perusahaan);
         } else {
-            return redirect()->route('login'); // Ganti dengan route login Anda
+            return redirect()->route('auth.loginp'); // Ganti dengan route login Anda
         }
 
         return $next($request);

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Beasiswa;
+use Illuminate\Support\Facades\Storage;
 
 class BeasiswaController extends Controller
 {
@@ -16,7 +17,6 @@ class BeasiswaController extends Controller
     {
         $beasiswas = Beasiswa::all(); 
         return view('perusahaan.uplist', compact('beasiswas'));
-
     }
 
     /**
@@ -27,7 +27,6 @@ class BeasiswaController extends Controller
     public function create()
     {
         return view('beasiswa.create');
-    
     }
 
     /**
@@ -50,10 +49,10 @@ class BeasiswaController extends Controller
             'miniisi' => 'required|string',
             'persyaratan' => 'required|string',
             'isipersyaratan' => 'required|string',
-            'judul_benefit' => 'required|string|max:255', // kolom menggunakan spasi
-            'isi_benefit' => 'required|string', // kolom menggunakan spasi
+            'judul_benefit' => 'required|string|max:255',
+            'isi_benefit' => 'required|string',
         ]);
-    
+
         // Simpan file
         $image1 = $request->file('image1');
         $imageName1 = $image1->hashName();  // Dapatkan nama file unik
@@ -79,8 +78,8 @@ class BeasiswaController extends Controller
             'miniisi' => $request->miniisi,
             'persyaratan' => $request->persyaratan,
             'isipersyaratan' => $request->isipersyaratan,
-            'judul_benefit' => $request->judul_benefit, // Akses kolom dengan spasi
-            'isi_benefit' => $request->isi_benefit, // Akses kolom dengan spasi
+            'judul_benefit' => $request->judul_benefit,
+            'isi_benefit' => $request->isi_benefit,
         ]);
     
         // Redirect berdasarkan kondisi
@@ -90,7 +89,7 @@ class BeasiswaController extends Controller
             return redirect()->route('beasiswa.index')->with('error', 'Data Gagal Disimpan!');
         }
     }
-    
+
     /**
      * Display the specified resource.
      *
@@ -98,19 +97,19 @@ class BeasiswaController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show($id)
-{
-    // Mengambil data beasiswa berdasarkan ID
-    $beasiswa = Beasiswa::find($id); 
+    {
+        // Mengambil data beasiswa berdasarkan ID
+        $beasiswa = Beasiswa::find($id); 
 
-    // Cek apakah beasiswa ditemukan
-    if (!$beasiswa) {
-        // Jika tidak ditemukan, Anda bisa mengalihkan atau menampilkan pesan error
-        return redirect()->route('perusahaan.uplist')->with('error', 'Beasiswa tidak ditemukan.');
+        // Cek apakah beasiswa ditemukan
+        if (!$beasiswa) {
+            // Jika tidak ditemukan, Anda bisa mengalihkan atau menampilkan pesan error
+            return redirect()->route('perusahaan.uplist')->with('error', 'Beasiswa tidak ditemukan.');
+        }
+
+        // Mengirim data ke view
+        return view('perusahaan.aplistup', compact('beasiswa'));
     }
-
-    // Mengirim data ke view
-    return view('perusahaan.aplistup', compact('beasiswa'));
-}
 
     /**
      * Show the form for editing the specified resource.
@@ -133,29 +132,68 @@ class BeasiswaController extends Controller
      */
     public function update(Request $request, $id)
     {
+        dd($request->all());
         $request->validate([
-            'image1' => 'required|string',
-            'image2' => 'required|string',
-            'namabeasiswa' => 'required|string',
-            'namaperusahaan' => 'required|string',
+            'image3' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'namabeasiswa' => 'required|string|max:255',
+            'namaperusahaan' => 'required|string|max:255',
             'batasbeasiswa' => 'required|date',
-            'minipersyaratan' => 'required|string',
+            'minipersyaratan' => 'required|string|max:255',
             'miniisi' => 'required|string',
             'persyaratan' => 'required|string',
-            'isipersyaratan' => 'required|text',
-            'image3' => 'required|string',
-            'judul benefit' => 'required|string',
-            'isi benefit' => 'required|string',
-            // Validasi untuk field lainnya
+            'isipersyaratan' => 'required|string',
+            'judul_benefit' => 'required|string|max:255',
+            'isi_benefit' => 'required|string'
         ]);
-    
-        $beasiswa = Beasiswa::findOrFail($id);
-        $beasiswa->update($request->all());
-    
-        return redirect()->route('perusahaan.uplist')->with('success', 'Beasiswa berhasil diperbarui');
-        
-    }
 
+        $beasiswa = Beasiswa::findOrFail($id);
+
+         // Cek jika ada file image yang di-upload
+         if ($request->hasFile('image3')) {
+            // Hapus gambar lama jika ada
+            if ($beasiswa->image3) {
+                Storage::delete('public/images/' . $beasiswa->image3);
+            }
+            
+            $image3 = $request->file('image3');
+            $imageName3 = $image3->hashName();  // Dapatkan nama file unik
+            $image3->storeAs('public/images', $imageName3); 
+            
+            // Update data dengan gambar baru
+            $beasiswa->update([
+                'image3' => $imageName3,
+                'namabeasiswa' => $request->namabeasiswa,
+                'namaperusahaan' => $request->namaperusahaan,
+                'batasbeasiswa' => $request->batasbeasiswa,
+                'minipersyaratan' => $request->minipersyaratan,
+                'miniisi' => $request->miniisi,
+                'persyaratan' => $request->persyaratan,
+                'isipersyaratan' => $request->isipersyaratan,
+                'judul_benefit' => $request->judul_benefit,
+                'isi_benefit' => $request->isi_benefit    
+            ]);
+        } else {
+            // Update data tanpa mengganti gambar
+            $beasiswa->update([
+            'namabeasiswa' => $request->namabeasiswa,
+            'namaperusahaan' => $request->namaperusahaan,
+            'batasbeasiswa' => $request->batasbeasiswa,
+            'minipersyaratan' => $request->minipersyaratan,
+            'miniisi' => $request->miniisi,
+            'persyaratan' => $request->persyaratan,
+            'isipersyaratan' => $request->isipersyaratan,
+            'judul_benefit' => $request->judul_benefit,
+            'isi_benefit' => $request->isi_benefit,
+
+            ]);
+        }
+        $beasiswa->save();
+        if ($beasiswa) {
+            return redirect()->route('beasiswa.index')->with('success', 'Data Berhasil Diupdate!');
+        } else {
+            return redirect()->route('beasiswa.index')->with('error', 'Data Gagal Diupdate!');
+        }
+    }
     /**
      * Remove the specified resource from storage.
      *
@@ -163,11 +201,23 @@ class BeasiswaController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
-    {
-        $beasiswa = Beasiswa::findOrFail($id);
-        $beasiswa->delete();
+{
+    $beasiswa = Beasiswa::findOrFail($id);
     
-        return redirect()->route('perusahaan.uplist')->with('success', 'Beasiswa berhasil dihapus');
-        
+    // Hapus gambar yang terkait
+    if ($beasiswa->image1) {
+        Storage::delete('public/images/' . $beasiswa->image1);
     }
+    if ($beasiswa->image2) {
+        Storage::delete('public/images/' . $beasiswa->image2);
+    }
+    if ($beasiswa->image3) {
+        Storage::delete('public/images/' . $beasiswa->image3);
+    }
+
+    // Hapus data beasiswa
+    $beasiswa->delete();
+
+    return redirect()->route('beasiswa.index')->with('success', 'Data beasiswa berhasil dihapus');
+}
 }
