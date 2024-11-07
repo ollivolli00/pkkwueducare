@@ -133,9 +133,32 @@
 
     <!-- Main Content -->
     <div class="w-5/6 p-8">
-      <form action="{{ route('beasiswa.update', $beasiswa->id) }}" method="POST" enctype="multipart/form-data">
-        @csrf
-        @method('PUT')
+    @if(session('success'))
+    <div class="alert alert-success">
+        {{ session('success') }}
+    </div>
+@endif
+
+@if(session('error'))
+    <div class="alert alert-danger">
+        {{ session('error') }}
+    </div>
+@endif
+
+@if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
+
+<!-- Form edit Anda di sini -->
+    <form action="{{ route('beasiswa.update', $beasiswa->id) }}" method="POST" enctype="multipart/form-data">
+    @csrf
+    @method('PUT')
         <br>
 
         <div class="flex justify-center mb-8">
@@ -208,7 +231,16 @@
                         </div>
                     @enderror
     </div>
-    <div class="flex justify-left space-x-4">
+    <div class="flex flex-col mb-8"> 
+    <input class="p-2 @error('judul_benefit') is-invalid @enderror font-bold text-2xl bg-transparent" name="judul_benefit" value="{{ old('judul_benefit', $beasiswa->judul_benefit) }}" placeholder="Add Your Description" type="text">
+    <!-- error message untuk content -->
+    @error('judul_benefit')
+        <div class="alert alert-danger mt-2">
+            {{ $message }}
+        </div>
+    @enderror
+</div>
+  <div class="flex justify-left space-x-4">
     <!-- Div utama untuk upload gambar baru -->
     <div class="bg-white p-4 rounded-lg shadow-md text-center min-h-[300px] w-64 flex flex-col items-center justify-center relative">
         <label class="cursor-pointer w-full h-full flex justify-center items-center">
@@ -235,7 +267,8 @@
 
 
                        <button id="changeButton3" class="hidden absolute top-2 right-2 bg-white text-gray-800 px-3 py-1 text-sm rounded hover:bg-gray-100" onclick="triggerFileInput('fileInput3')">Change File</button>
-                            <p class="text-gray-600">            <input class="border-2 border-gray-400 p-2 mt-2 @error('isi benefit') is-invalid @enderror" name="isi benefit" value="{{ old('isi_benefit', $beasiswa->isi_benefit) }}" placeholder="Add Description"></p>
+                            <p class="text-gray-600">           
+                               <input class="border-2 border-gray-400 p-2 mt-2 @error('isi benefit') is-invalid @enderror" name="isi benefit" value="{{ old('isi_benefit', $beasiswa->isi_benefit) }}" placeholder="Add Description"></p>
                         </div>
                     </div>
                 </div>
