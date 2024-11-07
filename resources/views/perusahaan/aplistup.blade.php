@@ -67,14 +67,8 @@
             </div>
             <div class="flex flex-col items-center mt-8">
                 <img alt="User  Avatar" class="rounded-full mb-4" height="100" src="https://storage.googleapis.com/a1aa/image/TsPTHHQA9PLmIZY2P9D0HASO0e0SXKHpfutawnKUyYyYKRnTA.jpg" width="100"/>
-                @auth('perusahaan')
-    <span class="font-semibold">
-        {{ Auth::guard('perusahaan')->user()->namaperusahaan }}
-    </span>
-    <span class="text-gray-500">
-        {{ Auth::guard('perusahaan')->user()->emailperusahaan ?? 'Email Perusahaan Tidak Tersedia' }}
-    </span>
-@endauth
+                <p class="text-gray-800 font-semibold">Nama Perusahaan</p>
+                <p class="text-gray-600">perusahaan@gmail.com</p>
             </div>
             <div class="mt-8">
                 <ul class="space-y-4">
@@ -94,13 +88,9 @@
                         </a>
                     </li>
                     <li class="flex items-center justify-center text-gray-800 hover:text-blue-600 cursor-pointer">
-                    <form method="POST" action="{{ route('logout') }}">
-        @csrf
-        <button type="submit" class="flex items-center w-full py-4 px-6">
-            <i class="fas fa-sign-out-alt mr-2"></i>
-            <span>Log Out</span>
-        </button>
-    </form>
+                        <a class="nav-link" href="#">
+                            <i class="fas fa-sign-out-alt mr-2"></i> Log Out
+                        </a>
                     </li>
                 </ul>
             </div>
@@ -108,9 +98,6 @@
 
    <!-- Main Content -->
    <div class="w-5/6 p-8">
-    <div class="flex justify-center mb-8">
-     <img alt="Header Image" class="w-full h-40 object-cover" src="https://storage.googleapis.com/a1aa/image/8AqxOeN50lwebEczm8d6mmrPd174tUwZUevvosOTDFSBbjcnA.jpg"/>
-    </div>
     <div class="flex items-center mb-8">
      <img alt="BCA Logo" class="mr-4" height="50" src="https://storage.googleapis.com/a1aa/image/8AqxOeN50lwebEczm8d6mmrPd174tUwZUevvosOTDFSBbjcnA.jpg" width="50"/>
      <div>
