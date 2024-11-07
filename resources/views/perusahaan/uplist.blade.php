@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="description" content="Ogani Template">
+    <script src="https://cdn.tailwindcss.com"></script>
     <meta name="keywords" content="Ogani, unica, creative, html">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
@@ -17,58 +18,118 @@
         crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 
-    <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css">
-    <link rel="stylesheet" href="css/font-awesome.min.css" type="text/css">
-    <link rel="stylesheet" href="css/elegant-icons.css" type="text/css">
-    <link rel="stylesheet" href="css/nice-select.css" type="text/css">
-    <link rel="stylesheet" href="css/jquery-ui.min.css" type="text/css">
-    <link rel="stylesheet" href="css/owl.carousel.min.css" type="text/css">
-    <link rel="stylesheet" href="css/slicknav.min.css" type="text/css">
-    <link rel="stylesheet" href="css/style.css" type="text/css">
+   
 </head>
 <style>
-        body {
-            font-family: Arial, sans-serif;
+     .content {
+        background-color: #f3f4f6;
+        min-height: 100vh;
+    }
+
+    /* Hover effect untuk card */
+    .bg-white:hover {
+        transform: translateY(-2px);
+        transition: transform 0.2s ease-in-out;
+    }
+
+    /* Image container */
+    .w-32 {
+        width: 8rem;
+        height: 8rem;
+    }
+
+    /* Button hover effect */
+    .hover\:bg-gray-300:hover {
+        background-color: #d1d5db;
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+        .content {
+            margin-left: 0;
+            padding: 1rem;
         }
-        .sidebar {
-            width: 250px;
-            background-color: #f8f9fa;
-            height: 100vh;
-            position: fixed;
-            border-right: 1px solid #dee2e6;
-            display: flex;
+        
+        .flex {
             flex-direction: column;
-            justify-content: space-between;
         }
-        .sidebar .profile {
-            text-align: center;
-            padding: 20px;
+        
+        .w-32 {
+            width: 100%;
+            height: auto;
+            margin-bottom: 1rem;
         }
-        .sidebar .profile img {
-            width: 80px;
-            height: 80px;
-            border-radius: 50%;
-        }
-        .sidebar .profile h5 {
-            margin-top: 10px;
-            font-size: 16px;
-        }
-        .sidebar .profile p {
-            font-size: 14px;
-            color: #6c757d;
-        }
-        .sidebar .nav-link {
-            font-size: 16px;
-            color: #000;
-            padding: 15px 20px;
-        }
-        .sidebar .nav-link:hover {
-            background-color: #e9ecef;
-        }
-        .sidebar .nav-link.active {
-            background-color: #adb5bd;
-            color: #fff;
-        }
+    }
+
+    .nav-link {
+        display: flex;
+        align-items: center;
+        padding: 1rem 1.5rem;
+        color: #4a5568; /* Warna teks */
+        text-decoration: none; /* Menghilangkan garis bawah */
+        transition: background-color 0.2s ease, color 0.2s ease; /* Transisi halus */
+    }
+
+    .nav-link:hover {
+        background-color: #edf2f7; /* Warna latar belakang saat hover */
+        color: #2d3748; /* Warna teks saat hover */
+    }
+
+    .nav-link.active {
+        background-color: #cbd5e0; /* Warna latar belakang untuk link aktif */
+        color: #2b6cb0; /* Warna teks untuk link aktif */
+        font-weight: bold; /* Menebalkan teks untuk link aktif */
+    }
+
+    .nav-link i {
+        margin-right: 0.75rem; /* Jarak antara ikon dan teks */
+    }
+    .button-style {
+      background-color: #38a169;
+      color: white;
+      padding: 0.5rem 2rem;
+      border-radius: 0.375rem;
+      margin-left: 0.5rem;
+      margin-right: 0.5rem;
+      display: inline-block;
+    }
+
+    .buttonn-style {
+      background-color: #2563eb;
+      color: white;
+      padding: 0.5rem 2rem;
+      border-radius: 0.375rem;
+      margin-left: 0.5rem;
+      margin-right: 0.5rem;
+      display: inline-block;
+    }
+
+    .button-stylee {
+      background-color: red;
+      color: white;
+      padding: 0.5rem 2rem;
+      border-radius: 0.375rem;
+      margin-left: 0.5rem;
+      margin-right: 0.5rem;
+      display: inline-block;
+    }
+
+    .sidebar {
+      transition: all 0.3s;
+    }
+
+    .nav-link {
+      @apply flex items-center px-6 py-3 text-gray-700 hover:bg-gray-100 transition-colors duration-200;
+    }
+
+    .nav-link.active {
+      @apply bg-blue-50 text-blue-600 font-medium;
+    }
+
+    .nav-link i {
+      @apply mr-3;
+    }
+
         .content {
             margin-left: 250px;
             padding: 50px;
@@ -113,189 +174,102 @@
     </style>
 </head>
 <body>
-    <!-- Page Preloder -->
-    <div id="preloder">
-        <div class="loader"></div>
-    </div>
+    
+    <!-- Sidebar -->
+<div class="sidebar bg-white h-screen w-64 fixed left-0 top-0 shadow-lg">
+    <div class="flex flex-col h-full">
+        <!-- Logo Section -->
+        <div class="p-6 border-b border-gray-200">
+            <img alt="Educare Logo" src="{{ asset('img/logo.png') }}" class="w-full max-w-[200px] mx-auto" />
+        </div>
 
-    <!-- Humberger Begin -->
-    <div class="humberger__menu__overlay"></div>
-    <div class="humberger__menu__wrapper">
-        <div class="humberger__menu__logo">
-            <a href="#"><img src="img/logo.png" alt=""></a>
+        <!-- Profile Section -->
+        <div class="p-6 border-b border-gray-200 text-center">
+            <img src="https://storage.googleapis.com/a1aa/image/TsPTHHQA9PLmIZY2P9D0HASO0e0SXKHpfutawnKUyYyYKRnTA.jpg" 
+                 alt="Profile Picture" 
+                 class="w-24 h-24 rounded-full mx-auto mb-4"/>
+            @auth('perusahaan')
+                <h3 class="font-semibold text-gray-800 mb-1">
+                    {{ Auth::guard('perusahaan')->user()->namaperusahaan }}
+                </h3>
+                <p class="text-sm text-gray-500">
+                    {{ Auth::guard('perusahaan')->user()->emailperusahaan ?? 'Email Perusahaan Tidak Tersedia' }}
+                </p>
+            @endauth
         </div>
-        <div class="humberger__menu__cart">
-            <ul>
-                <li><a href="#"><i class="fa fa-heart"></i> <span>1</span></a></li>
-                <li><a href="#"><i class="fa fa-shopping-bag"></i> <span>3</span></a></li>
-            </ul>
-            <div class="header__cart__price">item: <span>$150.00</span></div>
-        </div>
-        <div class="humberger__menu__widget">
-            <div class="header__top__right__language">
-                <img src="img/language.png" alt="">
-                <div>English</div>
-                <span class="arrow_carrot-down"></span>
-                <ul>
-                    <li><a href="#">Spanis</a></li>
-                    <li><a href="#">English</a></li>
-                </ul>
-            </div>
-            <div class="header__top__right__auth">
-                <a href="#"><i class="fa fa-user"></i> Login</a>
-            </div>
-        </div>
-        <nav class="humberger__menu__nav mobile-menu">
-            <ul>
-                <li class="active"><a href="/">Home</a></li>
-                <li><a href="./shop-grid.html">Shop</a></li>
-                <li><a href="#">Pages</a>
-                    <ul class="header__menu__dropdown">
-                        <li><a href="./shop-details.html">Shop Details</a></li>
-                        <li><a href="./shoping-cart.html">Shoping Cart</a></li>
-                        <li><a href="./checkout.html">Check Out</a></li>
-                        <li><a href="./blog-details.html">Blog Details</a></li>
-                    </ul>
-                </li>
-                <li><a href="./blog.html">Blog</a></li>
-                <li><a href="./contact.html">Contact</a></li>
-            </ul>
-        </nav>
-        <div id="mobile-menu-wrap"></div>
-        <div class="header__top__right__social">
-            <a href="#"><i class="fa fa-facebook"></i></a>
-            <a href="#"><i class="fa fa-twitter"></i></a>
-            <a href="#"><i class="fa fa-linkedin"></i></a>
-            <a href="#"><i class="fa fa-pinterest-p"></i></a>
-        </div>
-        <div class="humberger__menu__contact">
-            <ul>
-                <li><i class="fa fa-envelope"></i> hello@colorlib.com</li>
-                <li>Free Shipping for all Order of $99</li>
-            </ul>
-        </div>
-    </div>
-    <!-- Humberger End -->
-    <!-- Header Section Begin -->
-    <header class="header">
-        <!-- <div class="header__top">
-            <div class="container">
-                <div class="row">
-                  
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div> -->
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-3">
-                    <div class="header__logo">
-                        <a href="./index.html"><img src="img/logo.png" alt="" width="150px;" height="50px;"></a>
-                    </div>
-                </div>
-                <!-- <div class="col-lg-6">
-    <nav class="header__menu">
-        <ul>
 
-                <li><a href="{{'/'}}" style="text-align:center; ">Home</a></li>   
-              <li>  <a href="{{ 'about' }}" style="text-align:center; ">About</a>   
-            </li>    
-@guest
-<li>
-    <a href="{{ 'signup' }}" style="text-align:center; color:white; padding: 10px 15px 12px; background: #7fad39;">Daftar Sebagai Perusahaan</a>
-    </li>
-    @endguest
-<li class="nav-item dropdown">
-    @auth
-        <a id="navbarDropdown" class="nav-link dropdown-toggle" href="" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-            {{ Auth::user()->name }}
-        </a>
-        <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-        <a href="{{'profil'}}">Profile</a>   
-        <a class="dropdown-item" href="{{ route('logout') }}"
-               onclick="event.preventDefault();
-                             document.getElementById('logout-form').submit();">
-                {{ __('Logout') }}
+        <!-- Navigation Links -->
+        <nav class="flex-grow py-4">
+        <a class="nav-link {{ Request::routeIs('dashboard') ? 'active' : '' }}" 
+               href="{{ route('dashboard') }}">
+                <i class="fas fa-home w-6"></i>
+                <span>Dashboard</span>
+            </a>   
+        <a class="nav-link {{ Request::routeIs('beasiswa.create') ? 'active' : '' }}" 
+               href="{{ route('beasiswa.create') }}">
+                <i class="fas fa-upload w-6"></i>
+                <span>Upload</span>
             </a>
-            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+            <a class="nav-link {{ Request::routeIs('beasiswa.index') ? 'active' : '' }}" 
+               href="{{ route('beasiswa.index') }}">
+                <i class="fas fa-list w-6"></i>
+                <span>Uploaded List</span>
+            </a>
+            <a class="nav-link {{ Request::routeIs('applist-1') ? 'active' : '' }}" 
+               href="{{route('applist-1')}}">
+                <i class="fas fa-users w-6"></i>
+                <span>Applicants List</span>
+            </a>
+        </nav>
+
+        <!-- Logout Button -->
+        <div class="p-1 border-t border-gray-200">
+            <form method="POST" action="{{ route('logout') }}">
                 @csrf
+                <button type="submit" class="nav-link text-red-600 w-full text-left">
+                    <i class="fas fa-sign-out-alt w-6"></i>
+                    <span>Log Out</span>
+                </button>
             </form>
         </div>
-    @else
-        <a href="{{ route('login') }}" style="color:white; padding: 10px 15px 12px; background: #7fad39;">Login</a>
-    @endauth
-</li>
-
-        </ul> -->
-        </nav>
-</div>        
-</div>
-        </div>
-            </div>
-            <div class="humberger__open">
-                <i class="fa fa-bars"></i>
-            </div>
-        </div>
-    </header>
-        
-
-    <!-- Header Section End -->
-
-    <div class="sidebar">
-        <div>
-            <div class="profile">
-                <img src="https://storage.googleapis.com/a1aa/image/TsPTHHQA9PLmIZY2P9D0HASO0e0SXKHpfutawnKUyYyYKRnTA.jpg" alt="Profile Picture" width="80" height="80"/>
-                <br><br>
-                @auth('perusahaan')
-    <span class="font-semibold">
-        {{ Auth::guard('perusahaan')->user()->namaperusahaan }}
-    </span>
-    <span class="text-gray-500">
-        {{ Auth::guard('perusahaan')->user()->emailperusahaan ?? 'Email Perusahaan Tidak Tersedia' }}
-    </span>
-@endauth
-            </div>
-            <a class="nav-link" href={{'dashboard'}}><i class="fas fa-upload"></i> Upload</a>
-            <a class="nav-link active" href={{'uplist'}}><i class="fas fa-list"></i> Uploaded List</a>
-            <a class="nav-link" href={{'applist-1'}}><i class="fas fa-users"></i> Applicants List</a>
-            <form method="POST" action="{{ route('logout') }}">
-        @csrf
-        <button type="submit" class="nav-link">
-            <i class="fas fa-sign-out-alt mr-2"></i>
-            <span>Log Out</span>
-        </button>
-    </form>
-            
-        </div>
-       
     </div>
+</div>
 
    
-    <div class="content">
-    <div class="row">
+<div class="content ml-64 p-8"> <!-- Menggunakan margin-left dan padding -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"> <!-- Grid layout dengan gap -->
         @forelse($beasiswas as $beasiswa)
-            <div class="col-md-4">
-                <div class="card mt-4">
-                    <div class="d-flex align-items-center">
-                        <!-- Pastikan path gambar benar -->
-                        <img src="{{ asset('storage/images/' . $beasiswa->image1) }}" alt="BCA Logo" width="135" height="135"/>
-                        <div class="ms-4 card-body">
-                            <h4>{{ $beasiswa->namabeasiswa }}</h4>
-                            <p>{{ $beasiswa->namaperusahaan }}</p>
-                            <a href="{{route('beasiswa.show', $beasiswa->id)}}">VIEW</a>
+            <div class="bg-white rounded-lg shadow-md overflow-hidden"> <!-- Card dengan background putih -->
+                <div class="p-6">
+                    <div class="flex items-start space-x-4"> <!-- Flex container dengan spacing -->
+                        <img src="{{ asset('storage/images/' . $beasiswa->image2) }}" 
+                             alt="Company Logo" 
+                             class="w-32 h-32 object-cover rounded-lg" /> <!-- Image styling -->
+                        <div class="flex flex-col flex-grow space-y-3"> <!-- Content container -->
+                            <h4 class="font-bold text-lg text-gray-800">
+                                {{ $beasiswa->namabeasiswa }}
+                            </h4>
+                            <p class="text-gray-600">
+                                {{ $beasiswa->namaperusahaan }}
+                            </p>
+                            <br>
+                            <a href="{{route('beasiswa.show', $beasiswa->id)}}" 
+                               class="inline-flex items-center justify-center px-6 py-2 bg-gray-200 text-gray-800 rounded-full text-sm font-semibold hover:bg-gray-300 transition-colors">
+                                VIEW
+                            </a>
                         </div>
                     </div>
                 </div>
             </div>
         @empty
-            <div class="col-12">
-                <p class="alert alert-danger">Belum ada beasiswa yang tersedia.</p>
+            <div class="col-span-full">
+                <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded">
+                    Belum ada beasiswa yang tersedia.
+                </div>
             </div>
         @endforelse
     </div>
 </div>
-
             <!-- Js Plugins -->
             <script src="js/jquery-3.3.1.min.js"></script>
     <script src="js/bootstrap.min.js"></script>

@@ -71,15 +71,8 @@ Route::get('uplist', [BeasiswaController::class, 'index'])->name('beasiswa.index
 Route::get('/beasiswa/{id}', 'BeasiswaController@show')->name('beasiswa.show');
 
 Route::get('/signup', [PerusahaansignController::class, 'showSignupForm'])->name('signup');
+Route::get('/signin', [PerusahaanController::class, 'showLoginForm'])->name('auth.loginp');
 
-// Route for handling the signup form submission
-Route::post('/signupp', [PerusahaansignController::class, 'create'])->name('signup.post');
-
-// Route for showing the company login form
-Route::get('/signinn', [PerusahaanController::class, 'showLoginForm'])->name('auth.loginp');
-
-// Route for handling the company login form submission
-Route::post('/signin', [PerusahaanController::class, 'loginn'])->name('loginn.post');
 // Route::middleware(['auth', 'multiAuthUser:2'])->group(function () {
 //     Route::get('/dashboard', [PerusahaanController::class, 'dashboard'])->name('dashboard');
 // });
