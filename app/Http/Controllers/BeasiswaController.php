@@ -98,9 +98,19 @@ class BeasiswaController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show($id)
-    {
-        //
+{
+    // Mengambil data beasiswa berdasarkan ID
+    $beasiswa = Beasiswa::find($id); 
+
+    // Cek apakah beasiswa ditemukan
+    if (!$beasiswa) {
+        // Jika tidak ditemukan, Anda bisa mengalihkan atau menampilkan pesan error
+        return redirect()->route('perusahaan.uplist')->with('error', 'Beasiswa tidak ditemukan.');
     }
+
+    // Mengirim data ke view
+    return view('perusahaan.aplistup', compact('beasiswa'));
+}
 
     /**
      * Show the form for editing the specified resource.
@@ -112,7 +122,6 @@ class BeasiswaController extends Controller
     {
         $beasiswa = Beasiswa::findOrFail($id);
         return view('beasiswa.edit', compact('beasiswa'));
-    
     }
 
     /**

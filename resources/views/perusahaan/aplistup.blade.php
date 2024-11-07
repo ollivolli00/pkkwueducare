@@ -1,7 +1,7 @@
 <html>
  <head>
   <title>
-   Educare - BCA Beasiswa S3
+   Educare - {{$beasiswa->namabeasiswa}}
   </title>
   <script src="https://cdn.tailwindcss.com">
   </script>
@@ -56,6 +56,33 @@
     background-color: #adb5bd; /* Warna latar belakang untuk link aktif */
     color: #fff; /* Warna font untuk link aktif */
 }
+.button-style {
+    background-color: #38a169; /* Warna hijau (bg-green-500) */
+    color: white; /* Teks berwarna putih (text-white) */
+    padding: 0.5rem 2rem; /* Padding vertikal 0.5rem dan horizontal 2rem (py-2 dan px-8) */
+    border-radius: 0.375rem; /* Sudut dibulatkan (rounded-md) */
+    margin-left: 0.5rem; /* Margin kiri 0.5rem (mx-2) */
+    margin-right: 0.5rem; /* Margin kanan 0.5rem (mx-2) */
+    display: inline-block; /* Agar elemen bisa memiliki margin horizontal */
+}
+.buttonn-style {
+    background-color: #2563eb;
+    color: white; /* Teks berwarna putih (text-white) */
+    padding: 0.5rem 2rem; /* Padding vertikal 0.5rem dan horizontal 2rem (py-2 dan px-8) */
+    border-radius: 0.375rem; /* Sudut dibulatkan (rounded-md) */
+    margin-left: 0.5rem; /* Margin kiri 0.5rem (mx-2) */
+    margin-right: 0.5rem; /* Margin kanan 0.5rem (mx-2) */
+    display: inline-block; /* Agar elemen bisa memiliki margin horizontal */
+}
+.button-stylee {
+    background-color: red; 
+    color: white; /* Teks berwarna putih (text-white) */
+    padding: 0.5rem 2rem; /* Padding vertikal 0.5rem dan horizontal 2rem (py-2 dan px-8) */
+    border-radius: 0.375rem; /* Sudut dibulatkan (rounded-md) */
+    margin-left: 0.5rem; /* Margin kiri 0.5rem (mx-2) */
+    margin-right: 0.5rem; /* Margin kanan 0.5rem (mx-2) */
+    display: inline-block; /* Agar elemen bisa memiliki margin horizontal */
+}
 </style> 
 </head>
  <body class="bg-gray-100 font-sans">
@@ -98,144 +125,61 @@
 
    <!-- Main Content -->
    <div class="w-5/6 p-8">
+    <div class="flex justify-center mb-8">
+     <img alt="Header Image" class="w-full h-40 object-cover" src="https://storage.googleapis.com/a1aa/image/8AqxOeN50lwebEczm8d6mmrPd174tUwZUevvosOTDFSBbjcnA.jpg"/>
+    </div>
     <div class="flex items-center mb-8">
-     <img alt="BCA Logo" class="mr-4" height="50" src="https://storage.googleapis.com/a1aa/image/8AqxOeN50lwebEczm8d6mmrPd174tUwZUevvosOTDFSBbjcnA.jpg" width="50"/>
-     <div>
+    <img src="{{ asset('storage/images/' . $beasiswa->image2) }}" alt="{{$beasiswa->namabeasiswa}} " class="mr-4" height="150" width="150"/>     <div>
       <h2 class="text-2xl font-bold">
-       Beasiswa S3
+      {{$beasiswa->namabeasiswa}}
       </h2>
       <p class="text-gray-600">
-       by Bank BCA
+      {{$beasiswa->namaperusahaan}}
       </p>
       <p class="text-gray-500">
-       Batas Waktu: 14/09/2024
+      {{$beasiswa->batasbeasiswa}}
       </p>
      </div>
     </div>
-    <div class="flex justify-center space-x-4 mb-8">
+    <div class="flex justify-left space-x-4 mb-8">
      <div class="bg-white p-4 rounded-lg shadow-md text-center">
       <p class="text-gray-600">
-       Pendidikan
+      {{$beasiswa->minipersyaratan}}
       </p>
       <p class="font-bold">
-       Minimal pendidikan S3/Sederajat
-      </p>
-     </div>
-     <div class="bg-white p-4 rounded-lg shadow-md text-center">
-      <p class="text-gray-600">
-       Usia
-      </p>
-      <p class="font-bold">
-       Maksimal 30 tahun
-      </p>
-     </div>
-     <div class="bg-white p-4 rounded-lg shadow-md text-center">
-      <p class="text-gray-600">
-       Periode Program
-      </p>
-      <p class="font-bold">
-       2.5 Tahun
-      </p>
-     </div>
-     <div class="bg-white p-4 rounded-lg shadow-md text-center">
-      <p class="text-gray-600">
-       Program Pendidikan
-      </p>
-      <p class="font-bold">
-       Banking dan Perbankan &amp; Teknik Informatika
+      {{$beasiswa->miniisi}}
       </p>
      </div>
     </div>
     <div class="mb-8">
      <h3 class="text-xl font-bold mb-4">
-      Persyaratan
+     {{$beasiswa->persyaratan}}
      </h3>
-     <ul class="list-disc list-inside text-gray-700">
-      <li>
-       Warga negara Indonesia
-      </li>
-      <li>
-       Siswa/siswi kelas X / lulusn SMA/SMK
-      </li>
-      <li>
-       Rata-rata nilai rapor kelas X, XI, dan XII minimal 7.50
-      </li>
-      <li>
-       Rata-rata nilai Matematika kelas X, XI, dan XII (IPA, IPS) atau nilai Produktif kelas X, XI, dan XII khusus SMK minimal 7.50
-      </li>
-      <li>
-       Silakan mengisi angka 0.00 pada kolom nilai rapor kelas XI semester 2 (jika nilai rapor belum keluar)
-      </li>
-      <li>
-       Tidak pernah tinggal kelas dari SD-SMA/SMK
-      </li>
-      <li>
-       Tidak pernah terlibat narkoba dan pelanggaran hukum lainnya
-      </li>
-      <li>
-       Lulus dalam proses seleksi (Seleksi Administrasi, Tes Online, Tes Psikologi, Wawancara I, Wawancara II &amp; Tes Kesehatan)
-      </li>
-     </ul>
-    </div>
-    <div class="flex justify-center space-x-4 mb-8">
-     <div class="bg-white p-4 rounded-lg shadow-md text-center">
-      <p class="text-gray-600">
-       Lokasi
-      </p>
-      <p class="font-bold">
-       Berterakreditasi A
-      </p>
-      <p class="text-gray-600">
-       Bogor
-      </p>
-     </div>
-     <div class="bg-white p-4 rounded-lg shadow-md text-center">
-      <p class="text-gray-600">
-       Jam Belajar
-      </p>
-      <p class="font-bold">
-       Senin - Jumat
-      </p>
-      <p class="text-gray-600">
-       08:00 - 17:00 WIB
-      </p>
-     </div>
+     <p class="list-disc list-inside text-gray-700">
+     {{$beasiswa->isipersyaratan}}</p>
     </div>
     <div class="mb-8">
      <h3 class="text-xl font-bold mb-4">
-      Benefit Yang Didapat Melalui Beasiswa BCA
+     {{$beasiswa->judul_benefit}}
      </h3>
-     <div class="flex justify-center space-x-4">
-      <div class="bg-white p-4 rounded-lg shadow-md text-center">
-       <img alt="Benefit 1" class="mb-4" height="100" src="https://storage.googleapis.com/a1aa/image/QHbIvdiTuc5hL1owJeTB8RfEZHI4NqDiaAj36nFp9PJntRuTA.jpg" width="100"/>
-       <p class="text-gray-600">
-        Disediakan buku pelajaran dan penunjang lainnya serta fasilitas laptop (khusus angkatan PPTI)
-       </p>
-      </div>
-      <div class="bg-white p-4 rounded-lg shadow-md text-center">
-       <img alt="Benefit 2" class="mb-4" height="100" src="https://storage.googleapis.com/a1aa/image/Q00aqrCSkha5AJZ6pLJjxvP00Vp5f0S9ce7sONFP6mBfajcnA.jpg" width="100"/>
-       <p class="text-gray-600">
-        Bebas biaya pendidikan dan mendapatkan uang saku bulanan
-       </p>
-      </div>
-      <div class="bg-white p-4 rounded-lg shadow-md text-center">
-       <img alt="Benefit 3" class="mb-4" height="100" src="https://storage.googleapis.com/a1aa/image/R8gu4dwdxYbHBhS7sRjg8sTv6nQJetEezIk8A1kViLdltRuTA.jpg" width="100"/>
-       <p class="text-gray-600">
-        Mendapatkan kesempatan magang dan penawaran kerja di BCA
-       </p>
-      </div>
-      <div class="bg-white p-4 rounded-lg shadow-md text-center">
-       <img alt="Benefit 4" class="mb-4" height="100" src="https://storage.googleapis.com/a1aa/image/RfrMHvYVFnVjN6pj6epweuf3KFBFNtMS2xedM28e6hwnYbk7E.jpg" width="100"/>
-       <p class="text-gray-600">
-        Dormitory, shuttle bus, dan makan siang
-       </p>
-      </div>
-     </div>
+     <br>
+     <div class="flex justify-left space-x-4">
+    <div class="bg-white p-4 rounded-lg shadow-md text-center min-h-[300px] w-64 flex flex-col items-center justify-center"> <!-- Menggunakan Flexbox -->
+    <img src="{{ asset('storage/images/' . $beasiswa->image3) }}" alt="{{$beasiswa->namabeasiswa}} " class="mb-4" height="100" width="100"/>
+     <br>
+        <p class="text-gray-600">
+        {{$beasiswa->isi_benefit}}
+        </p>
+    </div>
+</div>
+@else
+    <p>Tidak ada detail beasiswa yang ditampilkan.</p>
+@endif
     </div>
     <div class="flex justify-center">
-     <button class="bg-blue-600 text-white px-8 py-2 rounded-full">
+     <div class="bg-blue-200 text-white px-8 py-2 rounded-full">
       DAFTAR
-     </button>
+     </div>
     </div>
    </div>
   </div>
