@@ -25,29 +25,20 @@
     <div class="w-full">
      <div class="flex items-center w-full py-4 px-6 bg-gray-400 text-white">
      <a class="flex items-center w-full py-4 px-6" href={{'dashboard'}}> 
-     <i class="fas fa-upload mr-2">
-      </i>
-      <span>
-       Upload
-      </span>
+     <i class="fas fa-upload mr-2"></i>
+      <span class="font-bold">Upload</span>
      </a>
      </div>
      <div class="flex items-center w-full py-4 px-6">
      <a class="flex items-center w-full py-4 px-6" href={{'uplist'}}>
-     <i class="fas fa-list mr-2">
-      </i>
-      <span>
-       Uploaded List
-      </span>
+     <i class="fas fa-list mr-2"></i>
+      <span class="font-bold">Uploaded List</span>
      </a>
       </div>
      <div class="flex items-center w-full py-4 px-6">
      <a class="flex items-center w-full py-4 px-6" href={{'applist-1'}}>
-      <i class="fas fa-users mr-2">
-      </i>
-      <span>
-       Applicants List
-      </span>
+      <i class="fas fa-users mr-2"></i>
+      <span class="font-bold">Applicant List</span>
       </a>
      </div>
     <div class="mt-auto mb-8">
@@ -56,7 +47,7 @@
         @csrf
         <button type="submit" class="flex items-center w-full py-4 px-6">
             <i class="fas fa-sign-out-alt mr-2"></i>
-            <span>Log Out</span>
+            <span class="font-bold">Log Out</span>
         </button>
     </form>
       </div>
