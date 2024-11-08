@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Auth\PerusahaansignController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\UserBeasiswaController;
 use App\Http\Controllers\Auth\PerusahaanController;
 use App\Http\Controllers\BeasiswaController;
 use Illuminate\Support\Facades\Route;
@@ -69,13 +70,17 @@ Route::get('/applist-2', function () {
 Route::get('uplist', [BeasiswaController::class, 'index'])->name('beasiswa.index');
 // routes/web.php
 Route::get('/beasiswa/{id}', 'BeasiswaController@show')->name('beasiswa.show');
+Route::post('/beasiswa/publish/{id}', [BeasiswaController::class, 'publish'])->name('beasiswa.publish');
 
 Route::get('/signup', [PerusahaansignController::class, 'showSignupForm'])->name('signup');
-Route::get('/signin', [PerusahaanController::class, 'showLoginForm'])->name('auth.loginp');
-
+Route::post('/signupp', [PerusahaansignController::class, 'create'])->name('signup.post');
+Route::get('/signin', [PerusahaanController::class, 'showLoginForm'])->name('loginn');
+Route::post('/signinn', [PerusahaanController::class, 'loginn'])->name('loginn.post');
 // Route::middleware(['auth', 'multiAuthUser:2'])->group(function () {
 //     Route::get('/dashboard', [PerusahaanController::class, 'dashboard'])->name('dashboard');
 // });
+
+Route::get('/home', [UserBeasiswaController::class, 'index']);
 
 
 

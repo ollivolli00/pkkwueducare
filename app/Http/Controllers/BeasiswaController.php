@@ -205,4 +205,18 @@ class BeasiswaController extends Controller
 
     return redirect()->route('beasiswa.index')->with('success', 'Data beasiswa berhasil dihapus');
 }
+
+public function publish($id)
+{
+    $beasiswa = Beasiswa::findOrFail($id);
+    $beasiswa->is_published = true; // Menandai beasiswa sebagai dipublikasikan
+    $beasiswa->save();
+
+    // Logika untuk mengirim data ke tampilan dashboard user
+    // Misalnya dengan membuat query yang hanya menampilkan beasiswa `published` di dashboard user
+
+    return redirect()->back()->with('success', 'Beasiswa berhasil dipublikasikan.');
+}
+
+
 }
