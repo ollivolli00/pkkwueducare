@@ -65,5 +65,6 @@ class Kernel extends HttpKernel
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
         'multiAuthUser' => \App\Http\Middleware\MultiAuthUser::class,
         'perusahaan' => \App\Http\Middleware\PerusahaanMiddleware::class,
+        'beasiswa' => \App\Http\Middleware\BeasiswaMiddleware::class,
     ];
 }
