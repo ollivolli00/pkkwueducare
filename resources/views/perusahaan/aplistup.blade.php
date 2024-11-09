@@ -142,7 +142,7 @@
    <div class="w-5/6 p-8 ml-64">
    <div class="flex justify-end">
    <form onsubmit="return confirm('Apakah Anda Yakin ?');" action="{{ route('beasiswa.destroy', $beasiswa->id) }}" method="POST">
-   <form onsubmit="return confirm('Apakah Anda yakin ingin mempublikasikan beasiswa ini?');" action="{{ route('beasiswa.publish', $beasiswa->id) }}" method="POST" style="display: inline-block;">
+   <form onsubmit="return confirm('Apakah Anda yakin ingin mempublikasikan beasiswa ini?');" action="{{ route('beasiswa.publish', $beasiswa->id) }}" method="POST">
   @csrf
   <button type="submit" class="buttonn-style">Publikasikan</button>                                      
 </form>                                   

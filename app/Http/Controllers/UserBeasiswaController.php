@@ -9,10 +9,10 @@ class UserBeasiswaController extends Controller
     public function index()
     {
         // Mengambil hanya beasiswa yang sudah dipublikasikan
-        $beasiswa = Beasiswa::where('is_published', true)->get();
+        $beasiswaa = Beasiswa::where('is_published', true)->latest()->first();
     
         // Mengirimkan data beasiswa ke view
-        return view('welcome', compact('beasiswa'));
+        return view('welcome', compact('beasiswaa'));
     }
     
 

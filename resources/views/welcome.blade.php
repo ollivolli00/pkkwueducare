@@ -479,57 +479,33 @@
     <br>
     <!-- Latest Product Section Begin -->
     <section class="latest-product spad">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-4 col-md-6">
-                    <div class="latest-product__text">
-                        <h4>Terbaru</h4>
-                        <div class="latest-product__slider owl-carousel">
-                            <div class="latest-prdouct__slider__item">
-                                <a href="#" class="latest-product__item">
-                                    <div class="latest-product__item__pic">
-                                        <img src="img/latest-product/lp-1.jpg" alt="">
-                                    </div>
-                                    @foreach($beasiswa as $item)
-                                    <div class="latest-product__item__text">
-                                        <h6>{{ $item->nama_beasiswa }}</h6>
-                                        <span>{{ $item->deskripsi }}</span>
-                                    </div>
-                                </a>
-                                @endforeach
-                            <div class="latest-prdouct__slider__item">
-                                <a href="#" class="latest-product__item">
-                                    <div class="latest-product__item__pic">
-                                        <img src="img/latest-product/lp-1.jpg" alt="">
-                                    </div>
-                                    <div class="latest-product__item__text">
-                                        <h6>Crab Pool Security</h6>
-                                        <span>$30.00</span>
-                                    </div>
-                                </a>
-                                <a href="#" class="latest-product__item">
-                                    <div class="latest-product__item__pic">
-                                        <img src="img/latest-product/lp-2.jpg" alt="">
-                                    </div>
-                                    <div class="latest-product__item__text">
-                                        <h6>Crab Pool Security</h6>
-                                        <span>$30.00</span>
-                                    </div>
-                                </a>
-                                <a href="#" class="latest-product__item">
-                                    <div class="latest-product__item__pic">
-                                        <img src="img/latest-product/lp-3.jpg" alt="">
-                                    </div>
-                                    <div class="latest-product__item__text">
-                                        <h6>Crab Pool Security</h6>
-                                        <span>$30.00</span>
-                                    </div>
-                                </a>
-                            </div>
-                        </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-4 col-md-6">
+                <div class="latest-product__text">
+                    <h4>Terbaru</h4>
+                    <div class="latest-product__slider owl-carousel">
+                    <div class="latest-prdouct__slider__item">
+    @if($beasiswaa)
+    <a href="{{ route('beasiswa', $beasiswaa->id) }}" class="latest-product__item">
+        <div class="latest-product__item__pic">
+            <img src="{{ asset('storage/images/' . $beasiswaa->image2) }}" alt="{{ $beasiswaa->namabeasiswa }}" />
+        </div>
+        <div class="latest-product__item__text">
+            <span>{{ $beasiswaa->namabeasiswa }}</span>
+            <h6>{{ $beasiswaa->namaperusahaan }}</h6>
+            <p style="font-size: 12px; color: #777; margin-top: 3px;">Dipublikasikan: {{ $beasiswaa->created_at->format('d M Y') }}</p>
+        </div>
+    </a>
+    @else
+    <p>Belum ada beasiswa terbaru.</p>
+    @endif
+</div>
+
                     </div>
                 </div>
-                <div class="col-lg-4 col-md-6">
+            </div>
+                         <div class="col-lg-4 col-md-6">
                     <div class="latest-product__text">
                         <h4>Paling Banyak Diminati</h4>
                         <div class="latest-product__slider owl-carousel">

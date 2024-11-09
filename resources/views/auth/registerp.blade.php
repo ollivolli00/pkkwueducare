@@ -34,8 +34,8 @@
         </div>
         <div class="login-section">
             <div class="form-box login">
-            <form method="POST" action="{{ route('signup') }}">
-            @csrf
+            <form action="{{ route('signup.post') }}" method="POST">
+    @csrf
                     <h2>Sign Up</h2>
                     <div class="input-box">
                         <span class="icon"><i class='bi bi-person-fill'></i></span>

@@ -26,7 +26,7 @@ Route::resource('beasiswa', BeasiswaController::class);
 Auth::routes();
 Route::middleware(['auth', 'multiAuthUser:user'])->group(function () {
   
-    Route::get('/home', [HomeController::class, 'index'])->name('dashboard');
+    Route::get('/home', [HomeController::class, 'index'])->name('user');
 });
  
 // Super Admin Routes
@@ -42,6 +42,10 @@ Route::middleware(['auth', 'perusahaan'])->group(function () {
 Route::get('/profil', function () {
     return view('profil');
 });
+Route::get('/beasiswa', function () {
+    return view('beasiswa');
+})->name('beasiswa');
+
 Route::get('/about', function () {
     return view('about');
 });
@@ -69,18 +73,20 @@ Route::get('/applist-2', function () {
 })->name('applist-2');
 Route::get('uplist', [BeasiswaController::class, 'index'])->name('beasiswa.index');
 // routes/web.php
-Route::get('/beasiswa/{id}', 'BeasiswaController@show')->name('beasiswa.show');
-Route::post('/beasiswa/publish/{id}', [BeasiswaController::class, 'publish'])->name('beasiswa.publish');
+Route::get('/beasiswa/{id}', [BeasiswaController::class, 'show'])->name('beasiswa.show');
+Route::post('/beasiswa/{id}', [BeasiswaController::class, 'publish'])->name('beasiswa.publish');
 
 Route::get('/signup', [PerusahaansignController::class, 'showSignupForm'])->name('signup');
-Route::post('/signupp', [PerusahaansignController::class, 'create'])->name('signup.post');
+
+Route::post('/signup', [PerusahaansignController::class, 'create'])->name('signup.post');
+
 Route::get('/signin', [PerusahaanController::class, 'showLoginForm'])->name('loginn');
 Route::post('/signinn', [PerusahaanController::class, 'loginn'])->name('loginn.post');
 // Route::middleware(['auth', 'multiAuthUser:2'])->group(function () {
 //     Route::get('/dashboard', [PerusahaanController::class, 'dashboard'])->name('dashboard');
 // });
 
-Route::get('/home', [UserBeasiswaController::class, 'index']);
+Route::get('/', [UserBeasiswaController::class, 'index'])->name('user.index');
 
 
 

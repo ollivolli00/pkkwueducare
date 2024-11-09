@@ -27,6 +27,7 @@ return new class extends Migration
             $table->string('image3');
             $table->string('judul_benefit');
             $table->string('isi_benefit');
+            $table->boolean('is_published')->default(false);
             $table->timestamps();
         });
     }
@@ -39,5 +40,6 @@ return new class extends Migration
     public function down()
     {
         Schema::dropIfExists('beasiswas');
+        
     }
 };
