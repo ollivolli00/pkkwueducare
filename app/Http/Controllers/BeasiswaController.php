@@ -219,18 +219,5 @@ public function publish($id)
     ->with('success', 'Beasiswa berhasil dipublikasikan');
 }
 
-public function PerusahaanDashboard()
-{
-    $totalUploads = Beasiswa::where('is_published', 1)
-                             ->count();
-
-    $totalUnpublished = Beasiswa::where('is_published', 0)
-                                 ->count();
-
-    // Debugging: Pastikan data ada
-    dd(compact('totalUploads', 'totalUnpublished'));
-
-    return view('perusahaan.home', compact('totalUploads', 'totalUnpublished'));
-}
 
 }

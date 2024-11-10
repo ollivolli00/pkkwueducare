@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('namadepan');
             $table->string('namabelakang');
-            $table->string('emailperusahaan')->unique();
+            $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->tinyInteger('type')->default(2);
             $table->string('namaperusahaan');

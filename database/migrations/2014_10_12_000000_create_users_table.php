@@ -1,9 +1,9 @@
 <?php
-  
+
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
-  
+
 return new class extends Migration
 {
     /**
@@ -19,13 +19,18 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
-            $table->tinyInteger('type')->default(0); /* Users: 0=>User, 1=>Super Admin, 2=>Manager */
-           
+            $table->tinyInteger('type')->default(0); /* Users: 0=>User  , 1=>Super Admin, 2=>Manager */
+            $table->unsignedBigInteger('perusahaan_id')->nullable(); // Tambahkan kolom perusahaan_id
             $table->rememberToken();
             $table->timestamps();
+
+            // Menambahkan foreign key constraint
+            $table->foreign('perusahaan_id')->references('id')->on('perusahaansigns')
+                ->onDelete('restrict') // Anda bisa mengganti ini sesuai kebutuhan
+                ->onUpdate('restrict'); // Anda bisa mengganti ini sesuai kebutuhan
         });
     }
-  
+
     /**
      * Reverse the migrations.
      *

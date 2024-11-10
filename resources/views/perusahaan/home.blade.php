@@ -96,7 +96,7 @@
               {{ Auth::guard('perusahaan')->user()->namaperusahaan }}
             </h3>
             <p class="text-sm text-gray-500">
-              {{ Auth::guard('perusahaan')->user()->emailperusahaan ?? 'Email Perusahaan Tidak Tersedia' }}
+              {{ Auth::guard('perusahaan')->user()->email ?? 'Email Perusahaan Tidak Tersedia' }}
             </p>
           @endauth
         </div>
@@ -147,33 +147,12 @@
 @endauth
   <!-- Statistics Cards -->
   <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-6">
-    <!-- Card 1 -->
-    <div class="bg-white p-6 rounded-lg shadow">
-      <div class="flex items-center">
-        <i class="fas fa-users text-blue-500 text-2xl mr-3"></i>
-        <div>
-          <h3 class="text-lg font-semibold text-gray-700">Total Applicants</h3>
-          <p class="text-2xl font-bold">124</p>
-        </div>
-      </div>
-    </div>
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-6">
+  <p>Total Beasiswa yang Dipublikasikan: {{ $totalPublished }}</p>
+<p>Total Beasiswa yang Belum Dipublikasikan: {{ $totalUnpublished }}</p>
+<p>Total Beasiswa yang Diupload: {{ $totalUploads }}</p>
 
-    <!-- Card 2 -->
-      
-
-    <!-- Card 3 -->
-    <div class="bg-white p-6 rounded-lg shadow">
-      <div class="flex items-center">
-        <i class="fas fa-upload text-green-500 text-2xl mr-3"></i>
-        <div>
-        <h3 class="text-lg font-semibold text-gray-700">Total Uploads</h3>
-        <p class="text-2xl font-bold">47</p>
-        </div>
-      </div>
-    </div>
-
-    
-  </div>
+</div>
 
   <!-- Activity Feed and Recent Applicants -->
   <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">

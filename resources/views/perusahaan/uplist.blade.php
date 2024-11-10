@@ -192,7 +192,7 @@
               {{ Auth::guard('perusahaan')->user()->namaperusahaan }}
             </h3>
             <p class="text-sm text-gray-500">
-              {{ Auth::guard('perusahaan')->user()->emailperusahaan ?? 'Email Perusahaan Tidak Tersedia' }}
+              {{ Auth::guard('perusahaan')->user()->email ?? 'Email Perusahaan Tidak Tersedia' }}
             </p>
           @endauth
         </div>

@@ -20,26 +20,23 @@ use Illuminate\Support\Facades\Auth;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 Route::resource('beasiswa', BeasiswaController::class);
 Auth::routes();
-Route::middleware(['auth', 'multiAuthUser:user'])->group(function () {
-  
-    Route::get('/home', [HomeController::class, 'index'])->name('user')->middleware('beasiswa');
-});
- 
-// Super Admin Routes
-Route::middleware(['auth', 'multiAuthUser:admin'])->group(function () {
-  
+Route::middleware(['auth', 'multiAuthUser :admin'])->group(function () {
     Route::get('/admin/dashboard', [HomeController::class, 'AdminDashboard'])->name('admin');
-});  
-Route::middleware(['auth', 'perusahaan'])->group(function () {
-    Route::get('/dashboard', [PerusahaanController::class, 'dashboard'])->name('perusahaan.dashboard');
 });
 
-// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::middleware(['auth:perusahaan', 'perusahaan'])->group(function () {
+    Route::get('/dashboard', [PerusahaanController::class, 'dashboard'])->name('dashboard');
+});
+
+
+Route::middleware(['auth', 'multiAuthUser :user'])->group(function () {
+    Route::get('/user/dashboard', [HomeController::class, 'dashboard'])->name('user');
+});
 Route::get('/profil', function () {
     return view('profil');
 });
@@ -90,7 +87,7 @@ Route::post('/signinn', [PerusahaanController::class, 'loginn'])->name('loginn.p
 
 Route::resource('beasiswaa', UserBeasiswaController::class);
 Route::get('/', [UserBeasiswaController::class, 'index'])->middleware('beasiswa');
-Route::get('/daftarbeasiswa/{id}', [UserBeasiswaController::class, 'show'])->name('beasiswa.show');
+Route::get('/daftarbeasiswa/{id}', [UserBeasiswaController::class, 'show'])->name('beasiswaa.show');
 // Route::get('/', [UserBeasiswaController::class, 'index'])->name('user.index');
 
 

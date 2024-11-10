@@ -79,14 +79,14 @@
                         <span class="icon"><i class='bx bxs-envelope'></i></span>
                         <label>Email Perusahaan</label>
                         <br>
-                        <label type="email" required {{ __('emailperusahaan') }}></label>
+                        <label type="email" required {{ __('email') }}></label>
 
                         <div class="col-md-6">
-                                <input id="emailperusahaan" type="email" class="form-control @error('emailperusahaan') is-invalid @enderror" name="emailperusahaan" value="{{ old('emailperusahaan') }}" required autocomplete="emailperusahaan" autofocus>
+                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
 
-                                @error('emailperusahaan')
+                                @error('email')
                                 <script>
-                document.getElementById('emailperusahaan').value = '';
+                document.getElementById('email').value = '';
             </script>
             <span class="invalid-feedback" role="alert">
                 <strong>{{ $message }}</strong>
@@ -151,7 +151,7 @@
                                 </button>
                     
                     <div class="create-account">
-                        <p>Already Have an Account? <a href="{{route('signin')}}" class="register-link">Login</a>
+                        <p>Already Have an Account? <a href="{{route('loginn')}}" class="register-link">Login</a>
                         </p>
                     </div>
                 </form>

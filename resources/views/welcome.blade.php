@@ -487,7 +487,7 @@
                     <div class="latest-product__slider owl-carousel">
                     <div class="latest-product__slider__item">
     @if(isset($beasiswaa))
-    <a href="{{ route('beasiswa.show', $beasiswaa->id) }}" class="latest-product__item">
+    <a href="{{ route('beasiswaa.show', $beasiswaa->id) }}" class="latest-product__item">
         <div class="latest-product__item__pic">
             <img src="{{ asset('storage/images/' . $beasiswaa->image2) }}" alt="{{ $beasiswaa->namabeasiswa }}" />
         </div>

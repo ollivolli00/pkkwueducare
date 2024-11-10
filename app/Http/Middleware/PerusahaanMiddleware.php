@@ -9,8 +9,16 @@ class PerusahaanMiddleware
 {
     public function handle($request, Closure $next)
     {
-        if (Auth::check()) {
-            $user = Auth::user();
+        // Cek apakah pengguna sudah terautentikasi dengan guard 'perusahaan'
+        if (Auth::guard('perusahaan')->check()) {
+            // Cek apakah rute yang diminta adalah /signin
+            if ($request->is('signin')) {
+                // Jika sudah terautentikasi dan mencoba mengakses /signin, redirect ke dashboard
+                return redirect()->route('dashboard'); // Ganti dengan rute dashboard Anda
+            }
+
+            // Jika pengguna sudah terautentikasi, ambil data perusahaan
+            $user = Auth::guard('perusahaan')->user();
             $perusahaan = $user->perusahaan; // Ambil data perusahaan terkait
 
             if (!$perusahaan) {
@@ -19,8 +27,6 @@ class PerusahaanMiddleware
 
             // Menyimpan data perusahaan ke dalam request agar bisa diakses di controller
             $request->attributes->set('perusahaan', $perusahaan);
-        } else {
-            return redirect()->route('auth.loginp'); // Ganti dengan route login Anda
         }
 
         return $next($request);
