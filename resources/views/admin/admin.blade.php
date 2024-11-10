@@ -1,122 +1,220 @@
-<!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Educare Admin Dashboard</title>
-    <link crossorigin="anonymous" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"/>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-        }
-        .sidebar {
-            background-color: #f8f9fa;
-            height: 100vh;
-            padding: 20px;
-            border-right: 1px solid #dee2e6;
-        }
-        .sidebar .nav-link {
-            color: #000;
-            margin: 10px 0;
-        }
-        .sidebar .nav-link:hover,
-        .sidebar .nav-link.active {
-            background-color: #e9ecef;
-            border-radius: 5px;
-        }
-        .content {
-            padding: 20px;
-        }
-        .header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 10px 0;
-            border-bottom: 1px solid #dee2e6;
-        }
-        .scholarship-info {
-            display: flex;
-            align-items: center;
-            margin: 30px 0;
-        }
-        .scholarship-info img {
-            height: 170px;
-            margin-right: 15px;
-        }
-        .btn-primary {
-            background-color: #007bff;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 5px;
-        }
-        .btn-primary:hover {
-            background-color: #0056b3;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard Admin</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
+  <style>
+    .nav-link {
+        display: flex;
+        align-items: center;
+        padding: 1rem 1.5rem;
+        color: #4a5568; /* Warna teks */
+        text-decoration: none; /* Menghilangkan garis bawah */
+        transition: background-color 0.2s ease, color 0.2s ease; /* Transisi halus */
+    }
+
+    .nav-link:hover {
+        background-color: #edf2f7; /* Warna latar belakang saat hover */
+        color: #2d3748; /* Warna teks saat hover */
+    }
+
+    .nav-link.active {
+        background-color: #cbd5e0; /* Warna latar belakang untuk link aktif */
+        color: #2b6cb0; /* Warna teks untuk link aktif */
+        font-weight: bold; /* Menebalkan teks untuk link aktif */
+    }
+
+    .nav-link i {
+        margin-right: 0.75rem; /* Jarak antara ikon dan teks */
+    }
+    .button-style {
+      background-color: #38a169;
+      color: white;
+      padding: 0.5rem 2rem;
+      border-radius: 0.375rem;
+      margin-left: 0.5rem;
+      margin-right: 0.5rem;
+      display: inline-block;
+    }
+
+    .buttonn-style {
+      background-color: #2563eb;
+      color: white;
+      padding: 0.5rem 2rem;
+      border-radius: 0.375rem;
+      margin-left: 0.5rem;
+      margin-right: 0.5rem;
+      display: inline-block;
+    }
+
+    .button-stylee {
+      background-color: red;
+      color: white;
+      padding: 0.5rem 2rem;
+      border-radius: 0.375rem;
+      margin-left: 0.5rem;
+      margin-right: 0.5rem;
+      display: inline-block;
+    }
+
+    .sidebar {
+      transition: all 0.3s;
+    }
+
+    .nav-link {
+      @apply flex items-center px-6 py-3 text-gray-700 hover:bg-gray-100 transition-colors duration-200;
+    }
+
+    .nav-link.active {
+      @apply bg-blue-50 text-blue-600 font-medium;
+    }
+
+    .nav-link i {
+      @apply mr-3;
+    }
+  </style> 
 </head>
-<body>
-    <div class="d-flex">
-        <div class="sidebar">
-            <div class="profile text-center">
-                <img alt="Profile Picture" height="100" src="https://storage.googleapis.com/a1aa/image/bOoayfKSQRUrBi3ZvOSVfaeMwRAY4Czh8ecs9aaWA9MPFzmOB.jpg" width="100"/>
-                <h4>ADMIN</h4>
-                <p>adminn@gmail.com</p>
-            </div>
-            <nav class="nav flex-column">
-                <a class="nav-link active" href="#"><i class="fas fa-globe"></i> Website</a>
-                <a class="nav-link" href="#"><i class="fas fa-user"></i> User</a>
-                <a class="nav-link" href="#"><i class="fas fa-cog"></i> Website Settings</a>
-                <a class="nav-link" href="#"><i class="fas fa-th-large"></i> Layout Settings</a>
-                <a class="nav-link" href="#"><i class="fas fa-database"></i> Data Users</a>
-                <a class="nav-link" href="#"><i class="fas fa-star"></i> User Choice's</a>
-                <a class="nav-link" href="#"><i class="fas fa-upload"></i> Upload</a>
-                <form method="POST" action="{{ route('logout') }}">
+<body class="bg-gray-100 font-sans">
+  <div class="flex">
+    <!-- Sidebar -->
+    <div class="sidebar bg-white h-screen w-64 fixed left-0 top-0 overflow-y-auto shadow-lg">
+      <div class="flex flex-col h-full">
+        <!-- Logo Section -->
+        <div class="p-6 border-b border-gray-200">
+          <img alt="Educare Logo" src="{{ asset('img/logo.png') }}" class="w-full max-w-[200px] mx-auto" />
+        </div>
+
+        <!-- Profile Section -->
+        <div class="p-6 border-b border-gray-200 text-center">
+          <img src="https://storage.googleapis.com/a1aa/image/TsPTHHQA9PLmIZY2P9D0HASO0e0SXKHpfutawnKUyYyYKRnTA.jpg" 
+               alt="Profile Picture" 
+               class="w-24 h-24 rounded-full mx-auto mb-4"/>
+         
+            <h3 class="font-semibold text-gray-800 mb-1">
+            Admin
+            </h3>
+            <p class="text-sm text-gray-500">
+            admin@educare.com
+            </p>
+ 
+        </div>
+
+        <!-- Navigation Links -->
+        <nav class="flex-grow py-4">
+          <a class="nav-link {{ Request::routeIs('datauser') ? 'active' : '' }}" 
+             href="{{ route('datauser') }}">
+            <i class="fas fa-user w-6"></i>
+            <span>Data Users</span>
+          </a>
+          <a class="nav-link {{ Request::routeIs('dataperusahaan') ? 'active' : '' }}" 
+             href="{{ route('dataperusahaan') }}">
+            <i class="fas fa-user w-6"></i>
+            <span>Data Users Perusahaan</span>
+          </a>
+          <a class="nav-link {{ Request::routeIs('manage') ? 'active' : '' }}" 
+             href="{{route('manage')}}">
+            <i class="fas fa-upload w-6"></i>
+            <span>Manage Uploads</span>
+          </a>
+        </nav>
+
+        <!-- Logout Button -->
+<div class="p-1 border-t border-gray-200">
+    <form method="POST" action="{{ route('logout') }}"> <!-- Menghapus spasi setelah 'logout' -->
         @csrf
-        <button type="submit" class="flex items-center w-full py-4 px-6">
-            <i class="fas fa-sign-out-alt mr-2"></i>
+        <button type="submit" class="nav-link text-red-600 w-full text-left">
+            <i class="fas fa-sign-out-alt w-6"></i>
             <span>Log Out</span>
         </button>
     </form>
-
-            </nav>
-        </div>
-        <div class="content flex-grow-1">
-            <div class="header">
-                <div class="logo">EDUCARE</div>
-                <div class="settings"><i class="fas fa-cog"></i></div>
-            </div>
-            <div class="bg-gray-300 h-40 flex justify-center items-center mb-4" style="border-radius: 10px;">
-                <label class="cursor-pointer w-full h-full flex justify-center items-center relative">
-                    <i class="fas fa-plus text-4xl text-gray-500"></i>
-                    <input class="hidden" type="file"/>
-                </label>
-            </div>
-            <div class="main-content">
-                <div class="scholarship-info">
-                    <img alt="BCA Logo" src="img/bcakcil.png" width="170">
-                    <div>
-                        <h1>Beasiswa BCA</h1>
-                        <p>by Bank BCA</p>
-                        <p style="color: red;">Batas Waktu: 14/ 09/2024</p>
-                    </div>
-                </div>
-                <div class="requirements mt-4">
-                    <h4>Persyaratan</h4>
-                    <ul>
-                        <li>Warga negara Indonesia</li>
-                        <li>Siswa/siswi kelas XII / lulusan SMA/SMK</li>
-                        <li>Rata-rata nilai rapor kelas X, XI, dan XII minimal 7,50*</li>
-                        <li>Rata-rata nilai Matematika kelas X, XI, dan XII (SMA IPA, IPS) atau nilai Produktif kelas X, XI, dan XII (khusus SMK) minimal 7,50*</li>
-                        <li>(Silahkan mengisi angka "0.00" pada kolom nilai rapor kelas XI semester 2 (jika nilai rapor belum keluar))</li>
-                        <li>Tidak pernah tinggal kelas dari SD-SMA/SMK</li>
-                        <li>Tidak pernah terlibat narkoba dan pelanggaran hukum lainnya</li>
-                        <li>Lulus dalam proses seleksi (Seleksi Administrasi, Tes Online, Tes Psikologi, Wawancara I, Wawancara II & Tes Kesehatan)</li>
-                    </ul>
-                </div>
-                <button class="btn btn-primary mt-4 mx-auto">Daftar</button>
-            </div>
-        </div>
+</div>      </div>
     </div>
+
+    <div class="ml-64 p-6 bg-gray-100 min-h-screen">
+  <!-- Page Header -->
+  <div class="flex justify-between items-center mb-6">
+    <h1 class="text-3xl font-semibold text-gray-800">Dashboard Admin</h1>
+  </div>
+<!-- Statistics Cards -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+  <!-- Card 1 -->
+  <div class="bg-white p-6 rounded-lg shadow">
+    <div class="flex items-center">
+      <i class="fas fa-users text-blue-500 text-2xl mr-3"></i>
+      <div>
+        <h3 class="text-lg font-semibold text-gray-700">Total Data User</h3>
+        <p class="text-2xl font-bold">124</p> <!-- Ganti dengan data dari database -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Card 2 -->
+  <div class="bg-white p-6 rounded-lg shadow">
+    <div class="flex items-center">
+      <i class="fas fa-upload text-green-500 text-2xl mr-3"></i>
+      <div>
+        <h3 class="text-lg font-semibold text-gray-700">Total Data Perusahaan</h3>
+        <p class="text-2xl font-bold">47</p> <!-- Ganti dengan data dari database -->
+      </div>
+    </div>
+  </div>
+</div>
+
+
+  <!-- Activity Feed and Recent Applicants -->
+  <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+    <!-- Recent Applicants -->
+    <div class="bg-white p-6 rounded-lg shadow">
+      <h2 class="text-lg font-semibold text-gray-700 mb-4">Recent Applicants</h2>
+      <ul>
+        <li class="flex justify-between items-center border-b border-gray-200 py-3">
+          <div>
+            <h3 class="text-md font-medium text-gray-800">John Doe</h3>
+            <p class="text-sm text-gray-500">Applied for Scholarship X</p>
+          </div>
+          <span class="text-green-600 text-sm">New</span>
+        </li>
+        <li class="flex justify-between items-center border-b border-gray-200 py-3">
+          <div>
+            <h3 class="text-md font-medium text-gray-800">Jane Smith</h3>
+            <p class="text-sm text-gray-500">Applied for Scholarship Y</p>
+          </div>
+          <span class="text-green-600 text-sm">New</span>
+        </li>
+        <!-- Add more applicants here -->
+      </ul>
+    </div>
+
+    <!-- Recent Activity -->
+    <div class="bg-white p-6 rounded-lg shadow">
+      <h2 class="text-lg font-semibold text-gray-700 mb-4">Recent Uploaded Beasiswa</h2>
+      <ul>
+        <li class="flex items-center justify-between py-3 border-b border-gray-200">
+          <p class="text-gray-700">Admin approved an application</p>
+          <span class="text-gray-500 text-sm">2 hrs ago</span>
+        </li>
+        <li class="flex items-center justify-between py-3 border-b border-gray-200">
+          <p class="text-gray-700">New upload added</p>
+          <span class="text-gray-500 text-sm">5 hrs ago</span>
+        </li>
+        <!-- Add more activities here -->
+      </ul>
+    </div>
+  </div>
+</div>
+
+            <!-- Js Plugins -->
+            <script src="js/jquery-3.3.1.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/jquery.nice-select.min.js"></script>
+    <script src="js/jquery-ui.min.js"></script>
+    <script src="js/jquery.slicknav.js"></script>
+    <script src="js/mixitup.min.js"></script>
+    <script src="js/owl.carousel.min.js"></script>
+    <script src="js/main.js"></script>
+
+
 </body>
 </html>

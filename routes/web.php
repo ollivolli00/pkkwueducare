@@ -5,6 +5,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UserBeasiswaController;
 use App\Http\Controllers\Auth\PerusahaanController;
 use App\Http\Controllers\BeasiswaController;
+use App\Http\Controllers\AdminController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
@@ -64,7 +65,13 @@ Route::get('/unggulan', function () {
 Route::get('/dashboard', function () {
     return view('perusahaan.home');
 })->name('dashboard');
-
+Route::get('/data-users', [AdminController::class, 'showDataUsers'])->name('datauser');
+Route::get('/data-perusahaan', function () {
+    return view('admin.dataperusahaan');
+})->name('dataperusahaan');
+Route::get('/manage-beasiswas', function () {
+    return view('admin.manage');
+})->name('manage');
 Route::get('/applist-1', function () {
     return view('perusahaan.applist1');
 })->name('applist-1');

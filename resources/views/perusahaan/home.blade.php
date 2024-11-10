@@ -137,7 +137,102 @@
 </div>      </div>
     </div>
 
-    
+    <div class="ml-64 p-6 bg-gray-100 min-h-screen">
+  <!-- Page Header -->
+  <div class="flex justify-between items-center mb-6">
+    <h1 class="text-3xl font-semibold text-gray-800">Dashboard Admin</h1>
+    <button class="button-style">New Upload</button>
+  </div>
+
+  <!-- Statistics Cards -->
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-6">
+    <!-- Card 1 -->
+    <div class="bg-white p-6 rounded-lg shadow">
+      <div class="flex items-center">
+        <i class="fas fa-users text-blue-500 text-2xl mr-3"></i>
+        <div>
+          <h3 class="text-lg font-semibold text-gray-700">Total Applicants</h3>
+          <p class="text-2xl font-bold">124</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 2 -->
+    <div class="bg-white p-6 rounded-lg shadow">
+      <div class="flex items-center">
+        <i class="fas fa-upload text-green-500 text-2xl mr-3"></i>
+        <div>
+          <h3 class="text-lg font-semibold text-gray-700">Total Uploads</h3>
+          <p class="text-2xl font-bold">47</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 3 -->
+    <div class="bg-white p-6 rounded-lg shadow">
+      <div class="flex items-center">
+        <i class="fas fa-envelope-open-text text-yellow-500 text-2xl mr-3"></i>
+        <div>
+          <h3 class="text-lg font-semibold text-gray-700">Pending Approvals</h3>
+          <p class="text-2xl font-bold">16</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 4 -->
+    <div class="bg-white p-6 rounded-lg shadow">
+      <div class="flex items-center">
+        <i class="fas fa-tasks text-red-500 text-2xl mr-3"></i>
+        <div>
+          <h3 class="text-lg font-semibold text-gray-700">Completed</h3>
+          <p class="text-2xl font-bold">98%</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Activity Feed and Recent Applicants -->
+  <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+    <!-- Recent Applicants -->
+    <div class="bg-white p-6 rounded-lg shadow">
+      <h2 class="text-lg font-semibold text-gray-700 mb-4">Recent Applicants</h2>
+      <ul>
+        <li class="flex justify-between items-center border-b border-gray-200 py-3">
+          <div>
+            <h3 class="text-md font-medium text-gray-800">John Doe</h3>
+            <p class="text-sm text-gray-500">Applied for Scholarship X</p>
+          </div>
+          <span class="text-green-600 text-sm">New</span>
+        </li>
+        <li class="flex justify-between items-center border-b border-gray-200 py-3">
+          <div>
+            <h3 class="text-md font-medium text-gray-800">Jane Smith</h3>
+            <p class="text-sm text-gray-500">Applied for Scholarship Y</p>
+          </div>
+          <span class="text-green-600 text-sm">New</span>
+        </li>
+        <!-- Add more applicants here -->
+      </ul>
+    </div>
+
+    <!-- Recent Activity -->
+    <div class="bg-white p-6 rounded-lg shadow">
+      <h2 class="text-lg font-semibold text-gray-700 mb-4">Recent Activities</h2>
+      <ul>
+        <li class="flex items-center justify-between py-3 border-b border-gray-200">
+          <p class="text-gray-700">Admin approved an application</p>
+          <span class="text-gray-500 text-sm">2 hrs ago</span>
+        </li>
+        <li class="flex items-center justify-between py-3 border-b border-gray-200">
+          <p class="text-gray-700">New upload added</p>
+          <span class="text-gray-500 text-sm">5 hrs ago</span>
+        </li>
+        <!-- Add more activities here -->
+      </ul>
+    </div>
+  </div>
+</div>
+
             <!-- Js Plugins -->
             <script src="js/jquery-3.3.1.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
