@@ -91,14 +91,15 @@
           <img src="https://storage.googleapis.com/a1aa/image/TsPTHHQA9PLmIZY2P9D0HASO0e0SXKHpfutawnKUyYyYKRnTA.jpg" 
                alt="Profile Picture" 
                class="w-24 h-24 rounded-full mx-auto mb-4"/>
-          @auth('perusahaan')
-            <h3 class="font-semibold text-gray-800 mb-1">
-              {{ Auth::guard('perusahaan')->user()->namaperusahaan }}
-            </h3>
-            <p class="text-sm text-gray-500">
-              {{ Auth::guard('perusahaan')->user()->email ?? 'Email Perusahaan Tidak Tersedia' }}
-            </p>
-          @endauth
+               @auth
+    <h3 class="font-semibold text-gray-800 mb-1">
+        {{ Auth::user()->perusahaan->namaperusahaan ?? 'Nama Perusahaan Tidak Tersedia' }}
+    </h3>
+    <p class="text-sm text-gray-500">
+        {{ Auth::user()->perusahaan->email ?? 'Email Perusahaan Tidak Tersedia' }}
+    </p>
+@endauth
+
         </div>
 
         <!-- Navigation Links -->
@@ -141,8 +142,9 @@
   <!-- Page Header -->
   @auth('perusahaan')
   <div class="flex justify-between items-center mb-6">
-    <h1 class="text-3xl font-semibold text-gray-800">Dashboard  {{ Auth::guard('perusahaan')->user()->namaperusahaan }}</h1>
+    <h1 class="text-3xl font-semibold text-gray-800">Dashboard    {{ Auth::user()->perusahaan->namaperusahaan ?? 'Nama Perusahaan Tidak Tersedia' }}</h1>
     <button class="button-style">New Upload</button>
+    
   </div>
 @endauth
   <!-- Statistics Cards -->

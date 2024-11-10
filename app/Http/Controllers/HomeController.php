@@ -46,8 +46,8 @@ class HomeController extends Controller
 
             // Ambil data perusahaan berdasarkan ID
             $dataPerusahaan = $perusahaan; // Menggunakan data perusahaan dari pengguna yang login
-           
-            return view('perusahaan.home', compact('dataPerusahaan'));
+            $totaUploads = Beasiswa::all()->count(); 
+            return view('perusahaan.home', compact('dataPerusahaan', 'totalUploads'));
         }
 
         return redirect()->route('signin'); // Redirect jika tidak ada pengguna yang login

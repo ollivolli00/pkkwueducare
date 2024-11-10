@@ -88,3 +88,4 @@ Route::get('/signup', [PerusahaansignController::class, 'showSignupForm'])->name
 Route::post('/signup', [PerusahaansignController::class, 'create'])->name('signup.post');
 Route::get('/signin',[PerusahaanController::class, 'showLoginForm'])->name('signin');
 Route::post('/signin', [PerusahaanController::class, 'loginn'])->name('signin.post');
+
