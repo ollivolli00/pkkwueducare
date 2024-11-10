@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Beasiswa;
 use Illuminate\Support\Facades\Storage;
-
+use Illuminate\Support\Facades\Auth;
 class BeasiswaController extends Controller
 {
     /**
@@ -219,5 +219,18 @@ public function publish($id)
     ->with('success', 'Beasiswa berhasil dipublikasikan');
 }
 
+public function PerusahaanDashboard()
+{
+    $totalUploads = Beasiswa::where('is_published', 1)
+                             ->count();
+
+    $totalUnpublished = Beasiswa::where('is_published', 0)
+                                 ->count();
+
+    // Debugging: Pastikan data ada
+    dd(compact('totalUploads', 'totalUnpublished'));
+
+    return view('perusahaan.home', compact('totalUploads', 'totalUnpublished'));
+}
 
 }

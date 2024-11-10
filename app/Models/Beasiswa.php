@@ -11,4 +11,6 @@ class Beasiswa extends Model
     protected $fillable = [
         'image1', 'image2', 'namabeasiswa', 'namaperusahaan', 'batasbeasiswa', 'minipersyaratan', 'miniisi', 'persyaratan', 'isipersyaratan', 'image3', 'judul_benefit', 'isi_benefit'
     ];
+
+    
 }

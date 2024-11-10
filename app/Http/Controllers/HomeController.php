@@ -2,7 +2,8 @@
 
 namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Auth;
-
+use App\Models\User;
+use App\Models\Perusahaansign;
 class HomeController extends Controller
 {
     /**
@@ -26,7 +27,14 @@ class HomeController extends Controller
     }
     public function AdminDashboard()
     {
-        return view('admin.admin');
+        // Mengambil jumlah pengguna yang login
+         $totalUsers = User::where('type', 0)->count();// Mengambil jumlah seluruh pengguna
+        
+        // Mengambil jumlah perusahaan
+        $totalPerusahaan = Perusahaansign::count();  // Mengambil jumlah perusahaan
+
+        // Mengirim data ke view
+        return view('admin.admin', compact('totalUsers', 'totalPerusahaan'));
     }
     public function PerusahaanDashboard()
     {

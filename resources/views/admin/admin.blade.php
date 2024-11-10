@@ -101,8 +101,13 @@
  
         </div>
 
-        <!-- Navigation Links -->
-        <nav class="flex-grow py-4">
+               <!-- Navigation Links -->
+               <nav class="flex-grow py-4">
+        <a class="nav-link {{ Request::routeIs('admin') ? 'active' : '' }}" 
+               href="{{ route('admin') }}">
+                <i class="fas fa-home w-6"></i>
+                <span>Dashboard</span>
+            </a>   
           <a class="nav-link {{ Request::routeIs('datauser') ? 'active' : '' }}" 
              href="{{ route('datauser') }}">
             <i class="fas fa-user w-6"></i>
@@ -111,7 +116,7 @@
           <a class="nav-link {{ Request::routeIs('dataperusahaan') ? 'active' : '' }}" 
              href="{{ route('dataperusahaan') }}">
             <i class="fas fa-user w-6"></i>
-            <span>Data Users Perusahaan</span>
+            <span>Data Perusahaan</span>
           </a>
           <a class="nav-link {{ Request::routeIs('manage') ? 'active' : '' }}" 
              href="{{route('manage')}}">
@@ -121,15 +126,16 @@
         </nav>
 
         <!-- Logout Button -->
-<div class="p-1 border-t border-gray-200">
-    <form method="POST" action="{{ route('logout') }}"> <!-- Menghapus spasi setelah 'logout' -->
-        @csrf
-        <button type="submit" class="nav-link text-red-600 w-full text-left">
-            <i class="fas fa-sign-out-alt w-6"></i>
-            <span>Log Out</span>
-        </button>
-    </form>
-</div>      </div>
+        <div class="p-1 border-t border-gray-200">
+            <form method="POST" action="{{ route('logout') }}">
+                @csrf
+                <button type="submit" class="nav-link text-red-600 w-full text-left">
+                    <i class="fas fa-sign-out-alt w-6"></i>
+                    <span>Log Out</span>
+                </button>
+            </form>
+        </div>  
+      </div>
     </div>
 
     <div class="ml-64 p-6 bg-gray-100 min-h-screen">
@@ -145,7 +151,7 @@
       <i class="fas fa-users text-blue-500 text-2xl mr-3"></i>
       <div>
         <h3 class="text-lg font-semibold text-gray-700">Total Data User</h3>
-        <p class="text-2xl font-bold">124</p> <!-- Ganti dengan data dari database -->
+        <p class="text-2xl font-bold">{{ $totalUsers }}</p>
       </div>
     </div>
   </div>
@@ -156,7 +162,7 @@
       <i class="fas fa-upload text-green-500 text-2xl mr-3"></i>
       <div>
         <h3 class="text-lg font-semibold text-gray-700">Total Data Perusahaan</h3>
-        <p class="text-2xl font-bold">47</p> <!-- Ganti dengan data dari database -->
+        <p class="text-2xl font-bold">{{ $totalPerusahaan }}</p>
       </div>
     </div>
   </div>

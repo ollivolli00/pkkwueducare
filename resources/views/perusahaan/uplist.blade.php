@@ -174,28 +174,27 @@
     </style>
 </head>
 <body>
-    
     <!-- Sidebar -->
-<div class="sidebar bg-white h-screen w-64 fixed left-0 top-0 shadow-lg">
-    <div class="flex flex-col h-full">
+    <div class="sidebar bg-white h-screen w-64 fixed left-0 top-0 overflow-y-auto shadow-lg">
+      <div class="flex flex-col h-full">
         <!-- Logo Section -->
         <div class="p-6 border-b border-gray-200">
-            <img alt="Educare Logo" src="{{ asset('img/logo.png') }}" class="w-full max-w-[200px] mx-auto" />
+          <img alt="Educare Logo" src="{{ asset('img/logo.png') }}" class="w-full max-w-[200px] mx-auto" />
         </div>
 
         <!-- Profile Section -->
         <div class="p-6 border-b border-gray-200 text-center">
-            <img src="https://storage.googleapis.com/a1aa/image/TsPTHHQA9PLmIZY2P9D0HASO0e0SXKHpfutawnKUyYyYKRnTA.jpg" 
-                 alt="Profile Picture" 
-                 class="w-24 h-24 rounded-full mx-auto mb-4"/>
-            @auth('perusahaan')
-                <h3 class="font-semibold text-gray-800 mb-1">
-                    {{ Auth::guard('perusahaan')->user()->namaperusahaan }}
-                </h3>
-                <p class="text-sm text-gray-500">
-                    {{ Auth::guard('perusahaan')->user()->emailperusahaan ?? 'Email Perusahaan Tidak Tersedia' }}
-                </p>
-            @endauth
+          <img src="https://storage.googleapis.com/a1aa/image/TsPTHHQA9PLmIZY2P9D0HASO0e0SXKHpfutawnKUyYyYKRnTA.jpg" 
+               alt="Profile Picture" 
+               class="w-24 h-24 rounded-full mx-auto mb-4"/>
+          @auth('perusahaan')
+            <h3 class="font-semibold text-gray-800 mb-1">
+              {{ Auth::guard('perusahaan')->user()->namaperusahaan }}
+            </h3>
+            <p class="text-sm text-gray-500">
+              {{ Auth::guard('perusahaan')->user()->emailperusahaan ?? 'Email Perusahaan Tidak Tersedia' }}
+            </p>
+          @endauth
         </div>
 
         <!-- Navigation Links -->
@@ -205,35 +204,35 @@
                 <i class="fas fa-home w-6"></i>
                 <span>Dashboard</span>
             </a>   
-        <a class="nav-link {{ Request::routeIs('beasiswa.create') ? 'active' : '' }}" 
-               href="{{ route('beasiswa.create') }}">
-                <i class="fas fa-upload w-6"></i>
-                <span>Upload</span>
-            </a>
-            <a class="nav-link {{ Request::routeIs('beasiswa.index') ? 'active' : '' }}" 
-               href="{{ route('beasiswa.index') }}">
-                <i class="fas fa-list w-6"></i>
-                <span>Uploaded List</span>
-            </a>
-            <a class="nav-link {{ Request::routeIs('applist-1') ? 'active' : '' }}" 
-               href="{{route('applist-1')}}">
-                <i class="fas fa-users w-6"></i>
-                <span>Applicants List</span>
-            </a>
+          <a class="nav-link {{ Request::routeIs('beasiswa.create') ? 'active' : '' }}" 
+             href="{{ route('beasiswa.create') }}">
+            <i class="fas fa-upload w-6"></i>
+            <span>Upload</span>
+          </a>
+          <a class="nav-link {{ Request::routeIs('beasiswa.index') ? 'active' : '' }}" 
+             href="{{ route('beasiswa.index') }}">
+            <i class="fas fa-list w-6"></i>
+            <span>Uploaded List</span>
+          </a>
+          <a class="nav-link {{ Request::routeIs('applist-1') ? 'active' : '' }}" 
+             href="{{route('applist-1')}}">
+            <i class="fas fa-users w-6"></i>
+            <span>Applicants List</span>
+          </a>
         </nav>
 
         <!-- Logout Button -->
         <div class="p-1 border-t border-gray-200">
-            <form method="POST" action="{{ route('logout') }}">
-                @csrf
-                <button type="submit" class="nav-link text-red-600 w-full text-left">
-                    <i class="fas fa-sign-out-alt w-6"></i>
-                    <span>Log Out</span>
-                </button>
-            </form>
+          <form method="POST" action="{{ route('logout') }}">
+            @csrf
+            <button type="submit" class="nav-link text-red-600 w-full text-left">
+              <i class="fas fa-sign-out-alt w-6"></i>
+              <span>Log Out</span>
+            </button>
+          </form>
         </div>
+      </div>
     </div>
-</div>
 
    
 <div class="content ml-64 p-8"> <!-- Menggunakan margin-left dan padding -->

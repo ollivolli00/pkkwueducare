@@ -85,6 +85,11 @@
 
         <!-- Navigation Links -->
         <nav class="flex-grow py-4">
+        <a class="nav-link {{ Request::routeIs('admin') ? 'active' : '' }}" 
+               href="{{ route('admin') }}">
+                <i class="fas fa-home w-6"></i>
+                <span>Dashboard</span>
+            </a>   
           <a class="nav-link {{ Request::routeIs('datauser') ? 'active' : '' }}" 
              href="{{ route('datauser') }}">
             <i class="fas fa-user w-6"></i>
@@ -93,7 +98,7 @@
           <a class="nav-link {{ Request::routeIs('dataperusahaan') ? 'active' : '' }}" 
              href="{{ route('dataperusahaan') }}">
             <i class="fas fa-user w-6"></i>
-            <span>Data Users Perusahaan</span>
+            <span>Data Perusahaan</span>
           </a>
           <a class="nav-link {{ Request::routeIs('manage') ? 'active' : '' }}" 
              href="{{route('manage')}}">
@@ -117,14 +122,14 @@
 
     <!-- Section to Display Logged-In Users Data -->
     <div class="ml-64 p-8">
-      <h2 class="text-2xl font-semibold mb-4">Data Users yang Login</h2>
+      <h2 class="text-2xl font-semibold mb-4">Data Akun User</h2>
       <div class="bg-white shadow-md rounded-lg overflow-hidden">
         <table class="min-w-full leading-normal table-auto">
           <thead>
             <tr>
-              <th class="px-6 py-3 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Nama</th>
-              <th class="px-6 py-3 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Email</th>
               <th class="px-6 py-3 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Username</th>
+              <th class="px-6 py-3 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Email</th>
+              <th class="px-6 py-3 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Dibuat Tanggal</th>
             </tr>
           </thead>
           <tbody>
@@ -135,8 +140,7 @@
     <tr>
         <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">{{ $user->name }}</td>
         <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">{{ $user->email }}</td>
-        <!-- Menambahkan kolom Username -->
-        <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">{{ $user->username }}</td>
+        <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">{{ $user->created_at->format('d-m-Y H:i:s') }}</td> <!-- Menampilkan waktu pembuatan akun -->
     </tr>
     @endforeach
 </tbody>

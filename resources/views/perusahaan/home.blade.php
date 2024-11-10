@@ -139,11 +139,12 @@
 
     <div class="ml-64 p-6 bg-gray-100 min-h-screen">
   <!-- Page Header -->
+  @auth('perusahaan')
   <div class="flex justify-between items-center mb-6">
-    <h1 class="text-3xl font-semibold text-gray-800">Dashboard Admin</h1>
+    <h1 class="text-3xl font-semibold text-gray-800">Dashboard  {{ Auth::guard('perusahaan')->user()->namaperusahaan }}</h1>
     <button class="button-style">New Upload</button>
   </div>
-
+@endauth
   <!-- Statistics Cards -->
   <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-6">
     <!-- Card 1 -->
@@ -158,37 +159,20 @@
     </div>
 
     <!-- Card 2 -->
-    <div class="bg-white p-6 rounded-lg shadow">
-      <div class="flex items-center">
-        <i class="fas fa-upload text-green-500 text-2xl mr-3"></i>
-        <div>
-          <h3 class="text-lg font-semibold text-gray-700">Total Uploads</h3>
-          <p class="text-2xl font-bold">47</p>
-        </div>
-      </div>
-    </div>
+      
 
     <!-- Card 3 -->
     <div class="bg-white p-6 rounded-lg shadow">
       <div class="flex items-center">
-        <i class="fas fa-envelope-open-text text-yellow-500 text-2xl mr-3"></i>
+        <i class="fas fa-upload text-green-500 text-2xl mr-3"></i>
         <div>
-          <h3 class="text-lg font-semibold text-gray-700">Pending Approvals</h3>
-          <p class="text-2xl font-bold">16</p>
+        <h3 class="text-lg font-semibold text-gray-700">Total Uploads</h3>
+        <p class="text-2xl font-bold">47</p>
         </div>
       </div>
     </div>
 
-    <!-- Card 4 -->
-    <div class="bg-white p-6 rounded-lg shadow">
-      <div class="flex items-center">
-        <i class="fas fa-tasks text-red-500 text-2xl mr-3"></i>
-        <div>
-          <h3 class="text-lg font-semibold text-gray-700">Completed</h3>
-          <p class="text-2xl font-bold">98%</p>
-        </div>
-      </div>
-    </div>
+    
   </div>
 
   <!-- Activity Feed and Recent Applicants -->
