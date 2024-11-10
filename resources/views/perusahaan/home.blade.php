@@ -148,10 +148,38 @@
   <!-- Statistics Cards -->
   <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-6">
   <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-6">
-  <p>Total Beasiswa yang Dipublikasikan: {{ $totalPublished }}</p>
-<p>Total Beasiswa yang Belum Dipublikasikan: {{ $totalUnpublished }}</p>
-<p>Total Beasiswa yang Diupload: {{ $totalUploads }}</p>
+    <!-- Total Applicants Card -->
+    <div class="bg-white p-6 rounded-lg shadow">
+      <div class="flex items-center">
+        <i class="fas fa-users text-blue-500 text-2xl mr-3"></i>
+        <div>
+          <h3 class="text-lg font-semibold text-gray-700">Total Published</h3>
+          <p class="text-2xl font-bold">{{ $totalPublished }}</p>
+        </div>
+      </div>
+    </div>
 
+    <!-- Total Uploads Card -->
+    <div class="bg-white p-6 rounded-lg shadow">
+      <div class="flex items-center">
+        <i class="fas fa-upload text-green-500 text-2xl mr-3"></i>
+        <div>
+          <h3 class="text-lg font-semibold text-gray-700">Total Uploads</h3>
+          <p class="text-2xl font-bold">{{ $totalUploads }}</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Total Unpublished Beasiswa Card -->
+    <div class="bg-white p-6 rounded-lg shadow">
+      <div class="flex items-center">
+        <i class="fas fa-file-alt text-yellow-500 text-2xl mr-3"></i>
+        <div>
+          <h3 class="text-lg font-semibold text-gray-700">Unpublished Beasiswa</h3>
+          <p class="text-2xl font-bold">{{ $totalUnpublished }}</p>
+        </div>
+      </div>
+    </div>
 </div>
 
   <!-- Activity Feed and Recent Applicants -->

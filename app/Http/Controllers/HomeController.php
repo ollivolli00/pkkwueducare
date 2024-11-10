@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
+use App\Models\Beasiswa;
 use App\Models\Perusahaansign;
 class HomeController extends Controller
 {
@@ -38,9 +39,17 @@ class HomeController extends Controller
     }
     public function PerusahaanDashboard()
     {
-        // Mengambil pengguna yang sedang login
-        $perusahaan = Auth::user(); // Ambil data pengguna yang sedang login
+       
+        // Pastikan pengguna adalah perusahaan yang sudah login
+        if (Auth::guard('perusahaan')->check()) {
+            $perusahaan = Auth::guard('perusahaan')->user(); // Ambil data pengguna perusahaan yang login
 
-        return view('perusahaan.home', compact('perusahaan')); // Kirim data pengguna ke view
+            // Ambil data perusahaan berdasarkan ID
+            $dataPerusahaan = $perusahaan; // Menggunakan data perusahaan dari pengguna yang login
+           
+            return view('perusahaan.home', compact('dataPerusahaan'));
+        }
+
+        return redirect()->route('signin'); // Redirect jika tidak ada pengguna yang login
     }
 }

@@ -34,7 +34,7 @@
         </div>
         <div class="login-section">
             <div class="form-box login">
-            <form method="POST" action="{{ route('loginn.post') }}">
+            <form method="POST" action="{{ route('signin.post') }}">
             @csrf
                     <h2>Sign In</h2>
                     <div class="input-box">
@@ -88,7 +88,7 @@
                                         {{ __('Forgot Your Password?') }}
                                     </a>
                                 @endif
-                        <p>Create A New Account? <a href="{{ 'signup' }}" class="register-link">Sign Up</a></p>
+                        <p>Create A New Account? <a href="{{ route('signup') }}" class="register-link">Sign Up</a></p>
                     </div>
                 </form>
             </div>

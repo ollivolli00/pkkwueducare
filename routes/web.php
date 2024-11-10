@@ -30,12 +30,11 @@ Route::middleware(['auth', 'multiAuthUser :admin'])->group(function () {
 });
 
 Route::middleware(['auth:perusahaan', 'perusahaan'])->group(function () {
-    Route::get('/dashboard', [PerusahaanController::class, 'dashboard'])->name('dashboard');
+    Route::get('/dashboard', [HomeController::class, 'PerusahaanDashboard'])->name('dashboard');
 });
 
-
 Route::middleware(['auth', 'multiAuthUser :user'])->group(function () {
-    Route::get('/user/dashboard', [HomeController::class, 'dashboard'])->name('user');
+    Route::get('/home', [HomeController::class, 'dashboard'])->name('user');
 });
 Route::get('/profil', function () {
     return view('profil');
@@ -79,16 +78,13 @@ Route::get('uplist', [BeasiswaController::class, 'index'])->name('beasiswa.index
 Route::get('/beasiswa/{id}', [BeasiswaController::class, 'show'])->name('beasiswa.show');
 Route::post('/beasiswa/{id}', [BeasiswaController::class, 'publish'])->name('beasiswa.publish');
 
-Route::get('/signup', [PerusahaansignController::class, 'showSignupForm'])->name('signup');
-
-Route::post('/signup', [PerusahaansignController::class, 'create'])->name('signup.post');
-Route::get('/signin', [PerusahaanController::class, 'showLoginForm'])->name('loginn');
-Route::post('/signinn', [PerusahaanController::class, 'loginn'])->name('loginn.post');
-
+Route::get('/home', [UserBeasiswaController::class, 'indexx'])->name('beasiswa.indexx');
 Route::resource('beasiswaa', UserBeasiswaController::class);
 Route::get('/', [UserBeasiswaController::class, 'index'])->middleware('beasiswa');
 Route::get('/daftarbeasiswa/{id}', [UserBeasiswaController::class, 'show'])->name('beasiswaa.show');
 // Route::get('/', [UserBeasiswaController::class, 'index'])->name('user.index');
 
-
-
+Route::get('/signup', [PerusahaansignController::class, 'showSignupForm'])->name('signup');
+Route::post('/signup', [PerusahaansignController::class, 'create'])->name('signup.post');
+Route::get('/signin',[PerusahaanController::class, 'showLoginForm'])->name('signin');
+Route::post('/signin', [PerusahaanController::class, 'loginn'])->name('signin.post');
