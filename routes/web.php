@@ -29,9 +29,7 @@ Route::middleware(['auth', 'multiAuthUser :admin'])->group(function () {
     Route::get('/admin/dashboard', [HomeController::class, 'AdminDashboard'])->name('admin');
 });
 
-Route::middleware(['auth:perusahaan', 'perusahaan'])->group(function () {
     Route::get('/dashboard', [HomeController::class, 'PerusahaanDashboard'])->name('dashboard');
-});
 
 Route::middleware(['auth', 'multiAuthUser :user'])->group(function () {
     Route::get('/home', [HomeController::class, 'dashboard'])->name('user');

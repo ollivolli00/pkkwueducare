@@ -39,17 +39,17 @@ class HomeController extends Controller
     }
     public function PerusahaanDashboard()
     {
-       
-        // Pastikan pengguna adalah perusahaan yang sudah login
-        if (Auth::guard('perusahaan')->check()) {
-            $perusahaan = Auth::guard('perusahaan')->user(); // Ambil data pengguna perusahaan yang login
-
-            // Ambil data perusahaan berdasarkan ID
-            $dataPerusahaan = $perusahaan; // Menggunakan data perusahaan dari pengguna yang login
-            $totaUploads = Beasiswa::all()->count(); 
-            return view('perusahaan.home', compact('dataPerusahaan', 'totalUploads'));
-        }
-
-        return redirect()->route('signin'); // Redirect jika tidak ada pengguna yang login
+        // Hitung total beasiswa yang di-upload
+        $totalBeasiswa = Beasiswa::count(); // Menggunakan count() untuk menghitung jumlah beasiswa
+    
+        // Hitung total beasiswa yang sudah dipublikasikan (is_published = 1)
+        $published = Beasiswa::where('is_published', 1)->count(); // Pastikan menggunakan count(), tanpa ?? 0
+    
+        // Hitung total beasiswa yang belum dipublikasikan (is_published = 0)
+        $unpublished = Beasiswa::where('is_published', 0)->count(); // Sama seperti published
+    
+        // Kirim data ke view
+        return view('perusahaan.home', compact('totalBeasiswa', 'published', 'unpublished'));
     }
+    
 }

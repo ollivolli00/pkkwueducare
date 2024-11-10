@@ -140,47 +140,49 @@
 
     <div class="ml-64 p-6 bg-gray-100 min-h-screen">
   <!-- Page Header -->
-  @auth('perusahaan')
-  <div class="flex justify-between items-center mb-6">
-    <h1 class="text-3xl font-semibold text-gray-800">Dashboard    {{ Auth::user()->perusahaan->namaperusahaan ?? 'Nama Perusahaan Tidak Tersedia' }}</h1>
-    <button class="button-style">New Upload</button>
-    
-  </div>
-@endauth
-  <!-- Statistics Cards -->
-  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-6">
-  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-6">
-    <!-- Total Applicants Card -->
+<!-- Page Header -->
+<div class="flex justify-between items-center mb-6">
+    <h1 class="text-3xl font-semibold text-gray-800">
+        Dashboard {{ Auth::user()->perusahaan->namaperusahaan ?? 'Nama Perusahaan Tidak Tersedia' }}
+    </h1>
+    <button class="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 focus:outline-none">
+        New Upload
+    </button>
+</div>
+
+<!-- Statistics Cards -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+    <!-- Total Data Upload Card -->
     <div class="bg-white p-6 rounded-lg shadow">
-      <div class="flex items-center">
-        <i class="fas fa-users text-blue-500 text-2xl mr-3"></i>
-        <div>
-          <h3 class="text-lg font-semibold text-gray-700">Total Published</h3>
-          <p class="text-2xl font-bold">{{ $totalPublished }}</p>
+        <div class="flex items-center">
+            <i class="fas fa-users text-blue-500 text-2xl mr-3"></i>
+            <div>
+                <h3 class="text-lg font-semibold text-gray-700">Total Data Upload</h3>
+                <p class="text-2xl font-bold">{{ $totalBeasiswa ?? 0 }}</p>
+            </div>
         </div>
-      </div>
     </div>
 
-    <!-- Total Uploads Card -->
+    <!-- Total Published Card -->
     <div class="bg-white p-6 rounded-lg shadow">
-      <div class="flex items-center">
-        <i class="fas fa-upload text-green-500 text-2xl mr-3"></i>
-        <div>
-          <h3 class="text-lg font-semibold text-gray-700">Total Uploads</h3>
-          <p class="text-2xl font-bold">{{ $totalUploads }}</p>
+        <div class="flex items-center">
+            <i class="fas fa-upload text-green-500 text-2xl mr-3"></i>
+            <div>
+                <h3 class="text-lg font-semibold text-gray-700">Total Published</h3>
+                <p class="text-2xl font-bold">{{ $published ?? 0 }}</p>
+            </div>
         </div>
-      </div>
     </div>
 
-    <!-- Total Unpublished Beasiswa Card -->
+    <!-- Total Unpublished Card -->
     <div class="bg-white p-6 rounded-lg shadow">
-      <div class="flex items-center">
-        <i class="fas fa-file-alt text-yellow-500 text-2xl mr-3"></i>
-        <div>
-          <h3 class="text-lg font-semibold text-gray-700">Unpublished Beasiswa</h3>
-          <p class="text-2xl font-bold">{{ $totalUnpublished }}</p>
+        <div class="flex items-center">
+            <i class="fas fa-upload text-yellow-500 text-2xl mr-3"></i>
+            <div>
+                <h3 class="text-lg font-semibold text-gray-700">Total Unpublished</h3>
+                <p class="text-2xl font-bold">{{ $unpublished ?? 0 }}</p>
+            </div>
         </div>
-      </div>
     </div>
 </div>
 
@@ -229,7 +231,7 @@
             <!-- Js Plugins -->
             <script src="js/jquery-3.3.1.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
-    <script src="js/jquery.nice-select.min.js"></script>
+<script src="js/jquery.nice-select.min.js"></script>
     <script src="js/jquery-ui.min.js"></script>
     <script src="js/jquery.slicknav.js"></script>
     <script src="js/mixitup.min.js"></script>
