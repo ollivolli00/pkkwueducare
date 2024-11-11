@@ -480,31 +480,32 @@
     <!-- Latest Product Section Begin -->
     <section class="latest-product spad">
     <div class="container">
-        <div class="row">
-            <div class="col-lg-4 col-md-6">
-                <div class="latest-product__text">
-                    <h4>Terbaru</h4>
-                    <div class="latest-product__slider owl-carousel">
+        <div class="row"><div class="col-lg-4 col-md-6">
+    <div class="latest-product__text">
+        <h4>Beasiswa Terbaru</h4>
+        <div class="latest-product__slider owl-carousel">
+            @if($beasiswaa->isNotEmpty())
+                @foreach($beasiswaa as $beasiswa)
                     <div class="latest-product__slider__item">
-    @if(isset($beasiswaa))
-    <a href="{{ route('beasiswaa.show', $beasiswaa->id) }}" class="latest-product__item">
-        <div class="latest-product__item__pic">
-            <img src="{{ asset('storage/images/' . $beasiswaa->image2) }}" alt="{{ $beasiswaa->namabeasiswa }}" />
-        </div>
-        <div class="latest-product__item__text">
-            <span>{{ $beasiswaa->namabeasiswa }}</span>
-            <h6>{{ $beasiswaa->namaperusahaan }}</h6>
-            <p style="font-size: 12px; color: #777; margin-top: 3px;">Dipublikasikan: {{ $beasiswaa->created_at->format('d M Y') }}</p>
-        </div>
-    </a>
-    @else
-    <p>Belum ada beasiswa terbaru.</p>
-    @endif
-</div>
-
+                        <a href="{{ route('beasiswaa.show', $beasiswa->id) }}" class="latest-product__item">
+                            <div class="latest-product__item__pic">
+                                <img src="{{ asset('storage/images/' . $beasiswa->image2) }}" alt="{{ $beasiswa->namabeasiswa }}" />
+                            </div>
+                            <div class="latest-product__item__text">
+                                <span>{{ $beasiswa->namabeasiswa }}</span>
+                                <h6>{{ $beasiswa->namaperusahaan }}</h6>
+                                <p style="font-size: 12px; color: #777; margin-top: 3px;">Dipublikasikan: {{ $beasiswa->created_at->format('d M Y') }}</p>
+                            </div>
+                        </a>
                     </div>
-                </div>
-            </div>
+                @endforeach
+            @else
+                <p>Tidak ada beasiswa yang tersedia.</p>
+            @endif
+        </div>
+        
+    </div>
+</div>
                          <div class="col-lg-4 col-md-6">
                     <div class="latest-product__text">
                         <h4>Paling Banyak Diminati</h4>
@@ -800,7 +801,27 @@
     <script src="js/owl.carousel.min.js"></script>
     <script src="js/main.js"></script>
 
-
+    <script>
+    $(document).ready(function(){
+        $('.latest-product__slider').owlCarousel({
+            loop: true,
+            margin: 10,
+            nav: true,
+            navText: ["<div class='owl-nav-left'>←</div>", "<div class='owl-nav-right'>→</div>"],
+            responsive: {
+                0: {
+                    items: 1
+                },
+                600: {
+                    items: 2
+                },
+                1000: {
+                    items: 3
+                }
+            }
+        });
+    });
+</script>
 
 </body>
 

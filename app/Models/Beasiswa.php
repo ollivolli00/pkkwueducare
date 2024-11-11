@@ -16,6 +16,7 @@ class Beasiswa extends Model
     {
         return $this->belongsToMany(User::class, 'beasiswa_user', 'beasiswa_id', 'user_id');
     }
+    
 }
 
 

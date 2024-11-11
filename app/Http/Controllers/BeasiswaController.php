@@ -232,5 +232,4 @@ public function publish($id)
     ->with('success', 'Beasiswa berhasil dipublikasikan');
 }
 
-
 }

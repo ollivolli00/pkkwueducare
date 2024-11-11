@@ -15,8 +15,8 @@ class UserBeasiswaController extends Controller
      */
     public function index()
 {
-    // Mengambil hanya beasiswa yang sudah dipublikasikan
-    $beasiswaa = Beasiswa::where('is_published', true)->latest()->first();
+    // Mengambil hanya 5 beasiswa yang sudah dipublikasikan
+    $beasiswaa = Beasiswa::where('is_published', true)->latest()->take(5)->get(); // Menggunakan take() untuk membatasi hasil
     
     // Mengirimkan data beasiswa ke view
     return view('welcome', compact('beasiswaa'));
@@ -170,4 +170,5 @@ public function indexx(){
         return view('perusahaan.applist1', compact('daftars'));
     }
 
+  
 }
