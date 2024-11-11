@@ -6,6 +6,7 @@ use App\Http\Controllers\UserBeasiswaController;
 use App\Http\Controllers\Auth\PerusahaanController;
 use App\Http\Controllers\BeasiswaController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\PenggunaController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
@@ -90,5 +91,4 @@ Route::get('/', [UserBeasiswaController::class, 'index'])->middleware('beasiswa'
 Route::get('/daftarbeasiswa/{id}', [UserBeasiswaController::class, 'show'])->name('beasiswaa.show');
 // Route::get('/', [UserBeasiswaController::class, 'index'])->name('user.index');
 
-
-
+Route::resource('pengguna', PenggunaController::class);

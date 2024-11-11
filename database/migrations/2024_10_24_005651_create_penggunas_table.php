@@ -15,6 +15,12 @@ return new class extends Migration
     {
         Schema::create('penggunas', function (Blueprint $table) {
             $table->id();
+            $table->string('namalengkap');
+            $table->date('tanggal_lahir');
+            $table->string('jenis_kelamin');
+            $table->string('email')->unique();
+            $table->string('no_telp');
+            $table->string('image')->nullable();
             $table->timestamps();
         });
     }
