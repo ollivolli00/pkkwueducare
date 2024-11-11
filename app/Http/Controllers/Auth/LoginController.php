@@ -17,7 +17,7 @@ class LoginController extends Controller
         $this->middleware('guest')->except('logout');
     }
     public function login(Request $request)
-{   
+{
     $input = $request->all();
 
     $this->validate($request, [
@@ -27,11 +27,10 @@ class LoginController extends Controller
 
     // Cek di tabel user
     if (auth()->attempt(['email' => $input['email'], 'password' => $input['password']])) {
-        // Arahkan sesuai tipe user
         if (auth()->user()->type == 'admin') {
             return redirect()->route('admin');
         } elseif (auth()->user()->type == 'perusahaan') {
-            return redirect()->route('perusahaan');
+            return redirect()->route('dashboard');
         } else {
             return redirect()->route('user');
         }
@@ -40,12 +39,13 @@ class LoginController extends Controller
     // Jika tidak ada di tabel user, cek di tabel perusahaansign
     $perusahaan = Perusahaansign::where('email', $input['email'])->first();
     if ($perusahaan && Hash::check($input['password'], $perusahaan->password)) {
-        // Login perusahaan
-        auth()->login($perusahaan); // Pastikan Anda menggunakan model yang sesuai
+        // Gunakan guard perusahaan untuk login
+        auth()->guard('perusahaan')->login($perusahaan);
         return redirect()->route('dashboard'); // Arahkan ke halaman perusahaan
     }
 
     return redirect()->route('login')->with('error', 'Email-Address And Password Are Wrong.');
 }
+
    
 }

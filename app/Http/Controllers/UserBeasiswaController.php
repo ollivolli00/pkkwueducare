@@ -160,4 +160,14 @@ public function indexx(){
     {
         //
     }
+    // UserBeasiswaController.php
+    public function applicantsList()
+    {
+        // Fetch applicants with pagination (adjust the number 10 if needed)
+        $daftars = Daftar::paginate(10); 
+    
+        // Return the view and pass the paginated data
+        return view('perusahaan.applist1', compact('daftars'));
+    }
+
 }

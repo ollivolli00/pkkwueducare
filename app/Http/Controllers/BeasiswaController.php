@@ -215,7 +215,7 @@ public function publish($id)
     // Logika untuk mengirim data ke tampilan dashboard user
     // Misalnya dengan membuat query yang hanya menampilkan beasiswa `published` di dashboard user
 
-    return redirect('/aplistup')
+    return redirect('/uplist')
     ->with('success', 'Beasiswa berhasil dipublikasikan');
 }
 

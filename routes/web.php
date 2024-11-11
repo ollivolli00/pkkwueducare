@@ -28,12 +28,13 @@ Auth::routes();
 Route::middleware(['auth', 'multiAuthUser :admin'])->group(function () {
     Route::get('/admin/dashboard', [HomeController::class, 'AdminDashboard'])->name('admin');
 });
-
-    Route::get('/dashboard', [HomeController::class, 'PerusahaanDashboard'])->name('dashboard');
-
 Route::middleware(['auth', 'multiAuthUser :user'])->group(function () {
     Route::get('/home', [HomeController::class, 'dashboard'])->name('user');
 });
+Route::middleware(['auth:perusahaan', 'perusahaan'])->group(function () {
+    Route::get('/dashboard', [HomeController::class, 'PerusahaanDashboard'])->name('dashboard');
+});
+
 Route::get('/profil', function () {
     return view('profil');
 });
@@ -56,20 +57,14 @@ Route::get('/lpdp', function () {
 Route::get('/unggulan', function () {
     return view('isikonten3');
 });
-Route::get('/dashboard', function () {
-    return view('perusahaan.home');
-})->name('dashboard');
 Route::get('/data-users', [AdminController::class, 'showDataUsers'])->name('datauser');
 Route::get('/data-perusahaan', [AdminController::class, 'showDataPerusahaan'])->name('dataperusahaan');
 Route::get('/manage-beasiswas', function () {
     return view('admin.manage');
 })->name('manage');
-Route::get('/applist-1', function () {
-    return view('perusahaan.applist1');
-})->name('applist-1');
-Route::get('/applist-2', function () {
-    return view('perusahaan.applist2');
-})->name('applist-2');
+// In routes/web.php
+Route::get('/applicants-list', [UserBeasiswaController::class, 'applicantsList'])->name('applist-1');
+
 Route::get('uplist', [BeasiswaController::class, 'index'])->name('beasiswa.index');
 // routes/web.php
 

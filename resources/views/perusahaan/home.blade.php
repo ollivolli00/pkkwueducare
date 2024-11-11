@@ -91,14 +91,14 @@
           <img src="https://storage.googleapis.com/a1aa/image/TsPTHHQA9PLmIZY2P9D0HASO0e0SXKHpfutawnKUyYyYKRnTA.jpg" 
                alt="Profile Picture" 
                class="w-24 h-24 rounded-full mx-auto mb-4"/>
-               @auth
-    <h3 class="font-semibold text-gray-800 mb-1">
-        {{ Auth::user()->perusahaan->namaperusahaan ?? 'Nama Perusahaan Tidak Tersedia' }}
-    </h3>
-    <p class="text-sm text-gray-500">
-        {{ Auth::user()->perusahaan->email ?? 'Email Perusahaan Tidak Tersedia' }}
-    </p>
-@endauth
+               @auth('perusahaan')
+            <h3 class="font-semibold text-gray-800 mb-1">
+              {{ Auth::guard('perusahaan')->user()->namaperusahaan }}
+            </h3>
+            <p class="text-sm text-gray-500">
+              {{ Auth::guard('perusahaan')->user()->email ?? 'Email Perusahaan Tidak Tersedia' }}
+            </p>
+          @endauth
 
         </div>
 
@@ -139,93 +139,97 @@
     </div>
 
     <div class="ml-64 p-6 bg-gray-100 min-h-screen">
-  <!-- Page Header -->
-<!-- Page Header -->
-<div class="flex justify-between items-center mb-6">
-    <h1 class="text-3xl font-semibold text-gray-800">
-        Dashboard {{ Auth::user()->perusahaan->namaperusahaan ?? 'Nama Perusahaan Tidak Tersedia' }}
-    </h1>
-    <button class="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 focus:outline-none">
-        New Upload
-    </button>
-</div>
-
-<!-- Statistics Cards -->
-<div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
-    <!-- Total Data Upload Card -->
-    <div class="bg-white p-6 rounded-lg shadow">
-        <div class="flex items-center">
-            <i class="fas fa-users text-blue-500 text-2xl mr-3"></i>
-            <div>
-                <h3 class="text-lg font-semibold text-gray-700">Total Data Upload</h3>
-                <p class="text-2xl font-bold">{{ $totalBeasiswa ?? 0 }}</p>
-            </div>
-        </div>
-    </div>
-
-    <!-- Total Published Card -->
-    <div class="bg-white p-6 rounded-lg shadow">
-        <div class="flex items-center">
-            <i class="fas fa-upload text-green-500 text-2xl mr-3"></i>
-            <div>
-                <h3 class="text-lg font-semibold text-gray-700">Total Published</h3>
-                <p class="text-2xl font-bold">{{ $published ?? 0 }}</p>
-            </div>
-        </div>
-    </div>
-
-    <!-- Total Unpublished Card -->
-    <div class="bg-white p-6 rounded-lg shadow">
-        <div class="flex items-center">
-            <i class="fas fa-upload text-yellow-500 text-2xl mr-3"></i>
-            <div>
-                <h3 class="text-lg font-semibold text-gray-700">Total Unpublished</h3>
-                <p class="text-2xl font-bold">{{ $unpublished ?? 0 }}</p>
-            </div>
-        </div>
-    </div>
-</div>
-
-  <!-- Activity Feed and Recent Applicants -->
-  <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-    <!-- Recent Applicants -->
-    <div class="bg-white p-6 rounded-lg shadow">
-      <h2 class="text-lg font-semibold text-gray-700 mb-4">Recent Applicants</h2>
-      <ul>
-        <li class="flex justify-between items-center border-b border-gray-200 py-3">
-          <div>
-            <h3 class="text-md font-medium text-gray-800">John Doe</h3>
-            <p class="text-sm text-gray-500">Applied for Scholarship X</p>
-          </div>
-          <span class="text-green-600 text-sm">New</span>
-        </li>
-        <li class="flex justify-between items-center border-b border-gray-200 py-3">
-          <div>
-            <h3 class="text-md font-medium text-gray-800">Jane Smith</h3>
-            <p class="text-sm text-gray-500">Applied for Scholarship Y</p>
-          </div>
-          <span class="text-green-600 text-sm">New</span>
-        </li>
-        <!-- Add more applicants here -->
-      </ul>
-    </div>
-
-    <!-- Recent Activity -->
-    <div class="bg-white p-6 rounded-lg shadow">
-      <h2 class="text-lg font-semibold text-gray-700 mb-4">Recent Activities</h2>
-      <ul>
-        <li class="flex items-center justify-between py-3 border-b border-gray-200">
-          <p class="text-gray-700">Admin approved an application</p>
-          <span class="text-gray-500 text-sm">2 hrs ago</span>
-        </li>
-        <li class="flex items-center justify-between py-3 border-b border-gray-200">
-          <p class="text-gray-700">New upload added</p>
-          <span class="text-gray-500 text-sm">5 hrs ago</span>
-        </li>
-        <!-- Add more activities here -->
-      </ul>
-    </div>
+    <!-- Page Header -->
+    @auth('perusahaan')
+  <div class="flex justify-between items-center mb-6">
+    <h1 class="text-3xl font-semibold text-gray-800">Dashboard  {{ Auth::guard('perusahaan')->user()->namaperusahaan }}</h1>
+    <button class="button-style">New Upload</button>
   </div>
+@endauth
+
+    <!-- Statistics Cards -->
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-6">
+        <div class="bg-white p-6 rounded-lg shadow">
+            <div class="flex items-center">
+                <i class="fas fa-users text-blue-500 text-2xl mr-3"></i>
+                <div>
+                    <h3 class="text-lg font-semibold text-gray-700">Total Data Upload</h3>
+                    <p class="text-2xl font-bold">{{ $totalBeasiswa ?? 0 }}</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="bg-white p-6 rounded-lg shadow">
+            <div class="flex items-center">
+                <i class="fas fa-upload text-green-500 text-2xl mr-3"></i>
+                <div>
+                    <h3 class="text-lg font-semibold text-gray-700">Total Published</h3>
+                    <p class="text-2xl font-bold">{{ $published ?? 0 }}</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="bg-white p-6 rounded-lg shadow">
+            <div class="flex items-center">
+                <i class="fas fa-upload text-yellow-500 text-2xl mr-3"></i>
+                <div>
+                    <h3 class="text-lg font-semibold text-gray-700">Total Unpublished</h3>
+                    <p class="text-2xl font-bold">{{ $unpublished ?? 0 }}</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="bg-white p-6 rounded-lg shadow">
+            <div class="flex items-center">
+                <i class="fas fa-upload text-green-500 text-2xl mr-3"></i>
+                <div>
+                    <h3 class="text-lg font-semibold text-gray-700">Total Applicants</h3>
+                    <p class="text-2xl font-bold">{{ $applicants ?? 0 }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Activity Feed and Recent Applicants -->
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <!-- Recent Applicants -->
+        <div class="bg-white p-6 rounded-lg shadow">
+            <h2 class="text-lg font-semibold text-gray-700 mb-4">Recent Applicants</h2>
+            <ul>
+                <li class="flex justify-between items-center border-b border-gray-200 py-3">
+                    <div>
+                        <h3 class="text-md font-medium text-gray-800">John Doe</h3>
+                        <p class="text-sm text-gray-500">Applied for Scholarship X</p>
+                    </div>
+                    <span class="text-green-600 text-sm">New</span>
+                </li>
+                <li class="flex justify-between items-center border-b border-gray-200 py-3">
+                    <div>
+                        <h3 class="text-md font-medium text-gray-800">Jane Smith</h3>
+                        <p class="text-sm text-gray-500">Applied for Scholarship Y</p>
+                    </div>
+                    <span class="text-green-600 text-sm">New</span>
+                </li>
+                <!-- Add more applicants here -->
+            </ul>
+        </div>
+
+        <!-- Recent Activity -->
+        <div class="bg-white p-6 rounded-lg shadow">
+            <h2 class="text-lg font-semibold text-gray-700 mb-4">Recent Activities</h2>
+            <ul>
+                <li class="flex items-center justify-between py-3 border-b border-gray-200">
+                    <p class="text-gray-700">Admin approved an application</p>
+                    <span class="text-gray-500 text-sm">2 hrs ago</span>
+                </li>
+                <li class="flex items-center justify-between py-3 border-b border-gray-200">
+                    <p class="text-gray-700">New upload added</p>
+                    <span class="text-gray-500 text-sm">5 hrs ago</span>
+                </li>
+                <!-- Add more activities here -->
+            </ul>
+        </div>
+    </div>
 </div>
 
             <!-- Js Plugins -->
