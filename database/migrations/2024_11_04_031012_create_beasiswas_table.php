@@ -24,8 +24,8 @@ return new class extends Migration
             $table->string('miniisi');
             $table->string('persyaratan');
             $table->text('isipersyaratan');
-            $table->string('image3');
             $table->string('judul_benefit');
+            $table->string('bidang_benefit');
             $table->string('isi_benefit');
             $table->boolean('is_published')->default(false);
             $table->unsignedBigInteger('company_id');

@@ -17,7 +17,10 @@ class UserBeasiswaController extends Controller
 {
     // Mengambil hanya 5 beasiswa yang sudah dipublikasikan
     $beasiswaa = Beasiswa::where('is_published', true)->latest()->take(5)->get(); // Menggunakan take() untuk membatasi hasil
-    
+    $beasiswaa->minipersyaratan = json_decode($beasiswaa->minipersyaratan);
+        $beasiswaa->miniisi = json_decode($beasiswaa->miniisi);
+        $beasiswaa->bidang_benefit = json_decode($beasiswaa->bidang_benefit);
+        $beasiswaa->isi_benefit = json_decode($beasiswaa->isi_benefit);
     // Mengirimkan data beasiswa ke view
     return view('welcome', compact('beasiswaa'));
 }
@@ -116,7 +119,10 @@ public function indexx(){
     public function show($id)
     {
         $beasiswaa = Beasiswa::find($id); 
-
+        $beasiswaa->minipersyaratan = json_decode($beasiswaa->minipersyaratan);
+        $beasiswaa->miniisi = json_decode($beasiswaa->miniisi);
+        $beasiswaa->bidang_benefit = json_decode($beasiswaa->bidang_benefit);
+        $beasiswaa->isi_benefit = json_decode($beasiswaa->isi_benefit);
         // Cek apakah beasiswa ditemukan
         if (!$beasiswaa) {
             // Jika tidak ditemukan, Anda bisa mengalihkan atau menampilkan pesan error

@@ -66,11 +66,10 @@ Route::get('/manage-beasiswas', function () {
 Route::get('/applicants-list', [UserBeasiswaController::class, 'applicantsList'])->name('applist-1');
 
 Route::get('uplist', [BeasiswaController::class, 'index'])->name('beasiswa.index');
-// routes/web.php
 
 Route::get('/beasiswa/{id}', [BeasiswaController::class, 'show'])->name('beasiswa.show');
 Route::post('/beasiswa/{id}', [BeasiswaController::class, 'publish'])->name('beasiswa.publish');
-
+Route::post('/beasiswa/{id}/unpublish', [BeasiswaController::class, 'unpublish'])->name('beasiswa.unpublish');
 Route::get('/home', [UserBeasiswaController::class, 'indexx'])->name('beasiswa.indexx');
 Route::resource('beasiswaa', UserBeasiswaController::class);
 Route::get('/', [UserBeasiswaController::class, 'index'])->middleware('beasiswa');
