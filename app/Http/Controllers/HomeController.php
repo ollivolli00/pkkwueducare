@@ -46,14 +46,20 @@ class HomeController extends Controller
             $perusahaan = Auth::guard('perusahaan')->user(); // Ambil pengguna yang terautentikasi
     
             // Log informasi pengguna
-            Log::info('User   ID: ' . $perusahaan->id);
+            Log::info('User  ID: ' . $perusahaan->id);
     
             // Mengambil data beasiswa terkait perusahaan
             $beasiswaRecords = $perusahaan->beasiswa; // Ambil semua beasiswa yang terkait dengan perusahaan
     
+            // Initialize variables
+            $company_id = null;
+            $totalBeasiswa = 0;
+            $published = 0;
+            $unpublished = 0;
+    
             // Cek apakah ada beasiswa yang terkait
             if ($beasiswaRecords->isNotEmpty()) {
-                // Ambil company_id dari beasiswa pertama (atau sesuaikan logika sesuai kebutuhan)
+                // Ambil company_id dari beasiswa pertama
                 $company_id = $beasiswaRecords->first()->company_id; // Ambil company_id dari beasiswa pertama
                 
                 // Mengambil data statistik berdasarkan company_id
@@ -66,14 +72,14 @@ class HomeController extends Controller
                 Log::info('Total Beasiswa: ' . $totalBeasiswa);
                 Log::info('Published Beasiswa: ' . $published);
                 Log::info('Unpublished Beasiswa: ' . $unpublished);
-    
-                // Kirim data ke view
-                return view('perusahaan.home', compact('totalBeasiswa', 'published', 'unpublished', 'company_id'));
             } else {
                 Log::warning('No Beasiswa records found for the authenticated perusahaan.');
-                // Handle case where no beasiswa records exist
-                return view('perusahaan.home', compact('company_id')); // You may want to show a message or handle this case
+                // Optionally, you can set a message to display in the view
+                // $message = 'You have no beasiswa records yet.';
             }
+    
+            // Kirim data ke view
+            return view('perusahaan.home', compact('totalBeasiswa', 'published', 'unpublished', 'company_id'));
         }
     
         // Jika tidak ada pengguna yang login, redirect ke halaman signin

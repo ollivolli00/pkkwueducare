@@ -15,8 +15,19 @@ class BeasiswaController extends Controller
      */
     public function index()
     {
-        $beasiswas = Beasiswa::all(); 
-        return view('perusahaan.uplist', compact('beasiswas'));
+        // Ensure the user is authenticated as a perusahaan
+        if (Auth::guard('perusahaan')->check()) {
+            $perusahaan = Auth::guard('perusahaan')->user();
+    
+            // Fetch only the beasiswa records that belong to the authenticated company
+            $beasiswas = Beasiswa::where('company_id', $perusahaan->id)->get();
+    
+            // Pass the filtered beasiswa records to the view
+            return view('perusahaan.uplist', compact('beasiswas'));
+        }
+    
+        // Redirect or handle unauthenticated access
+        return redirect()->route('signin');
     }
 
     /**
