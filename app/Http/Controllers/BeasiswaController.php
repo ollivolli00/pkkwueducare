@@ -65,7 +65,7 @@ class BeasiswaController extends Controller
         $image3 = $request->file('image3');
         $imageName3 = $image3->hashName();  // Dapatkan nama file unik
         $image3->storeAs('public/images', $imageName3);  // Simpan gambar
-    
+        $company_id = Auth::guard('perusahaan')->user()->id;
         // Buat data beasiswa
         $beasiswa = Beasiswa::create([
             'image1' => $imageName1,
@@ -80,6 +80,7 @@ class BeasiswaController extends Controller
             'isipersyaratan' => $request->isipersyaratan,
             'judul_benefit' => $request->judul_benefit,
             'isi_benefit' => $request->isi_benefit,
+            'company_id' => $company_id
         ]);
     
         // Redirect berdasarkan kondisi
@@ -143,7 +144,8 @@ class BeasiswaController extends Controller
                 'persyaratan' => 'required|string',
                 'isipersyaratan' => 'required|string',
                 'judul_benefit' => 'required|string|max:255',
-                'isi_benefit' => 'required|string'
+                'isi_benefit' => 'required|string',
+                
             ]);
     
             $beasiswa = Beasiswa::findOrFail($id);

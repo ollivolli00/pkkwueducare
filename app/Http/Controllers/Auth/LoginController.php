@@ -7,6 +7,8 @@ use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
 use App\Models\Perusahaansign;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 
 class LoginController extends Controller
 {
@@ -16,35 +18,49 @@ class LoginController extends Controller
     {
         $this->middleware('guest')->except('logout');
     }
-    public function login(Request $request)
+ public function login(Request $request)
 {
-    $input = $request->all();
-
+    // Validate the incoming request data
     $this->validate($request, [
         'email' => 'required|email',
         'password' => 'required',
     ]);
 
-    // Cek di tabel user
-    if (auth()->attempt(['email' => $input['email'], 'password' => $input['password']])) {
-        if (auth()->user()->type == 'admin') {
-            return redirect()->route('admin');
-        } elseif (auth()->user()->type == 'perusahaan') {
-            return redirect()->route('dashboard');
+    // Log the login attempt
+    Log::info('Login attempt for email: ' . $request->email);
+
+    // Attempt to authenticate the user from the users table
+    if (auth()->attempt(['email' => $request->email, 'password' => $request->password])) {
+        // Retrieve the authenticated user
+        $user = auth()->user();
+
+        // Log user ID
+        Log::info('User  ID: ' . $user->id);
+
+        // Check the user type and handle accordingly
+        if ($user->type == 'admin') {
+            return redirect()->route('admin'); // Redirect to admin route
+        } elseif ($user->type == 'perusahaan') {
+           
+            return redirect()->route('dashboard'); // Replace with your actual route
         } else {
-            return redirect()->route('user');
+            // Handle other user types if necessary
+            return redirect()->route('user'); // Redirect to default dashboard
         }
-    }
+    } else {
+       
+        // Check if the email exists in the perusahaansign table
+        $perusahaan = Perusahaansign::where('email', $request->email)->first();
+        if ($perusahaan && Hash::check($request->password, $perusahaan->password)) {
+            // Use the perusahaan guard to log in
+            auth()->guard('perusahaan')->login($perusahaan);
+            
+            return redirect()->route('dashboard'); // Redirect to perusahaan dashboard
+        }
 
-    // Jika tidak ada di tabel user, cek di tabel perusahaansign
-    $perusahaan = Perusahaansign::where('email', $input['email'])->first();
-    if ($perusahaan && Hash::check($input['password'], $perusahaan->password)) {
-        // Gunakan guard perusahaan untuk login
-        auth()->guard('perusahaan')->login($perusahaan);
-        return redirect()->route('dashboard'); // Arahkan ke halaman perusahaan
+        // If both attempts fail, redirect back with an error
+        return redirect ()->back()->withErrors(['email' => 'Invalid credentials.'])->withInput();
     }
-
-    return redirect()->route('login')->with('error', 'Email-Address And Password Are Wrong.');
 }
 
    

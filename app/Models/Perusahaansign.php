@@ -42,9 +42,13 @@ class Perusahaansign extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
-    public function users()
-    {
-        return $this->hasMany(User::class, 'perusahaan_id');
-    }
+    public function user()
+{
+    return $this->belongsTo(User::class, 'user_id', 'id');
+}
+public function beasiswa()
+{
+    return $this->hasMany(Beasiswa::class, 'company_id', 'id'); // Assuming 'perusahaan_id' is the foreign key in the Beasiswa table
 }
 
+}

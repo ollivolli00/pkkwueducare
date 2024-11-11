@@ -18,6 +18,9 @@ return new class extends Migration
             $table->string('namalengkap');
             $table->string('email');
             $table->string('no_telp');
+            $table->unsignedBigInteger('company_id')->nullable();
+            $table->foreign('company_id')->references('id')->on('perusahaansigns')->onDelete('cascade');
+
             $table->timestamps();
         });
     }
