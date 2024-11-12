@@ -274,7 +274,7 @@
     @if(isset($beasiswaa))
     <div class="flex justify-center items-center h-52 pl-5"> <!-- Menggunakan padding-left -->
     <img alt="Djarum Logo" src="{{ asset('storage/images/' . $beasiswaa->image1) }}" 
-         class="h-100 rounded-[30px]"> <!-- Menggunakan kelas Tailwind untuk border-radius -->
+         class="h-100"> <!-- Menggunakan kelas Tailwind untuk border-radius -->
 </div>
 <div class="container">
     <div class="scholarship-info" style="display: flex; align-items: center;">
