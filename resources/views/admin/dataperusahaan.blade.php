@@ -100,11 +100,7 @@
             <i class="fas fa-user w-6"></i>
             <span>Data Perusahaan</span>
           </a>
-          <a class="nav-link {{ Request::routeIs('manage') ? 'active' : '' }}" 
-             href="{{route('manage')}}">
-            <i class="fas fa-upload w-6"></i>
-            <span>Manage Uploads</span>
-          </a>
+         
         </nav>
 
         <!-- Logout Button -->
@@ -134,24 +130,29 @@
     </tr>
   </thead>
   <tbody>
-    @foreach ($perusahaans as $perusahaann)
-      <tr class="hover:bg-gray-50">
-        <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">{{ $perusahaann->namaperusahaan }}</td>
-        <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">{{ $perusahaann->emailperusahaan }}</td>
+  <tbody>
+    @foreach ($perusahaan as $perusahaann)
+        <tr class="hover:bg-gray-50">
+            <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">{{ $perusahaann->namaperusahaan }}</td>
+            <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">{{ $perusahaann->email }}</td>
 
-        <!-- Menampilkan Beasiswa yang di-upload -->
-        <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-          @foreach ($perusahaann->beasiswas as $beasiswa)
-            <ul>
-              <li>{{ $beasiswa->nama_beasiswa }}</li>
-            </ul>
-          @endforeach
-        </td>
+            <!-- Menampilkan Beasiswa yang di-upload -->
+            <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+    @if($perusahaann->beasiswas->isNotEmpty())
+        <ul>
+            @foreach ($perusahaann->beasiswas as $beasiswa)
+                <li>{{ $beasiswa->namabeasiswa ?: 'Nama beasiswa tidak tersedia' }}</li>
+            @endforeach
+        </ul>
+    @else
+        <p>Tidak ada beasiswa yang di-upload.</p>
+    @endif
+</td>
 
-        <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">{{ $perusahaann->created_at->format('d-m-Y H:i:s') }}</td>
-      </tr>
+            <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">{{ $perusahaann->created_at->format('d-m-Y H:i:s') }}</td>
+        </tr>
     @endforeach
-  </tbody>
+</tbody>
 </table>
 
       </div>

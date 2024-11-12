@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Beasiswa;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Notification;
 
 class BeasiswaController extends Controller
 {
@@ -173,6 +173,7 @@ $data['isi_benefit'] = $request->filled('isi_benefit')
     $beasiswa->is_published = true; // Set status ke published
     $beasiswa->save();
 
+  
     return redirect()->route('beasiswa.index', $beasiswa->id)->with('success', 'Beasiswa berhasil dipublikasikan.');
 }
 

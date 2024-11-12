@@ -47,6 +47,7 @@ Route::get('/about', function () {
 });
 
 Route::get('/data-users', [AdminController::class, 'showDataUsers'])->name('datauser');
+Route::get('/data-users', [AdminController::class, 'showDataUsers'])->name('datauser');
 Route::get('/data-perusahaan', [AdminController::class, 'showDataPerusahaan'])->name('dataperusahaan');
 Route::get('/manage-beasiswas', function () {
     return view('admin.manage');

@@ -46,9 +46,9 @@ class Perusahaansign extends Authenticatable
 {
     return $this->belongsTo(User::class, 'user_id', 'id');
 }
-public function beasiswa()
+public function beasiswas()
 {
-    return $this->hasMany(Beasiswa::class, 'company_id', 'id'); // Assuming 'perusahaan_id' is the foreign key in the Beasiswa table
+    return $this->hasMany(Beasiswa::class, 'company_id', 'id');
 }
 
 }

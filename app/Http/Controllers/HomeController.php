@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Carbon;;
 use Illuminate\Support\Facades\Log;
 use App\Models\User;
+use App\Models\Notification;
 use App\Models\Beasiswa;
 use App\Models\Daftar;
 use App\Models\Perusahaansign;
@@ -35,9 +37,13 @@ class HomeController extends Controller
         
         // Mengambil jumlah perusahaan
         $totalPerusahaan = Perusahaansign::count();  // Mengambil jumlah perusahaan
+    
+        $recentBeasiswa = Beasiswa::with('perusahaan')
+        ->orderBy('created_at', 'desc')
+        ->paginate(5); // Mengambil 5 data per halaman
 
         // Mengirim data ke view
-        return view('admin.admin', compact('totalUsers', 'totalPerusahaan'));
+        return view('admin.admin', compact('totalUsers', 'recentBeasiswa', 'totalPerusahaan'));
     }
     public function PerusahaanDashboard()
     {
@@ -49,7 +55,7 @@ class HomeController extends Controller
             Log::info('User  ID: ' . $perusahaan->id);
     
             // Mengambil data beasiswa terkait perusahaan
-            $beasiswaRecords = $perusahaan->beasiswa; // Ambil semua beasiswa yang terkait dengan perusahaan
+            $beasiswaRecords = $perusahaan->beasiswas; // Ambil semua beasiswa yang terkait dengan perusahaan
     
             // Initialize variables
             $company_id = null;

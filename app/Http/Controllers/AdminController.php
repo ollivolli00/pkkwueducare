@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Models\Notification; // Pastikan ini adalah model Notification yang Anda buat
 use App\Models\Perusahaansign;
 use App\Models\User;
 use App\Models\Beasiswa;
@@ -22,11 +22,16 @@ class AdminController extends Controller
         return view('admin.dataperusahaan', compact('perusahaan'));
 
     }
-    public function showBeasiswa()
-{
-    $beasiswas = Beasiswa::with('loginPerusahaan')->get(); // Mengambil data beasiswa beserta data perusahaan
-
-    return view('admin.datauser', compact('beasiswas'));
-}
-
+    public function showPerusahaanWithBeasiswa()
+    {
+        // Retrieve all companies with their related scholarships
+        $perusahaan = Perusahaansign::with('beasiswas')->get();
+    
+        return view('admin.dataperusahaan', compact('perusahaan'));
+    }
+    public function index()
+    {
+        $notifications = Notification::orderBy('created_at', 'desc')->take(10)->get(); // Ambil 10 notifikasi terbaru
+        return view('admin.admin', compact('notifications'));
+    }
 }

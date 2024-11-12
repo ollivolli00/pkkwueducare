@@ -214,21 +214,7 @@
             </ul>
         </div>
 
-        <!-- Recent Activity -->
-        <div class="bg-white p-6 rounded-lg shadow">
-            <h2 class="text-lg font-semibold text-gray-700 mb-4">Recent Activities</h2>
-            <ul>
-                <li class="flex items-center justify-between py-3 border-b border-gray-200">
-                    <p class="text-gray-700">Admin approved an application</p>
-                    <span class="text-gray-500 text-sm">2 hrs ago</span>
-                </li>
-                <li class="flex items-center justify-between py-3 border-b border-gray-200">
-                    <p class="text-gray-700">New upload added</p>
-                    <span class="text-gray-500 text-sm">5 hrs ago</span>
-                </li>
-                <!-- Add more activities here -->
-            </ul>
-        </div>
+      
     </div>
 </div>
 
