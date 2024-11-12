@@ -72,24 +72,24 @@
         </div>
     </header>
     <!-- Navbar Selesai -->
-<div class="w-full p-4">
+    <div class="w-full p-4">
     @if(isset($beasiswaa) && $beasiswaa->count() > 0)
         @foreach($beasiswaa as $key => $beasiswa)
             @if($beasiswa->is_published == 1)
-                <div class="mt-4 p-4 border border-gray-300 rounded-lg">
+                <a href="{{ route('beasiswaa.show', $beasiswa->id) }}" class="block mt-4 p-3 border border-gray-300 rounded-lg hover:bg-gray-100 transition">
                     <div class="flex items-center">
-                        <img alt="Logo {{ $beasiswa->namaperusahaan }}" class="w-16 h-16 mr-4" height="100" src="{{ asset('storage/images/' . $beasiswa->image2) }}" width="100"/>
+                        <img alt="Logo {{ $beasiswa->namaperusahaan }}" class="w-12 h-12 mr-4" height="50" src="{{ asset('storage/images/' . $beasiswa->image2) }}" width="50"/>
                         <div>
-                            <h2 class="text-xl font-semibold">{{ $beasiswa->namabeasiswa }}</h2>
-                            <p class="text-gray-600">by {{ $beasiswa->namaperusahaan }}</p>
+                            <h2 class="text-lg font-semibold">{{ $beasiswa->namabeasiswa }}</h2>
+                            <p class="text-gray-600 text-sm">by {{ $beasiswa->namaperusahaan }}</p>
                         </div>
                     </div>
-                    <div class="mt-4 flex flex-wrap">
+                    <div class="mt-2 flex flex-wrap">
                         @if(isset($beasiswa->miniisi))
                             @if(is_array($beasiswa->miniisi))
-                                <div class="flex space-x-4 mt-3">
+                                <div class="flex space-x-2 mt-2">
                                     @foreach($beasiswa->miniisi as $miniisi)
-                                        <div class="p-4 rounded-md text-center">
+                                        <div class="p-2 rounded-md text-center">
                                             <p class="text-gray-600 text-base">
                                                 {{ $miniisi }}
                                             </p>
@@ -97,7 +97,7 @@
                                     @endforeach
                                 </div>
                             @else
-                                <div class="p-4 rounded-md text-center">
+                                <div class="p-2 rounded-md text-center">
                                     <p class="text-gray-600 text-base">
                                         {{ $beasiswa->miniisi }}
                                     </p>
@@ -109,7 +109,7 @@
                             </p>
                         @endif
                     </div>
-                </div>
+                </a>
             @endif
         @endforeach
     @else
