@@ -15,16 +15,41 @@ class UserBeasiswaController extends Controller
      */
     public function index()
 {
-    // Mengambil hanya 5 beasiswa yang sudah dipublikasikan
-    $beasiswaa = Beasiswa::where('is_published', true)->latest()->take(5)->get(); // Menggunakan take() untuk membatasi hasil
-    $beasiswaa->minipersyaratan = json_decode($beasiswaa->minipersyaratan);
-        $beasiswaa->miniisi = json_decode($beasiswaa->miniisi);
-        $beasiswaa->bidang_benefit = json_decode($beasiswaa->bidang_benefit);
-        $beasiswaa->isi_benefit = json_decode($beasiswaa->isi_benefit);
+    // Mengambil 4 beasiswa terbaru yang sudah dipublikasikan
+    $beasiswaa = Beasiswa::where('is_published', 1)
+                          ->orderBy('created_at', 'desc')
+                          ->take(4) // Ambil hanya 4 beasiswa terbaru
+                          ->get();
+
+    // Mengambil total beasiswa yang sudah dipublikasikan
+    $totalBeasiswa = Beasiswa::where('is_published', 1)->count();
+
     // Mengirimkan data beasiswa ke view
-    return view('welcome', compact('beasiswaa'));
+    return view('welcome', compact('beasiswaa', 'totalBeasiswa'));
 }
     
+public function index1()
+{
+    // Mengambil ID beasiswa yang sudah ditampilkan di welcome
+    $beasiswaIds = Beasiswa::where('is_published', 1)
+                           ->orderBy('created_at', 'desc')
+                           ->take(4) // Ambil ID dari 4 beasiswa terbaru
+                           ->pluck('id'); // Ambil hanya ID-nya
+
+    // Mengambil semua beasiswa yang sudah dipublikasikan, kecuali yang sudah ditampilkan
+    $beasiswaa = Beasiswa::where('is_published', 1)
+                          ->whereNotIn('id', $beasiswaIds) // Mengecualikan ID beasiswa yang sudah ditampilkan
+                          ->orderBy('created_at', 'asc') // Mengurutkan berdasarkan tanggal terlama
+                          ->get();
+
+    // Mendecode JSON jika perlu
+    foreach ($beasiswaa as $beasiswa) {
+        $beasiswa->miniisi = json_decode($beasiswa->miniisi);
+    }
+
+    // Mengirimkan data beasiswa ke view
+    return view('lebihbanyak', compact('beasiswaa'));
+}
 
 public function indexx(){
     $daftars = Daftar::all(); 

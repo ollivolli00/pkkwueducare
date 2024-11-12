@@ -45,18 +45,7 @@ Route::get('/beasiswa', function () {
 Route::get('/about', function () {
     return view('about');
 });
-Route::get('/djarum', function () {
-    return view('isikonten1');
-});
-Route::get('/bca', function () {
-    return view('isikonten4');
-});
-Route::get('/lpdp', function () {
-    return view('isikonten2');
-});
-Route::get('/unggulan', function () {
-    return view('isikonten3');
-});
+
 Route::get('/data-users', [AdminController::class, 'showDataUsers'])->name('datauser');
 Route::get('/data-perusahaan', [AdminController::class, 'showDataPerusahaan'])->name('dataperusahaan');
 Route::get('/manage-beasiswas', function () {
@@ -73,6 +62,7 @@ Route::post('/beasiswa/{id}/unpublish', [BeasiswaController::class, 'unpublish']
 Route::get('/home', [UserBeasiswaController::class, 'indexx'])->name('beasiswa.indexx');
 Route::resource('beasiswaa', UserBeasiswaController::class);
 Route::get('/', [UserBeasiswaController::class, 'index'])->middleware('beasiswa');
+Route::get('/beasiswa-lebih-banyak', [UserBeasiswaController::class, 'index1'])->middleware('beasiswa');
 Route::get('/daftarbeasiswa/{id}', [UserBeasiswaController::class, 'show'])->name('beasiswaa.show');
 // Route::get('/', [UserBeasiswaController::class, 'index'])->name('user.index');
 
@@ -80,4 +70,3 @@ Route::get('/signup', [PerusahaansignController::class, 'showSignupForm'])->name
 Route::post('/signup', [PerusahaansignController::class, 'create'])->name('signup.post');
 Route::get('/signin',[PerusahaanController::class, 'showLoginForm'])->name('signin');
 Route::post('/signin', [PerusahaanController::class, 'loginn'])->name('signin.post');
-

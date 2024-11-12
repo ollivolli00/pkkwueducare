@@ -410,57 +410,7 @@
     <!-- Featured Section End -->
      <br>
      <br>
-     <!-- Rekomendasi Beasiswa Section Begin -->
-<section class="categories">
-    <div class="container">
-        <div class="section-title">
-            <h2 class="text-center">Rekomendasi Beasiswa Untukmu</h2>
-        </div>
-        <div class="row">
-            <div class="categories__slider owl-carousel">
-                <!-- Beasiswa BCA -->
-                <div class="col-lg-3">
-                    <div class="border rounded-lg p-4 flex flex-col items-center min-w-[250px]">
-                        <img alt="Logo of Bank BCA" class="mb-4" height="100" src="img/bcakcil.png" width="100"/>
-                        <h5 class="text-lg font-bold">Beasiswa BCA</h5>
-                        <p class="text-gray-600 mb-4">by Bank BCA</p>
-                        <a href="{{'bca'}}" style="color: white; border-radius: 5px; padding: 5px 30px; background: #7fad39; font-family: Cairo;">DAFTAR</a>
-                    </div>
-                </div>
-                <!-- Beasiswa Djarum Plus -->
-                <div class="col-lg-3">
-                    <div class="border rounded-lg p-4 flex flex-col items-center min-w-[250px]">
-                        <img alt="Logo of PT Djarum" class="mb-4" height="100" src="img/djrumkcl.png" width="100"/>
-                        <h5 class="text-lg font-bold">Beasiswa Djarum Plus</h5>
-                        <p class="text-gray-600 mb-4">by PT Djarum</p>
-                        <a href="{{'djarum'}}" style="color: white; border-radius: 5px; padding: 5px 30px; background: #7fad39; font-family: Cairo;">DAFTAR</a>
-                    </div>
-                </div>
-                <!-- Beasiswa LPDP -->
-                <div class="col-lg-3">
-                    <div class="border rounded-lg p-4 flex flex-col items-center min-w-[250px]">
-                        <img alt="Logo of Kemenkeu RI" class="mb-4" height="100" src="img/lpdp.png" width="100"/>
-                        <h5 class="text-lg font-bold">Beasiswa LPDP</h5>
-                        <p class="text-gray-600 mb-4">by Kemenkeu RI</p>
-                        <a href="{{'lpdp'}}" style="color: white; border-radius: 5px; padding: 5px 30px; background: #7fad39; font-family: Cairo;">DAFTAR</a>
-                    </div>
-                </div>
-                <!-- Beasiswa Unggulan -->
-                <div class="col-lg-3">
-                    <div class="border rounded-lg p-4 flex flex-col items-center min-w-[250px]">
-                        <img alt="Logo of Kemendikburistek" class="mb-4" height="100" src="img/unggul.png" width="100"/>
-                        <h5 class="text-lg font-bold">Beasiswa Unggulan</h5>
-                        <p class="text-gray-600 mb-4">by Kemendikburistek</p>
-                        <a href="{{'unggulan'}}" style="color: white; border-radius: 5px; padding: 5px 30px; background: #7fad39; font-family: Cairo;">DAFTAR</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-<!-- Rekomendasi Beasiswa Section End -->
-     <br>
-<!-- Blog Section Begin -->
+     <!-- Blog Section Begin -->
 <section class="from-blog spad">
         <div class="container">
             <div class="row">
@@ -477,170 +427,59 @@
     </section>
     <!-- Blog Section End -->
     <br>
-    <!-- Latest Product Section Begin -->
-    <section class="latest-product spad">
+
+
+     <!-- Rekomendasi Beasiswa Section Begin -->
+     <section class="categories">
     <div class="container">
-        <div class="row"><div class="col-lg-4 col-md-6">
-    <div class="latest-product__text">
-        <h4>Beasiswa Terbaru</h4>
-        <div class="latest-product__slider owl-carousel">
-            @if($beasiswaa->isNotEmpty())
-                @foreach($beasiswaa as $beasiswa)
-                    <div class="latest-product__slider__item">
-                        <a href="{{ route('beasiswaa.show', $beasiswa->id) }}" class="latest-product__item">
-                            <div class="latest-product__item__pic">
-                                <img src="{{ asset('storage/images/' . $beasiswa->image2) }}" alt="{{ $beasiswa->namabeasiswa }}" />
-                            </div>
-                            <div class="latest-product__item__text">
-                                <span>{{ $beasiswa->namabeasiswa }}</span>
-                                <h6>{{ $beasiswa->namaperusahaan }}</h6>
-                                <p style="font-size: 12px; color: #777; margin-top: 3px;">Dipublikasikan: {{ $beasiswa->created_at->format('d M Y') }}</p>
-                            </div>
-                        </a>
-                    </div>
-                @endforeach
-            @else
-                <p>Tidak ada beasiswa yang tersedia.</p>
-            @endif
+        <div class="section-title">
+            <h2 class="text-center">Beasiswa Terbaru</h2>
+            
+          
         </div>
         
-    </div>
-</div>
-                         <div class="col-lg-4 col-md-6">
-                    <div class="latest-product__text">
-                        <h4>Paling Banyak Diminati</h4>
-                        <div class="latest-product__slider owl-carousel">
-                            <div class="latest-prdouct__slider__item">
-                                <a href="#" class="latest-product__item">
-                                    <div class="latest-product__item__pic">
-                                        <img src="img/latest-product/lp-1.jpg" alt="">
+        <div class="row">
+              <!-- Tambahkan tautan Lihat Beasiswa Lainnya di atas carousel -->
+              @if($totalBeasiswa > 4)
+              <div class="text-right mb-3">
+                <a href="{{'beasiswa-lebih-banyak'}}" style="color: #7fad39; font-weight: bold; font-size: 16px;">
+                    Lihat Lebih Banyak
+                </a>
+            </div>
+            @endif
+            <div class="categories__slider owl-carousel">
+                @if($beasiswaa->isNotEmpty())
+                @foreach($beasiswaa->take(4) as $beasiswa)
+                        <!-- Cek apakah beasiswa dipublikasikan -->
+                        @if($beasiswa->is_published == 1)
+                            <div class="col-lg-3">
+                                <div class="border rounded-lg p-4 flex flex-col items-center min-w-[250px]">
+                                    <div style="width: 200px; height: 90px; display: flex; justify-content: center; align-items: center; border-radius: 5px; overflow: hidden;">
+                                        <img 
+                                            alt="Logo {{ $beasiswa->namaperusahaan }}" 
+                                            src="{{ asset('storage/images/' . $beasiswa->image2) }}" 
+                                            style="max-width: 100%; max-height: 100%; object-fit: contain;" 
+                                        />
                                     </div>
-                                    <div class="latest-product__item__text">
-                                        <h6>Crab Pool Security</h6>
-                                        <span>$30.00</span>
-                                    </div>
-                                </a>
-                                <a href="#" class="latest-product__item">
-                                    <div class="latest-product__item__pic">
-                                        <img src="img/latest-product/lp-2.jpg" alt="">
-                                    </div>
-                                    <div class="latest-product__item__text">
-                                        <h6>Crab Pool Security</h6>
-                                        <span>$30.00</span>
-                                    </div>
-                                </a>
-                                <a href="#" class="latest-product__item">
-                                    <div class="latest-product__item__pic">
-                                        <img src="img/latest-product/lp-3.jpg" alt="">
-                                    </div>
-                                    <div class="latest-product__item__text">
-                                        <h6>Crab Pool Security</h6>
-                                        <span>$30.00</span>
-                                    </div>
-                                </a>
+                                    <h5 class="text-lg font-bold">{{ $beasiswa->namabeasiswa }}</h5>
+                                    <p class="text-gray-600 mb-4">by {{ $beasiswa->namaperusahaan }}</p>
+                                    <!-- Tampilkan tanggal publikasi -->
+                                    <p style="font-size: 12px; color: #777; margin-top: 3px;">Dipublikasikan: {{ $beasiswa->created_at->format('d M Y') }}</p>
+                                    <a href="{{ route('beasiswaa.show', $beasiswa->id) }}" style="color: white; border-radius: 5px; padding: 5px 30px; background: #7fad39; font-family: Cairo;">DAFTAR</a>
+                                </div>
                             </div>
-                            <div class="latest-prdouct__slider__item">
-                                <a href="#" class="latest-product__item">
-                                    <div class="latest-product__item__pic">
-                                        <img src="img/latest-product/lp-1.jpg" alt="">
-                                    </div>
-                                    <div class="latest-product__item__text">
-                                        <h6>Crab Pool Security</h6>
-                                        <span>$30.00</span>
-                                    </div>
-                                </a>
-                                <a href="#" class="latest-product__item">
-                                    <div class="latest-product__item__pic">
-                                        <img src="img/latest-product/lp-2.jpg" alt="">
-                                    </div>
-                                    <div class="latest-product__item__text">
-                                        <h6>Crab Pool Security</h6>
-                                        <span>$30.00</span>
-                                    </div>
-                                </a>
-                                <a href="#" class="latest-product__item">
-                                    <div class="latest-product__item__pic">
-                                        <img src="img/latest-product/lp-3.jpg" alt="">
-                                    </div>
-                                    <div class="latest-product__item__text">
-                                        <h6>Crab Pool Security</h6>
-                                        <span>$30.00</span>
-                                    </div>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6">
-                    <div class="latest-product__text">
-                        <h4>Paling Banyak Dilihat</h4>
-                        <div class="latest-product__slider owl-carousel">
-                            <div class="latest-prdouct__slider__item">
-                                <a href="#" class="latest-product__item">
-                                    <div class="latest-product__item__pic">
-                                        <img src="img/latest-product/lp-1.jpg" alt="">
-                                    </div>
-                                    <div class="latest-product__item__text">
-                                        <h6>Crab Pool Security</h6>
-                                        <span>$30.00</span>
-                                    </div>
-                                </a>
-                                <a href="#" class="latest-product__item">
-                                    <div class="latest-product__item__pic">
-                                        <img src="img/latest-product/lp-2.jpg" alt="">
-                                    </div>
-                                    <div class="latest-product__item__text">
-                                        <h6>Crab Pool Security</h6>
-                                        <span>$30.00</span>
-                                    </div>
-                                </a>
-                                <a href="#" class="latest-product__item">
-                                    <div class="latest-product__item__pic">
-                                        <img src="img/latest-product/lp-3.jpg" alt="">
-                                    </div>
-                                    <div class="latest-product__item__text">
-                                        <h6>Crab Pool Security</h6>
-                                        <span>$30.00</span>
-                                    </div>
-                                </a>
-                            </div>
-                            <div class="latest-prdouct__slider__item">
-                                <a href="#" class="latest-product__item">
-                                    <div class="latest-product__item__pic">
-                                        <img src="img/latest-product/lp-1.jpg" alt="">
-                                    </div>
-                                    <div class="latest-product__item__text">
-                                        <h6>Crab Pool Security</h6>
-                                        <span>$30.00</span>
-                                    </div>
-                                </a>
-                                <a href="#" class="latest-product__item">
-                                    <div class="latest-product__item__pic">
-                                        <img src="img/latest-product/lp-2.jpg" alt="">
-                                    </div>
-                                    <div class="latest-product__item__text">
-                                        <h6>Crab Pool Security</h6>
-                                        <span>$30.00</span>
-                                    </div>
-                                </a>
-                                <a href="#" class="latest-product__item">
-                                    <div class="latest-product__item__pic">
-                                        <img src="img/latest-product/lp-3.jpg" alt="">
-                                    </div>
-                                    <div class="latest-product__item__text">
-                                        <h6>Crab Pool Security</h6>
-                                        <span>$30.00</span>
-                                    </div>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                        @endif
+                    @endforeach
+                @else
+                    <p>Tidak ada beasiswa yang tersedia.</p>
+                @endif
             </div>
         </div>
-    </section>
-    <!-- Latest Product Section End -->
+    </div>
+</section>
 
+<!-- Rekomendasi Beasiswa Section End -->
+     <br>
 
     <!-- Banner Begin -->
     <div class="banner">

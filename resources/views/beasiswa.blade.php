@@ -324,7 +324,7 @@
         </div>
 
         <!-- Persyaratan -->
-        <div ```html
+        
         <div class="requirements mt-5 pl-16">
             <h4 class="font-bold text-xl">{{$beasiswaa->persyaratan}}</h4>
             <br>
