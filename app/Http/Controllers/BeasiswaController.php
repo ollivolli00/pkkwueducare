@@ -72,7 +72,7 @@ class BeasiswaController extends Controller
         $beasiswa->miniisi = json_decode($beasiswa->miniisi);
         $beasiswa->bidang_benefit = json_decode($beasiswa->bidang_benefit);
         $beasiswa->isi_benefit = json_decode($beasiswa->isi_benefit);
-
+      
         return view('perusahaan.aplistup', compact('beasiswa'));
     }
 

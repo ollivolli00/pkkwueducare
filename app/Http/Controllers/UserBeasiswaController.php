@@ -24,8 +24,13 @@ class UserBeasiswaController extends Controller
     // Mengambil total beasiswa yang sudah dipublikasikan
     $totalBeasiswa = Beasiswa::where('is_published', 1)->count();
 
+    // Mengambil 4 beasiswa yang paling banyak dilihat
+    $mostViewedBeasiswa = Beasiswa::where('views', '>', 0)
+    ->orderBy('views', 'desc')
+    ->take(4)
+    ->get(); 
     // Mengirimkan data beasiswa ke view
-    return view('welcome', compact('beasiswaa', 'totalBeasiswa'));
+    return view('welcome', compact('beasiswaa', 'totalBeasiswa', 'mostViewedBeasiswa'));
 }
     
 public function index1()
@@ -148,6 +153,8 @@ public function indexx(){
         $beasiswaa->miniisi = json_decode($beasiswaa->miniisi);
         $beasiswaa->bidang_benefit = json_decode($beasiswaa->bidang_benefit);
         $beasiswaa->isi_benefit = json_decode($beasiswaa->isi_benefit);
+        $beasiswaa->increment('views'); // Meningkatkan jumlah views
+
         // Cek apakah beasiswa ditemukan
         if (!$beasiswaa) {
             // Jika tidak ditemukan, Anda bisa mengalihkan atau menampilkan pesan error

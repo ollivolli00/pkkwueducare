@@ -390,23 +390,9 @@
             <div class="modal-body">
                 <form action="{{ route('beasiswaa.store') }}" method="POST" id="registrationForm" enctype="multipart/form-data">
                     @csrf  
+                   
                     <div class="mb-3">
-                        <label for="name" class="form-label">Nama Lengkap</label>
-                        <input type="text" class="form-control @error('namalengkap') is-invalid @enderror" name="namalengkap" id="namalengkap" required>
-                        @error('namalengkap')<div class="alert alert-danger mt-2">{{ $message }}</div>@enderror
-                    </div>
-                    <div class="mb-3">
-                        <label for="email" class="form-label">Email</label>
-                        <input type="email" class="form-control @error('email') is-invalid @enderror" name="email" id="email" required>
-                        @error('email')<div class="alert alert-danger mt-2">{{ $message }}</div>@enderror
-                    </div>
-                    <div class="mb-3">
-                        <label for="phone" class="form-label">Nomor Telepon</label>
-                        <input type="tel" class="form-control @error('no_telp') is-invalid @enderror" name="no_telp" id="no_telp" required>
-                        @error('no_telp')<div class="alert alert-danger mt-2">{{ $message }}</div>@enderror
-                    </div>
-                    <div class="mb-3">
-                        <label for="files" class="form-label">Upload File</ ```html
+                        <label for="files" class="form-label">Upload File</label>
                         <input type="file" class="form-control @error('files') is-invalid @enderror" name="files[]" id="files" multiple required>
                         @error('files')<div class="alert alert-danger mt-2">{{ $message }}</div>@enderror
                         <small class="form-text text-muted">Maksimum 2MB per file.</small>

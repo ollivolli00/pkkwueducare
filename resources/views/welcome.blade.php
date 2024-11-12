@@ -9,7 +9,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>EDUCARE</title>
-
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
     <!-- Google Font -->
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;900&display=swap" rel="stylesheet">
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
@@ -478,8 +478,45 @@
     </div>
 </section>
 
-<!-- Rekomendasi Beasiswa Section End -->
-     <br>
+<!-- Carousel untuk Beasiswa yang Paling Banyak Dilihat -->
+<section class="featured spad">
+    <div class="container">
+        <div class="section-title">
+            <h2>Beasiswa Paling Banyak Dilihat</h2>
+        </div>
+        @if($mostViewedBeasiswa->count() > 0) <!-- Memeriksa apakah ada beasiswa yang ditampilkan -->
+            <div class="categories__slider owl-carousel">
+                @foreach($mostViewedBeasiswa as $beasiswa)
+                    <div class="col-lg-3">
+                        <div class="border rounded-lg p-4 flex flex-col items-center min-w-[250px]">
+                            <div style="width: 200px; height: 90px; display: flex; justify-content: center; align-items: center; border-radius: 5px; overflow: hidden;">
+                                <img 
+                                    alt="Logo {{ $beasiswa->namaperusahaan }}" 
+                                    src="{{ asset('storage/images/' . $beasiswa->image2) }}" 
+                                    style="max-width: 100%; max-height: 100%; object-fit: contain;" 
+                                />
+                            </div>
+                            <h5 class="text-lg font-bold">{{ $beasiswa->namabeasiswa }}</h5>
+                            <p class="text-gray-600 mb-4">by {{ $beasiswa->namaperusahaan }}</p>
+                            <p style="font-size: 12px; color: #777; margin-top: 3px;">Dipublikasikan: {{ $beasiswa->created_at->format('d M Y') }}</p>
+                            
+                            <!-- Menambahkan Icon dan Jumlah Views -->
+                            <div class="flex items-center mt-2">
+                                <i class="bi bi-eye" style="color: #7fad39; margin-right: 5px;"></i>
+                                <span style="font-size: 12px; color: #777;">{{ $beasiswa->views }} views</span>
+                            </div>
+                            <br>
+                            <a href="{{ route('beasiswaa.show', $beasiswa->id) }}" style="color: white; border-radius: 5px; padding: 5px 30px; background: #7fad39; font-family: Cairo;">DAFTAR</a>
+                        </div>
+                    </div>
+                @endforeach
+            </div>
+        @else
+            <p class="text-gray-600">Tidak ada beasiswa yang paling banyak dilihat saat ini.</p> <!-- Pesan jika tidak ada beasiswa -->
+        @endif
+    </div>
+</section><!-- Rekomendasi Beasiswa Section End -->   
+  <br>
 
     <!-- Banner Begin -->
     <div class="banner">

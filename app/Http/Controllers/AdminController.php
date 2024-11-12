@@ -1,11 +1,12 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Models\Notification; // Pastikan ini adalah model Notification yang Anda buat
+
 use App\Models\Perusahaansign;
 use App\Models\User;
 use App\Models\Beasiswa;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Notification;
 
 class AdminController extends Controller
 {
@@ -29,9 +30,5 @@ class AdminController extends Controller
     
         return view('admin.dataperusahaan', compact('perusahaan'));
     }
-    public function index()
-    {
-        $notifications = Notification::orderBy('created_at', 'desc')->take(10)->get(); // Ambil 10 notifikasi terbaru
-        return view('admin.admin', compact('notifications'));
-    }
+  
 }
