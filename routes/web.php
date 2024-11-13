@@ -3,10 +3,10 @@
 use App\Http\Controllers\Auth\PerusahaansignController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UserBeasiswaController;
+use App\Http\Controllers\PenggunaController;
 use App\Http\Controllers\Auth\PerusahaanController;
 use App\Http\Controllers\BeasiswaController;
 use App\Http\Controllers\AdminController;
-use App\Http\Controllers\PenggunaController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
@@ -32,6 +32,10 @@ Route::middleware(['auth', 'multiAuthUser :admin'])->group(function () {
 Route::middleware(['auth', 'multiAuthUser :user'])->group(function () {
     Route::get('/home', [HomeController::class, 'dashboard'])->name('user');
 });
+Route::middleware(['auth:perusahaan', 'perusahaan'])->group(function () {
+    Route::get('/dashboard', [HomeController::class, 'PerusahaanDashboard'])->name('dashboard');
+});
+
 Route::get('/profil', function () {
     return view('profil');
 });
@@ -69,3 +73,4 @@ Route::post('/signup', [PerusahaansignController::class, 'create'])->name('signu
 Route::get('/signin',[PerusahaanController::class, 'showLoginForm'])->name('signin');
 Route::post('/signin', [PerusahaanController::class, 'loginn'])->name('signin.post');
 
+Route::resource('pengguna', PenggunaController::class);

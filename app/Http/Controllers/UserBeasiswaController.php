@@ -29,8 +29,7 @@ class UserBeasiswaController extends Controller
     ->orderBy('views', 'desc')
     ->take(4)
     ->get(); 
-    // Mengirimkan data beasiswa ke view
-    return view('welcome', compact('beasiswaa', 'totalBeasiswa', 'mostViewedBeasiswa'));
+       return view('welcome', compact('beasiswaa', 'totalBeasiswa', 'mostViewedBeasiswa'));
 }
     
 public function index1()
