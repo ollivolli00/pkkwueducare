@@ -1,4 +1,3 @@
-@ -1,248 +1,234 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -213,9 +212,7 @@
                 </li>
                 <!-- Add more applicants here -->
             </ul>
-        </div>
-
-        
+        </div>        
     </div>
 </div>
 

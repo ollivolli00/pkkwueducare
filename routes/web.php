@@ -29,9 +29,6 @@ Auth::routes();
 Route::middleware(['auth', 'multiAuthUser :admin'])->group(function () {
     Route::get('/admin/dashboard', [HomeController::class, 'AdminDashboard'])->name('admin');
 });
-
-    Route::get('/dashboard', [HomeController::class, 'PerusahaanDashboard'])->name('dashboard');
-
 Route::middleware(['auth', 'multiAuthUser :user'])->group(function () {
     Route::get('/home', [HomeController::class, 'dashboard'])->name('user');
 });
@@ -49,41 +46,25 @@ Route::get('/beasiswa', function () {
 Route::get('/about', function () {
     return view('about');
 });
-Route::get('/djarum', function () {
-    return view('isikonten1');
-});
-Route::get('/bca', function () {
-    return view('isikonten4');
-});
-Route::get('/lpdp', function () {
-    return view('isikonten2');
-});
-Route::get('/unggulan', function () {
-    return view('isikonten3');
-});
-Route::get('/dashboard', function () {
-    return view('perusahaan.home');
-})->name('dashboard');
+
+Route::get('/data-users', [AdminController::class, 'showDataUsers'])->name('datauser');
 Route::get('/data-users', [AdminController::class, 'showDataUsers'])->name('datauser');
 Route::get('/data-perusahaan', [AdminController::class, 'showDataPerusahaan'])->name('dataperusahaan');
 Route::get('/manage-beasiswas', function () {
     return view('admin.manage');
 })->name('manage');
-Route::get('/applist-1', function () {
-    return view('perusahaan.applist1');
-})->name('applist-1');
-Route::get('/applist-2', function () {
-    return view('perusahaan.applist2');
-})->name('applist-2');
+// In routes/web.php
+Route::get('/applicants-list', [UserBeasiswaController::class, 'applicantsList'])->name('applist-1');
+
 Route::get('uplist', [BeasiswaController::class, 'index'])->name('beasiswa.index');
-// routes/web.php
 
 Route::get('/beasiswa/{id}', [BeasiswaController::class, 'show'])->name('beasiswa.show');
 Route::post('/beasiswa/{id}', [BeasiswaController::class, 'publish'])->name('beasiswa.publish');
-
+Route::post('/beasiswa/{id}/unpublish', [BeasiswaController::class, 'unpublish'])->name('beasiswa.unpublish');
 Route::get('/home', [UserBeasiswaController::class, 'indexx'])->name('beasiswa.indexx');
 Route::resource('beasiswaa', UserBeasiswaController::class);
 Route::get('/', [UserBeasiswaController::class, 'index'])->middleware('beasiswa');
+Route::get('/beasiswa-lebih-banyak', [UserBeasiswaController::class, 'index1'])->middleware('beasiswa');
 Route::get('/daftarbeasiswa/{id}', [UserBeasiswaController::class, 'show'])->name('beasiswaa.show');
 // Route::get('/', [UserBeasiswaController::class, 'index'])->name('user.index');
 
