@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Perusahaansign;
 use App\Models\User;
-use App\Models\Beasiswa;
+use App\Models\Daftar;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Notification;
 
@@ -31,4 +31,7 @@ class AdminController extends Controller
         return view('admin.dataperusahaan', compact('perusahaan'));
     }
   
+   
+   
+
 }

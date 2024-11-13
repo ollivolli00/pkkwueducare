@@ -271,6 +271,11 @@
     <!-- Header Section End -->
 
     <div class="main-content">
+          @if(session('success'))
+            <div class="bg-green-500 text-white p-3 rounded mb-6">
+                {{ session('success') }}
+            </div>
+        @endif
     @if(isset($beasiswaa))
     <div class="flex justify-center items-center h-52 pl-5"> <!-- Menggunakan padding-left -->
     <img alt="Djarum Logo" src="{{ asset('storage/images/' . $beasiswaa->image1) }}" 
@@ -388,22 +393,24 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form action="{{ route('beasiswaa.store') }}" method="POST" id="registrationForm" enctype="multipart/form-data">
-                    @csrf  
-                   
-                    <div class="mb-3">
-                        <label for="files" class="form-label">Upload File</label>
-                        <input type="file" class="form-control @error('files') is-invalid @enderror" name="files[]" id="files" multiple required>
-                        @error('files')<div class="alert alert-danger mt-2">{{ $message }}</div>@enderror
-                        <small class="form-text text-muted">Maksimum 2MB per file.</small>
-                        <small class="form-text text-muted">Jika lebih dari 1 file, maka pengguna hanya bisa menambahkan sekaligus dalam 1x pemilihan.</small>
-                    </div>
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
-                <button type="button" class="btn btn-primary" id="submitButton">Kirim</button>
-            </div>
+    <form action="{{ route('beasiswaa.store', ['beasiswaId' => $beasiswaa->id]) }}" method="POST" id="registrationForm" enctype="multipart/form-data">
+        @csrf  
+        
+        <div class="mb-3">
+            <label for="file_upload" class="form-label">Upload File</label>
+            <input type="file" class="form-control @error('file_upload') is-invalid @enderror" name="file_upload[]" id="file_upload" multiple required>
+            @error('file_upload')<div class="alert alert-danger mt-2">{{ $message }}</div>@enderror
+            <small class="form-text text-muted">Maksimum 2MB per file.</small>
+            <small class="form-text text-muted">Jika lebih dari 1 file, maka pengguna hanya bisa menambahkan sekaligus dalam 1x pemilihan.</small>
+        </div>
+        
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
+            <button type="submit" class="btn btn-primary">Kirim</button> <!-- Change here -->
+        </div>
+    </form>
+</div>
+         
         </div>
     </div>
 </div>

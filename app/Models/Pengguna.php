@@ -27,4 +27,9 @@ class Pengguna extends Model
     {
         return $this->belongsTo(User::class, 'id_user'); // Hubungkan ke model User dengan foreign key id_user
     }
+    public function daftars()
+{
+    return $this->hasMany(Daftar::class);
+}
+
 }

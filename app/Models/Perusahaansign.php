@@ -50,5 +50,8 @@ public function beasiswas()
 {
     return $this->hasMany(Beasiswa::class, 'company_id', 'id');
 }
-
+// public function daftars()
+// {
+//     return $this->hasMany(Daftar::class, 'company_id'); // Menghubungkan ke model Daftar
+// }
 }

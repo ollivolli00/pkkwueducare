@@ -48,7 +48,7 @@ class PenggunaController extends Controller
             'image' => $imageName,
         ]);
 
-        return redirect()->route('pengguna.show')->with('success', 'Data Berhasil Disimpan!');
+        return redirect()->route('pengguna.show', ['pengguna' => Auth::id()])->with('success', 'Data Berhasil Disimpan!');
     }
 
     public function show($id)

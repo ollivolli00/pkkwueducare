@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 use App\Models\Beasiswa;
 use App\Models\Daftar;
-use Illuminate\Support\Facades\Storage;
+use App\Models\Pengguna;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Http\Request;
 use ZipArchive;
 class UserBeasiswaController extends Controller
@@ -55,10 +57,6 @@ public function index1()
     return view('lebihbanyak', compact('beasiswaa'));
 }
 
-public function indexx(){
-    $daftars = Daftar::all(); 
-    return view('perusahaan.applist1', compact('daftars'));
-}
     /**
      * Show the form for creating a new resource.
      *
@@ -76,69 +74,78 @@ public function indexx(){
      * @return \Illuminate\Http\Response
      */
 
-    public function store(Request $request)
-    {
-    
-        // Validasi input
-        $request->validate([
-            'namalengkap' => 'required|string|max:255',
-            'email' => 'required|string|max:255',
-            'no_telp' => 'required|string|max:255',
-            'files.*' => 'file|mimes:jpeg,png,jpg,pdf|max:2048', // Validasi setiap file
-        ]);
-    
-        $filePaths = []; // Array untuk menyimpan path file sementara
-    
-        // Periksa jika ada file yang diunggah
-        if ($request->hasFile('files')) {
-            // Folder sementara untuk menyimpan file sebelum di-zip
-            $tempDir = storage_path('app/temp_uploads/');
-            if (!file_exists($tempDir)) {
-                mkdir($tempDir, 0777, true); // Buat folder jika belum ada
-            }
-    
-            // Simpan setiap file di folder sementara
-            foreach ($request->file('files') as $file) {
-                $fileName = time() . '_' . $file->getClientOriginalName();
-                $filePath = $tempDir . $fileName;
-                $file->move($tempDir, $fileName);
+   
+     public function store(Request $request, $beasiswaId)
+{
+    // Validasi input untuk memastikan ada file yang diupload
+    $request->validate([
+        'file_upload.*' => 'required|file|mimes:jpeg,png,jpg,pdf|max:2048', // Validasi setiap file
+    ]);
+
+    // Ambil data pengguna yang login dari tabel Pengguna
+    $pengguna = Pengguna::where('id_user', auth()->id())->first();
+
+    // Cek jika pengguna tidak ditemukan
+    if (!$pengguna) {
+        return redirect()->route('beasiswaa.index')->with('error', 'Pengguna tidak ditemukan!');
+    }
+
+    // Periksa apakah ada file yang di-upload
+    if ($request->hasFile('file_upload')) {
+        $files = $request->file('file_upload'); // Ambil semua file yang diupload
+
+        // Array untuk menyimpan path file yang diupload
+        $filePaths = [];
+        $zipFileName = time() . '_beasiswa_files.zip'; // Nama file ZIP dengan timestamp
+
+        // Tentukan direktori tempat file ZIP disimpan
+        $zipFilePath = storage_path('app/public/files/' . $zipFileName);
+
+        // Membuat instance ZIP archive
+        $zip = new \ZipArchive;
+
+        // Membuka file ZIP untuk ditulis
+        if ($zip->open($zipFilePath, \ZipArchive::CREATE) === TRUE) {
+            // Menambahkan file ke dalam ZIP
+            foreach ($files as $file) {
+                $fileName = time() . '_' . $file->getClientOriginalName(); // Menyimpan file dengan nama yang unik
+                $filePath = $file->storeAs('public/files', $fileName); // Menyimpan file di folder 'public/files'
+
+                // Tambahkan file ke dalam ZIP
+                $zip->addFile(storage_path('app/' . $filePath), $fileName);
+
+                // Menyimpan path file yang diupload untuk referensi (untuk kemungkinan penggunaan nanti)
                 $filePaths[] = $filePath;
             }
-    
-            // Buat file ZIP
-            $zipFileName = 'uploads_' . time() . '.zip';
-            $zipFilePath = public_path('zips/' . $zipFileName);
-    
-            $zip = new ZipArchive;
-            if ($zip->open($zipFilePath, ZipArchive::CREATE | ZipArchive::OVERWRITE) === TRUE) {
-                foreach ($filePaths as $file) {
-                    $zip->addFile($file, basename($file)); // Tambahkan setiap file ke ZIP
-                }
-                $zip->close();
-            }
-    
-            // Hapus file sementara setelah di-zip
-            foreach ($filePaths as $file) {
-                unlink($file);
-            }
-        }
-    
-        // Buat data beasiswa
-        $data = Daftar::create([
-            'namalengkap' => $request->namalengkap,
-            'email' => $request->email,
-            'no_telp' => $request->no_telp,
-            'zip_file' => 'zips/' . $zipFileName, // Simpan path ZIP di database
-        ]);
-    
-        // Redirect berdasarkan kondisi penyimpanan
-        if ($data) {
-            return redirect()->route('beasiswaa.index')->with('success', 'Data Berhasil Disimpan!');
+
+            // Menutup ZIP setelah selesai
+            $zip->close();
         } else {
-            return redirect()->route('beasiswaa.index')->with('error', 'Data Gagal Disimpan!');
+            return redirect()->back()->with('error', 'Gagal membuat file ZIP!');
         }
+
+        // Simpan data pendaftaran ke tabel Daftar dengan informasi file ZIP
+        Daftar::create([
+            'user_id' => auth()->id(), // ID user yang sedang login
+            'beasiswa_id' => $beasiswaId,
+            'file_upload' => json_encode($filePaths), // Simpan path file ke kolom 'file_upload' sebagai JSON
+            'zip_file' => $zipFileName, // Simpan nama file ZIP
+            'namalengkap' => $pengguna->namalengkap,
+            'tanggal_lahir' => $pengguna->tanggal_lahir,
+            'jenis_kelamin' => $pengguna->jenis_kelamin,
+            'email' => $pengguna->email,
+            'no_telp' => $pengguna->no_telp,
+            'image' => $pengguna->image,
+        ]);
+
+        return redirect()->route('beasiswaa.show', $beasiswaId)->with('success', 'Data Anda Berhasil Tersimpan, Kami Akan Kabari Anda Lebih Lanjut!');
+    } else {
+        return redirect()->back()->with('error', 'Data Anda Tidak Terkirim Kepada Kami, Silahkan Upload FIle Terlebih Dahulu!');
     }
-    
+}
+
+       
+     
     /**
      * Display the specified resource.
      *
@@ -200,12 +207,13 @@ public function indexx(){
     // UserBeasiswaController.php
     public function applicantsList()
     {
-        // Fetch applicants with pagination (adjust the number 10 if needed)
-        $daftars = Daftar::paginate(10); 
+        $company_id = Auth::guard('perusahaan')->user()->company_id;
+
+        $daftars = Daftar::with('beasiswa')->paginate(10); // Contoh penggunaan pagination  
     
-        // Return the view and pass the paginated data
         return view('perusahaan.applist1', compact('daftars'));
     }
+    
 
   
 }

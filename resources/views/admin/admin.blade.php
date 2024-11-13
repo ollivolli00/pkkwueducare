@@ -163,8 +163,9 @@
     </div>
   </div>
 </div>
-<!-- Activity Feed and Recent Applicants -->
+
 <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+    <!-- Recent Uploaded Beasiswa Section -->
     <div class="bg-white p-6 rounded-lg shadow">
         <h2 class="text-lg font-semibold text-gray-700 mb-4">Recent Uploaded Beasiswa</h2>
         <ul>
@@ -195,7 +196,49 @@
             {{ $recentBeasiswa->links() }}
         </div>
     </div>
-</div>            <!-- Js Plugins -->
+    
+    <div class="bg-white p-6 rounded-lg shadow">
+    <h2 class="text-lg font-semibold text-gray-700 mb-4">Recent Activity</h2>
+    <ul>
+        @if ($recentApplicants->isEmpty())
+            <li class="py-3 text-gray-500">Tidak ada aktivitas baru dalam 24 jam terakhir.</li>
+        @else
+            @foreach ($recentApplicants as $applicant)
+                <li class="flex items-center justify-between py-3 border-b border-gray-200">
+                    <p class="text-gray-700">
+                        @if($applicant->pengguna) 
+                            <strong>{{ $applicant->pengguna->namalengkap }}</strong> - 
+                            <span class="text-gray-600">
+                                @if($applicant->beasiswa)
+                                    Applied for Scholarship: {{ $applicant->beasiswa->namabeasiswa }} by 
+                                    @if($applicant->beasiswa->perusahaan)
+                                        {{$applicant->beasiswa->perusahaan->namaperusahaan}}
+                                    @else
+                                        Perusahaan tidak tersedia
+                                    @endif
+                                @else
+                                    Beasiswa tidak tersedia
+                                @endif
+                            </span>
+                        @else
+                            Pengguna tidak tersedia
+                        @endif
+                    </p>
+                    <span class="text-gray-500 text-sm ml-4">{{ $applicant->created_at->diffForHumans() }}</span>
+                </li>
+            @endforeach
+        @endif
+    </ul>
+
+    <div class="mt-4">
+        <!-- Pagination links -->
+        {{ $recentApplicants->links() }}
+    </div>
+</div>
+
+
+
+<!-- Js Plugins -->
             <script src="js/jquery-3.3.1.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script src="js/jquery.nice-select.min.js"></script>

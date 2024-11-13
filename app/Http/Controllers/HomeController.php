@@ -33,18 +33,26 @@ class HomeController extends Controller
     public function AdminDashboard()
     {
         // Mengambil jumlah pengguna yang login
-         $totalUsers = User::where('type', 0)->count();// Mengambil jumlah seluruh pengguna
+        $totalUsers = User::where('type', 0)->count(); // Mengambil jumlah seluruh pengguna
         
         // Mengambil jumlah perusahaan
         $totalPerusahaan = Perusahaansign::count();  // Mengambil jumlah perusahaan
     
+        // Mengambil 5 data beasiswa terbaru
         $recentBeasiswa = Beasiswa::with('perusahaan')
-        ->orderBy('created_at', 'desc')
-        ->paginate(5); // Mengambil 5 data per halaman
-
+            ->orderBy('created_at', 'desc')
+            ->paginate(5); // Mengambil 5 data per halaman
+        
+        // Fetching applicants along with their beasiswa and user (pengguna) data
+        $recentApplicants = Daftar::with(['beasiswa', 'pengguna']) // Memuat relasi beasiswa dan pengguna
+            ->orderBy('created_at', 'desc')
+            ->paginate(5); // Paginate results with 5 per page
+        
         // Mengirim data ke view
-        return view('admin.admin', compact('totalUsers', 'recentBeasiswa', 'totalPerusahaan'));
+        return view('admin.admin', compact('totalUsers', 'recentBeasiswa', 'totalPerusahaan', 'recentApplicants'));
     }
+     
+
     public function PerusahaanDashboard()
     {
         // Pastikan pengguna adalah perusahaan yang sudah login
@@ -52,7 +60,7 @@ class HomeController extends Controller
             $perusahaan = Auth::guard('perusahaan')->user(); // Ambil pengguna yang terautentikasi
     
             // Log informasi pengguna
-            Log::info('User  ID: ' . $perusahaan->id);
+            Log::info('User ID: ' . $perusahaan->id);
     
             // Mengambil data beasiswa terkait perusahaan
             $beasiswaRecords = $perusahaan->beasiswas; // Ambil semua beasiswa yang terkait dengan perusahaan
@@ -62,6 +70,7 @@ class HomeController extends Controller
             $totalBeasiswa = 0;
             $published = 0;
             $unpublished = 0;
+            $applicants = 0;
     
             // Cek apakah ada beasiswa yang terkait
             if ($beasiswaRecords->isNotEmpty()) {
@@ -78,18 +87,39 @@ class HomeController extends Controller
                 Log::info('Total Beasiswa: ' . $totalBeasiswa);
                 Log::info('Published Beasiswa: ' . $published);
                 Log::info('Unpublished Beasiswa: ' . $unpublished);
+                
+               // Ambil data pendaftar terbaru berdasarkan company_id dan beasiswa_id
+$recentApplicants = Daftar::with(['beasiswa' => function($query) use ($company_id) {
+    // Filter beasiswa berdasarkan company_id
+    $query->where('company_id', $company_id);
+}])
+->orderBy('created_at', 'desc')
+->take(5)
+->get();
+
+  // Menghitung jumlah pendaftar untuk beasiswa yang diupload oleh perusahaan
+  $applicants = Daftar::whereHas('beasiswa', function ($query) use ($company_id) {
+    $query->where('company_id', $company_id);
+})->count();
+
+// Log recent applicants
+Log::info('Recent Applicants: ', $recentApplicants->toArray());
+
+                
+                // Log recent applicants
+                Log::info('Recent Applicants: ', $recentApplicants->toArray());
             } else {
                 Log::warning('No Beasiswa records found for the authenticated perusahaan.');
-                // Optionally, you can set a message to display in the view
-                // $message = 'You have no beasiswa records yet.';
             }
     
             // Kirim data ke view
-            return view('perusahaan.home', compact('totalBeasiswa', 'published', 'unpublished', 'company_id'));
+            return view('perusahaan.home', compact('totalBeasiswa', 'published', 'unpublished', 'company_id', 'recentApplicants', 'applicants'));
         }
     
         // Jika tidak ada pengguna yang login, redirect ke halaman signin
-        Log::info('User  not authenticated, redirecting to signin');
+        Log::info('User not authenticated, redirecting to signin');
         return redirect()->route('signin');
     }
+    
+    
 }

@@ -54,5 +54,9 @@ class User extends Authenticatable
     {
         return $this->hasOne(Pengguna::class, 'id_user');
     }
-
+    public function daftars()
+    {
+        return $this->hasMany(Daftar::class, 'user_id'); // Pastikan user_id di tabel daftar
+    }
+    
 }

@@ -93,13 +93,13 @@
                     <img src="https://storage.googleapis.com/a1aa/image/TsPTHHQA9PLmIZY2P9D0HASO0e0SXKHpfutawnKUyYyYKRnTA.jpg" 
                          alt="Profile Picture" class="w-24 h-24 rounded-full mx-auto mb-4"/>
                      @auth('perusahaan')
-            <h3 class="font-semibold text-gray-800 mb-1">
-              {{ Auth::guard('perusahaan')->user()->namaperusahaan }}
-            </h3>
-            <p class="text-sm text-gray-500">
-              {{ Auth::guard('perusahaan')->user()->email ?? 'Email Perusahaan Tidak Tersedia' }}
-            </p>
-          @endauth
+                    <h3 class="font-semibold text-gray-800 mb-1">
+                        {{ Auth::guard('perusahaan')->user()->namaperusahaan }}
+                    </h3>
+                    <p class="text-sm text-gray-500">
+                        {{ Auth::guard('perusahaan')->user()->email ?? 'Email Perusahaan Tidak Tersedia' }}
+                    </p>
+                    @endauth
                 </div>
 
                 <nav class="flex-grow py-4">
@@ -132,53 +132,69 @@
                 </div>
             </div>
         </div>
-
+        
         <!-- Table Container -->
         <div class="table-container">
-            <table class="table table-bordered">
-                <thead>
-                    <tr>
-                        <th>No</th>
-                        <th>Nama</th>
-                        <th>Email</th>
-                        <th>No. Telepon</th>
-                        <th>Uploaded File</th>
-                    </tr>
-                </thead>
-                <tbody>
+        <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>No</th>
+                <th>Nama Lengkap</th>
+                <th>Tanggal Lahir</th>
+                <th>Jenis Kelamin</th>
+                <th>Email</th>
+                <th>No. Telepon</th>
+                <th>Image</th>
+                <th>Uploaded File</th>
+                <th>Nama Beasiswa</th> <!-- Kolom Nama Beasiswa -->
+            </tr>
+        </thead>
+        <tbody>
+            @if($daftars->count()) <!-- Check if there are any records -->
                 @foreach ($daftars as $index => $daftar)
                 <tr>
                     <td>{{ $index + 1 }}</td>
                     <td>{{ $daftar->namalengkap }}</td>
+                    <td>{{ $daftar->tanggal_lahir }}</td>
+                    <td>{{ $daftar->jenis_kelamin }}</td>
                     <td><a href="mailto:{{ $daftar->email }}">{{ $daftar->email }}</a></td>
                     <td>{{ $daftar->no_telp }}</td>
                     <td>
-    @if($daftar->file_1)
-        @php
-            $fileExtension = pathinfo($daftar->file_1, PATHINFO_EXTENSION);
-        @endphp
-        @if($fileExtension == 'zip')
-            <a href="{{ asset('storage/'.$daftar->file_1) }}" target="_blank">
-                <img src="{{ asset('img/zip-icon.png') }}" alt="ZIP File" style="width: 30px; height: 30px;">
-            </a>
-        @else
-            <a href="{{ asset('storage/'.$daftar->file_1) }}" target="_blank">
-                <img src="{{ asset('img/file-icon.png') }}" alt="File" style="width: 30px; height: 30px;">
-            </a>
-        @endif
-    @else
-        <span>Tidak Ada</span>
-    @endif
-</td>
-
+                        @if($daftar->image)
+                            <img src="{{ asset('storage/images/'.$daftar->image) }}" alt="User  Image" style="width: 50px; height: 50px;">
+                        @else
+                            <span>Tidak Ada</span>
+                        @endif
+                    </td>
+                    <td>
+                        @if($daftar->zip_file)
+                            <a href="{{ asset('storage/files/' . $daftar->zip_file) }}" class="btn btn-primary" download>
+                                Unduh File ZIP
+                            </a>
+                        @else
+                            <p>Tidak ada file ZIP yang tersedia.</p>
+                        @endif
+                    </td>
+                    <td>
+                        <!-- Menampilkan nama beasiswa yang didaftar -->
+                        @if($daftar->beasiswa)
+                            {{ $daftar->beasiswa->namabeasiswa }} <!-- Nama beasiswa -->
+                        @else
+                            <span>Tidak Ada</span>
+                        @endif
+                    </td>
                 </tr>
                 @endforeach
-                </tbody>
-            </table>
-            <!-- Pagination -->
+            @else
+                <tr>
+                    <td colspan="9" class="text-center">Tidak ada pelamar yang ditemukan.</td>
+                </tr>
+            @endif
+        </tbody>
+    </table>
+       <!-- Pagination -->
             <div class="pagination">
-                <button class="btn btn-outline-secondary disabled"><i class="fas fa-arrow-left"></i></button>
-                <button class="btn btn-outline-secondary"><i class="fas fa-arrow-right"></i></button>
+                {{ $daftars->links() }} <!-- Menambahkan pagination otomatis di bawah tabel -->
             </div>
         </div>
     </div>

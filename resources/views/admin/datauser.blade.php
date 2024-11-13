@@ -131,9 +131,7 @@
           <tbody>
             @foreach ($users as $user)
               <tr class="hover:bg-gray-50">
-              <tbody>
-    @foreach ($users as $user)
-    <tr>
+          
         <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">{{ $user->name }}</td>
         <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">{{ $user->email }}</td>
         <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">{{ $user->created_at->format('d-m-Y H:i:s') }}</td> <!-- Menampilkan waktu pembuatan akun -->
@@ -141,9 +139,6 @@
     @endforeach
 </tbody>
 
-              </tr>
-            @endforeach
-          </tbody>
         </table>
       </div>
     </div>

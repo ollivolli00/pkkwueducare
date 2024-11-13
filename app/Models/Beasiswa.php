@@ -13,14 +13,17 @@ class Beasiswa extends Model
         'id', 'image1', 'image2', 'namabeasiswa', 'namaperusahaan', 'batasbeasiswa', 'minipersyaratan', 'miniisi', 'persyaratan', 'isipersyaratan', 'judul_benefit', 'bidang_benefit', 'isi_benefit', 'is_published', 'company_id'
     ];
 
-    public function applicants()
+    public function daftar()
     {
-        return $this->belongsToMany(User::class, 'beasiswa_user', 'beasiswa_id', 'user_id');
+        return $this->hasMany(Daftar::class, 'beasiswa_id');
     }
+    
+
     
     public function perusahaan()
 {
     return $this->belongsTo(Perusahaansign::class, 'company_id', 'id');
 }
+
 }
 
