@@ -2625,9 +2625,10 @@ margin-top: 40px;
 -----------------------*/
 
 .footer {
-	background: #F3F6FA;
+	background: #ffffff;
 	padding-top: 70px;
 	padding-bottom: 0;
+	width: 100%;
 }
 
 .footer__about {
@@ -2741,17 +2742,20 @@ margin-top: 40px;
 	padding: 15px 0;
 	overflow: hidden;
 	margin-top: 20px;
+	width: 100%;
 }
+
 
 .footer__copyright__text {
 	font-size: 14px;
-	color: #1c1c1c;
+	color: #ffffff;
 	float: left;
 	line-height: 25px;
 }
 
 .footer__copyright__payment {
 	float: right;
+	color: #ffffff;
 }
 
 /*---------------------

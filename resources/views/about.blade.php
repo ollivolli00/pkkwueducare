@@ -9,7 +9,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>EDUCARE</title>
-
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
     <!-- Google Font -->
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;900&display=swap" rel="stylesheet">
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
@@ -59,7 +59,7 @@
         </div>
         <nav class="humberger__menu__nav mobile-menu">
             <ul>
-                <li class="active"><a href="./index.html">Home</a></li>
+                <li class="active"><a href="/">Home</a></li>
                 <li><a href="./shop-grid.html">Shop</a></li>
                 <li><a href="#">Pages</a>
                     <ul class="header__menu__dropdown">
@@ -103,7 +103,7 @@
             <div class="row">
                 <div class="col-lg-3">
                     <div class="header__logo">
-                        <a href="./index.html"><img src="img/logo.png" alt="" width="150px;" height="50px;"></a>
+                        <a href="{{'/'}}"><img src="img/logo.png" alt="" width="150px;" height="50px;"></a>
                     </div>
                 </div>
                 <div class="col-lg-6">
@@ -111,11 +111,14 @@
         <ul>
 
                 <li><a href="{{'/'}}" style="text-align:center; ">Home</a></li>   
-              <li>  <a href="{{ 'about' }}" style="text-align:center; ">About</a>   </li>          
-
-@guest
-    <a href="{{ route('login') }}" style="text-align:center; color:white; padding: 10px 15px 12px; background: #7fad39;">Daftar Sebagai Perusahaan</a>
+              <li>  <a href="{{ 'about' }}" style="text-align:center; ">About</a>   
+            </li>    
+            @guest
+<li>
+    <a href="{{ route('signup') }}" style="text-align:center; color:white; padding: 10px 15px 12px; background: #7fad39;">Daftar Sebagai Perusahaan</a>
+</li>
 @endguest
+
 <li class="nav-item dropdown">
     @auth
         <a id="navbarDropdown" class="nav-link dropdown-toggle" href="" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
@@ -136,6 +139,9 @@
         <a href="{{ route('login') }}" style="color:white; padding: 10px 15px 12px; background: #7fad39;">Login</a>
     @endauth
 </li>
+
+        </ul>
+        </nav>
 </div>        
 </div>
         </div>
@@ -145,8 +151,6 @@
             </div>
         </div>
     </header>
-        
-
     <!-- Header Section End -->
 
     <!-- Hero Section Begin -->
@@ -231,33 +235,19 @@ Visi kami adalah menciptakan generasi yang memiliki kesempatan pendidikan yang s
     <!-- Contact Section Begin -->
     <section class="contact spad">
         <div class="container">
-            <div class="row">
+            <div class="row justify-content-center">
                 <div class="col-lg-3 col-md-3 col-sm-6 text-center">
                     <div class="contact__widget">
                         <span class="icon_phone"></span>
-                        <h4>Phone</h4>
-                        <p>+01-3-8888-6868</p>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-3 col-sm-6 text-center">
-                    <div class="contact__widget">
-                        <span class="icon_pin_alt"></span>
-                        <h4>Address</h4>
-                        <p>60-49 Road 11378 New York</p>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-3 col-sm-6 text-center">
-                    <div class="contact__widget">
-                        <span class="icon_clock_alt"></span>
-                        <h4>Open time</h4>
-                        <p>10:00 am to 23:00 pm</p>
+                        <h4>Call Center</h4>
+                        <p>+62 813-3535-9018</p>
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-3 col-sm-6 text-center">
                     <div class="contact__widget">
                         <span class="icon_mail_alt"></span>
                         <h4>Email</h4>
-                        <p>hello@colorlib.com</p>
+                        <p>educare@gmail.com</p>
                     </div>
                 </div>
             </div>
@@ -272,73 +262,31 @@ Visi kami adalah menciptakan generasi yang memiliki kesempatan pendidikan yang s
         </div>
     </section>
   
-  <!-- Footer Section Begin -->
-  <footer class="footer spad">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-3 col-md-6 col-sm-6">
-                    <div class="footer__about">
-                        <div class="footer__about__logo">
-                            <a href="./index.html"><img src="img/logo.png" alt=""></a>
-                        </div>
-                        <ul>
-                           
-                            <li>Call Center: +62 112 233 445</li>
-                            <li>Email: educare@gmail.com</li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6 col-sm-6 offset-lg-1">
-                    <div class="footer__widget">
-                        <h6>Helpful Links</h6>
-                        <ul>
-                            <li><a href="#">About Us</a></li>
-                            <li><a href="#">About Our Shop</a></li>
-                            <li><a href="#">Secure Shopping</a></li>
-                            <li><a href="#">Delivery infomation</a></li>
-                            <li><a href="#">Privacy Policy</a></li>
-                            <li><a href="#">Our Sitemap</a></li>
-                        </ul>
-                        <ul>
-                            <li><a href="#">Who We Are</a></li>
-                            <li><a href="#">Our Services</a></li>
-                            <li><a href="#">Projects</a></li>
-                            <li><a href="#">Contact</a></li>
-                            <li><a href="#">Innovation</a></li>
-                            <li><a href="#">Testimonials</a></li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-12">
-                    <div class="footer__widget">
-                        <h6>Join Our Newsletter Now</h6>
-                        <p>Get E-mail updates about our latest shop and special offers.</p>
-                        <form action="#">
-                            <input type="text" placeholder="Enter your mail">
-                            <button type="submit" class="site-btn">Subscribe</button>
-                        </form>
-                        <div class="footer__widget__social">
-                            <a href="#"><i class="fa fa-facebook"></i></a>
-                            <a href="#"><i class="fa fa-instagram"></i></a>
-                            <a href="#"><i class="fa fa-twitter"></i></a>
-                            <a href="#"><i class="fa fa-pinterest"></i></a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="footer__copyright">
-                        <div class="footer__copyright__text"><p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-  Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
-  <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p></div>
-                        <!-- <div class="footer__copyright__payment"><img src="img/payment-item.png" alt=""></div> -->
-                    </div>
-                </div>
+  <!-- Footer Section Begin --><footer class="footer spad">
+    <div class="container">
+        <!-- Konten lain dalam footer bisa tetap di dalam container jika tidak ingin full width -->
+        <div class="row">
+            <div class="col-lg-12">
+                <!-- Bagian ini bisa diisi konten lain jika diperlukan -->
             </div>
         </div>
-    </footer>
-    <!-- Footer Section End -->
+    </div>
+
+    <!-- Pindahkan footer__copyright ke luar container untuk lebar penuh -->
+    <div class="footer__copyright" style="background: #7fad39; width: 100%;">
+        <div class="container">
+            <div class="footer__copyright__text">
+                <img src="img/logo.png" alt="" width="120px" height="50px">
+            </div>
+            <div class="footer__copyright__payment">
+            <p style="color: #ffffff;" class="pt-2">
+                    Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | Educare.com
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
 
     <!-- Js Plugins -->
     <script src="js/jquery-3.3.1.min.js"></script>

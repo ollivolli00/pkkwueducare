@@ -143,7 +143,7 @@
     @auth('perusahaan')
   <div class="flex justify-between items-center mb-6">
     <h1 class="text-3xl font-semibold text-gray-800">Dashboard  {{ Auth::guard('perusahaan')->user()->namaperusahaan }}</h1>
-    <button class="button-style">New Upload</button>
+    
   </div>
 @endauth
 

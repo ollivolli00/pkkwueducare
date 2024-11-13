@@ -151,7 +151,7 @@
                                 </button>
                     
                     <div class="create-account">
-                        <p>Already Have an Account? <a href="{{route('signin')}}" class="register-link">Login</a>
+                        <p>Already Have an Account? <a href="{{route('login')}}" class="register-link">Login</a>
                         </p>
                     </div>
                 </form>
