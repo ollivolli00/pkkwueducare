@@ -58,9 +58,6 @@ class PenggunaController extends Controller
         return view('profil.show', compact('penggunas'));
     }
     
-
-    
-
     public function edit($id)
     {
         $pengguna = Pengguna::findOrFail($id);
