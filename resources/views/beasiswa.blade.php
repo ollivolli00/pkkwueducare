@@ -326,19 +326,23 @@
                 @csrf  
                 <div class="mb-3">
                         <label for="name" class="form-label">Nama Lengkap</label>
-                        <input type="text" class="form-control" id="name" required>
+                        <input type="text" class="form-control @error('namalengkap') is-invalid @enderror" name="namalengkap" id="namalengkap" required>
+                        @error('namalengkap')<div class="alert alert-danger mt-2">{{ $message }}</div>@enderror
                     </div>
                     <div class="mb-3">
                         <label for="email" class="form-label">Email</label>
-                        <input type="email" class="form-control" id="email" required>
+                        <input type="email" class="form-control @error('email') is-invalid @enderror" name="email" id="email" required>
+                        @error('email')<div class="alert alert-danger mt-2">{{ $message }}</div>@enderror
                     </div>
                     <div class="mb-3">
                         <label for="phone" class="form-label">Nomor Telepon</label>
-                        <input type="tel" class="form-control" id="phone" required>
+                        <input type="tel" class="form-control @error('no_telp') is-invalid @enderror" name="no_telp" id="no_telp" required>
+                        @error('no_telp')<div class="alert alert-danger mt-2">{{ $message }}</div>@enderror
                     </div>
                     <div class="mb-3">
                         <label for="files" class="form-label">Upload File</label>
-                        <input type="file" class="form-control" id="files" multiple required>
+                        <input type="file" class="form-control @error('files') is-invalid @enderror" name="files[]" id="files" multiple required>
+                        @error('files')<div class="alert alert-danger mt-2">{{ $message }}</div>@enderror
                         <small class="form-text text-muted">Maksimum 2MB per file.</small>
                         <small class="form-text text-muted">Jika lebih dari 1 file, maka pengguna hanya bisa menambahkan sekaligus dalam 1x pemilihan.</small>
                     </div>
@@ -351,6 +355,8 @@
         </div>
     </div>
 </div>
+
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-Q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
         crossorigin="anonymous"></script>
          <!-- Js Plugins -->
@@ -382,7 +388,12 @@
     text-align: left; /* Mengatur teks dalam modal agar rata kiri */
 }
 </style>
-
+<script>
+    // Event listener untuk tombol submit di luar form
+    document.getElementById('submitButton').addEventListener('click', function() {
+        document.getElementById('registrationForm').submit();
+    });
+</script>
 </body>
 
 </html>

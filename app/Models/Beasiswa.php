@@ -9,10 +9,7 @@ class Beasiswa extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'image1', 'image2', 'namabeasiswa', 'namaperusahaan', 'batasbeasiswa', 'minipersyaratan', 'miniisi', 'persyaratan', 'isipersyaratan', 'image3', 'judul_benefit', 'isi_benefit', 'is_published',
+        'image1', 'image2', 'namabeasiswa', 'namaperusahaan', 'batasbeasiswa', 'minipersyaratan', 'miniisi', 'persyaratan', 'isipersyaratan', 'image3', 'judul_benefit', 'isi_benefit', 'is_published'
     ];
 
-    protected $attributes = [
-        'is_published' => 0, // Default to unpublished if not set
-    ];
 }

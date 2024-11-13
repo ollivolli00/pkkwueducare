@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Http\Middleware;
 
 use Closure;
@@ -11,24 +10,13 @@ class PerusahaanMiddleware
     {
         // Cek apakah pengguna sudah terautentikasi dengan guard 'perusahaan'
         if (Auth::guard('perusahaan')->check()) {
-            // Cek apakah rute yang diminta adalah /signin
+            // Jika pengguna sudah login dan mencoba mengakses /signin
             if ($request->is('signin')) {
-                // Jika sudah terautentikasi dan mencoba mengakses /signin, redirect ke dashboard
-                return redirect()->route('dashboard'); // Ganti dengan rute dashboard Anda
+                // Kembalikan tampilan login dengan pesan
+                return response()->view('perusahaan.home', ['message' => 'Anda sudah login.']);
             }
-
-            // Jika pengguna sudah terautentikasi, ambil data perusahaan
-            $user = Auth::guard('perusahaan')->user();
-            $perusahaan = $user->perusahaan; // Ambil data perusahaan terkait
-
-            if (!$perusahaan) {
-                return redirect()->back()->with('error', 'Data perusahaan tidak ditemukan.');
-            }
-
-            // Menyimpan data perusahaan ke dalam request agar bisa diakses di controller
-            $request->attributes->set('perusahaan', $perusahaan);
         }
-
+    
         return $next($request);
     }
 }

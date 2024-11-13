@@ -42,6 +42,12 @@ class User extends Authenticatable
      */
     public function perusahaan()
     {
-        return $this->belongsTo(PerusahaanSign::class, 'perusahaan_id');
+        return $this->hasOne(PerusahaanSign::class, 'id', 'id');
     }
+
+    public function profile()
+    {
+        return $this->hasOne(Pengguna::class, 'id_user');
+    }
+
 }

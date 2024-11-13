@@ -3,8 +3,9 @@
 namespace App\Http\Controllers;
 use App\Models\Beasiswa;
 use App\Models\Daftar;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
-
+use ZipArchive;
 class UserBeasiswaController extends Controller
 {
     /**
@@ -22,7 +23,10 @@ class UserBeasiswaController extends Controller
 }
     
 
-
+public function indexx(){
+    $daftars = Daftar::all(); 
+    return view('perusahaan.applist1', compact('daftars'));
+}
     /**
      * Show the form for creating a new resource.
      *
@@ -39,61 +43,70 @@ class UserBeasiswaController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+
     public function store(Request $request)
     {
+    
+        // Validasi input
         $request->validate([
-            'image1' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
-            'image2' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
-            'image3' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
-            'namabeasiswa' => 'required|string|max:255',
-            'namaperusahaan' => 'required|string|max:255',
-            'batasbeasiswa' => 'required|date',
-            'minipersyaratan' => 'required|string|max:255',
-            'miniisi' => 'required|string',
-            'persyaratan' => 'required|string',
-            'isipersyaratan' => 'required|string',
-            'judul_benefit' => 'required|string|max:255',
-            'isi_benefit' => 'required|string',
-        ]);
-
-        // Simpan file
-        $image1 = $request->file('image1');
-        $imageName1 = $image1->hashName();  // Dapatkan nama file unik
-        $image1->storeAs('public/images', $imageName1);  // Simpan gambar
-    
-        $image2 = $request->file('image2');
-        $imageName2 = $image2->hashName();  // Dapatkan nama file unik
-        $image2->storeAs('public/images', $imageName2);  // Simpan gambar
-    
-        $image3 = $request->file('image3');
-        $imageName3 = $image3->hashName();  // Dapatkan nama file unik
-        $image3->storeAs('public/images', $imageName3);  // Simpan gambar
-    
-        // Buat data beasiswa
-        $beasiswa = Beasiswa::create([
-            'image1' => $imageName1,
-            'image2' => $imageName2,
-            'image3' => $imageName3,
-            'namabeasiswa' => $request->namabeasiswa,
-            'namaperusahaan' => $request->namaperusahaan,
-            'batasbeasiswa' => $request->batasbeasiswa,
-            'minipersyaratan' => $request->minipersyaratan,
-            'miniisi' => $request->miniisi,
-            'persyaratan' => $request->persyaratan,
-            'isipersyaratan' => $request->isipersyaratan,
-            'judul_benefit' => $request->judul_benefit,
-            'isi_benefit' => $request->isi_benefit,
+            'namalengkap' => 'required|string|max:255',
+            'email' => 'required|string|max:255',
+            'no_telp' => 'required|string|max:255',
+            'files.*' => 'file|mimes:jpeg,png,jpg,pdf|max:2048', // Validasi setiap file
         ]);
     
-        // Redirect berdasarkan kondisi
-        if ($beasiswa) {
-            return redirect()->route('beasiswa.index')->with('success', 'Data Berhasil Disimpan!');
-        } else {
-            return redirect()->route('beasiswa.index')->with('error', 'Data Gagal Disimpan!');
+        $filePaths = []; // Array untuk menyimpan path file sementara
+    
+        // Periksa jika ada file yang diunggah
+        if ($request->hasFile('files')) {
+            // Folder sementara untuk menyimpan file sebelum di-zip
+            $tempDir = storage_path('app/temp_uploads/');
+            if (!file_exists($tempDir)) {
+                mkdir($tempDir, 0777, true); // Buat folder jika belum ada
+            }
+    
+            // Simpan setiap file di folder sementara
+            foreach ($request->file('files') as $file) {
+                $fileName = time() . '_' . $file->getClientOriginalName();
+                $filePath = $tempDir . $fileName;
+                $file->move($tempDir, $fileName);
+                $filePaths[] = $filePath;
+            }
+    
+            // Buat file ZIP
+            $zipFileName = 'uploads_' . time() . '.zip';
+            $zipFilePath = public_path('zips/' . $zipFileName);
+    
+            $zip = new ZipArchive;
+            if ($zip->open($zipFilePath, ZipArchive::CREATE | ZipArchive::OVERWRITE) === TRUE) {
+                foreach ($filePaths as $file) {
+                    $zip->addFile($file, basename($file)); // Tambahkan setiap file ke ZIP
+                }
+                $zip->close();
+            }
+    
+            // Hapus file sementara setelah di-zip
+            foreach ($filePaths as $file) {
+                unlink($file);
+            }
         }
     
+        // Buat data beasiswa
+        $data = Daftar::create([
+            'namalengkap' => $request->namalengkap,
+            'email' => $request->email,
+            'no_telp' => $request->no_telp,
+            'zip_file' => 'zips/' . $zipFileName, // Simpan path ZIP di database
+        ]);
+    
+        // Redirect berdasarkan kondisi penyimpanan
+        if ($data) {
+            return redirect()->route('beasiswaa.index')->with('success', 'Data Berhasil Disimpan!');
+        } else {
+            return redirect()->route('beasiswaa.index')->with('error', 'Data Gagal Disimpan!');
+        }
     }
-
+    
     /**
      * Display the specified resource.
      *

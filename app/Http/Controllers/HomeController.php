@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
+use App\Models\Beasiswa;
 use App\Models\Perusahaansign;
 class HomeController extends Controller
 {
@@ -38,9 +39,17 @@ class HomeController extends Controller
     }
     public function PerusahaanDashboard()
     {
-        // Mengambil pengguna yang sedang login
-        $perusahaan = Auth::user(); // Ambil data pengguna yang sedang login
-
-        return view('perusahaan.home', compact('perusahaan')); // Kirim data pengguna ke view
+        // Hitung total beasiswa yang di-upload
+        $totalBeasiswa = Beasiswa::count(); // Menggunakan count() untuk menghitung jumlah beasiswa
+    
+        // Hitung total beasiswa yang sudah dipublikasikan (is_published = 1)
+        $published = Beasiswa::where('is_published', 1)->count(); // Pastikan menggunakan count(), tanpa ?? 0
+    
+        // Hitung total beasiswa yang belum dipublikasikan (is_published = 0)
+        $unpublished = Beasiswa::where('is_published', 0)->count(); // Sama seperti published
+    
+        // Kirim data ke view
+        return view('perusahaan.home', compact('totalBeasiswa', 'published', 'unpublished'));
     }
+    
 }

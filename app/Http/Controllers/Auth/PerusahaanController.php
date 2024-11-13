@@ -23,31 +23,17 @@ class PerusahaanController extends Controller
 
     public function showLoginForm()
     {
-        // Jika pengguna sudah terautentikasi, arahkan ke dashboard
-        if (Auth::guard('perusahaan')->check()) {
-            return redirect()->route('dashboard'); // Redirect ke halaman dashboard
-        }
-        // Jika belum terautentikasi, tampilkan form login
-        return view('auth.loginp');
-    }
-
-    public function dashboard(Request $request)
-    {
-        // Pastikan pengguna adalah perusahaan yang sudah login
-        if (Auth::guard('perusahaan')->check()) {
-            $perusahaan = Auth::guard('perusahaan')->user(); // Ambil data pengguna perusahaan yang login
-
-            // Ambil data perusahaan berdasarkan ID
-            $dataPerusahaan = $perusahaan; // Menggunakan data perusahaan dari pengguna yang login
-            $totalPublished = Beasiswa::where('is_published', 1)->count(); // Mengambil jumlah beasiswa yang dipublikasikan
-            $totalUnpublished = Beasiswa::where('is_published', 0)->count(); // Mengambil jumlah beasiswa yang belum dipublikasikan
-            $totalUploads = Beasiswa::count(); // Mengambil total beasiswa yang diupload
-
-            return view('perusahaan.home', compact('totalPublished', 'totalUnpublished', 'totalUploads', 'dataPerusahaan'));
+        
+            // Cek apakah pengguna sudah terautentikasi
+            if (session('perusahaan_logged_in')) {
+                // Jika sudah login, arahkan ke halaman dashboard
+                return redirect()->route('dashboard');
+            }
+        
+            // Jika belum login, tampilkan form login
+            return view('auth.loginp'); // Pastikan ini adalah tampilan yang benar untuk form login
         }
 
-        return redirect()->route('login'); // Redirect jika tidak ada pengguna yang login
-    }
 
     public function loginn(Request $request)
     {

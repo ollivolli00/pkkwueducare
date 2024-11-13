@@ -91,14 +91,15 @@
           <img src="https://storage.googleapis.com/a1aa/image/TsPTHHQA9PLmIZY2P9D0HASO0e0SXKHpfutawnKUyYyYKRnTA.jpg" 
                alt="Profile Picture" 
                class="w-24 h-24 rounded-full mx-auto mb-4"/>
-         @auth('perusahaan')
+               @auth
     <h3 class="font-semibold text-gray-800 mb-1">
-        {{ Auth::guard('perusahaan')->user()->namaperusahaan }}
+        {{ Auth::user()->perusahaan->namaperusahaan ?? 'Nama Perusahaan Tidak Tersedia' }}
     </h3>
     <p class="text-sm text-gray-500">
-        {{ Auth::guard('perusahaan')->user()->email ?? 'Email Perusahaan Tidak Tersedia' }}
+        {{ Auth::user()->perusahaan->email ?? 'Email Perusahaan Tidak Tersedia' }}
     </p>
 @endauth
+
         </div>
 
         <!-- Navigation Links -->

@@ -42,7 +42,7 @@ class LoginController extends Controller
     if ($perusahaan && Hash::check($input['password'], $perusahaan->password)) {
         // Login perusahaan
         auth()->login($perusahaan); // Pastikan Anda menggunakan model yang sesuai
-        return redirect()->route('perusahaan'); // Arahkan ke halaman perusahaan
+        return redirect()->route('dashboard'); // Arahkan ke halaman perusahaan
     }
 
     return redirect()->route('login')->with('error', 'Email-Address And Password Are Wrong.');
