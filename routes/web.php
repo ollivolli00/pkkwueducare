@@ -3,10 +3,10 @@
 use App\Http\Controllers\Auth\PerusahaansignController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UserBeasiswaController;
+use App\Http\Controllers\PenggunaController;
 use App\Http\Controllers\Auth\PerusahaanController;
 use App\Http\Controllers\BeasiswaController;
 use App\Http\Controllers\AdminController;
-use App\Http\Controllers\PenggunaController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
@@ -35,7 +35,13 @@ Route::middleware(['auth', 'multiAuthUser :admin'])->group(function () {
 Route::middleware(['auth', 'multiAuthUser :user'])->group(function () {
     Route::get('/home', [HomeController::class, 'dashboard'])->name('user');
 });
+Route::middleware(['auth:perusahaan', 'perusahaan'])->group(function () {
+    Route::get('/dashboard', [HomeController::class, 'PerusahaanDashboard'])->name('dashboard');
+});
 
+Route::get('/profil', function () {
+    return view('profil');
+});
 Route::get('/beasiswa', function () {
     return view('beasiswa');
 })->name('beasiswa');
@@ -86,19 +92,4 @@ Route::post('/signup', [PerusahaansignController::class, 'create'])->name('signu
 Route::get('/signin',[PerusahaanController::class, 'showLoginForm'])->name('signin');
 Route::post('/signin', [PerusahaanController::class, 'loginn'])->name('signin.post');
 
-//Route::resource('pengguna', PenggunaController::class);
-// routes/web.php
-//Route::get('/profile', [PenggunaController::class, 'show'])->name('pengguna.show');
-
-// routes/web.php
-//Route::middleware('auth')->group(function () {
-//    Route::get('/profile', 'PenggunaController@show')->name('profil.show');
-  //  Route::post('/profile', 'PenggunaController@store')->name('profil.store');
-    //Route::get('/profile/edit/{id}', 'PenggunaController@edit')->name('profil.edit');
-    //Route::put('/profile/update/{id}', 'PenggunaController@update')->name('profil.update');
-    //Route::delete('/profile/delete/{id}', 'PenggunaController@destroy')->name('profil.destroy');
-//});
-
-Route::middleware('auth')->group(function () {
-    Route::resource('pengguna', PenggunaController::class);
-});
+Route::resource('pengguna', PenggunaController::class);

@@ -29,7 +29,7 @@ class PenggunaController extends Controller
             'namalengkap' => 'required|string|max:255',
             'tanggal_lahir' => 'required|date',
             'jenis_kelamin' => 'required|string',
-            'email' => 'required|email|max:255|unique:penggunas,email',
+            'email' => 'required|email|max:255|',
             'no_telp' => 'required|string|max:15',
             'image' => 'required|image|mimes:jpeg,png,jpg|max:3072',
         ]);
@@ -48,14 +48,14 @@ class PenggunaController extends Controller
             'image' => $imageName,
         ]);
 
-        return redirect()->route('profile.show')->with('success', 'Data Berhasil Disimpan!');
+        return redirect()->route('pengguna.show')->with('success', 'Data Berhasil Disimpan!');
     }
 
     public function show($id)
     {
-        $pengguna = Pengguna::findOrFail($id);
+        $penggunas = Pengguna::findOrFail($id);
     
-        return view('profil.show', compact('pengguna'));
+        return view('profil.show', compact('penggunas'));
     }
     
 
