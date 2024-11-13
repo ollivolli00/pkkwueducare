@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Profil;
+use App\Models\Pengguna;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
 
@@ -11,16 +11,16 @@ class PenggunaController extends Controller
 {
     public function index()
     {
-        $profil = Profil::where('user_id', Auth::id())->first();
+        $penggunas = Pengguna::where('id_user', Auth::id())->first();
 
-        return $profil 
-            ? redirect()->route('pengguna.edit', $profil->id)
+        return $penggunas 
+            ? redirect()->route('pengguna.show', $penggunas->id)
             : redirect()->route('pengguna.create');
     }
 
     public function create()
     {
-        return view('pengguna.create');
+        return view('profil.create');
     }
 
     public function store(Request $request)
@@ -38,8 +38,8 @@ class PenggunaController extends Controller
         $imageName = $image->hashName();
         $image->storeAs('public/images', $imageName);
 
-        $profil = Profil::create([
-            'user_id' => Auth::id(),
+        $penggunas = Pengguna::create([
+            'id_user' => Auth::id(),
             'namalengkap' => $request->namalengkap,
             'tanggal_lahir' => $request->tanggal_lahir,
             'jenis_kelamin' => $request->jenis_kelamin,
@@ -48,19 +48,23 @@ class PenggunaController extends Controller
             'image' => $imageName,
         ]);
 
-        return redirect()->route('pengguna.show', $profil->id)->with('success', 'Data Berhasil Disimpan!');
+        return redirect()->route('profile.show')->with('success', 'Data Berhasil Disimpan!');
     }
 
     public function show($id)
     {
-        $penggunas = Profil::where('id', $id)->where('user_id', Auth::id())->firstOrFail();
-        return view('pengguna.show', compact('penggunas'));
+        $pengguna = Pengguna::findOrFail($id);
+    
+        return view('profil.show', compact('pengguna'));
     }
+    
+
+    
 
     public function edit($id)
     {
-        $penggunas = Profil::where('id', $id)->where('user_id', Auth::id())->firstOrFail();
-        return view('pengguna.edit', compact('penggunas'));
+        $pengguna = Pengguna::findOrFail($id);
+        return view('profil.edit', compact('pengguna'));
     }
 
     public function update(Request $request, $id)
@@ -75,12 +79,12 @@ class PenggunaController extends Controller
                 'image' => 'nullable|image|mimes:jpeg,png,jpg|max:3072',
             ]);
 
-            $profil = Profil::where('id', $id)->where('user_id', Auth::id())->firstOrFail();
+            $penggunas = Pengguna::findOrFail($id);
             $data = $request->except('image');
 
             if ($request->hasFile('image')) {
-                if ($profil->image && Storage::disk('public')->exists('images/' . $profil->image)) {
-                    Storage::disk('public')->delete('images/' . $profil->image);
+                if ($penggunas->image && Storage::disk('public')->exists('images/' . $penggunas->image)) {
+                    Storage::disk('public')->delete('images/' . $penggunas->image);
                 }
 
                 $image = $request->file('image');
@@ -89,8 +93,8 @@ class PenggunaController extends Controller
                 $data['image'] = $imageName;
             }
 
-            $profil->update($data);
-            return redirect()->route('pengguna.show', $profil->id)->with('success', 'Data Berhasil Diupdate!');
+            $penggunas->update($data);
+            return redirect()->route('pengguna.show', $penggunas->id)->with('success', 'Data Berhasil Diupdate!');
         } catch (\Exception $e) {
             return redirect()->back()->with('error', 'Terjadi kesalahan saat memperbarui data.')->withInput();
         }
@@ -98,13 +102,13 @@ class PenggunaController extends Controller
 
     public function destroy($id)
     {
-        $profil = Profil::where('id', $id)->where('user_id', Auth::id())->firstOrFail();
+        $penggunas = Pengguna::findOrFail($id);
 
-        if ($profil->image && Storage::disk('public')->exists('images/' . $profil->image)) {
-            Storage::disk('public')->delete('images/' . $profil->image);
+        if ($penggunas->image && Storage::disk('public')->exists('images/' . $penggunas->image)) {
+            Storage::disk('public')->delete('images/' . $penggunas->image);
         }
 
-        $profil->delete();
+        $penggunas->delete();
         return redirect()->route('pengguna.create')->with('success', 'Data Berhasil Dihapus!');
     }
 }

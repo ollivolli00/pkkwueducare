@@ -7,7 +7,7 @@
     <meta name="keywords" content="Ogani, unica, creative, html">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Profil</title>
+    <title>Profile Pengguna</title>
 
     <!-- Google Font -->
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;900&display=swap" rel="stylesheet">
@@ -15,96 +15,155 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <!-- Scripts and Styles -->
-    @vite(['resources/sass/app.scss', 'resources/js/app.js'])
+    <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
+
+    <!-- Scripts -->
+    @vite(['resources/sass/app.scss', 'resources/js/app.js'])
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" />
-    <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css">
-    <link rel="stylesheet" href="css/font-awesome.min.css" type="text/css">
-    <link rel="stylesheet" href="css/elegant-icons.css" type="text/css">
-    <link rel="stylesheet" href="css/nice-select.css" type="text/css">
-    <link rel="stylesheet" href="css/jquery-ui.min.css" type="text/css">
-    <link rel="stylesheet" href="css/owl.carousel.min.css" type="text/css">
-    <link rel="stylesheet" href="css/slicknav.min.css" type="text/css">
-    <link rel="stylesheet" href="css/style.css" type="text/css">
+    <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/font-awesome.min.css')}}" type="text/css">
+    <link rel="stylesheet" href="{{asset('css/elegant-icons.css')}}" type="text/css">
+    <link rel="stylesheet" href="{{asset('css/nice-select.css')}}" type="text/css">
+    <link rel="stylesheet" href="{{asset('css/jquery-ui.min.css')}}" type="text/css">
+    <link rel="stylesheet" href="{{asset('css/owl.carousel.min.css')}}" type="text/css">
+    <link rel="stylesheet" href="{{asset('css/slicknav.min.css')}}" type="text/css">
+    <link rel="stylesheet" href="{{asset('css/style.css')}}" type="text/css">
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&amp;display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet"/>
 </head>
 
 <body class="bg-gray-100 font-roboto">
 
-<header class="header">
-    <div class="container mx-auto p-4">
-        <img src="img/bannerr.png" style="width: 100%; transform: scale(1); border-radius:40px;">
-        <h1 class="text-3xl text-center">Aplikasi Profil Pengguna</h1>
-        <nav class="mt-4">
-            <ul class="flex justify-center space-x-4">
-                <li><a href="{{ route('pengguna.index') }}" class="text-blue-600">Home</a></li>
-                <li><a href="{{ route('pengguna.create') }}" class="text-blue-600">Buat Profil</a></li>
-            </ul>
-        </nav>
+    <!-- Page Preloder -->
+    <div id="preloder">
+        <div class="loader"></div>
     </div>
-</header>
 
-<main class="container mx-auto mt-6">
-    <div class="bg-white shadow-md rounded-lg p-6">
-        <h2 class="text-center text-2xl mb-4">Buat Profilmu Sekarang!</h2>
-
-        <!-- Display success message -->
-        @if (session('success'))
-            <div class="alert alert-success">
-                {{ session('success') }}
-            </div>
-        @endif
-
-        <form action="{{ route('pengguna.store') }}" method="POST" enctype="multipart/form-data">
+    <!-- Header Section Begin -->
+    <header class="header">
+        <div class="header__top">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-3">
+                        <div class="header__logo">
+                            <a href="./index.html"><img src="{{asset('img/logo.png')}}" alt="" width="150px;" height="50px;"></a>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <nav class="header__menu">
+                            <ul>
+                                <li><a href="{{'/'}}" style="text-align:center; ">Home</a></li>
+                                <li><a href="{{ 'about' }}" style="text-align:center; ">About</a></li>
+                                @guest
+                                    <a href="{{ route('login') }}" style="text-align:center; color:white; padding: 10px 15px 12px; background: #7fad39;">Daftar Sebagai Perusahaan</a>
+                                @endguest
+                                <li class="nav-item dropdown">
+                                @auth
+    <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+        {{ Auth::user()->name }}
+    </a>
+    <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+        <a href="{{ route('pengguna.create') }}">Profile</a>
+        <a class="dropdown-item" href="{{ route('logout') }}"
+           onclick="event.preventDefault();
+                    document.getElementById('logout-form').submit();">
+            {{ __('Logout') }}
+        </a>
+        <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
             @csrf
-            <div class="mb-6">
-                <label for="namalengkap" class="block text-gray-700 font-bold mb-2">Nama Lengkap</label>
-                <input type="text" name="namalengkap" id="namalengkap" placeholder="Masukkan Nama Lengkap Anda..." class="w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" required />
-            </div>
-            <div class="mb-6">
-                <label for="tanggal_lahir" class="block text-gray-700 font-bold mb-2">Tanggal Lahir</label>
-                <input type="date" name="tanggal_lahir" id="tanggal_lahir" class="w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" required />
-            </div>
-            <div class="mb-6">
-                <label for="jenis_kelamin" class="block text-gray-700 font-bold mb-2">Jenis Kelamin</label>
-                <select name="jenis_kelamin" id="jenis_kelamin" class="w-full px-4 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" required>
-                    <option value="" disabled selected>Pilih Jenis Kelamin</option>
-                    <option value="laki-laki">Laki-laki</option>
-                    <option value="perempuan">Perempuan</option>
-                </select>
-            </div>
-            <div class="mb-6">
-                <label for="email" class="block text-gray-700 font-bold mb-2">Email</label>
-                <input type="email" name="email" id="email" placeholder="Masukkan Email Lengkap Anda..." class="w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" required />
-            </div>
-            <div class="mb-6">
-                <label for="no_telp" class="block text-gray-700 font-bold mb-2">No. Telepon</label>
-                <input type="tel" name="no_telp" id="no_telp" placeholder="Masukkan Nomor Telepon Anda..." class="w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" required />
-            </div>
-            <div class="mb-6">
-                <label for="image" class="block text-gray-700 font-bold mb-2">Upload File</label>
-                <input type="file" name="image" id="image" class="block w-full text-sm text-gray-500 border rounded-full" required />
-                <p class="text-gray-500 text-sm mt-1">Maksimal ukuran file foto: 3MB. File extension: png, jpg, jpeg.</p>
-                <p class="text-gray-500 text-sm">Contoh File: pas foto 3x4, scan KK, scan KTP, dll.</p>
-            </div>
-            <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition duration-300">Simpan</button>
         </form>
     </div>
-</main>
+@else
+    <a href="{{ route('login') }}" style="color:white; padding: 10px 15px 12px; background: #7fad39;">Login</a>
+@endauth
 
-<!-- Js Plugins -->
-<script src="js/jquery-3.3.1.min.js"></script>
-<script src="js/bootstrap.min.js"></script>
-<script src="js/jquery.nice-select.min.js"></script>
-<script src="js/jquery-ui.min.js"></script>
-<script src="js/jquery.slicknav.js"></script>
-<script src="js/mixitup.min.js"></script>
-<script src="js/owl.carousel.min.js"></script>
-<script src="js/main.js"></script>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="container mx-auto mt-6">
+    @if(session('success'))
+        <div class="bg-green-500 text-white p-3 rounded mb-6">
+            {{ session('success') }}
+        </div>
+    @endif
+        <div class="bg-white shadow-md rounded-lg p-6">
+            <img src="{{ asset('img/bannerr.png') }}" class="w-full rounded-lg mb-6">
+            <h2 class="text-2xl font-semibold text-center">Lengkapi Profilmu Sekarang!</h2>
+            
+            <form action="{{ route('pengguna.store') }}" method="POST" enctype="multipart/form-data" class="mt-6">
+                @csrf
+                
+                <div class="mb-4">
+                    <label for="namalengkap" class="block text-gray-700">Nama Lengkap:</label>
+                    <input type="text" name="namalengkap" id="namalengkap" value="{{ old('namalengkap') }}" class="w-full px-4 py-2 border rounded-lg @error('namalengkap') border-red-500 @enderror">
+                    @error('namalengkap')
+                        <span class="text-red-500 text-sm">{{ $message }}</span>
+                    @enderror
+                </div>
+
+                <div class="mb-4">
+                    <label for="tanggal_lahir" class="block text-gray-700">Tanggal Lahir:</label>
+                    <input type="date" name="tanggal_lahir" id="tanggal_lahir" value="{{ old('tanggal_lahir') }}" class="w-full px-4 py-2 border rounded-lg @error('tanggal_lahir') border-red-500 @enderror">
+                    @error('tanggal_lahir')
+                        <span class="text-red-500 text-sm">{{ $message }}</span>
+                    @enderror
+                </div>
+
+                <div class="mb-4">
+                    <label for="jenis_kelamin" class="block text-gray-700">Jenis Kelamin:</label>
+                    <select name="jenis_kelamin" id="jenis_kelamin" class="w-full px-4 py-2 border rounded-lg">
+                        <option value="Laki-Laki">Laki-Laki</option>
+                        <option value="Perempuan">Perempuan</option>
+                    </select>
+                </div>
+
+                <div class="mb-4">
+                    <label for="email" class="block text-gray-700">Email:</label>
+                    <input type="email" name="email" id="email" value="{{ old('email') }}" class="w-full px-4 py-2 border rounded-lg @error('email') border-red-500 @enderror">
+                    @error('email')
+                        <span class="text-red-500 text-sm">{{ $message }}</span>
+                    @enderror
+                </div>
+
+                <div class="mb-4">
+                    <label for="no_telp" class="block text-gray-700">No. Telepon:</label>
+                    <input type="text" name="no_telp" id="no_telp" value="{{ old('no_telp') }}" class="w-full px-4 py-2 border rounded-lg @error('no_telp') border-red-500 @enderror">
+                    @error('no_telp')
+                        <span class="text-red-500 text-sm">{{ $message }}</span>
+                    @enderror
+                </div>
+
+                <div class="mb-4">
+                    <label for="image" class="block text-gray-700">Foto Profil:</label>
+                    <input type="file" name="image" id="image" class="w-full px-4 py-2 border rounded-lg @error('image') border-red-500 @enderror">
+                    @error('image')
+                        <span class="text-red-500 text-sm">{{ $message }}</span>
+                    @enderror
+                </div>
+
+                <button type="submit" class="w-full bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600">Simpan</button>
+            </form>
+        </div>
+    </main>
+
+    <!-- Js Plugins -->
+    <script src="{{asset('js/jquery-3.3.1.min.js')}}"></script>
+    <script src="{{asset('js/bootstrap.min.js')}}"></script>
+    <script src="{{asset('js/jquery.nice-select.min.js')}}"></script>
+    <script src="{{asset('js/jquery-ui.min.js')}}"></script>
+    <script src="{{asset('js/jquery.slicknav.js')}}"></script>
+    <script src="{{asset('js/mixitup.min.js')}}"></script>
+    <script src="{{asset('js/owl.carousel.min.js')}}"></script>
+    <script src="{{asset('js/main.js')}}"></script>
+
 </body>
-
 </html>
