@@ -118,11 +118,7 @@
             <i class="fas fa-user w-6"></i>
             <span>Data Perusahaan</span>
           </a>
-          <a class="nav-link {{ Request::routeIs('manage') ? 'active' : '' }}" 
-             href="{{route('manage')}}">
-            <i class="fas fa-upload w-6"></i>
-            <span>Manage Uploads</span>
-          </a>
+          
         </nav>
 
         <!-- Logout Button -->
@@ -167,51 +163,39 @@
     </div>
   </div>
 </div>
-
-
-  <!-- Activity Feed and Recent Applicants -->
-  <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-    <!-- Recent Applicants -->
+<!-- Activity Feed and Recent Applicants -->
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
     <div class="bg-white p-6 rounded-lg shadow">
-      <h2 class="text-lg font-semibold text-gray-700 mb-4">Recent Applicants</h2>
-      <ul>
-        <li class="flex justify-between items-center border-b border-gray-200 py-3">
-          <div>
-            <h3 class="text-md font-medium text-gray-800">John Doe</h3>
-            <p class="text-sm text-gray-500">Applied for Scholarship X</p>
-          </div>
-          <span class="text-green-600 text-sm">New</span>
-        </li>
-        <li class="flex justify-between items-center border-b border-gray-200 py-3">
-          <div>
-            <h3 class="text-md font-medium text-gray-800">Jane Smith</h3>
-            <p class="text-sm text-gray-500">Applied for Scholarship Y</p>
-          </div>
-          <span class="text-green-600 text-sm">New</span>
-        </li>
-        <!-- Add more applicants here -->
-      </ul>
-    </div>
+        <h2 class="text-lg font-semibold text-gray-700 mb-4">Recent Uploaded Beasiswa</h2>
+        <ul>
+            @if ($recentBeasiswa->isEmpty())
+                <li class="py-3 text-gray-500">Tidak ada beasiswa baru dalam 24 jam terakhir.</li>
+            @else
+                @foreach ($recentBeasiswa as $beasiswa)
+                    <li class="flex items-center justify-between py-3 border-b border-gray-200">
+                        <p class="text-gray-700">
+                            <strong>{{ $beasiswa->namabeasiswa }}</strong> - 
+                            <span class="text-gray-600">
+                                Diterbitkan oleh 
+                                @if($beasiswa->perusahaan)
+                                    {{ $beasiswa->perusahaan->namaperusahaan }}
+                                @else
+                                    Perusahaan tidak tersedia
+                                @endif
+                            </span> 
+                        </p>
+                        <span class="text-gray-500 text-sm ml-4">{{ $beasiswa->created_at->diffForHumans() }}</span>
+                    </li>
+                @endforeach
+            @endif
+        </ul>
 
-    <!-- Recent Activity -->
-    <div class="bg-white p-6 rounded-lg shadow">
-      <h2 class="text-lg font-semibold text-gray-700 mb-4">Recent Uploaded Beasiswa</h2>
-      <ul>
-        <li class="flex items-center justify-between py-3 border-b border-gray-200">
-          <p class="text-gray-700">Admin approved an application</p>
-          <span class="text-gray-500 text-sm">2 hrs ago</span>
-        </li>
-        <li class="flex items-center justify-between py-3 border-b border-gray-200">
-          <p class="text-gray-700">New upload added</p>
-          <span class="text-gray-500 text-sm">5 hrs ago</span>
-        </li>
-        <!-- Add more activities here -->
-      </ul>
+        <!-- Pagination Links -->
+        <div class="mt-4">
+            {{ $recentBeasiswa->links() }}
+        </div>
     </div>
-  </div>
-</div>
-
-            <!-- Js Plugins -->
+</div>            <!-- Js Plugins -->
             <script src="js/jquery-3.3.1.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script src="js/jquery.nice-select.min.js"></script>

@@ -13,14 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('daftars', function (Blueprint $table) {
+        Schema::create('beasiswa_user', function (Blueprint $table) {
             $table->id();
-            $table->string('namalengkap');
-            $table->string('email');
-            $table->string('no_telp');
-            $table->unsignedBigInteger('company_id')->nullable();
-            $table->foreign('company_id')->references('id')->on('perusahaansigns')->onDelete('cascade');
-
+            $table->foreignId('beasiswa_id')->constrained('beasiswas')->onDelete('cascade');
+            $table->foreignId('user_id')->constrained('users')->onDelete('cascade');    
             $table->timestamps();
         });
     }
@@ -32,6 +28,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('daftars');
+        Schema::dropIfExists('beasiswa_user');
     }
 };

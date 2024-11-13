@@ -9,7 +9,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>EDUCARE</title>
-
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
     <!-- Google Font -->
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;900&display=swap" rel="stylesheet">
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
@@ -103,7 +103,7 @@
             <div class="row">
                 <div class="col-lg-3">
                     <div class="header__logo">
-                        <a href="./index.html"><img src="img/logo.png" alt="" width="150px;" height="50px;"></a>
+                        <a href="{{'/'}}"><img src="img/logo.png" alt="" width="150px;" height="50px;"></a>
                     </div>
                 </div>
                 <div class="col-lg-6">
@@ -210,15 +210,7 @@
                    
 <!--                         
                     </div> -->
-                    <div class="hero__search">
-                        <div class="hero__search__form">
-                            <form action="#">
-                               
-                                <input type="text" placeholder="What do yo u need?">
-                                <button type="submit" class="site-btn">SEARCH</button>
-                            </form>
-                        </div>
-                        </div>
+                   
                         <br>
                     <img src="img/bannerr.png" style= "width: 100%; transform: scale(1); border-radius:40px;">
                 </div>
@@ -414,57 +406,7 @@
     <!-- Featured Section End -->
      <br>
      <br>
-     <!-- Rekomendasi Beasiswa Section Begin -->
-<section class="categories">
-    <div class="container">
-        <div class="section-title">
-            <h2 class="text-center">Rekomendasi Beasiswa Untukmu</h2>
-        </div>
-        <div class="row">
-            <div class="categories__slider owl-carousel">
-                <!-- Beasiswa BCA -->
-                <div class="col-lg-3">
-                    <div class="border rounded-lg p-4 flex flex-col items-center min-w-[250px]">
-                        <img alt="Logo of Bank BCA" class="mb-4" height="100" src="img/bcakcil.png" width="100"/>
-                        <h5 class="text-lg font-bold">Beasiswa BCA</h5>
-                        <p class="text-gray-600 mb-4">by Bank BCA</p>
-                        <a href="{{'bca'}}" style="color: white; border-radius: 5px; padding: 5px 30px; background: #7fad39; font-family: Cairo;">DAFTAR</a>
-                    </div>
-                </div>
-                <!-- Beasiswa Djarum Plus -->
-                <div class="col-lg-3">
-                    <div class="border rounded-lg p-4 flex flex-col items-center min-w-[250px]">
-                        <img alt="Logo of PT Djarum" class="mb-4" height="100" src="img/djrumkcl.png" width="100"/>
-                        <h5 class="text-lg font-bold">Beasiswa Djarum Plus</h5>
-                        <p class="text-gray-600 mb-4">by PT Djarum</p>
-                        <a href="{{'djarum'}}" style="color: white; border-radius: 5px; padding: 5px 30px; background: #7fad39; font-family: Cairo;">DAFTAR</a>
-                    </div>
-                </div>
-                <!-- Beasiswa LPDP -->
-                <div class="col-lg-3">
-                    <div class="border rounded-lg p-4 flex flex-col items-center min-w-[250px]">
-                        <img alt="Logo of Kemenkeu RI" class="mb-4" height="100" src="img/lpdp.png" width="100"/>
-                        <h5 class="text-lg font-bold">Beasiswa LPDP</h5>
-                        <p class="text-gray-600 mb-4">by Kemenkeu RI</p>
-                        <a href="{{'lpdp'}}" style="color: white; border-radius: 5px; padding: 5px 30px; background: #7fad39; font-family: Cairo;">DAFTAR</a>
-                    </div>
-                </div>
-                <!-- Beasiswa Unggulan -->
-                <div class="col-lg-3">
-                    <div class="border rounded-lg p-4 flex flex-col items-center min-w-[250px]">
-                        <img alt="Logo of Kemendikburistek" class="mb-4" height="100" src="img/unggul.png" width="100"/>
-                        <h5 class="text-lg font-bold">Beasiswa Unggulan</h5>
-                        <p class="text-gray-600 mb-4">by Kemendikburistek</p>
-                        <a href="{{'unggulan'}}" style="color: white; border-radius: 5px; padding: 5px 30px; background: #7fad39; font-family: Cairo;">DAFTAR</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-<!-- Rekomendasi Beasiswa Section End -->
-     <br>
-<!-- Blog Section Begin -->
+     <!-- Blog Section Begin -->
 <section class="from-blog spad">
         <div class="container">
             <div class="row">
@@ -481,169 +423,93 @@
     </section>
     <!-- Blog Section End -->
     <br>
-    <!-- Latest Product Section Begin -->
-    <section class="latest-product spad">
+
+
+     <!-- Rekomendasi Beasiswa Section Begin -->
+     <section class="categories">
     <div class="container">
+        <div class="section-title">
+            <h2 class="text-center">Beasiswa Terbaru</h2>
+            
+          
+        </div>
+        
         <div class="row">
-            <div class="col-lg-4 col-md-6">
-                <div class="latest-product__text">
-                    <h4>Terbaru</h4>
-                    <div class="latest-product__slider owl-carousel">
-                    <div class="latest-product__slider__item">
-    @if(isset($beasiswaa))
-    <a href="{{ route('beasiswaa.show', $beasiswaa->id) }}" class="latest-product__item">
-        <div class="latest-product__item__pic">
-            <img src="{{ asset('storage/images/' . $beasiswaa->image2) }}" alt="{{ $beasiswaa->namabeasiswa }}" />
-        </div>
-        <div class="latest-product__item__text">
-            <span>{{ $beasiswaa->namabeasiswa }}</span>
-            <h6>{{ $beasiswaa->namaperusahaan }}</h6>
-            <p style="font-size: 12px; color: #777; margin-top: 3px;">Dipublikasikan: {{ $beasiswaa->created_at->format('d M Y') }}</p>
-        </div>
-    </a>
-    @else
-    <p>Belum ada beasiswa terbaru.</p>
-    @endif
-</div>
-
-                    </div>
-                </div>
+              <!-- Tambahkan tautan Lihat Beasiswa Lainnya di atas carousel -->
+              @if($totalBeasiswa > 4)
+              <div class="text-right mb-3">
+                <a href="{{'beasiswa-lebih-banyak'}}" style="color: #7fad39; font-weight: bold; font-size: 16px;">
+                    Lihat Lebih Banyak
+                </a>
             </div>
-                         <div class="col-lg-4 col-md-6">
-                    <div class="latest-product__text">
-                        <h4>Paling Banyak Diminati</h4>
-                        <div class="latest-product__slider owl-carousel">
-                            <div class="latest-prdouct__slider__item">
-                                <a href="#" class="latest-product__item">
-                                    <div class="latest-product__item__pic">
-                                        <img src="img/latest-product/lp-1.jpg" alt="">
+            @endif
+            <div class="categories__slider owl-carousel">
+                @if($beasiswaa->isNotEmpty())
+                @foreach($beasiswaa->take(4) as $beasiswa)
+                        <!-- Cek apakah beasiswa dipublikasikan -->
+                        @if($beasiswa->is_published == 1)
+                            <div class="col-lg-3">
+                                <div class="border rounded-lg p-4 flex flex-col items-center min-w-[250px]">
+                                    <div style="width: 200px; height: 90px; display: flex; justify-content: center; align-items: center; border-radius: 5px; overflow: hidden;">
+                                        <img 
+                                            alt="Logo {{ $beasiswa->namaperusahaan }}" 
+                                            src="{{ asset('storage/images/' . $beasiswa->image2) }}" 
+                                            style="max-width: 100%; max-height: 100%; object-fit: contain;" 
+                                        />
                                     </div>
-                                    <div class="latest-product__item__text">
-                                        <h6>Crab Pool Security</h6>
-                                        <span>$30.00</span>
-                                    </div>
-                                </a>
-                                <a href="#" class="latest-product__item">
-                                    <div class="latest-product__item__pic">
-                                        <img src="img/latest-product/lp-2.jpg" alt="">
-                                    </div>
-                                    <div class="latest-product__item__text">
-                                        <h6>Crab Pool Security</h6>
-                                        <span>$30.00</span>
-                                    </div>
-                                </a>
-                                <a href="#" class="latest-product__item">
-                                    <div class="latest-product__item__pic">
-                                        <img src="img/latest-product/lp-3.jpg" alt="">
-                                    </div>
-                                    <div class="latest-product__item__text">
-                                        <h6>Crab Pool Security</h6>
-                                        <span>$30.00</span>
-                                    </div>
-                                </a>
+                                    <h5 class="text-lg font-bold">{{ $beasiswa->namabeasiswa }}</h5>
+                                    <p class="text-gray-600 mb-4">by {{ $beasiswa->namaperusahaan }}</p>
+                                    <!-- Tampilkan tanggal publikasi -->
+                                    <p style="font-size: 12px; color: #777; margin-top: 3px;">Dipublikasikan: {{ $beasiswa->created_at->format('d M Y') }}</p>
+                                    <a href="{{ route('beasiswaa.show', $beasiswa->id) }}" style="color: white; border-radius: 5px; padding: 5px 30px; background: #7fad39; font-family: Cairo;">DAFTAR</a>
+                                </div>
                             </div>
-                            <div class="latest-prdouct__slider__item">
-                                <a href="#" class="latest-product__item">
-                                    <div class="latest-product__item__pic">
-                                        <img src="img/latest-product/lp-1.jpg" alt="">
-                                    </div>
-                                    <div class="latest-product__item__text">
-                                        <h6>Crab Pool Security</h6>
-                                        <span>$30.00</span>
-                                    </div>
-                                </a>
-                                <a href="#" class="latest-product__item">
-                                    <div class="latest-product__item__pic">
-                                        <img src="img/latest-product/lp-2.jpg" alt="">
-                                    </div>
-                                    <div class="latest-product__item__text">
-                                        <h6>Crab Pool Security</h6>
-                                        <span>$30.00</span>
-                                    </div>
-                                </a>
-                                <a href="#" class="latest-product__item">
-                                    <div class="latest-product__item__pic">
-                                        <img src="img/latest-product/lp-3.jpg" alt="">
-                                    </div>
-                                    <div class="latest-product__item__text">
-                                        <h6>Crab Pool Security</h6>
-                                        <span>$30.00</span>
-                                    </div>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6">
-                    <div class="latest-product__text">
-                        <h4>Paling Banyak Dilihat</h4>
-                        <div class="latest-product__slider owl-carousel">
-                            <div class="latest-prdouct__slider__item">
-                                <a href="#" class="latest-product__item">
-                                    <div class="latest-product__item__pic">
-                                        <img src="img/latest-product/lp-1.jpg" alt="">
-                                    </div>
-                                    <div class="latest-product__item__text">
-                                        <h6>Crab Pool Security</h6>
-                                        <span>$30.00</span>
-                                    </div>
-                                </a>
-                                <a href="#" class="latest-product__item">
-                                    <div class="latest-product__item__pic">
-                                        <img src="img/latest-product/lp-2.jpg" alt="">
-                                    </div>
-                                    <div class="latest-product__item__text">
-                                        <h6>Crab Pool Security</h6>
-                                        <span>$30.00</span>
-                                    </div>
-                                </a>
-                                <a href="#" class="latest-product__item">
-                                    <div class="latest-product__item__pic">
-                                        <img src="img/latest-product/lp-3.jpg" alt="">
-                                    </div>
-                                    <div class="latest-product__item__text">
-                                        <h6>Crab Pool Security</h6>
-                                        <span>$30.00</span>
-                                    </div>
-                                </a>
-                            </div>
-                            <div class="latest-prdouct__slider__item">
-                                <a href="#" class="latest-product__item">
-                                    <div class="latest-product__item__pic">
-                                        <img src="img/latest-product/lp-1.jpg" alt="">
-                                    </div>
-                                    <div class="latest-product__item__text">
-                                        <h6>Crab Pool Security</h6>
-                                        <span>$30.00</span>
-                                    </div>
-                                </a>
-                                <a href="#" class="latest-product__item">
-                                    <div class="latest-product__item__pic">
-                                        <img src="img/latest-product/lp-2.jpg" alt="">
-                                    </div>
-                                    <div class="latest-product__item__text">
-                                        <h6>Crab Pool Security</h6>
-                                        <span>$30.00</span>
-                                    </div>
-                                </a>
-                                <a href="#" class="latest-product__item">
-                                    <div class="latest-product__item__pic">
-                                        <img src="img/latest-product/lp-3.jpg" alt="">
-                                    </div>
-                                    <div class="latest-product__item__text">
-                                        <h6>Crab Pool Security</h6>
-                                        <span>$30.00</span>
-                                    </div>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                        @endif
+                    @endforeach
+                @else
+                    <p>Tidak ada beasiswa yang tersedia.</p>
+                @endif
             </div>
         </div>
-    </section>
-    <!-- Latest Product Section End -->
+    </div>
+</section>
 
+<!-- Carousel untuk Beasiswa yang Paling Banyak Dilihat -->
+<section class="featured spad">
+    <div class="container">
+        <div class="section-title">
+            <h2>Beasiswa Paling Banyak Dilihat</h2>
+        </div>
+        @if($mostViewedBeasiswa->count() > 0) <!-- Memeriksa apakah ada beasiswa yang ditampilkan -->
+            <div class="categories__slider owl-carousel">
+                @foreach($mostViewedBeasiswa as $beasiswa)
+                    <div class="col-lg-3">
+                        <div class="border rounded-lg p-4 flex flex-col items-center min-w-[250px]">
+                            <div style="width: 200px; height: 90px; display: flex; justify-content: center; align-items: center; border-radius: 5px; overflow: hidden;">
+                                <img 
+                                    alt="Logo {{ $beasiswa->namaperusahaan }}" 
+                                    src="{{ asset('storage/images/' . $beasiswa->image2) }}" 
+                                    style="max-width: 100%; max-height: 100%; object-fit: contain;" 
+                                />
+                            </div>
+                            <h5 class="text-lg font-bold">{{ $beasiswa->namabeasiswa }}</h5>
+                            <p class="text-gray-600 mb-4">by {{ $beasiswa->namaperusahaan }}</p>
+                            <p style="font-size: 12px; color: #777; margin-top: 3px;">Dipublikasikan: {{ $beasiswa->created_at->format('d M Y') }}</p>
+                            
+                            <!-- Menambahkan Icon dan Jumlah Views -->
+                          
+                          
+                            <a href="{{ route('beasiswaa.show', $beasiswa->id) }}" style="color: white; border-radius: 5px; padding: 5px 30px; background: #7fad39; font-family: Cairo;">DAFTAR</a>
+                        </div>
+                    </div>
+                @endforeach
+            </div>
+        @else
+            <p class="text-gray-600">Tidak ada beasiswa yang paling banyak dilihat saat ini.</p> <!-- Pesan jika tidak ada beasiswa -->
+        @endif
+    </div>
+</section><!-- Rekomendasi Beasiswa Section End -->   
+  <br>
 
     <!-- Banner Begin -->
     <div class="banner">
@@ -663,136 +529,35 @@
         </div>
     </div>
     <!-- Banner End -->
-
-
-    <!-- Blog Section Begin -->
-    <section class="from-blog spad">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="section-title from-blog__title">
-                        <h2>Blog Kami</h2>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-lg-4 col-md-4 col-sm-6">
-                    <div class="blog__item">
-                        <div class="blog__item__pic">
-                            <img src="img/blog/blog-1.jpg" alt="">
-                        </div>
-                        <div class="blog__item__text">
-                            <ul>
-                                <li><i class="fa fa-calendar-o"></i> May 4,2019</li>
-                                <li><i class="fa fa-comment-o"></i> 5</li>
-                            </ul>
-                            <h5><a href="#">Cooking tips make cooking simple</a></h5>
-                            <p>Sed quia non numquam modi tempora indunt ut labore et dolore magnam aliquam quaerat </p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-4 col-sm-6">
-                    <div class="blog__item">
-                        <div class="blog__item__pic">
-                            <img src="img/blog/blog-2.jpg" alt="">
-                        </div>
-                        <div class="blog__item__text">
-                            <ul>
-                                <li><i class="fa fa-calendar-o"></i> May 4,2019</li>
-                                <li><i class="fa fa-comment-o"></i> 5</li>
-                            </ul>
-                            <h5><a href="#">6 ways to prepare breakfast for 30</a></h5>
-                            <p>Sed quia non numquam modi tempora indunt ut labore et dolore magnam aliquam quaerat </p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-4 col-sm-6">
-                    <div class="blog__item">
-                        <div class="blog__item__pic">
-                            <img src="img/blog/blog-3.jpg" alt="">
-                        </div>
-                        <div class="blog__item__text">
-                            <ul>
-                                <li><i class="fa fa-calendar-o"></i> May 4,2019</li>
-                                <li><i class="fa fa-comment-o"></i> 5</li>
-                            </ul>
-                            <h5><a href="#">Visit the clean farm in the US</a></h5>
-                            <p>Sed quia non numquam modi tempora indunt ut labore et dolore magnam aliquam quaerat </p>
-                        </div>
-                    </div>
-                </div>
+<br>
+<br>
+<br>
+   <!-- Footer Section Begin -->
+<footer class="footer spad">
+    <div class="container">
+        <!-- Konten lain dalam footer bisa tetap di dalam container jika tidak ingin full width -->
+        <div class="row">
+            <div class="col-lg-12">
+                <!-- Bagian ini bisa diisi konten lain jika diperlukan -->
             </div>
         </div>
-    </section>
-    <!-- Blog Section End -->
+    </div>
 
-    <!-- Footer Section Begin -->
-    <footer class="footer spad">
+    <!-- Pindahkan footer__copyright ke luar container untuk lebar penuh -->
+    <div class="footer__copyright" style="background: #7fad39; width: 100%;">
         <div class="container">
-            <div class="row">
-                <div class="col-lg-3 col-md-6 col-sm-6">
-                    <div class="footer__about">
-                        <div class="footer__about__logo">
-                            <a href="./index.html"><img src="img/logo.png" alt=""></a>
-                        </div>
-                        <ul>
-                           
-                            <li>Call Center: +62 112 233 445</li>
-                            <li>Email: educare@gmail.com</li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6 col-sm-6 offset-lg-1">
-                    <div class="footer__widget">
-                        <h6>Helpful Links</h6>
-                        <ul>
-                            <li><a href="#">About Us</a></li>
-                            <li><a href="#">About Our Shop</a></li>
-                            <li><a href="#">Secure Shopping</a></li>
-                            <li><a href="#">Delivery infomation</a></li>
-                            <li><a href="#">Privacy Policy</a></li>
-                            <li><a href="#">Our Sitemap</a></li>
-                        </ul>
-                        <ul>
-                            <li><a href="#">Who We Are</a></li>
-                            <li><a href="#">Our Services</a></li>
-                            <li><a href="#">Projects</a></li>
-                            <li><a href="#">Contact</a></li>
-                            <li><a href="#">Innovation</a></li>
-                            <li><a href="#">Testimonials</a></li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-12">
-                    <div class="footer__widget">
-                        <h6>Join Our Newsletter Now</h6>
-                        <p>Get E-mail updates about our latest shop and special offers.</p>
-                        <form action="#">
-                            <input type="text" placeholder="Enter your mail">
-                            <button type="submit" class="site-btn">Subscribe</button>
-                        </form>
-                        <div class="footer__widget__social">
-                            <a href="#"><i class="fa fa-facebook"></i></a>
-                            <a href="#"><i class="fa fa-instagram"></i></a>
-                            <a href="#"><i class="fa fa-twitter"></i></a>
-                            <a href="#"><i class="fa fa-pinterest"></i></a>
-                        </div>
-                    </div>
-                </div>
+            <div class="footer__copyright__text">
+                <img src="img/logo.png" alt="" width="120px" height="50px">
             </div>
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="footer__copyright">
-                        <div class="footer__copyright__text"><p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-  Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
-  <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p></div>
-                        <!-- <div class="footer__copyright__payment"><img src="img/payment-item.png" alt=""></div> -->
-                    </div>
-                </div>
+            <div class="footer__copyright__payment">
+            <p style="color: #ffffff;" class="pt-2">
+                    Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | Educare.com
+                </p>
             </div>
         </div>
-    </footer>
-    <!-- Footer Section End -->
+    </div>
+</footer>
+ <!-- Footer Section End -->
 
     <!-- Js Plugins -->
     <script src="js/jquery-3.3.1.min.js"></script>
@@ -804,7 +569,27 @@
     <script src="js/owl.carousel.min.js"></script>
     <script src="js/main.js"></script>
 
-
+    <script>
+    $(document).ready(function(){
+        $('.latest-product__slider').owlCarousel({
+            loop: true,
+            margin: 10,
+            nav: true,
+            navText: ["<div class='owl-nav-left'>←</div>", "<div class='owl-nav-right'>→</div>"],
+            responsive: {
+                0: {
+                    items: 1
+                },
+                600: {
+                    items: 2
+                },
+                1000: {
+                    items: 3
+                }
+            }
+        });
+    });
+</script>
 
 </body>
 

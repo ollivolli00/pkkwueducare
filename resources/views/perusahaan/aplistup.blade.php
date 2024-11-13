@@ -6,6 +6,15 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
   <style>
+    ul {
+  list-style-type: disc !important; /* Menampilkan bullets */
+  padding-left: 20px; /* Jarak di kiri */
+}
+
+li {
+  margin-bottom: 5px;
+}
+
     .nav-link {
         display: flex;
         align-items: center;
@@ -91,14 +100,14 @@
           <img src="https://storage.googleapis.com/a1aa/image/TsPTHHQA9PLmIZY2P9D0HASO0e0SXKHpfutawnKUyYyYKRnTA.jpg" 
                alt="Profile Picture" 
                class="w-24 h-24 rounded-full mx-auto mb-4"/>
-               @auth
-    <h3 class="font-semibold text-gray-800 mb-1">
-        {{ Auth::user()->perusahaan->namaperusahaan ?? 'Nama Perusahaan Tidak Tersedia' }}
-    </h3>
-    <p class="text-sm text-gray-500">
-        {{ Auth::user()->perusahaan->email ?? 'Email Perusahaan Tidak Tersedia' }}
-    </p>
-@endauth
+               @auth('perusahaan')
+            <h3 class="font-semibold text-gray-800 mb-1">
+              {{ Auth::guard('perusahaan')->user()->namaperusahaan }}
+            </h3>
+            <p class="text-sm text-gray-500">
+              {{ Auth::guard('perusahaan')->user()->email ?? 'Email Perusahaan Tidak Tersedia' }}
+            </p>
+          @endauth
 
         </div>
 
@@ -142,81 +151,169 @@
    <!-- Main Content -->
    <div class="w-5/6 p-8 ml-64">
    <div class="flex justify-end">
-   <form onsubmit="return confirm('Apakah Anda Yakin ?');" action="{{ route('beasiswa.destroy', $beasiswa->id) }}" method="POST">
-   <form onsubmit="return confirm('Apakah Anda yakin ingin mempublikasikan beasiswa ini?');" action="{{ route('beasiswa.publish', $beasiswa->id) }}" method="POST">
-  @csrf
-  <button type="submit" class="buttonn-style">Publikasikan</button>                                      
-</form>                                   
-   <a href="{{ route('beasiswa.edit', $beasiswa->id) }}" class="button-style">Edit</a>
-                                            <form action="{{ route('beasiswa.destroy', $beasiswa->id) }}" method="POST" style="display: inline-block">
-                                                @csrf
-                                                @method('DELETE')
-                                                <button type="submit" class="button-stylee">Hapus</button>
-                                            </form>
-                                        </form>
-                                       
-                                    </div>
-
- 
+    <form id="publishForm" onsubmit="return confirm('Apakah Anda yakin ingin mempublikasikan beasiswa ini?');" action="{{ route('beasiswa.publish', $beasiswa->id) }}" method="POST" style="{{ $beasiswa->is_published ? 'display: none;' : '' }}">
+        @csrf
+        <button type="submit" id="publishButton" class="buttonn-style">Publikasikan</button>
+    </form>
+    <form id="unpublishForm" onsubmit="return confirm('Apakah Anda yakin ingin meng-unpublish beasiswa ini?');" action="{{ route('beasiswa.unpublish', $beasiswa->id) }}" method="POST" style="{{ $beasiswa->is_published ? 'display: inline-block;' : 'display: none;' }}">
+        @csrf
+        <button type="submit" id="unpublishButton" class="button-stylee">Unpublish</button>
+    </form>
+    <a href="{{ route('beasiswa.edit', $beasiswa->id) }}" class="button-style">Edit</a>
+    <form action="{{ route('beasiswa.destroy', $beasiswa->id) }}" method="POST" style="display: inline-block">
+        @csrf
+        @method('DELETE')
+        <button type="submit" class="button-stylee">Hapus</button>
+    </form>
+</div>
     <br>
     @if($beasiswa)
     <div class="flex justify-center mb-8">
-    <img src="{{ asset('storage/images/' . $beasiswa->image1) }}" alt="{{$beasiswa->namabeasiswa}} " class="w-full h-40 object-cover"/>
-       </div>
-    <div class="flex items-center mb-8">
-    <img src="{{ asset('storage/images/' . $beasiswa->image2) }}" alt="{{$beasiswa->namabeasiswa}} " class="mr-4" height="150" width="150"/>     <div>
-      <h2 class="text-2xl font-bold">
-      {{$beasiswa->namabeasiswa}}
-      </h2>
-      <p class="text-gray-600">
-      {{$beasiswa->namaperusahaan}}
-      </p>
-      <p class="text-gray-500">
-      {{$beasiswa->batasbeasiswa}}
-      </p>
-     </div>
-    </div>
-    <div class="flex justify-left space-x-4 mb-8">
-     <div class="bg-white p-4 rounded-lg shadow-md text-center">
-      <p class="text-gray-600">
-      {{$beasiswa->minipersyaratan}}
-      </p>
-      <p class="font-bold">
-      {{$beasiswa->miniisi}}
-      </p>
-     </div>
-    </div>
-    <div class="mb-8">
-     <h3 class="text-xl font-bold mb-4">
-     {{$beasiswa->persyaratan}}
-     </h3>
-     <p class="list-disc list-inside text-gray-700">
-     {{$beasiswa->isipersyaratan}}</p>
-    </div>
-    <div class="mb-8">
-     <h3 class="text-xl font-bold mb-4">
-     {{$beasiswa->judul_benefit}}
-     </h3>
-     <br>
-     <div class="flex justify-left space-x-4">
-    <div class="bg-white p-4 rounded-lg shadow-md text-center min-h-[300px] w-64 flex flex-col items-center justify-center"> <!-- Menggunakan Flexbox -->
-    <img src="{{ asset('storage/images/' . $beasiswa->image3) }}" alt="{{$beasiswa->namabeasiswa}} " class="mb-4" height="100" width="100"/>
-     <br>
-        <p class="text-gray-600">
-        {{$beasiswa->isi_benefit}}
-        </p>
-    </div>
-</div>
-@else
+    <div class="bg-white p-6 rounded-lg shadow-lg w-full max-w-screen-lg">
+        <!-- Gambar pertama -->
+        <img src="{{ asset('storage/images/' . $beasiswa->image1) }}" alt="{{$beasiswa->namabeasiswa}}" class="w-full h-auto md:h-[200px] object-cover rounded-lg mb-4"/>
+
+        <!-- Bagian teks dan gambar kedua -->
+        <div class="flex items-center mb-4 pl-4">
+            <img src="{{ asset('storage/images/' . $beasiswa->image2) }}" alt="{{$beasiswa->namabeasiswa}}" class="mr-4" height="150" width="150"/>
+            <div class="pl-4">
+                <h2 class="text-2xl font-bold">
+                    {{$beasiswa->namabeasiswa}}
+                </h2>
+                <p class="text-gray-600">
+                    {{$beasiswa->namaperusahaan}}
+                </p>
+                <p class="text-gray-500">
+                    {{$beasiswa->batasbeasiswa}}
+                </p>
+            </div>
+        </div>
+
+        <!-- Mini Persyaratan -->
+        <div class="flex justify-left space-x-4 mb-8 pl-6">
+            @foreach($beasiswa->minipersyaratan as $key => $minipersyaratan)
+                <div class="bg-white p-5 rounded-lg shadow-md text-center w-56 transition-transform transform hover:scale-105 hover:shadow-xl">
+                    <p class="font-bold text-lg mb-3">
+                        {{$minipersyaratan}}
+                    </p>
+
+                    <!-- Memeriksa apakah miniisi ada dan berupa array -->
+                    @if(isset($beasiswa->miniisi[$key]))
+                        @if(is_array($beasiswa->miniisi[$key]))
+                            <div class="flex space-x-4 mt-3">
+                                @foreach($beasiswa->miniisi[$key] as $miniisi)
+                                    <div class="p-4 rounded-md w-48">
+                                        <p class="text-gray-600 text-base">
+                                            {{$miniisi}}
+                                        </p>
+                                    </div>
+                                @endforeach
+                            </div>
+                        @else
+                            <div class="p-4 rounded-md w-48">
+                                <p class="text-gray-600 text-base">
+                                    {{$beasiswa->miniisi[$key]}}
+                                </p>
+                            </div>
+                        @endif
+                    @else
+                        <p class="text-gray-400 mt-2 text-sm">
+                            No miniisi available.
+                        </p>
+                    @endif
+                </div>
+            @endforeach
+        </div>
+
+        <!-- Persyaratan -->
+        <div class="mb-8 pl-8">
+            <h3 class="text-xl font-bold mb-4">
+                {{$beasiswa->persyaratan}}
+            </h3>
+            <div class="text-gray-700">
+                <ul class="list-disc pl-6">
+                    {!! $beasiswa->isipersyaratan !!}
+                </ul>
+            </div>
+        </div>
+
+        <!-- Benefit -->
+        <div class="mb-8 pl-8">
+            <h3 class="text-xl font-bold mb-4">
+                {{$beasiswa->judul_benefit}}
+            </h3>
+            <br>
+             <!-- Mini Persyaratan -->
+        <div class="flex justify-left space-x-4 mb-8">
+            @foreach($beasiswa->bidang_benefit as $key => $bidang_benefit)
+                <div class="bg-white p-5 rounded-lg shadow-md text-center w-56 transition-transform transform hover:scale-105 hover:shadow-xl">
+                    <p class="font-bold text-lg mb-3">
+                        {{$bidang_benefit}}
+                    </p>
+
+                    <!-- Memeriksa apakah miniisi ada dan berupa array -->
+                    @if(isset($beasiswa->isi_benefit[$key]))
+                        @if(is_array($beasiswa->isi_benefit[$key]))
+                            <div class="flex space-x-4 mt-3">
+                                @foreach($beasiswa->isi_benefit[$key] as $isi_benefit)
+                                    <div class="p-4 rounded-md w-48">
+                                        <p class="text-gray-600 text-base">
+                                            {{$isi_benefit}}
+                                        </p>
+                                    </div>
+                                @endforeach
+                            </div>
+                        @else
+                            <div class="p-4 rounded-md w-48">
+                                <p class="text-gray-600 text-base">
+                                    {{$beasiswa->isi_benefit[$key]}}
+                                </p>
+                            </div>
+                        @endif
+                    @else
+                        <p class="text-gray-400 mt-2 text-sm">
+                            No isi_benefit available.
+                        </p>
+                    @endif
+                </div>
+            @endforeach
+        </div>
+
+        </div>
+        
+        @else
     <p>Tidak ada detail beasiswa yang ditampilkan.</p>
 @endif
-    </div>
-    <div class="flex justify-center">
+<div class="flex justify-center">
      <div class="bg-blue-200 text-white px-8 py-2 rounded-full">
       DAFTAR
      </div>
     </div>
+    </div>
+</div>
+
+ 
    </div>
   </div>
+    <script>
+         document.getElementById('publishForm').addEventListener('submit', function(event) {
+        event.preventDefault(); // Mencegah pengiriman form
+        // Ganti tombol Publikasikan dengan Unpublish
+        document.getElementById('publishButton').style.display = 'none';
+        document.getElementById('unpublishForm').style.display = 'inline-block';
+        // Kirim form untuk mempublikasikan
+        this.submit();
+    });
+
+    document.getElementById('unpublishForm').addEventListener('submit', function(event) {
+        event.preventDefault(); // Mencegah pengiriman form
+        // Ganti tombol Unpublish dengan Publikasikan
+        document.getElementById('unpublishButton').style.display = 'none';
+        document.getElementById('publishForm').style.display = 'inline-block';
+        // Kirim form untuk meng-unpublish
+        this.submit();
+    });
+
+    </script>
  </body>
 </html>

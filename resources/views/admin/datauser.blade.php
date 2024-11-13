@@ -100,11 +100,7 @@
             <i class="fas fa-user w-6"></i>
             <span>Data Perusahaan</span>
           </a>
-          <a class="nav-link {{ Request::routeIs('manage') ? 'active' : '' }}" 
-             href="{{route('manage')}}">
-            <i class="fas fa-upload w-6"></i>
-            <span>Manage Uploads</span>
-          </a>
+         
         </nav>
 
         <!-- Logout Button -->

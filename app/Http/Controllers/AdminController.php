@@ -6,6 +6,7 @@ use App\Models\Perusahaansign;
 use App\Models\User;
 use App\Models\Beasiswa;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Notification;
 
 class AdminController extends Controller
 {
@@ -22,11 +23,12 @@ class AdminController extends Controller
         return view('admin.dataperusahaan', compact('perusahaan'));
 
     }
-    public function showBeasiswa()
-{
-    $beasiswas = Beasiswa::with('loginPerusahaan')->get(); // Mengambil data beasiswa beserta data perusahaan
-
-    return view('admin.datauser', compact('beasiswas'));
-}
-
+    public function showPerusahaanWithBeasiswa()
+    {
+        // Retrieve all companies with their related scholarships
+        $perusahaan = Perusahaansign::with('beasiswas')->get();
+    
+        return view('admin.dataperusahaan', compact('perusahaan'));
+    }
+  
 }

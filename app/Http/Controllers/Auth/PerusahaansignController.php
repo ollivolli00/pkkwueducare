@@ -45,7 +45,7 @@ class PerusahaansignController extends Controller
         $this->registerPerusahaan($request->all());
 
         // Redirect dengan pesan sukses
-        return redirect()->route('loginn')->with('success', 'Registration successful! Please log in.');
+        return redirect()->route('signin')->with('success', 'Registration successful! Please log in.');
     }
 
     protected function registerPerusahaan(array $data)
