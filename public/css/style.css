@@ -434,48 +434,49 @@ ol {
     margin-top: 40px; /* contoh margin setelah login */
 }
 .header__menu ul li .header__menu__dropdown {
-	position: absolute;
-	left: 0;
-	top: 50px;
-	background: #222222;
-	width: 180px;
-	z-index: 9;
-	padding: 5px 0;
-	-webkit-transition: all, 0.3s;
-	-moz-transition: all, 0.3s;
-	-ms-transition: all, 0.3s;
-	-o-transition: all, 0.3s;
-	transition: all, 0.3s;
-	opacity: 0;
-	visibility: hidden;
+    position: absolute;
+    left: 30px;
+    top: 50px;
+    background: #222222;
+    width: 180px;
+    z-index: 9;
+    padding: 10px 2px;
+    -webkit-transition: all, 0.3s;
+    -moz-transition: all, 0.3s;
+    -ms-transition: all, 0.3s;
+    -o-transition: all, 0.3s;
+    transition: all, 0.3s;
+    opacity: 0;
+    visibility: hidden;
 }
 
 .header__menu ul li .header__menu__dropdown li {
-	margin-right: 0;
-	display: block;
+    margin-right: 0;
+    display: block;
 }
 
-.header__menu ul li .header__menu__dropdown li:hover>a {
-	color: #7fad39;
+.header__menu ul li .header__menu__dropdown li:hover > a {
+    color: #7fad39;
 }
 
 .header__menu ul li .header__menu__dropdown li a {
-	text-transform: capitalize;
-	color: #ffffff;
-	font-weight: 400;
-	padding: 5px 15px;
+    text-transform: capitalize;
+    color: #ffffff;
+    font-weight: 400;
+    padding: 5px 15px; /* Padding atas/bawah dan kiri/kanan */
+    padding-left: 20px; /* Menambahkan padding kiri untuk menghindari teks mepet */
 }
 
 .header__menu ul li.active a {
-	color: #7fad39;
+    color: #7fad39;
 }
 
 .header__menu ul li:hover .header__menu__dropdown {
-	top: 30px;
-	opacity: 1;
-	visibility: visible;
-}
+    top: 30px;
 
+    opacity: 1;
+    visibility: visible;
+}
 .header__menu ul li:hover>a {
 	color: #7fad39;
 }
