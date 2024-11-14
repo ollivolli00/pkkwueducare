@@ -45,48 +45,64 @@
     <!-- Header Section Begin -->
     <header class="header">
         <div class="header__top">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-3">
-                        <div class="header__logo">
-                            <a href="./index.html"><img src="{{asset('img/logo.png')}}" alt="" width="150px;" height="50px;"></a>
-                        </div>
-                    </div>
-                    <div class="col-lg-6">
-                        <nav class="header__menu">
-                            <ul>
-                                <li><a href="{{'/'}}" style="text-align:center; ">Home</a></li>
-                                <li><a href="{{ 'about' }}" style="text-align:center; ">About</a></li>
-                                @guest
-                                    <a href="{{ route('login') }}" style="text-align:center; color:white; padding: 10px 15px 12px; background: #7fad39;">Daftar Sebagai Perusahaan</a>
-                                @endguest
-                                <li class="nav-item dropdown">
-                                    @auth
-                                        <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                            {{ Auth::user()->name }}
-                                        </a>
-                                        <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                            <a href="{{ route('pengguna.create') }}">Profile</a>
-                                            <a class="dropdown-item" href="{{ route('logout') }}"
-                                               onclick="event.preventDefault();
-                                                        document.getElementById('logout-form').submit();">
-                                                {{ __('Logout') }}
-                                            </a>
-                                            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                                @csrf
-                                            </form>
-                                        </div>
-                                    @else
-                                        <a href="{{ route('login') }}" style="color:white; padding: 10px 15px 12px; background: #7fad39;">Login</a>
-                                    @endauth
-                                </li>
-                            </ul>
-                        </nav>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3">
+                <div class="header__logo">
+                        <a href="{{'/'}}"><img src={{asset("img/logo.png")}} alt="" width="150px;" height="50px;"></a>
                     </div>
                 </div>
+                <div class="col-lg-6">
+    <nav class="header__menu">
+        <ul>
+
+                <li><a href="{{'/'}}" style="text-align:center; ">Home</a></li>   
+                <li>
+    <a href="{{ route('about') }}" style="text-align:center;">About</a>
+</li>            </li>    
+            @guest
+<li>
+    <a href="{{ route('signup') }}" style="text-align:center; color:white; padding: 10px 15px 12px; background: #7fad39;">Daftar Sebagai Perusahaan</a>
+</li>
+@endguest
+
+<li class="nav-item dropdown">
+    @auth
+        <a id="navbarDropdown" class="nav-link dropdown-toggle" href="" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+            {{ Auth::user()->name }}
+        </a>
+        <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+        @if (Auth::user()->profile) <!-- Cek jika profil ada -->
+                <a href="{{ route('pengguna.show', Auth::user()->profile->id) }}">Profile</a>   
+            @else
+                <a href="{{ route('pengguna.create') }}">Profile</a>
+            @endif  
+        <a class="dropdown-item" href="{{ route('logout') }}"
+               onclick="event.preventDefault();
+                             document.getElementById('logout-form').submit();">
+                {{ __('Logout') }}
+            </a>
+            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                @csrf
+            </form>
+        </div>
+    @else
+        <a href="{{ route('login') }}" style="color:white; padding: 10px 15px 12px; background: #7fad39;">Login</a>
+    @endauth
+</li>
+
+        </ul>
+        </nav>
+</div>        
+</div>
+        </div>
+            </div>
+            <div class="humberger__open">
+                <i class="fa fa-bars"></i>
             </div>
         </div>
     </header>
+   
 
     <main class="container mx-auto mt-6">
         @if(session('success'))

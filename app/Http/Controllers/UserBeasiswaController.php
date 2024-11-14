@@ -207,10 +207,17 @@ public function index1()
     // UserBeasiswaController.php
     public function applicantsList()
     {
-        $company_id = Auth::guard('perusahaan')->user()->company_id;
+           // Ambil company_id dari auth user atau parameter request
+          // Ambil company_id dari auth guard perusahaan
+        $companyId = auth('perusahaan')->user()->id; // Pastikan ini benar dan sesuai dengan struktur database Anda
 
-        $daftars = Daftar::with('beasiswa')->paginate(10); // Contoh penggunaan pagination  
-    
+        // Ambil data pendaftar berdasarkan company_id yang ada di tabel beasiswa
+        $daftars = Daftar::with('beasiswa') // Mengambil relasi beasiswa
+            ->whereHas('beasiswa', function($query) use ($companyId) {
+                $query->where('company_id', $companyId);
+            })
+            ->paginate(10); 
+   
         return view('perusahaan.applist1', compact('daftars'));
     }
     

@@ -125,7 +125,11 @@
             {{ Auth::user()->name }}
         </a>
         <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-        <a href="{{'profil'}}">Profile</a>   
+        @if (Auth::user()->profile) <!-- Cek jika profil ada -->
+                <a href="{{ route('pengguna.show', Auth::user()->profile->id) }}">Profile</a>   
+            @else
+                <a href="{{ route('pengguna.create') }}">Profile</a>
+            @endif  
         <a class="dropdown-item" href="{{ route('logout') }}"
                onclick="event.preventDefault();
                              document.getElementById('logout-form').submit();">
@@ -151,8 +155,7 @@
             </div>
         </div>
     </header>
-    <!-- Header Section End -->
-
+   
     <!-- Hero Section Begin -->
     <section class="hero">
         <div class="container">

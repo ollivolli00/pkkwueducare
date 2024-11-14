@@ -11,6 +11,7 @@ class PenggunaController extends Controller
 {
     public function index()
     {
+        // Cek apakah pengguna sudah memiliki data pengguna
         $penggunas = Pengguna::where('id_user', Auth::id())->first();
 
         return $penggunas 
@@ -20,24 +21,39 @@ class PenggunaController extends Controller
 
     public function create()
     {
+        // Cek apakah pengguna sudah memiliki data pengguna
+        if (Pengguna::where('id_user', Auth::id())->exists()) {
+            // Jika sudah, arahkan ke halaman detail pengguna
+            return redirect()->route('pengguna.show', Pengguna::where('id_user', Auth::id())->first()->id);
+        }
+
+        // Jika belum, tampilkan form create
         return view('profil.create');
     }
 
     public function store(Request $request)
     {
+        // Validasi input
         $request->validate([
             'namalengkap' => 'required|string|max:255',
             'tanggal_lahir' => 'required|date',
             'jenis_kelamin' => 'required|string',
-            'email' => 'required|email|max:255|',
+            'email' => 'required|email|max:255',
             'no_telp' => 'required|string|max:15',
             'image' => 'required|image|mimes:jpeg,png,jpg|max:3072',
         ]);
 
+        // Cek apakah pengguna sudah memiliki data pengguna
+        if (Pengguna::where('id_user', Auth::id())->exists()) {
+            return redirect()->route('pengguna.show', Pengguna::where('id_user', Auth::id())->first()->id);
+        }
+
+        // Proses penyimpanan gambar
         $image = $request->file('image');
         $imageName = $image->hashName();
         $image->storeAs('public/images', $imageName);
 
+        // Simpan data pengguna
         $penggunas = Pengguna::create([
             'id_user' => Auth::id(),
             'namalengkap' => $request->namalengkap,
@@ -48,7 +64,8 @@ class PenggunaController extends Controller
             'image' => $imageName,
         ]);
 
-        return redirect()->route('pengguna.show', ['pengguna' => Auth::id()])->with('success', 'Data Berhasil Disimpan!');
+        // Arahkan ke halaman detail pengguna setelah berhasil disimpan
+        return redirect()->route('pengguna.show', $penggunas->id)->with('success', 'Data Berhasil Disimpan!');
     }
 
     public function show($id)
@@ -57,9 +74,6 @@ class PenggunaController extends Controller
     
         return view('profil.show', compact('penggunas'));
     }
-    
-
-    
 
     public function edit($id)
     {
@@ -96,7 +110,7 @@ class PenggunaController extends Controller
             $penggunas->update($data);
             return redirect()->route('pengguna.show', $penggunas->id)->with('success', 'Data Berhasil Diupdate!');
         } catch (\Exception $e) {
-            return redirect()->back()->with('error', 'Terjadi kesalahan saat memperbarui data.')->withInput();
+            return redirect ()->back()->with('error', 'Terjadi kesalahan saat memperbarui data.')->withInput();
         }
     }
 

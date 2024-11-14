@@ -195,24 +195,26 @@
     <div class="bg-white p-6 rounded-lg shadow">
         <h2 class="text-lg font-semibold text-gray-700 mb-4">Recent Applicants</h2>
         <ul>
-     @if($recentApplicants->isEmpty())
-    <li class="py-3 text-gray-500">Tidak ada pendaftar terbaru.</li>
-@else
-    @foreach($recentApplicants as $applicant)
-        @if($applicant->beasiswa) <!-- Hanya tampilkan jika beasiswa ada -->
-            <li class="flex justify-between items-center border-b border-gray-200 py-3">
-                <div>
-                    <h3 class="text-md font-medium text-gray-800">{{ $applicant->namalengkap }}</h3>
-                    <p class="text-sm text-gray-500">
-                        Applied for Scholarship: {{ $applicant->beasiswa->namabeasiswa }}
-                    </p>
-                </div>
-                <span class="text-green-600 text-sm">New</span>
-            </li>
-        @endif
-    @endforeach
-@endif
-   </ul>
+            @if($recentApplicants->isEmpty())
+                <li class="py-3 text-gray-500">Tidak ada pendaftar terbaru.</li>
+            @else
+                @foreach($recentApplicants as $applicant)
+                    @if($applicant->beasiswa) <!-- Hanya tampilkan jika beasiswa ada -->
+                        <li class="flex justify-between items-center border-b border-gray-200 py-3">
+                            <div>
+                                <h3 class="text-md font-medium text-gray-800">{{ $applicant->namalengkap }}</h3>
+                                <p class="text-sm text-gray-500">
+                                    Applied for Scholarship: {{ $applicant->beasiswa->namabeasiswa }}
+                                </p>
+                            </div>
+                            <span class="text-green-600 text-sm">
+                                {{ Carbon\Carbon::parse($applicant->created_at)->diffForHumans() }}
+                            </span>
+                        </li>
+                    @endif
+                @endforeach
+            @endif
+        </ul>
     </div>
 </div>
 

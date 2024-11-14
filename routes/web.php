@@ -31,6 +31,8 @@ Route::middleware(['auth', 'multiAuthUser :admin'])->group(function () {
 });
 Route::middleware(['auth', 'multiAuthUser :user'])->group(function () {
     Route::get('/home', [HomeController::class, 'dashboard'])->name('user');
+    
+Route::resource('pengguna', PenggunaController::class);
 });
 Route::middleware(['auth:perusahaan', 'perusahaan'])->group(function () {
     Route::get('/dashboard', [HomeController::class, 'PerusahaanDashboard'])->name('dashboard');
@@ -44,10 +46,9 @@ Route::get('/profil', function () {
 Route::get('/beasiswa', function () {
     return view('beasiswa');
 })->name('beasiswa');
-
 Route::get('/about', function () {
     return view('about');
-});
+})->name('about'); // Menambahkan nama pada rute
 
 Route::get('/data-users', [AdminController::class, 'showDataUsers'])->name('datauser');
 Route::get('/data-users', [AdminController::class, 'showDataUsers'])->name('datauser');
@@ -75,5 +76,3 @@ Route::get('/signup', [PerusahaansignController::class, 'showSignupForm'])->name
 Route::post('/signup', [PerusahaansignController::class, 'create'])->name('signup.post');
 Route::get('/signin',[PerusahaanController::class, 'showLoginForm'])->name('signin');
 Route::post('/signin', [PerusahaanController::class, 'loginn'])->name('signin.post');
-
-Route::resource('pengguna', PenggunaController::class);

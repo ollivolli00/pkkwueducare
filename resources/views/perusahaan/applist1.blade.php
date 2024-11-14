@@ -136,22 +136,23 @@
         <!-- Table Container -->
         <div class="table-container">
         <table class="table table-bordered">
-        <thead>
-            <tr>
-                <th>No</th>
-                <th>Nama Lengkap</th>
-                <th>Tanggal Lahir</th>
-                <th>Jenis Kelamin</th>
-                <th>Email</th>
-                <th>No. Telepon</th>
-                <th>Image</th>
-                <th>Uploaded File</th>
-                <th>Nama Beasiswa</th> <!-- Kolom Nama Beasiswa -->
-            </tr>
-        </thead>
-        <tbody>
-            @if($daftars->count()) <!-- Check if there are any records -->
-                @foreach ($daftars as $index => $daftar)
+    <thead>
+        <tr>
+            <th>No</th>
+            <th>Nama Lengkap</th>
+            <th>Tanggal Lahir</th>
+            <th>Jenis Kelamin</th>
+            <th>Email</th>
+            <th>No. Telepon</th>
+            <th>Image</th>
+            <th>Nama Beasiswa</th>
+            <th>Unduh File</th> <!-- Kolom Nama Beasiswa -->
+            <th>Waktu Pendaftaran</th> <!-- Kolom Waktu Pendaftaran -->
+        </tr>
+    </thead>
+    <tbody>
+        @if($daftars->count()) 
+            @foreach ($daftars as $index => $daftar)
                 <tr>
                     <td>{{ $index + 1 }}</td>
                     <td>{{ $daftar->namalengkap }}</td>
@@ -167,6 +168,13 @@
                         @endif
                     </td>
                     <td>
+                        @if($daftar->beasiswa)
+                            {{ $daftar->beasiswa->namabeasiswa }}
+                        @else
+                            <span>Tidak Ada</span>
+                        @endif
+                    </td>
+                    <td>
                         @if($daftar->zip_file)
                             <a href="{{ asset('storage/files/' . $daftar->zip_file) }}" class="btn btn-primary" download>
                                 Unduh File ZIP
@@ -175,23 +183,19 @@
                             <p>Tidak ada file ZIP yang tersedia.</p>
                         @endif
                     </td>
+    
                     <td>
-                        <!-- Menampilkan nama beasiswa yang didaftar -->
-                        @if($daftar->beasiswa)
-                            {{ $daftar->beasiswa->namabeasiswa }} <!-- Nama beasiswa -->
-                        @else
-                            <span>Tidak Ada</span>
-                        @endif
+                        {{ \Carbon\Carbon::parse($daftar->created_at)->diffForHumans() }} <!-- Menampilkan waktu pendaftaran -->
                     </td>
                 </tr>
-                @endforeach
-            @else
-                <tr>
-                    <td colspan="9" class="text-center">Tidak ada pelamar yang ditemukan.</td>
-                </tr>
-            @endif
-        </tbody>
-    </table>
+            @endforeach
+        @else
+            <tr>
+                <td colspan="10" class="text-center">Tidak ada pelamar yang ditemukan.</td>
+            </tr>
+        @endif
+    </tbody>
+</table>
        <!-- Pagination -->
             <div class="pagination">
                 {{ $daftars->links() }} <!-- Menambahkan pagination otomatis di bawah tabel -->

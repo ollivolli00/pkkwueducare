@@ -44,7 +44,10 @@ class User extends Authenticatable
     {
         return $this->hasOne(PerusahaanSign::class, 'user_id', 'id');
     }
-    
+    public function pengguna()
+    {
+        return $this->hasOne(Pengguna::class);
+    }
     public function beasiswas()
     {
         return $this->belongsToMany(Beasiswa::class, 'beasiswa_user', 'user_id', 'beasiswa_id');
