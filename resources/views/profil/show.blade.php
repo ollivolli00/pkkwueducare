@@ -113,28 +113,28 @@
             <h2 class="text-2xl font-semibold text-center">Profil Pengguna</h2>
             <div class="mt-8">
                 <div class="mb-4">
-                    <label for="namalengkap" class="block text-gray-700"><strong>Nama Lengkap :</strong></label>
+                    <label for="namalengkap" class="block text-gray-700 text-lg"><strong>Nama Lengkap :</strong></label>
                     <p class="w-full px-4 py-2 border rounded-lg">{{ $penggunas->namalengkap }}</p>
                 </div>
                 <div class="mb-4">
-                    <label for="tanggal_lahir" class="block text-gray-700"><strong>Tanggal Lahir :</strong></label>
+                    <label for="tanggal_lahir" class="block text-gray-700 text-lg"><strong>Tanggal Lahir :</strong></label>
                     <p class="w-full px-4 py-2 border rounded-lg">{{ $penggunas->tanggal_lahir }}</p>
                 </div>
                 <div class="mb-4">
-                    <label for="jenis_kelamin" class="block text-gray-700"><strong>Jenis Kelamin :</strong></label>
+                    <label for="jenis_kelamin" class="block text-gray-700 text-lg"><strong>Jenis Kelamin :</strong></label>
                     <p class="w-full px-4 py-2 border rounded-lg">{{ $penggunas->jenis_kelamin }}</p>
                 </div>
                 <div class="mb-4">
-                    <label for="email" class="block text-gray-700"><strong>Email :</strong></label>
+                    <label for="email" class="block text-gray-700 text-lg"><strong>Email :</strong></label>
                     <p class="w-full px-4 py-2 border rounded-lg">{{ $penggunas->email }}</p>
                 </div>
                 <div class="mb-4">
-                    <label for="no_telp" class="block text-gray-700"><strong>No. Telepon :</strong></label>
+                    <label for="no_telp" class="block text-gray-700 text-lg"><strong>No. Telepon :</strong></label>
                     <p class="w-full px-4 py-2 border rounded-lg">{{ $penggunas->no_telp }}</p>
                 </div>
                 @if ($penggunas->image)
                     <div class="mb-4">
-                        <label for="image" class="block text-gray-700"><strong>Upload File :</strong></label>
+                        <label for="image" class="block text-gray-700 text-lg"><strong>Upload File :</strong></label>
                         <img src="{{ asset('storage/images/' . $penggunas->image) }}" alt="Upload File" class="rounded-lg" style="width: 150px; height: auto;">
                     </div>
                 @endif

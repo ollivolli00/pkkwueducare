@@ -20,10 +20,12 @@ class Daftar extends Model
      * Setiap pendaftaran terkait dengan satu pengguna.
      */
 
-    public function pengguna()
-    {
-        return $this->belongsTo(Pengguna::class, 'user_id'); // Pastikan kolom 'user_id' sesuai dengan yang ada di tabel
-    }
+// Model Daftar
+
+public function pengguna()
+{
+    return $this->belongsTo(Pengguna::class, 'user_id', 'id_user'); // Menghubungkan ke model Pengguna
+}
 
 
 // Di model Daftar

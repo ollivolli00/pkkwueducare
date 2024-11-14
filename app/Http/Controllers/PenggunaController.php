@@ -77,6 +77,7 @@ class PenggunaController extends Controller
 
     public function edit($id)
     {
+        
         $pengguna = Pengguna::findOrFail($id);
         return view('profil.edit', compact('pengguna'));
     }

@@ -225,7 +225,7 @@
             <div class="row">
                 <div class="col-lg-3">
                     <div class="header__logo">
-                        <a href="{{'/'}}"><img src="img/logo.png" alt="" width="150px;" height="50px;"></a>
+                        <a href="{{'/'}}"><img src="{{asset('img/logo.png')}}" alt="" width="150px;" height="50px;"></a>
                     </div>
                 </div>
                 <div class="col-lg-6">
@@ -303,8 +303,8 @@
         <!-- Mini Persyaratan -->
         <div class="flex justify-left space-x-4 mb-8 pl-16">
             @foreach($beasiswaa->minipersyaratan as $key => $minipersyaratan)
-                <div class="bg-white p-2 rounded-lg shadow-md text-center w-56 transition-transform transform hover:scale-105 hover:shadow-xl">
-                    <p class="font-bold text-lg mb-3 text-black pt-2">
+                <div class="p-2 rounded-lg shadow-md text-center w-56 transition-transform transform hover:scale-105 hover:shadow-xl" style="background-color: #7fad39;">
+                    <p class="font-bold text-lg mb-3 pt-2" style="color: #ffffff;">
                         {{$minipersyaratan}}
                     </p>
                     
@@ -313,20 +313,19 @@
                         @if(is_array($beasiswaa->miniisi[$key]))
                             <div class="flex space-x-4 mt-3">
                                 @foreach($beasiswaa->miniisi[$key] as $miniisi)
-                                    <div class="p-4 rounded-md text-center" >
-                                        <p class="text-gray-600 text-base ">
-                                            {{$miniisi}}
-                                        </p>
-                                        
-                                    </div>
+                                <div class="p-4 rounded-md text-center">
+    <p class="text-white">
+        {{$miniisi}}
+    </p>
+</div>
                                 @endforeach
                             </div>
                         @else
                             <div class="p-4 rounded-md text-center">
-                                <p class="text-gray-600 text-base">
-                                    {{$beasiswaa->miniisi[$key]}}
-                                </p>
-                            </div>
+    <p class="text-white">
+        {{$beasiswaa->miniisi[$key]}}
+    </p>
+</div>
                         @endif
                     @else
                         <p class="text-gray-400 mt-2 text-sm">

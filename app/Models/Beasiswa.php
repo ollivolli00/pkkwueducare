@@ -19,11 +19,15 @@ class Beasiswa extends Model
     }
     
 
-    
     public function perusahaan()
 {
     return $this->belongsTo(Perusahaansign::class, 'company_id', 'id');
 }
 
+// Model Daftar
+public function pengguna()
+{
+    return $this->belongsTo(User::class, 'user_id'); // Pastikan 'user_id' adalah kolom yang sesuai
+}
 }
 

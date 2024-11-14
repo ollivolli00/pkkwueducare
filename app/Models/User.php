@@ -59,7 +59,7 @@ class User extends Authenticatable
     }
     public function daftars()
     {
-        return $this->hasMany(Daftar::class, 'user_id'); // Pastikan user_id di tabel daftar
+        return $this->hasMany(Daftar::class, 'user_id'); // Menghubungkan ke model Daftar
     }
     
 }

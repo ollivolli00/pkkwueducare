@@ -23,14 +23,16 @@ class Pengguna extends Model
      * Relasi ke model User.
      * Menunjukkan bahwa profil ini dimiliki oleh satu user.
      */
-    public function user()
-    {
-        return $this->belongsTo(User::class, 'id_user'); // Hubungkan ke model User dengan foreign key id_user
-    }
-    
+    // public function user()
+    // {
+    //     return $this->belongsTo(User::class, 'id_user'); // Hubungkan ke model User dengan foreign key id_user
+    // }
     public function daftars()
+    {
+        return $this->hasMany(Daftar::class, 'user_id', 'id_user'); // Menghubungkan ke model Daftar
+    }
+public function pengguna()
 {
-    return $this->hasMany(Daftar::class);
+    return $this->belongsTo(Pengguna::class, 'user_id'); // Pastikan 'user_id' adalah kolom yang sesuai
 }
-
 }

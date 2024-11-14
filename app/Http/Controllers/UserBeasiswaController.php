@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use App\Models\Beasiswa;
 use App\Models\Daftar;
+use Barryvdh\DomPDF\Facade\Pdf;
 use App\Models\Pengguna;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
@@ -17,6 +18,12 @@ class UserBeasiswaController extends Controller
      */
     public function index()
 {
+
+    $mostAppliedBeasiswa = Beasiswa::withCount('daftar')
+    ->having('daftar_count', '>', 0) // Hanya ambil beasiswa dengan pendaftar lebih dari 0
+    ->orderBy('daftar_count', 'desc')
+    ->take(4)
+    ->get();
     // Mengambil 4 beasiswa terbaru yang sudah dipublikasikan
     $beasiswaa = Beasiswa::where('is_published', 1)
                           ->orderBy('created_at', 'desc')
@@ -31,7 +38,7 @@ class UserBeasiswaController extends Controller
     ->orderBy('views', 'desc')
     ->take(4)
     ->get(); 
-       return view('welcome', compact('beasiswaa', 'totalBeasiswa', 'mostViewedBeasiswa'));
+       return view('welcome', compact('beasiswaa', 'totalBeasiswa', 'mostViewedBeasiswa', 'mostAppliedBeasiswa'));
 }
     
 public function index1()
@@ -222,5 +229,16 @@ public function index1()
     }
     
 
-  
+    public function downloadPdf()
+    {
+        // Ambil data applicant list
+        $applicants = Daftar::all(); // Sesuaikan dengan query yang sesuai
+    
+        // Load view yang akan dijadikan PDF
+        $pdf = Pdf::loadView('perusahaan.applicant_list_pdf', compact('applicants'));
+    
+        // Download file PDF
+        return $pdf->download('applicant_list.pdf');
+    }
+    
 }

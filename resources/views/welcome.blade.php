@@ -231,27 +231,27 @@
                  
                 <div class="col-lg-3">
                         <div class="categories__item set-bg" data-setbg="img/bcaa.png">
-                            <h5><a href="#">BANK BCA</a></h5>
+                            <h5><a href="https://karir.bca.co.id/beasiswa-bca">BANK BCA</a></h5>
                         </div>
                     </div>
                     <div class="col-lg-3">
                         <div class="categories__item set-bg" data-setbg="img/djarum.png">
-                            <h5><a href="#">PT DJARUM</a></h5>
+                            <h5><a href="https://djarumbeasiswaplus.org/">PT DJARUM</a></h5>
                         </div>
                     </div>
                     <div class="col-lg-3">
                         <div class="categories__item set-bg" data-setbg="img/kemenkeu.png">
-                            <h5><a href="#">KEMENKEU RI</a></h5>
+                            <h5><a href="https://ebeasiswa-lpdp.kemenkeu.go.id/Home">KEMENKEU RI</a></h5>
                         </div>
                     </div>
                     <div class="col-lg-3">
                         <div class="categories__item set-bg" data-setbg="img/tut.png">
-                            <h5><a href="#">KEMENDIKBUDRISTEK</a></h5>
+                            <h5><a href="https://beasiswaunggulan.kemdikbud.go.id/">KEMENDIKBUDRISTEK</a></h5>
                         </div>
                     </div>
                     <div class="col-lg-3">
                         <div class="categories__item set-bg" data-setbg="img/tut.png">
-                            <h5><a href="#">KEMDIKBUD</a></h5>
+                            <h5><a href="https://beasiswaunggulan.kemdikbud.go.id/">KEMDIKBUD</a></h5>
                         </div>
                     </div>
                 </div>
@@ -473,8 +473,7 @@
         </div>
     </div>
 </section>
-
-<!-- Carousel untuk Beasiswa yang Paling Banyak Dilihat -->
+<!-- Carousel untuk Beasiswa Paling Banyak Dilihat -->
 <section class="featured spad">
     <div class="container">
         <div class="section-title">
@@ -495,10 +494,6 @@
                             <h5 class="text-lg font-bold">{{ $beasiswa->namabeasiswa }}</h5>
                             <p class="text-gray-600 mb-4">by {{ $beasiswa->namaperusahaan }}</p>
                             <p style="font-size: 12px; color: #777; margin-top: 3px;">Dipublikasikan: {{ $beasiswa->created_at->format('d M Y') }}</p>
-                            
-                            <!-- Menambahkan Icon dan Jumlah Views -->
-                          
-                          
                             <a href="{{ route('beasiswaa.show', $beasiswa->id) }}" style="color: white; border-radius: 5px; padding: 5px 30px; background: #7fad39; font-family: Cairo;">DAFTAR</a>
                         </div>
                     </div>
@@ -509,6 +504,38 @@
         @endif
     </div>
 </section><!-- Rekomendasi Beasiswa Section End -->   
+
+<section class="featured spad">
+    <div class="container">
+        <div class="section-title">
+            <h2>Beasiswa Paling Banyak Dilamar</h2>
+        </div>
+        @if($mostAppliedBeasiswa->count() > 0)
+            <div class="categories__slider owl-carousel">
+                @foreach($mostAppliedBeasiswa as $beasiswa)
+                    <div class="col-lg-3">
+                        <div class="border rounded-lg p-4 flex flex-col items-center min-w-[250px]">
+                            <div style="width: 200px; height: 90px; display: flex; justify-content: center; align-items: center; border-radius: 5px; overflow: hidden;">
+                                <img 
+                                    alt="Logo {{ $beasiswa->namaperusahaan }}" 
+                                    src="{{ asset('storage/images/' . $beasiswa->image2) }}" 
+                                    style="max-width: 100%; max-height: 100%; object-fit: contain;" 
+                                />
+                            </div>
+                            <h5 class="text-lg font-bold">{{ $beasiswa->namabeasiswa }}</h5>
+                            <p class="text-gray-600 mb-4">by {{ $beasiswa->namaperusahaan }}</p>
+                            <p style="font-size: 12px; color: #777; margin-top: 3px;">Dipublikasikan: {{ $beasiswa->created_at->format('d M Y') }}</p>
+                           
+                            <a href="{{ route('beasiswaa.show', $beasiswa->id) }}" style="color: white; border-radius: 5px; padding: 5px 30px; background: #7fad39; font-family: Cairo;">DAFTAR</a>
+                        </div>
+                    </div>
+                @endforeach
+            </div>
+        @else
+            <p class="text-gray-600">Tidak ada beasiswa yang paling banyak dilamar saat ini.</p>
+        @endif
+    </div>
+</section>
   <br>
 
     <!-- Banner Begin -->
