@@ -71,7 +71,8 @@ class HomeController extends Controller
             $published = 0;
             $unpublished = 0;
             $applicants = 0;
-    
+            $recentApplicants = collect(); // Inisialisasi dengan koleksi kosong
+
             // Cek apakah ada beasiswa yang terkait
             if ($beasiswaRecords->isNotEmpty()) {
                 // Ambil company_id dari beasiswa pertama

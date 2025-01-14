@@ -423,16 +423,24 @@
     </div>
 </div>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-Q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-<!-- Js Plugins -->
-<script src="{{asset('js/jquery-3.3.1.min.js')}}"></script>
-<script src="{{asset('js/bootstrap.min.js')}}"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.min.js"></script>
+
 <script src="{{asset('js/jquery.nice-select.min.js')}}"></script>
 <script src="{{asset('js/jquery-ui.min.js')}}"></script>
 <script src="{{asset('js/jquery.slicknav.js')}}"></script>
 <script src="{{asset('js/mixitup.min.js')}}"></script>
 <script src="{{asset('js/owl.carousel.min.js')}}"></script>
 <script src="{{asset('js/main.js')}}"></script>
+<!-- <script src="{{asset('js/jquery.nice-select.min.js')}}"></script>
+<script src="{{asset('js/jquery-ui.min.js')}}"></script>
+<script src="{{asset('js/jquery.slicknav.js')}}"></script>
+<script src="{{asset('js/mixitup.min.js')}}"></script>
+<script src="{{asset('js/owl.carousel.min.js')}}"></script>
+<script src="{{asset('js/main.js')}}"></script>
+<script src="{{asset('js/bootstrap.min.js')}}"></script> -->
+
 <script src="https://cdn.tailwindcss.com"></script>
 <script>
     // Event listener untuk tombol submit di luar form

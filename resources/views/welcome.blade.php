@@ -435,10 +435,10 @@
         </div>
         
         <div class="row">
-              <!-- Tambahkan tautan Lihat Beasiswa Lainnya di atas carousel -->
+            
               @if($totalBeasiswa > 4)
               <div class="text-right mb-3">
-                <a href="{{'beasiswa-lebih-banyak'}}" style="color: #7fad39; font-weight: bold; font-size: 16px;">
+                <a href="{{'beasiswa-lebih-banyak'}}" style="color: #7fad39; font-weight: bold; font-size: 16px;    ">
                     Lihat Lebih Banyak
                 </a>
             </div>

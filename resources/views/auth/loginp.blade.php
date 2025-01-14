@@ -20,15 +20,13 @@
         <a href="#"><img src="img/logo.png" alt="" width="350px;" height="100px;"></a>
             <div class="text-item">
                 <h2>Welcome! <br><span>
-                    To Our Channel
+                    To Our Educare
                 </span></h2>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit, repellendus?</p>
+                <p>"Educare Scholarships – Your Gateway to a Brighter Future, Where Ambitions Take Flight and Opportunities Know No Boundaries."</p>
                 <div class="social-icon">
-                    <a href="#"><i class='bx bxl-facebook'></i></a>
-                    <a href="#"><i class='bx bxl-twitter'></i></a>
-                    <a href="#"><i class='bx bxl-youtube'></i></a>
-                    <a href="#"><i class='bx bxl-instagram'></i></a>
-                    <a href="#"><i class='bx bxl-linkedin'></i></a>
+                    <a href="https://www.facebook.com/profile.php?id=100054859316679&mibextid=ZbWKwL"><i class='bx bxl-facebook'></i></a>
+                    <a href="https://x.com/rgnaov"><i class='bx bxl-twitter'></i></a>
+                    <a href="https://www.instagram.com/rgnaov/?utm_source=ig_web_button_share_sheet"><i class='bx bxl-instagram'></i></a>
                 </div>
             </div>
         </div>
