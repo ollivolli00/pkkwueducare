@@ -29,5 +29,6 @@ public function pengguna()
 {
     return $this->belongsTo(User::class, 'user_id'); // Pastikan 'user_id' adalah kolom yang sesuai
 }
+
 }
 

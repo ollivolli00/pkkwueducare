@@ -135,6 +135,10 @@
         
         <!-- Table Container -->
         <div class="table-container">
+        <a href="{{ route('download.pdf') }}" class="btn btn-success mb-3">
+    <i class="fas fa-download"></i> Unduh PDF
+</a>
+
         <table class="table table-bordered">
     <thead>
         <tr>

@@ -37,7 +37,7 @@ Route::resource('pengguna', PenggunaController::class);
 Route::middleware(['auth:perusahaan', 'perusahaan'])->group(function () {
     Route::get('/dashboard', [HomeController::class, 'PerusahaanDashboard'])->name('dashboard');
     Route::get('/applicants-list', [UserBeasiswaController::class, 'applicantsList'])->name('applist-1');
-
+    Route::get('/download-pdf', [BeasiswaController::class, 'downloadPDF'])->name('download.pdf');
 });
 
 Route::get('/profil', function () {

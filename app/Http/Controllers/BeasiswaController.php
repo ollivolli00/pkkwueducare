@@ -1,7 +1,8 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Barryvdh\DomPDF\Facade\Pdf;
+use App\Models\Daftar;
 use Illuminate\Http\Request;
 use App\Models\Beasiswa;
 use Illuminate\Support\Facades\Storage;
@@ -185,4 +186,20 @@ public function unpublish($id)
 
     return redirect()->route('beasiswa.index', $beasiswa->id)->with('success', 'Beasiswa berhasil di-unpublish.');
 }
-}
+
+public function downloadPDF()
+{
+    // Ambil ID perusahaan yang sedang login
+    $perusahaanId = auth('perusahaan')->id();
+
+    // Filter data pelamar berdasarkan perusahaan login
+    $daftars = Daftar::whereHas('beasiswa', function ($query) use ($perusahaanId) {
+        $query->where('company_id', $perusahaanId);
+    })->with(['beasiswa'])->get();
+
+    // Generate PDF dengan data pelamar yang sudah difilter
+    $pdf = PDF::loadView('pdf.applicants', compact('daftars'))
+    ->setPaper('a4', 'landscape');
+    // Unduh file PDF
+    return $pdf->download('data-pelamar.pdf');
+}}
