@@ -140,11 +140,31 @@
 
                 <div class="mb-4">
                     <label for="no_telp" class="block text-gray-700 text-lg"><strong>No Telepon :</strong></label>
-                    <input type="tel" name="no_telp" id="no_telp" value="{{ $pengguna->no_telp }}" class="w-full px-4 py-2 border rounded-lg @error('no_telp') border-red-500 @enderror">
+                    <input type="tel" name="no_telp" id="no_telp" class="w-full px-4 py-2 border rounded-lg @error('no_telp') border-red-500 @enderror" value="{{ old('no_telp', $pengguna->no_telp) }}" pattern="[0-9]*" oninput="validateInput(this)">
                     @error('no_telp')
                         <span class="text-red-500 text-sm">{{ $message }}</span>
                     @enderror
+                    <span id="error-message" class="text-red-500 text-sm hidden"></span>
                 </div>
+
+                <script>
+                    function validateInput(input) {
+                        const errorMessage = document.getElementById('error-message');
+                        const value = input.value;
+
+                        // Menghapus karakter non-numerik
+                        input.value = value.replace(/[^0-9]/g, '');
+
+                        // Memeriksa apakah ada huruf yang dimasukkan
+                        if (/[a-zA-Z]/.test(value)) {
+                            errorMessage.textContent = 'Nomor telepon hanya boleh terdiri dari angka.';
+                            errorMessage.classList.remove('hidden');
+                        } else {
+                            errorMessage.textContent = '';
+                            errorMessage.classList.add('hidden');
+                        }
+                    }
+                </script>
 
                 <div class="mb-4">
                     <label for="image" class="block text-gray-700 text-lg"><strong>Upload Foto Diri</strong></label>
