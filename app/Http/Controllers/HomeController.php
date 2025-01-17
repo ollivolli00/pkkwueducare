@@ -30,6 +30,7 @@ class HomeController extends Controller
     {
         return view('welcome');
     }
+    
     public function AdminDashboard()
     {
         // Mengambil jumlah pengguna yang login
@@ -122,5 +123,15 @@ Log::info('Recent Applicants: ', $recentApplicants->toArray());
         return redirect()->route('signin');
     }
     
-    
+    public function showDaftar()
+{
+    $userId = auth()->user()->id;
+
+    $data = Daftar::where('user_id', $userId)
+        ->with('beasiswa') // Relasi dengan tabel beasiswa
+        ->get();
+
+    return view('riwayat', compact('data'));
+}
+
 }

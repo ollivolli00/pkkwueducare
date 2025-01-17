@@ -16,14 +16,31 @@ class UserBeasiswaController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-{
+    public function index(){
+if (Auth::check()) {
+    // Ambil ID pengguna yang sedang login
+    $userId = Auth::id();
+
+    // Cek apakah pengguna sudah memiliki data di tabel pengguna
+    $pengguna = Pengguna::where('id_user', $userId)->first();
+
+    // Jika data pengguna tidak ditemukan (belum mengisi profil)
+    if (!$pengguna) {
+        // Set session 'profile_incomplete' jika profil belum lengkap
+        session(['profile_incomplete' => 'Profil Anda belum lengkap. Harap lengkapi profil Anda untuk melanjutkan.']);
+    } else {
+        // Jika profil sudah lengkap, hapus session 'profile_incomplete'
+        session()->forget('profile_incomplete');
+    }
+}
+
 
     $mostAppliedBeasiswa = Beasiswa::withCount('daftar')
-    ->having('daftar_count', '>', 0) // Hanya ambil beasiswa dengan pendaftar lebih dari 0
-    ->orderBy('daftar_count', 'desc')
-    ->take(4)
+    ->having('daftar_count', '>', 0) // Mengambil hanya beasiswa yang memiliki pendaftar lebih dari 0
+    ->orderBy('daftar_count', 'desc') // Urutkan berdasarkan jumlah pendaftar terbanyak
+    ->take(4) // Ambil 4 beasiswa teratas
     ->get();
+
     // Mengambil 4 beasiswa terbaru yang sudah dipublikasikan
     $beasiswaa = Beasiswa::where('is_published', 1)
                           ->orderBy('created_at', 'desc')
@@ -38,9 +55,21 @@ class UserBeasiswaController extends Controller
     ->orderBy('views', 'desc')
     ->take(4)
     ->get(); 
+    
        return view('welcome', compact('beasiswaa', 'totalBeasiswa', 'mostViewedBeasiswa', 'mostAppliedBeasiswa'));
 }
-    
+public function search(Request $request)
+{
+    $query = $request->input('query');
+    $results = [];
+
+    if ($query) {
+        $results = Beasiswa::where('namabeasiswa', 'like', '%' . $query . '%')->get(['id', 'namabeasiswa']);
+    }
+
+    return response()->json($results); // Mengirimkan hasil pencarian dalam format JSON
+}
+
 public function index1()
 {
     // Mengambil ID beasiswa yang sudah ditampilkan di welcome
@@ -240,5 +269,26 @@ public function index1()
         // Download file PDF
         return $pdf->download('applicant_list.pdf');
     }
-    
+   
+    public function ubahStatus(Request $request, $id)
+{
+    $daftar = Daftar::findOrFail($id);
+
+    if ($request->action == 'lanjut') {
+        if ($daftar->status == 'DIPROSES') {
+            $daftar->status = 'TES PSIKOTES';
+        } elseif ($daftar->status == 'TES PSIKOTES') {
+            $daftar->status = 'TES WAWANCARA';
+        } elseif ($daftar->status == 'TES WAWANCARA') {
+            $daftar->status = 'DITERIMA';
+        }
+    } elseif ($request->action == 'ditolak') {
+        $daftar->status = 'DITOLAK';
+    }
+
+    $daftar->save();
+
+    return redirect()->route('applist-1')->with('success', 'Status berhasil diperbarui.');
+}
+          
 }

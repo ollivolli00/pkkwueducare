@@ -9,6 +9,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>EDUCARE</title>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
     <!-- Google Font -->
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;900&display=swap" rel="stylesheet">
@@ -126,7 +127,8 @@
         </a>
         <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown" style="padding-left: 15px;">
     @if (Auth::user()->profile) <!-- Cek jika profil ada -->
-        <a href="{{ route('pengguna.show', Auth::user()->profile->id) }}">Profile</a>   
+        <a href="{{ route('pengguna.show', Auth::user()->profile->id) }}">Profile</a> 
+        <a href="{{ route('riwayat' )}}">Riwayat Pendaftaran</a>   
     @else
         <a href="{{ route('pengguna.create') }}">Profile</a>
     @endif  
@@ -143,6 +145,7 @@
         <a href="{{ route('login') }}" style="color:white; padding: 10px 15px 12px; background: #7fad39;">Login</a>
     @endauth
 </li>
+
 
         </ul>
         </nav>
@@ -290,10 +293,11 @@ Visi kami adalah menciptakan generasi yang memiliki kesempatan pendidikan yang s
     </div>
 </footer>
 
+<!-- Include Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.min.js"></script>
 
 <script src="{{asset('js/jquery.nice-select.min.js')}}"></script>
 <script src="{{asset('js/jquery-ui.min.js')}}"></script>

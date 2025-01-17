@@ -11,7 +11,7 @@
 
     <!-- Google Font -->
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;900&display=swap" rel="stylesheet">
-
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" />
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
@@ -73,7 +73,8 @@
         </a>
         <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown" style="padding-left: 15px;">
     @if (Auth::user()->profile) <!-- Cek jika profil ada -->
-        <a href="{{ route('pengguna.show', Auth::user()->profile->id) }}">Profile</a>   
+        <a href="{{ route('pengguna.show', Auth::user()->profile->id) }}">Profile</a> 
+        <a href="{{ route('riwayat' )}}">Riwayat Pendaftaran</a>   
     @else
         <a href="{{ route('pengguna.create') }}">Profile</a>
     @endif  
@@ -119,86 +120,98 @@
             @csrf
             
             <div class="mt-8">
-                <div class="mb-4">
-                    <label for="namalengkap" class="block text-gray-700"><strong>Nama Lengkap :</strong></label>
-                    <input type="text" name="namalengkap" id="namalengkap" class="w-full px-4 py-2 border rounded-lg @error('namalengkap') border-red-500 @enderror" value="{{ old('namalengkap') }}">
-                    @error('namalengkap')
-                        <span class="text-red-500 text-sm">{{ $message }}</span>
-                    @enderror
-                </div>
+            <div class="mb-4">
+    <label for="namalengkap" class="block text-gray-700 text-lg"><strong>Nama Lengkap :</strong></label>
+    <input type="text" name="namalengkap" id="namalengkap" value="{{ $pengguna->namalengkap }}" class="w-full px-4 py-2 border rounded-lg @error('namalengkap') border-red-500 @enderror">
+    @error('namalengkap')
+        <span class="text-red-500 text-sm">{{ $message }}</span>
+    @enderror
+</div>
 
-                <div class="mb-4">
-                    <label for="tanggal_lahir" class="block text-gray-700"><strong>Tanggal Lahir :</strong></label>
-                    <input type="date" name="tanggal_lahir" id="tanggal_lahir" class="w-full px-4 py-2 border rounded-lg @error('tanggal_lahir') border-red-500 @enderror" value="{{ old('tanggal_lahir') }}">
-                    @error('tanggal_lahir')
-                        <span class="text-red-500 text-sm">{{ $message }}</span>
-                    @enderror
-                </div>
+<div class="mb-4">
+    <label for="tanggal_lahir" class="block text-gray-700 text-lg"><strong>Tanggal Lahir :</strong></label>
+    <input type="date" name="tanggal_lahir" id="tanggal_lahir" value="{{ $pengguna->tanggal_lahir }}" class="w-full px-4 py-2 border rounded-lg @error('tanggal_lahir') border-red-500 @enderror">
+    @error('tanggal_lahir')
+        <span class="text-red-500 text-sm">{{ $message }}</span>
+    @enderror
+</div>
 
-                
-                <div class="mb-4">
+<div class="mb-4">
     <label for="jenis_kelamin" class="block text-gray-700 text-lg"><strong>Jenis Kelamin :</strong></label>
-    <select name="jenis_kelamin" id="jenis_kelamin" class="w-full px-4 py-2 border rounded-lg text-gray-500 @error('jenis_kelamin') border-red-500 @enderror h-full">
-        <option value="" disabled selected hidden>Pilih Jenis Kelamin</option>
-        <option value="Laki-laki" {{ old('jenis_kelamin') == 'Laki-laki' ? 'selected' : '' }}>Laki-laki</option>
-        <option value="Perempuan" {{ old('jenis_kelamin') == 'Perempuan' ? 'selected' : '' }}>Perempuan</option>
-    </select>
+    <input type="text" name="jenis_kelamin" id="jenis_kelamin" value="{{ $pengguna->jenis_kelamin }}" class="w-full px-4 py-2 border rounded-lg text-gray-500 cursor-not-allowed" readonly>
     @error('jenis_kelamin')
         <span class="text-red-500 text-sm">{{ $message }}</span>
     @enderror
 </div>
-<br><br><br>
-                <div class="mb-4">
-                    <label for="email" class="block text-gray-700"><strong>Email :</strong></label>
-                    <input type="email" name="email" id="email" class="w-full px-4 py-2 border rounded-lg @error('email') border-red-500 @enderror" value="{{ old('email') }}">
-                    @error('email')
-                        <span class="text-red-500 text-sm">{{ $message }}</span>
-                    @enderror
-                </div>
 
-                <div class="mb-4">
-                    <label for="no_telp" class="block text-gray-700"><strong>No. Telepon :</strong></label>
-                    <input type="tel" name="no_telp" id="no_telp" class="w-full px-4 py-2 border rounded-lg @error('no_telp') border-red-500 @enderror" value="{{ old('no_telp') }}" pattern="[0-9]*" oninput="validateInput(this)">
-                    @error('no_telp')
-                        <span class="text-red-500 text-sm">{{ $message }}</span>
-                    @enderror
-                    <span id="error-message" class="text-red-500 text-sm hidden"></span>
-                </div>
+<div class="mb-4">
+    <label for="email" class="block text-gray-700"><strong>Email :</strong></label>
+    <input 
+        type="email" 
+        name="email" 
+        id="email" 
+        class="w-full px-4 py-2 border rounded-lg @error('email') border-red-500 @enderror opacity-50 cursor-not-allowed" 
+        value="{{ auth()->user()->email ?? old('email') }}" 
+        readonly
+    >
+    @error('email')
+        <span class="text-red-500 text-sm">{{ $message }}</span>
+    @enderror
+</div>
 
-                <script>
-                    function validateInput(input) {
-                        const errorMessage = document.getElementById('error-message');
-                        const value = input.value;
+<div class="mb-4">
+    <label for="no_telp" class="block text-gray-700 text-lg"><strong>No Telepon :</strong></label>
+    <input type="tel" name="no_telp" id="no_telp" class="w-full px-4 py-2 border rounded-lg @error('no_telp') border-red-500 @enderror" value="{{ old('no_telp', $pengguna->no_telp) }}" pattern="[0-9]*" oninput="validateInput(this)">
+    @error('no_telp')
+        <span class="text-red-500 text-sm">{{ $message }}</span>
+    @enderror
+    <span id="error-message" class="text-red-500 text-sm hidden"></span>
+</div>
 
-                        // Menghapus karakter non-numerik
-                        input.value = value.replace(/[^0-9]/g, '');
+<script>
+    function validateInput(input) {
+        const errorMessage = document.getElementById('error-message');
+        const value = input.value;
 
-                        // Memeriksa apakah ada huruf yang dimasukkan
-                        if (/[a-zA-Z]/.test(value)) {
-                            errorMessage.textContent = 'Nomor telepon hanya boleh terdiri dari angka.';
-                            errorMessage.classList.remove('hidden');
-                        } else {
-                            errorMessage.textContent = '';
-                            errorMessage.classList.add('hidden');
-                        }
-                    }
-                </script>
+        // Menghapus karakter non-numerik
+        input.value = value.replace(/[^0-9]/g, '');
 
-                <div class="mb-4">
-                    <label for="image" class="block text-gray-700"><strong>Upload Foto Diri :</strong></label>
-                    <input type="file" name="image" id="image" class="w-full px-4 py-2 border rounded-lg @error('image') border-red-500 @enderror">
-                    <p class="text-gray-500 text-sm mt-1">
-                        Maksimal ukuran file foto : 3MB. Ekstensi file yang diperbolehkan : png , jpg, jpeg.
-                    </p>
-                    <p class="text-gray-500 text-sm">
-                        (Contoh File : pas foto 3x4, scan KK, scan KTP, scan akte, scan rapor, dll).
-                    </p>
-                    @error('image')
-                        <span class="text-red-500 text-sm">{{ $message }}</span>
-                    @enderror
-                </div>
-                <div class="flex justify-center mt-6">
-    <button type="submit" class="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500">Simpan</button>
+        // Memeriksa apakah ada huruf yang dimasukkan
+        if (/[a-zA-Z]/.test(value)) {
+            errorMessage.textContent = 'Nomor telepon hanya boleh terdiri dari angka.';
+            errorMessage.classList.remove('hidden');
+        } else {
+            errorMessage.textContent = '';
+            errorMessage.classList.add('hidden');
+        }
+    }
+</script>
+
+<div class="mb-4">
+    <label for="image" class="block text-gray-700 text-lg"><strong>Upload Foto Diri</strong></label>
+    
+    <!-- Menampilkan gambar yang sudah ada jika tersedia -->
+    @if (isset($pengguna->image) && $pengguna->image)
+        <div class="mb-2">
+            <img src="{{ asset('storage/images/' . $pengguna->image) }}" alt="Foto Diri" class="w-32 h-32 object-cover rounded-md">
+        </div>
+    @endif
+
+    <input type="file" name="image" id="image" class="w-full px-4 py-2 border rounded-lg @error('image') border-red-500 @enderror" @if(isset($pengguna->image)) disabled @endif>
+
+    @error('image')
+        <span class="text-red-500 text-sm">{{ $message }}</span>
+    @enderror
+
+    <p class="text-gray-500 text-sm mt-1">
+        Maksimal ukuran file foto : 3MB. Ekstensi file yang diperbolehkan : png, jpg, jpeg. Foto ini akan digunakan pada saat mendaftar beasiswa, pilihlah foto yang layak.
+    </p>
+    <p class="text-gray-500 text-sm">
+        (Contoh File : pas foto 3x4).
+    </p>
+</div>
+
+<button type="submit" class="w-full bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600">Simpan</button>
 </div>
             </div>
         </form>

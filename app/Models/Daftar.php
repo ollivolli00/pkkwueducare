@@ -12,7 +12,7 @@ class Daftar extends Model
 
     // Daftar kolom yang dapat diisi
     protected $fillable = [
-        'user_id', 'beasiswa_id', 'zip_file', 'namalengkap', 'tanggal_lahir', 'jenis_kelamin', 'email', 'no_telp', 'image',
+        'user_id', 'beasiswa_id', 'zip_file', 'namalengkap', 'tanggal_lahir', 'jenis_kelamin', 'email', 'no_telp', 'image', 'status',
     ];
 
     /**

@@ -202,4 +202,8 @@ public function downloadPDF()
     ->setPaper('a4', 'landscape');
     // Unduh file PDF
     return $pdf->download('data-pelamar.pdf');
-}}
+}
+
+
+
+}

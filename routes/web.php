@@ -4,11 +4,14 @@ use App\Http\Controllers\Auth\PerusahaansignController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UserBeasiswaController;
 use App\Http\Controllers\PenggunaController;
+use App\Http\Controllers\MitraController;
 use App\Http\Controllers\Auth\PerusahaanController;
 use App\Http\Controllers\BeasiswaController;
 use App\Http\Controllers\AdminController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
+
+
 
 /*
 |--------------------------------------------------------------------------
@@ -37,6 +40,8 @@ Route::resource('pengguna', PenggunaController::class);
 Route::middleware(['auth:perusahaan', 'perusahaan'])->group(function () {
     Route::get('/dashboard', [HomeController::class, 'PerusahaanDashboard'])->name('dashboard');
     Route::get('/applicants-list', [UserBeasiswaController::class, 'applicantsList'])->name('applist-1');
+    Route::get('/applicants-list/{id}/status', [UserBeasiswaController::class, 'ubahStatus'])->name('ubahStatus');
+
     Route::get('/download-pdf', [BeasiswaController::class, 'downloadPDF'])->name('download.pdf');
 });
 
@@ -44,11 +49,11 @@ Route::get('/profil', function () {
     return view('profil');
 });
 
+Route::get('/riwayat-pendaftaran', [HomeController::class, 'showDaftar'])->name('riwayat');
 Route::get('/about', function () {
     return view('about');
 })->name('about'); // Menambahkan nama pada rute
 
-Route::get('/data-users', [AdminController::class, 'showDataUsers'])->name('datauser');
 Route::get('/data-users', [AdminController::class, 'showDataUsers'])->name('datauser');
 Route::get('/data-perusahaan', [AdminController::class, 'showDataPerusahaan'])->name('dataperusahaan');
 Route::get('/manage-beasiswas', function () {
@@ -67,8 +72,10 @@ Route::resource('beasiswaa', UserBeasiswaController::class);
 Route::post('/beasiswa/{beasiswaId}/daftar', [UserBeasiswaController::class, 'store'])->name('beasiswaa.store');
 
 Route::get('/', [UserBeasiswaController::class, 'index'])->middleware('beasiswa');
+
 Route::get('/beasiswa-lebih-banyak', [UserBeasiswaController::class, 'index1'])->middleware('beasiswa');
 Route::get('/daftarbeasiswa/{id}', [UserBeasiswaController::class, 'show'])->name('beasiswaa.show');
+
 // Route::get('/', [UserBeasiswaController::class, 'index'])->name('user.index');
 
 Route::get('/signup', [PerusahaansignController::class, 'showSignupForm'])->name('signup');
@@ -77,3 +84,5 @@ Route::get('/signin',[PerusahaanController::class, 'showLoginForm'])->name('sign
 Route::post('/signin', [PerusahaanController::class, 'loginn'])->name('signin.post');
 
 Route::get('/applicant-list/download', [UserBeasiswaController::class, 'downloadPdf'])->name('applicant.downloadPdf');
+
+Route::get('/search-beasiswa', [UserBeasiswaController::class, 'search'])->name('search.beasiswa');

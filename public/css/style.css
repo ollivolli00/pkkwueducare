@@ -36,6 +36,7 @@ body {
 	font-family: "Cairo", sans-serif;
 	-webkit-font-smoothing: antialiased;
 	font-smoothing: antialiased;
+	overflow-x: hidden;
 }
 
 h1,
@@ -119,7 +120,9 @@ ol {
 .section-title h2 {
 	color: #1c1c1c;
 	font-weight: 700;
+	font-size: 2rem;
 	position: relative;
+	
 }
 
 .section-title h2:after {
@@ -781,6 +784,7 @@ margin-top: 40px;
 	padding: 0 20px;
 	bottom: 20px;
 	text-align: center;
+	
 }
 
 .categories__item h5 a {
@@ -1991,6 +1995,16 @@ margin-top: 40px;
 
 .primary-btn.cart-btn span {
 	font-size: 14px;
+}
+.btn-daftar{
+	display: inline-block;
+	font-size: 14px;
+	padding: 10px 20px 10px;
+	color: #ffffff;
+	text-transform: uppercase;
+	font-weight: 700;
+	background: #7fad39;
+	letter-spacing: 2px;
 }
 
 .primary-btn.cart-btn.cart-btn-right {

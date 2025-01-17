@@ -9,11 +9,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>EDUCARE</title>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
     <!-- Google Font -->
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;900&display=swap" rel="stylesheet">
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
     <!-- Css Styles -->
+    <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css">
     <link rel="stylesheet" href="css/font-awesome.min.css" type="text/css">
     <link rel="stylesheet" href="css/elegant-icons.css" type="text/css">
@@ -126,7 +128,8 @@
         </a>
         <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown" style="padding-left: 15px;">
     @if (Auth::user()->profile) <!-- Cek jika profil ada -->
-        <a href="{{ route('pengguna.show', Auth::user()->profile->id) }}">Profile</a>   
+        <a href="{{ route('pengguna.show', Auth::user()->profile->id) }}">Profile</a> 
+        <a href="{{ route('riwayat' )}}">Riwayat Pendaftaran</a>   
     @else
         <a href="{{ route('pengguna.create') }}">Profile</a>
     @endif  
@@ -155,9 +158,34 @@
             </div>
         </div>
     </header>
-        
+    <div class="main-content">
+    @if(session('profile_incomplete'))
+    <div class="bg-yellow-100 border-l-4 border-yellow-500 text-yellow-700 p-4 rounded-lg shadow-lg flex items-center mb-6">
+        <div class="flex-shrink-0">
+            <!-- Ikon -->
+            <svg class="h-6 w-6 text-yellow-500 mr-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M18 10c0 4.418-3.582 8-8 8a8 8 0 110-16c4.418 0 8 3.582 8 8zm-9 4a1 1 0 102 0v-2a1 1 0 00-2 0v2zm0-8a1 1 0 100 2h.01a1 1 0 000-2H9z" clip-rule="evenodd" />
+            </svg>
+        </div>
+        <div class="flex-grow">
+            <p class="font-semibold">
+                {{ session('profile_incomplete') }}
+            </p>
+            <p class="text-sm text-gray-700">
+                Melengkapi profil dapat membantu Anda untuk mendaftar beasiswa yang tersedia.
+            </p>
+        </div>
+        <div>
+            <a href="{{ route('pengguna.create', auth()->user()->id) }}" 
+                class="bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-2 px-4 rounded-lg shadow-md transition-all duration-200">
+                Go to Profile
+            </a>
+        </div>
+    </div>
+@endif
 
-    <!-- Header Section End -->
+
+</div>
 
     <!-- Hero Section Begin -->
 <section class="hero">
@@ -165,14 +193,24 @@
         <div class="row">  
             <div class="col-lg-12 text-center">
                 <div style="margin-top: 50px;">
-                    <div class="header__search" style="margin-bottom: 20px;">
-                        <form action="" method="GET" style="display: flex; justify-content: center; align-items: center;">
-                            <input type="text" placeholder="Search..." name="query" required style="padding: 10px; border: 1px solid #ccc; border-radius: 10px; width: 100%; max-width: 500px; color: #333; font-family: 'Cairo', sans-serif;"> <!-- Mengatur warna font -->
-                            <button type="submit" style="padding: 10px; border: none; background: #7fad39; color: white; border-radius: 10px; cursor: pointer;">Search</button>
-                        </form>
-                    </div>
-                </div>
-            </div>
+                <div id="app">
+    <search-beasiswa></search-beasiswa>
+</div>
+
+
+               <div class="header__search" style="margin-bottom: 20px; position: relative;">
+    <form onsubmit="return false;" style="display: flex; justify-content: center; align-items: center;">
+        <input type="text" id="search-input" placeholder="Search..." style="padding: 10px; border: 1px solid #ccc; width: 100%; max-width: 500px; color: #333; font-family: 'Cairo', sans-serif;">
+        <button type="submit" style="padding: 11px; width:80px; border: none; background: #7fad39; color: white; cursor: pointer;">
+  <i class="fa fa-search" style="font-size: 16px;"></i>
+</button>
+    </form>
+    <!-- Hasil pencarian, tersembunyi saat tidak ada hasil -->
+    <div id="search-results" style="display: none; position: absolute; top: 100%; left: 0; width: 100%; background: #fff; border: 1px solid #ccc; z-index: 1000; max-height: 200px; overflow-y: auto;">
+        <!-- Hasil pencarian ditambahkan di sini -->
+    </div>
+</div>
+</div>
             <br>
             <div class="col-lg-12">
                 <img src="img/bannerr.png" style="width: 100%; transform: scale(1); border-radius: 40px;">
@@ -393,22 +431,19 @@
     <div class="container">
         <div class="section-title">
             <h2 class="text-center">Beasiswa Terbaru</h2>
-            
-          
         </div>
         
         <div class="row">
-            
-              @if($totalBeasiswa > 4)
-              <div class="text-right mb-3">
-                <a href="{{'beasiswa-lebih-banyak'}}" style="color: #7fad39; font-weight: bold; font-size: 16px;    ">
-                    Lihat Lebih Banyak
-                </a>
-            </div>
+            @if($totalBeasiswa > 4)
+                <div class="text-right mb-3">
+                    <a href="{{'beasiswa-lebih-banyak'}}" style="color: #7fad39; font-weight: bold; font-size: 16px;">
+                        Lihat Lebih Banyak
+                    </a>
+                </div>
             @endif
             <div class="categories__slider owl-carousel">
                 @if($beasiswaa->isNotEmpty())
-                @foreach($beasiswaa->take(4) as $beasiswa)
+                    @foreach($beasiswaa->take(4) as $beasiswa)
                         <!-- Cek apakah beasiswa dipublikasikan -->
                         @if($beasiswa->is_published == 1)
                             <div class="col-lg-3">
@@ -420,11 +455,11 @@
                                             style="max-width: 100%; max-height: 100%; object-fit: contain;" 
                                         />
                                     </div>
-                                    <h5 class="text-lg font-bold">{{ $beasiswa->namabeasiswa }}</h5>
-                                    <p class="text-gray-600 mb-4">by {{ $beasiswa->namaperusahaan }}</p>
-                                    <!-- Tampilkan tanggal publikasi -->
+                                    <h5 class="text-lg font-bold" style="text-align:center;">{{ $beasiswa->namabeasiswa }}</h5>
+                                    <p class="text-lg-gray-600 font-bold mb-4" style="text-align:center;">{{ $beasiswa->namaperusahaan }}</p>
                                     <p style="font-size: 12px; color: #777; margin-top: 3px;">Dipublikasikan: {{ $beasiswa->created_at->format('d M Y') }}</p>
-                                    <a href="{{ route('beasiswaa.show', $beasiswa->id) }}" style="color: white; border-radius: 5px; padding: 5px 30px; background: #7fad39; font-family: Cairo;">DAFTAR</a>
+                                    <a href="#" class="btn-daftar" data-url="{{ route('beasiswaa.show', $beasiswa->id) }}" style="color: white; border-radius: 5px; padding: 5px 30px; background: #7fad39; font-family: Cairo;">DAFTAR</a>
+
                                 </div>
                             </div>
                         @endif
@@ -436,6 +471,32 @@
         </div>
     </div>
 </section>
+
+<!-- Modal untuk Pendaftaran -->
+<div id="loginModal" class="modal fade" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
+    <div class="modal-dialog" style="top: 5px;"> <!-- Posisi modal lebih ke atas -->
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="loginModalLabel">EDUCARE</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>Anda perlu login terlebih dahulu untuk mendaftar beasiswa.</p>
+                <div class="d-flex justify-content-end">
+                    <a href="{{ route('login') }}" class="primary-btn" style="background-color: #7fad39; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px;">
+                        Login
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Pass Status Login ke dalam Elemen HTML -->
+<div id="authStatus" data-logged-in="{{ auth()->check() ? 'true' : 'false' }}"></div>
+
+
 <!-- Carousel untuk Beasiswa Paling Banyak Dilihat -->
 <section class="featured spad">
     <div class="container">
@@ -454,10 +515,10 @@
                                     style="max-width: 100%; max-height: 100%; object-fit: contain;" 
                                 />
                             </div>
-                            <h5 class="text-lg font-bold">{{ $beasiswa->namabeasiswa }}</h5>
-                            <p class="text-gray-600 mb-4">by {{ $beasiswa->namaperusahaan }}</p>
+                            <h5 class="text-lg font-bold" style="text-align:center;">{{ $beasiswa->namabeasiswa }}</h5>
+                            <p class="text-lg-gray-600 font-bold mb-4"> {{ $beasiswa->namaperusahaan }}</p>
                             <p style="font-size: 12px; color: #777; margin-top: 3px;">Dipublikasikan: {{ $beasiswa->created_at->format('d M Y') }}</p>
-                            <a href="{{ route('beasiswaa.show', $beasiswa->id) }}" style="color: white; border-radius: 5px; padding: 5px 30px; background: #7fad39; font-family: Cairo;">DAFTAR</a>
+                            <a href="#" class="btn-daftar" data-url="{{ route('beasiswaa.show', $beasiswa->id) }}" style="color: white; border-radius: 5px; padding: 5px 30px; background: #7fad39; font-family: Cairo;">DAFTAR</a>
                         </div>
                     </div>
                 @endforeach
@@ -467,14 +528,16 @@
         @endif
     </div>
 </section><!-- Rekomendasi Beasiswa Section End -->   
-
+ 
+  
+<!-- Carousel untuk Beasiswa Paling Banyak Dilihat -->
 <section class="featured spad">
-    <div class="container">
+<div class="container">
         <div class="section-title">
             <h2>Beasiswa Paling Banyak Dilamar</h2>
         </div>
-        @if($mostAppliedBeasiswa->count() > 0)
-            <div class="categories__slider owl-carousel">
+        @if($mostAppliedBeasiswa->count() > 0) <!-- Memeriksa apakah ada beasiswa yang ditampilkan -->
+        <div class="categories__slider owl-carousel">
                 @foreach($mostAppliedBeasiswa as $beasiswa)
                     <div class="col-lg-3">
                         <div class="border rounded-lg p-4 flex flex-col items-center min-w-[250px]">
@@ -485,11 +548,10 @@
                                     style="max-width: 100%; max-height: 100%; object-fit: contain;" 
                                 />
                             </div>
-                            <h5 class="text-lg font-bold">{{ $beasiswa->namabeasiswa }}</h5>
-                            <p class="text-gray-600 mb-4">by {{ $beasiswa->namaperusahaan }}</p>
+                            <h5 class="text-lg font-bold" style="text-align:center;">{{ $beasiswa->namabeasiswa }}</h5>
+                            <p class="text-lg-gray-600 font-bold mb-4"> {{ $beasiswa->namaperusahaan }}</p>
                             <p style="font-size: 12px; color: #777; margin-top: 3px;">Dipublikasikan: {{ $beasiswa->created_at->format('d M Y') }}</p>
-                           
-                            <a href="{{ route('beasiswaa.show', $beasiswa->id) }}" style="color: white; border-radius: 5px; padding: 5px 30px; background: #7fad39; font-family: Cairo;">DAFTAR</a>
+                            <a href="#" class="btn-daftar" data-url="{{ route('beasiswaa.show', $beasiswa->id) }}" style="color: white; border-radius: 5px; padding: 5px 30px; background: #7fad39; font-family: Cairo;">DAFTAR</a>
                         </div>
                     </div>
                 @endforeach
@@ -498,9 +560,9 @@
             <p class="text-gray-600">Tidak ada beasiswa yang paling banyak dilamar saat ini.</p>
         @endif
     </div>
-</section>
-  <br>
-
+</section><!-- Rekomendasi Beasiswa Section End -->   
+<br>
+<br>
     <!-- Banner Begin -->
     <div class="banner">
         <div class="container">
@@ -518,6 +580,7 @@
             </div>
         </div>
     </div>
+    
     <!-- Banner End -->
 <br>
 <br>
@@ -550,6 +613,9 @@
  <!-- Footer Section End -->
 
     <!-- Js Plugins -->
+     <!-- Include Bootstrap JS -->
+
+
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.min.js"></script>
@@ -560,7 +626,56 @@
 <script src="js/mixitup.min.js"></script>
 <script src="js/owl.carousel.min.js"></script>
 <script src="js/main.js"></script>
+<script src="{{ mix('js/app.js') }}"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function() {
+        // Menangani event keyup ketika mengetik di input pencarian
+        $('#search-input').on('keyup', function() {
+            let query = $(this).val().trim(); // Mengambil nilai input dan menghapus spasi
+            let resultsContainer = $('#search-results'); // Menyimpan referensi ke container hasil pencarian
 
+            // Cek jika input berisi query
+            if (query.length > 0) {
+                $.ajax({
+                    url: "{{ route('search.beasiswa') }}", // Mengirim permintaan pencarian ke Laravel
+                    method: 'GET',
+                    data: { query: query },
+                    success: function(data) {
+                        resultsContainer.empty(); // Menghapus hasil pencarian sebelumnya
+                        if (data.length > 0) {
+                            // Jika ada hasil pencarian, tampilkan
+                            data.forEach(function(item) {
+                                // Menambahkan setiap hasil pencarian sebagai elemen clickable
+                                resultsContainer.append('<div class="search-result-item" style="padding: 10px; border-bottom: 1px solid #ddd; cursor: pointer;" data-id="'+ item.id +'">' + item.namabeasiswa + '</div>');
+                            });
+                            resultsContainer.show(); // Menampilkan container hasil pencarian
+                        } else {
+                            resultsContainer.html('<div style="padding: 10px;">No results found</div>').show();
+                        }
+                    }
+                });
+            } else {
+                // Jika input kosong, kosongkan dan sembunyikan hasil pencarian
+                resultsContainer.empty().hide(); // Menghapus hasil dan menyembunyikan container
+            }
+        });
+
+        // Menangani klik pada hasil pencarian
+        $(document).on('click', '.search-result-item', function() {
+            let selectedItem = $(this).text(); // Mengambil teks dari item yang dipilih
+            $('#search-input').val(selectedItem); // Menampilkan hasil yang dipilih di input
+            $('#search-results').empty().hide(); // Menyembunyikan hasil pencarian
+        });
+
+        // Menyembunyikan hasil pencarian jika klik di luar form pencarian
+        $(document).click(function(e) {
+            if (!$(e.target).closest('.header__search').length) {
+                $('#search-results').hide(); // Menyembunyikan hasil pencarian jika klik di luar
+            }
+        });
+    });
+</script>
 
     <script>
     $(document).ready(function(){
@@ -579,6 +694,30 @@
                 1000: {
                     items: 3
                 }
+            }
+        });
+    });
+</script>
+
+<script>
+    // Mengambil status login dari elemen HTML
+    var isLoggedIn = document.getElementById('authStatus').getAttribute('data-logged-in') === 'true';
+
+    document.querySelectorAll('.btn-daftar').forEach(function(button) {
+        button.addEventListener('click', function(e) {
+            e.preventDefault(); // Menghentikan aksi default (navigasi ke halaman lain)
+
+            // Ambil URL dari atribut data-url
+            var routeUrl = this.getAttribute('data-url');
+            
+            // Cek apakah pengguna sudah login
+            if (isLoggedIn) {
+                // Jika sudah login, arahkan ke route URL
+                window.location.href = routeUrl;
+            } else {
+                // Jika belum login, tampilkan modal
+                var modal = new bootstrap.Modal(document.getElementById('loginModal'));
+                modal.show();
             }
         });
     });

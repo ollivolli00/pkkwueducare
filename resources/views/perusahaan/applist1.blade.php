@@ -139,7 +139,20 @@
     <i class="fas fa-download"></i> Unduh PDF
 </a>
 
-        <table class="table table-bordered">
+@if(session('success'))
+    <div class="alert alert-success">
+        {{ session('success') }}
+    </div>
+@endif
+
+@if(session('error'))
+    <div class="alert alert-danger">
+        {{ session('error') }}
+    </div>
+@endif
+
+
+<table class="table table-bordered">
     <thead>
         <tr>
             <th>No</th>
@@ -150,56 +163,61 @@
             <th>No. Telepon</th>
             <th>Image</th>
             <th>Nama Beasiswa</th>
-            <th>Unduh File</th> <!-- Kolom Nama Beasiswa -->
-            <th>Waktu Pendaftaran</th> <!-- Kolom Waktu Pendaftaran -->
+            <th>Unduh File</th>
+            <th>Status</th>
+            <th>Waktu Pendaftaran</th>
         </tr>
     </thead>
     <tbody>
-        @if($daftars->count()) 
-            @foreach ($daftars as $index => $daftar)
-                <tr>
-                    <td>{{ $index + 1 }}</td>
-                    <td>{{ $daftar->namalengkap }}</td>
-                    <td>{{ $daftar->tanggal_lahir }}</td>
-                    <td>{{ $daftar->jenis_kelamin }}</td>
-                    <td><a href="mailto:{{ $daftar->email }}">{{ $daftar->email }}</a></td>
-                    <td>{{ $daftar->no_telp }}</td>
-                    <td>
-                        @if($daftar->image)
-                            <img src="{{ asset('storage/images/'.$daftar->image) }}" alt="User  Image" style="width: 50px; height: 50px;">
-                        @else
-                            <span>Tidak Ada</span>
-                        @endif
-                    </td>
-                    <td>
-                        @if($daftar->beasiswa)
-                            {{ $daftar->beasiswa->namabeasiswa }}
-                        @else
-                            <span>Tidak Ada</span>
-                        @endif
-                    </td>
-                    <td>
-                        @if($daftar->zip_file)
-                            <a href="{{ asset('storage/files/' . $daftar->zip_file) }}" class="btn btn-primary" download>
-                                Unduh File ZIP
-                            </a>
-                        @else
-                            <p>Tidak ada file ZIP yang tersedia.</p>
-                        @endif
-                    </td>
-    
-                    <td>
-                        {{ \Carbon\Carbon::parse($daftar->created_at)->diffForHumans() }} <!-- Menampilkan waktu pendaftaran -->
-                    </td>
-                </tr>
-            @endforeach
-        @else
+        @foreach($daftars as $index => $daftar)
             <tr>
-                <td colspan="10" class="text-center">Tidak ada pelamar yang ditemukan.</td>
-            </tr>
+                <td>{{ $index + 1 }}</td>
+                <td>{{ $daftar->namalengkap }}</td>
+                <td>{{ $daftar->tanggal_lahir }}</td>
+                <td>{{ $daftar->jenis_kelamin }}</td>
+                <td><a href="mailto:{{ $daftar->email }}">{{ $daftar->email }}</a></td>
+                <td>{{ $daftar->no_telp }}</td>
+                <td>
+                    @if($daftar->image)
+                        <img src="{{ asset('storage/images/'.$daftar->image) }}" alt="User Image" style="width: 50px; height: 50px;">
+                    @else
+                        <span>Tidak Ada</span>
+                    @endif
+                </td>
+                <td>{{ $daftar->beasiswa->namabeasiswa ?? 'Tidak Ada' }}</td>
+                <td>
+                    @if($daftar->zip_file)
+                        <a href="{{ asset('storage/files/' . $daftar->zip_file) }}" class="btn btn-primary" download>Unduh File ZIP</a>
+                    @else
+                        <span>Tidak ada file ZIP yang tersedia.</span>
+                    @endif
+                </td>
+              
+                <td>
+    <!-- Lanjut Button (for changing status) -->
+        @if($daftar->status != 'DITOLAK' && $daftar->status != 'DITERIMA')
+            <a href="{{ route('ubahStatus', [$daftar->id, 'action' => 'lanjut']) }}" 
+            class="btn btn-primary" 
+            style="{{ $daftar->status == 'DITOLAK' ? 'background-color: gray; cursor: not-allowed; opacity: 0.5;' : '' }}">
+                {{ $daftar->status }}
+            </a>
         @endif
+<br><br>
+        <!-- Ditolak Button -->
+        <a href="{{ route('ubahStatus', [$daftar->id, 'action' => 'ditolak']) }}" 
+        class="btn btn-danger" 
+        style="{{ $daftar->status == 'DITOLAK' ? 'background-color: gray; cursor: not-allowed; opacity: 0.5;' : '' }}">
+            DITOLAK
+        </a>
+</td>
+
+
+                <td>{{ \Carbon\Carbon::parse($daftar->created_at)->diffForHumans() }}</td>
+            </tr>
+        @endforeach
     </tbody>
 </table>
+
        <!-- Pagination -->
             <div class="pagination">
                 {{ $daftars->links() }} <!-- Menambahkan pagination otomatis di bawah tabel -->

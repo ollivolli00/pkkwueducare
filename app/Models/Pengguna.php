@@ -16,7 +16,8 @@ class Pengguna extends Model
         'jenis_kelamin', 
         'email', 
         'no_telp', 
-        'image'
+        'image',
+        'profile_complete'
     ];
 
     /**
@@ -35,4 +36,9 @@ public function pengguna()
 {
     return $this->belongsTo(Pengguna::class, 'user_id'); // Pastikan 'user_id' adalah kolom yang sesuai
 }
+
+// Properti yang harus di-cast
+protected $casts = [
+    'profile_complete' => 'boolean', // Akan otomatis menjadi true/false
+];
 }
