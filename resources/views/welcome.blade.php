@@ -9,7 +9,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>EDUCARE</title>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
     <!-- Google Font -->
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;900&display=swap" rel="stylesheet">
@@ -38,54 +39,59 @@
         <div class="humberger__menu__logo">
             <a href="#"><img src="img/logo.png" alt=""></a>
         </div>
-        <div class="humberger__menu__cart">
-            <ul>
-                <li><a href="#"><i class="fa fa-heart"></i> <span>1</span></a></li>
-                <li><a href="#"><i class="fa fa-shopping-bag"></i> <span>3</span></a></li>
-            </ul>
-            <div class="header__cart__price">item: <span>$150.00</span></div>
-        </div>
-        <div class="humberger__menu__widget">
-            <div class="header__top__right__language">
-                <img src="img/language.png" alt="">
-                <div>English</div>
-                <span class="arrow_carrot-down"></span>
-                <ul>
-                    <li><a href="#">Spanis</a></li>
-                    <li><a href="#">English</a></li>
-                </ul>
-            </div>
-            <div class="header__top__right__auth">
-                <a href="#"><i class="fa fa-user"></i> Login</a>
-            </div>
-        </div>
+        
         <nav class="humberger__menu__nav mobile-menu">
             <ul>
-                <li class="active"><a href="/">Home</a></li>
-                <li><a href="./shop-grid.html">Shop</a></li>
-                <li><a href="#">Pages</a>
-                    <ul class="header__menu__dropdown">
-                        <li><a href="./shop-details.html">Shop Details</a></li>
-                        <li><a href="./shoping-cart.html">Shoping Cart</a></li>
-                        <li><a href="./checkout.html">Check Out</a></li>
-                        <li><a href="./blog-details.html">Blog Details</a></li>
-                    </ul>
-                </li>
-                <li><a href="./blog.html">Blog</a></li>
-                <li><a href="./contact.html">Contact</a></li>
+                
+            <li><a href="{{'/'}}" >Home</a></li>   
+              <li>  <a href="{{ 'about' }}">About</a>   
+            </li>    <br>
+            @guest
+<li>
+    <a href="{{ route('signup') }}" style="text-align:center; color:white; padding: 10px 15px 12px; background: #7fad39;">Daftar Sebagai Perusahaan</a>
+</li>
+@endguest
+<br>
+                <li class="nav-item dropdown">
+    @auth
+        <a id="navbarDropdown" class="" href="#" style="text-align:center;" role="button">
+            {{ Auth::user()->name }}
+        </a>
+        <ul class="header__menu__dropdown">
+            @if (Auth::user()->profile) <!-- Cek jika profil ada -->
+                <li><a href="{{ route('pengguna.show', Auth::user()->profile->id) }}">Profile</a></li>
+                <li><a href="{{ route('riwayat') }}">Riwayat Pendaftaran</a></li>
+            @else
+                <li><a href="{{ route('pengguna.create') }}">Profile</a></li>
+            @endif
+            <li>
+                <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                    Logout
+                </a>
+                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                    @csrf
+                </form>
+            </li>
+        </ul>
+    @else
+        <a href="{{ route('login') }}" style="color:white; padding: 10px 15px 12px; background: #7fad39;">Login</a>
+    @endauth
+</li>
+
+
             </ul>
         </nav>
         <div id="mobile-menu-wrap"></div>
         <div class="header__top__right__social">
-            <a href="#"><i class="fa fa-facebook"></i></a>
-            <a href="#"><i class="fa fa-twitter"></i></a>
-            <a href="#"><i class="fa fa-linkedin"></i></a>
-            <a href="#"><i class="fa fa-pinterest-p"></i></a>
+        <a href="https://www.facebook.com/profile.php?id=100054859316679&mibextid=ZbWKwL"><i class='fa fa-facebook'></i></a>
+                    <a href="https://x.com/rgnaov"><i class='fa fa-twitter'></i></a>
+                    <a href="https://www.instagram.com/rgnaov/?utm_source=ig_web_button_share_sheet"><i class='fa fa-instagram'></i></a>
+
         </div>
         <div class="humberger__menu__contact">
             <ul>
-                <li><i class="fa fa-envelope"></i> hello@colorlib.com</li>
-                <li>Free Shipping for all Order of $99</li>
+                <li><i class="fa fa-envelope"></i> educare@gmail.com</li>
+                <li><i class="fa fa-phone"> +62 881-9540-957</i></li>
             </ul>
         </div>
     </div>
@@ -192,25 +198,25 @@
     <div class="container">
         <div class="row">  
             <div class="col-lg-12 text-center">
-                <div style="margin-top: 50px;">
-                <div id="app">
-    <search-beasiswa></search-beasiswa>
-</div>
+            <div style="margin-top: 50px;">
+    <div id="app">
+        <search-beasiswa></search-beasiswa>
+    </div>
 
-
-               <div class="header__search" style="margin-bottom: 20px; position: relative;">
-    <form onsubmit="return false;" style="display: flex; justify-content: center; align-items: center;">
-        <input type="text" id="search-input" placeholder="Search..." style="padding: 10px; border: 1px solid #ccc; width: 100%; max-width: 500px; color: #333; font-family: 'Cairo', sans-serif;">
-        <button type="submit" style="padding: 11px; width:80px; border: none; background: #7fad39; color: white; cursor: pointer;">
-  <i class="fa fa-search" style="font-size: 16px;"></i>
-</button>
-    </form>
-    <!-- Hasil pencarian, tersembunyi saat tidak ada hasil -->
-    <div id="search-results" style="display: none; position: absolute; top: 100%; left: 0; width: 100%; background: #fff; border: 1px solid #ccc; z-index: 1000; max-height: 200px; overflow-y: auto;">
-        <!-- Hasil pencarian ditambahkan di sini -->
+    <div class="header__search" style="margin-bottom: 20px; position: relative;">
+        <form action="{{ route('search') }}" method="get" style="display: flex; justify-content: center; align-items: center;">
+            <input type="text" id="search-input" name="query" placeholder="Search..." style="padding: 10px; border: 1px solid #ccc; width: 100%; max-width: 500px; color: #333; font-family: 'Cairo', sans-serif;">
+            <button type="submit" style="padding: 11px; width:80px; border: none; background: #7fad39; color: white; cursor: pointer;">
+                <i class="fa fa-search" style="font-size: 16px;"></i>
+            </button>
+        </form>
+        <!-- Hasil pencarian, tersembunyi saat tidak ada hasil -->
+        <div id="search-results" style="display: none; position: absolute; top: 100%; left: 0; width: 100%; background: #fff; border: 1px solid #ccc; z-index: 1000; max-height: 200px; overflow-y: auto;">
+            <!-- Hasil pencarian ditambahkan di sini -->
+        </div>
     </div>
 </div>
-</div>
+
             <br>
             <div class="col-lg-12">
                 <img src="img/bannerr.png" style="width: 100%; transform: scale(1); border-radius: 40px;">
@@ -618,7 +624,7 @@
 
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.min.js"></script>
+
 
 <script src="js/jquery.nice-select.min.js"></script>
 <script src="js/jquery-ui.min.js"></script>
@@ -628,54 +634,6 @@
 <script src="js/main.js"></script>
 <script src="{{ mix('js/app.js') }}"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script>
-    $(document).ready(function() {
-        // Menangani event keyup ketika mengetik di input pencarian
-        $('#search-input').on('keyup', function() {
-            let query = $(this).val().trim(); // Mengambil nilai input dan menghapus spasi
-            let resultsContainer = $('#search-results'); // Menyimpan referensi ke container hasil pencarian
-
-            // Cek jika input berisi query
-            if (query.length > 0) {
-                $.ajax({
-                    url: "{{ route('search.beasiswa') }}", // Mengirim permintaan pencarian ke Laravel
-                    method: 'GET',
-                    data: { query: query },
-                    success: function(data) {
-                        resultsContainer.empty(); // Menghapus hasil pencarian sebelumnya
-                        if (data.length > 0) {
-                            // Jika ada hasil pencarian, tampilkan
-                            data.forEach(function(item) {
-                                // Menambahkan setiap hasil pencarian sebagai elemen clickable
-                                resultsContainer.append('<div class="search-result-item" style="padding: 10px; border-bottom: 1px solid #ddd; cursor: pointer;" data-id="'+ item.id +'">' + item.namabeasiswa + '</div>');
-                            });
-                            resultsContainer.show(); // Menampilkan container hasil pencarian
-                        } else {
-                            resultsContainer.html('<div style="padding: 10px;">No results found</div>').show();
-                        }
-                    }
-                });
-            } else {
-                // Jika input kosong, kosongkan dan sembunyikan hasil pencarian
-                resultsContainer.empty().hide(); // Menghapus hasil dan menyembunyikan container
-            }
-        });
-
-        // Menangani klik pada hasil pencarian
-        $(document).on('click', '.search-result-item', function() {
-            let selectedItem = $(this).text(); // Mengambil teks dari item yang dipilih
-            $('#search-input').val(selectedItem); // Menampilkan hasil yang dipilih di input
-            $('#search-results').empty().hide(); // Menyembunyikan hasil pencarian
-        });
-
-        // Menyembunyikan hasil pencarian jika klik di luar form pencarian
-        $(document).click(function(e) {
-            if (!$(e.target).closest('.header__search').length) {
-                $('#search-results').hide(); // Menyembunyikan hasil pencarian jika klik di luar
-            }
-        });
-    });
-</script>
 
     <script>
     $(document).ready(function(){

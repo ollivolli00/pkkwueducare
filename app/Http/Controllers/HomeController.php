@@ -129,7 +129,7 @@ Log::info('Recent Applicants: ', $recentApplicants->toArray());
 
     $data = Daftar::where('user_id', $userId)
         ->with('beasiswa') // Relasi dengan tabel beasiswa
-        ->get();
+        ->paginate(3); 
 
     return view('riwayat', compact('data'));
 }

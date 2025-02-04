@@ -144,7 +144,7 @@
 
           <label class="cursor-pointer w-full h-full flex justify-center items-center relative">
               <i id="icon1" class="fas fa-plus text-4xl text-gray-500"></i>
-              <input class="hidden @error('image1') is-invalid @enderror" name="image1" id="fileInput1" onchange="handleFileUpload(event, 'preview1', 'icon1', 'changeButton1')" type="file"  aria-describedby="fileInputTooltip"/>
+              <input class="hidden @error('image1') is-invalid @enderror" name="image1" id="fileInput1" onchange="handleFileUpload(event, 'preview1', 'icon1', 'changeButton1')" type="file"  aria-describedby="fileInputTooltip" required/>
           </label>
           @error('image1')
             <div class="alert alert-danger mt-2">{{ $message }}</div>
@@ -157,17 +157,17 @@
                 <i id="fileInputTooltip" class="fas fa-info-circle text-gray-500 cursor-pointer absolute top-2 right-2 z-10" data-tippy-content="Pilih logo beasiswamu" style="pointer-events: all;"></i>  
                 <label class="cursor-pointer w-full h-full flex justify-center items-center relative">
                     <i id="icon2" class="fas fa-plus text-4xl text-gray-500 absolute"></i>
-                    <input class="hidden @error('image2') is-invalid @enderror" name="image2" id="fileInput2" onchange="handleFileUpload(event, 'preview2', 'icon2', 'changeButton2')" type="file" aria-describedby="fileInputTooltip">
+                    <input class="hidden @error('image2') is-invalid @enderror" name="image2" id="fileInput2" onchange="handleFileUpload(event, 'preview2', 'icon2', 'changeButton2')" type="file" aria-describedby="fileInputTooltip" required>
                 </label>
                 @error('image2')<div class="alert alert-danger mt-2">{{ $message }}</div>@enderror
                 <img id="preview2" class="hidden absolute top-0 left-0 w-full h-full object-cover" alt="Preview">
             </div>
             <div class="w-3/4 flex flex-col">
-                <input class="border-2 border-gray-400 p-2 mb-4 w-full @error('namabeasiswa') is-invalid @enderror" name="namabeasiswa" placeholder="Contoh: Beasiswa BCA" type="text" title="Masukkan nama beasiswa">
+                <input class="border-2 border-gray-400 p-2 mb-4 w-full @error('namabeasiswa') is-invalid @enderror" name="namabeasiswa" placeholder="Contoh: Beasiswa BCA" type="text" title="Masukkan nama beasiswa" required>
                 @error('namabeasiswa')<div class="alert alert-danger mt-2">{{ $message }}</div>@enderror
-                <input class="border-2 border-gray-400 p-2 mb-4 w-full @error('namaperusahaan') is-invalid @enderror" name="namaperusahaan" placeholder="Contoh: BANK BCA" type="text" title="Masukkan nama perusahaan">
+                <input class="border-2 border-gray-400 p-2 mb-4 w-full @error('namaperusahaan') is-invalid @enderror" name="namaperusahaan" placeholder="Contoh: BANK BCA" type="text" title="Masukkan nama perusahaan" required>
                 @error('namaperusahaan')<div class="alert alert-danger mt-2">{{ $message }}</div>@enderror
-                <input class="border-2 border-gray-400 p-2 mb-4 w-full @error('batasbeasiswa') is-invalid @enderror" name="batasbeasiswa" placeholder="Contoh: 19/10/2025" type="date" title="Masukkan batas beasiswa">
+                <input class="border-2 border-gray-400 p-2 mb-4 w-full @error('batasbeasiswa') is-invalid @enderror" name="batasbeasiswa" placeholder="Contoh: 19/10/2025" type="date" title="Masukkan batas beasiswa" required>
                 @error('batasbeasiswa')<div class="alert alert-danger mt-2">{{ $message }}</div>@enderror
             </div>
         </div>
@@ -176,8 +176,8 @@
         <div class="w-full flex flex-col justify-center items-center p-4">
             <i class="fas fa-pencil-alt mb-2 absolute top-4 left-1/2 transform -translate-x-1/2"></i>
             <br>
-            <input class="border-2 border-gray-400 p-2 mb-2 w-full" name="minipersyaratan[]" placeholder="Contoh: Pendidikan" type="text" title="Masukkan judul kualifikasi"/>
-            <textarea class="border-2 border-gray-400 p-2 w-full" name="miniisi[]" placeholder="Contoh: Minimal Pendidikan S1/Sederajat" title="Masukkan isi kualifikasi"></textarea>
+            <input class="border-2 border-gray-400 p-2 mb-2 w-full" name="minipersyaratan[]" placeholder="Contoh: Pendidikan" type="text" title="Masukkan judul kualifikasi" required/>
+            <textarea class="border-2 border-gray-400 p-2 w-full" name="miniisi[]" placeholder="Contoh: Minimal Pendidikan S1/Sederajat" title="Masukkan isi kualifikasi" required></textarea>
         </div>
     </div>
     <div class="flex justify-center mb-8">
@@ -188,17 +188,17 @@
         
 
         <div class="flex flex-col mb-8">
-            <input class="border-2 border-gray-400 p-2 mb-2 @error('persyaratan') is-invalid @enderror" name="persyaratan" placeholder="Contoh: Persyaratan Khusus" type="text" title="Masukkan judul persyaratan"/>
+            <input class="border-2 border-gray-400 p-2 mb-2 @error('persyaratan') is-invalid @enderror" name="persyaratan" placeholder="Contoh: Persyaratan Khusus" type="text" title="Masukkan judul persyaratan" required/>
             @error('persyaratan')
                 <div class="alert alert-danger mt-2">{{ $message }}</div>
             @enderror
-            <textarea class="border-2 border-gray-400 p-2 @error('isipersyaratan') is-invalid @enderror" name="isipersyaratan" placeholder="Contoh: 1. Scan KTP 2. Scan KK (dianjurkan memakai bullets point)" title="Masukkan isi persyaratan"></textarea>
+            <textarea class="border-2 border-gray-400 p-2 @error('isipersyaratan') is-invalid @enderror" name="isipersyaratan" placeholder="Contoh: 1. Scan KTP 2. Scan KK (dianjurkan memakai bullets point)" title="Masukkan isi persyaratan" required></textarea>
             @error('isipersyaratan')
                 <div class="alert alert-danger mt-2">{{ $message }}</div>
             @enderror
         </div>
         <div class="flex flex-col mb-8">
-            <input class="border-2 border-gray-400 p-2 mb-2 @error('judul_benefit') is-invalid @enderror" name="judul_benefit" placeholder="Contoh: Benefit Yang Akan Kamu Dapatkan" type="text" title="Masukkan judul benefit" />
+            <input class="border-2 border-gray-400 p-2 mb-2 @error('judul_benefit') is-invalid @enderror" name="judul_benefit" placeholder="Contoh: Benefit Yang Akan Kamu Dapatkan" type="text" title="Masukkan judul benefit" required/>
             @error('judul_benefit')
                 <div class="alert alert-danger mt-2">{{ $message }}</div>
             @enderror
@@ -209,7 +209,7 @@
         <div class="w-full flex flex-col justify-center items-center p-4">
             <i class="fas fa-pencil-alt mb-2 absolute top-4 left-1/2 transform -translate-x-1/2"></i>
             <br>
-            <input class="border-2 border-gray-400 p-2 mb-2 w-full" name="bidang_benefit[]" placeholder="Contoh: Dana Pendidikan" type="text" title="Masukkan bidang benefitmu"/>
+            <input class="border-2 border-gray-400 p-2 mb-2 w-full" name="bidang_benefit[]" placeholder="Contoh: Dana Pendidikan" type="text" title="Masukkan bidang benefitmu" required/>
             <textarea class="border-2 border-gray-400 p-2 w-full" name="isi_benefit[]" placeholder="Contoh: Mendapatkan dana pendidikan sebesar 1.500.000/bulan" title="Masukkan isi benefitmu"></textarea>
         </div>
     </div>
@@ -282,8 +282,8 @@
             <div class="w-full flex flex-col justify-center items-center p-4">
                 <i class="fas fa-pencil-alt mb-2 absolute top-4 left-1/2 transform -translate-x-1/2"></i>
                 <br>
-                <input class="border-2 border-gray-400 p-2 mb-2 w-full" name="minipersyaratan[]" placeholder="Contoh: Pendidikan" type="text" title="Masukkan judul kualifikasi"/>
-                <textarea class="border-2 border-gray-400 p-2 w-full" name="miniisi[]" placeholder="Contoh: Minimal Pendidikan S1/Sederajat" title="Masukkan isi kualifikasi"></textarea>
+                <input class="border-2 border-gray-400 p-2 mb-2 w-full" name="minipersyaratan[]" placeholder="Contoh: Pendidikan" type="text" title="Masukkan judul kualifikasi" required/>
+                <textarea class="border-2 border-gray-400 p-2 w-full" name="miniisi[]" placeholder="Contoh: Minimal Pendidikan S1/Sederajat" title="Masukkan isi kualifikasi" required></textarea>
             </div>
         `;
     } else if (idContainer === 'dynamicFields2') {
@@ -292,8 +292,8 @@
             <div class="w-full flex flex-col justify-center items-center p-4">
                 <i class="fas fa-pencil-alt mb-2 absolute top-4 left-1/2 transform -translate-x-1/2"></i>
                 <br>
-                <input class="border-2 border-gray-400 p-2 mb-2 w-full" name="bidang_benefit[]" placeholder="Contoh: Dana Pendidikan" type="text" title="Masukkan bidang benefitmu"/>
-                <textarea class="border-2 border-gray-400 p-2 w-full" name="isi_benefit[]" placeholder="Contoh: Mendapatkan dana pendidikan sebesar 1.500.000/bulan" title="Masukkan isi benefitmu"></textarea>
+                <input class="border-2 border-gray-400 p-2 mb-2 w-full" name="bidang_benefit[]" placeholder="Contoh: Dana Pendidikan" type="text" title="Masukkan bidang benefitmu" required/>
+                <textarea class="border-2 border-gray-400 p-2 w-full" name="isi_benefit[]" placeholder="Contoh: Mendapatkan dana pendidikan sebesar 1.500.000/bulan" title="Masukkan isi benefitmu" required></textarea>
             </div>
         `;
     }

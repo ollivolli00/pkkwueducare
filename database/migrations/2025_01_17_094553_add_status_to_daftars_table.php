@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::table('daftars', function (Blueprint $table) {
-            $table->string('status')->default('Diproses')->after('created_at');
+            $table->string('status')->default('DIPROSES')->after('created_at');
         });
     }
     

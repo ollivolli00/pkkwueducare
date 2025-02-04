@@ -18,8 +18,9 @@
     <link rel="dns-prefetch" href="//fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
 
-    <!-- Scripts -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
+
 
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" />
@@ -42,7 +43,70 @@
     <div id="preloder">
         <div class="loader"></div>
     </div>
+ <!-- Humberger Begin -->
+  <!-- Humberger Begin -->
+  <div class="humberger__menu__overlay"></div>
+    <div class="humberger__menu__wrapper">
+        <div class="humberger__menu__logo">
+            <a href="#"><img src="img/logo.png" alt=""></a>
+        </div>
+        
+        <nav class="humberger__menu__nav mobile-menu">
+            <ul>
+                
+            <li><a href="{{'/'}}" >Home</a></li>   
+              <li>  <a href="{{ 'about' }}">About</a>   
+            </li>    <br>
+            @guest
+<li>
+    <a href="{{ route('signup') }}" style="text-align:center; color:white; padding: 10px 15px 12px; background: #7fad39;">Daftar Sebagai Perusahaan</a>
+</li>
+@endguest
+<br>
+                <li class="nav-item dropdown">
+    @auth
+        <a id="navbarDropdown" class="" href="#" style="text-align:center;" role="button">
+            {{ Auth::user()->name }}
+        </a>
+        <ul class="header__menu__dropdown">
+            @if (Auth::user()->profile) <!-- Cek jika profil ada -->
+                <li><a href="{{ route('pengguna.show', Auth::user()->profile->id) }}">Profile</a></li>
+                <li><a href="{{ route('riwayat') }}">Riwayat Pendaftaran</a></li>
+            @else
+                <li><a href="{{ route('pengguna.create') }}">Profile</a></li>
+            @endif
+            <li>
+                <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                    Logout
+                </a>
+                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                    @csrf
+                </form>
+            </li>
+        </ul>
+    @else
+        <a href="{{ route('login') }}" style="color:white; padding: 10px 15px 12px; background: #7fad39;">Login</a>
+    @endauth
+</li>
 
+
+            </ul>
+        </nav>
+        <div id="mobile-menu-wrap"></div>
+        <div class="header__top__right__social">
+        <a href="https://www.facebook.com/profile.php?id=100054859316679&mibextid=ZbWKwL"><i class='fa fa-facebook'></i></a>
+                    <a href="https://x.com/rgnaov"><i class='fa fa-twitter'></i></a>
+                    <a href="https://www.instagram.com/rgnaov/?utm_source=ig_web_button_share_sheet"><i class='fa fa-instagram'></i></a>
+
+        </div>
+        <div class="humberger__menu__contact">
+            <ul>
+                <li><i class="fa fa-envelope"></i> educare@gmail.com</li>
+                <li><i class="fa fa-phone"> +62 881-9540-957</i></li>
+            </ul>
+        </div>
+    </div>
+     
     <!-- Header Section Begin -->
     <header class="header">
         <div class="header__top">
@@ -106,7 +170,7 @@
     </header>
     <main class="container mx-auto mt-6" >
     <div class="section-title mt-4">
-                        <h2 center>RIWAYAT LAMARAN</h2>
+                        <h2 center>RIWAYAT PENDAFTARAN</h2>
                     </div>   
                     <div class="bg-white shadow-md rounded-3xl p-6 relative overflow-hidden">
     <div class="relative z-10">
@@ -140,14 +204,15 @@
                 {{ \Carbon\Carbon::parse($item->created_at)->format('d F Y H:i') }}
             </td>
             <td class="py-2 px-4 pt-6 border-t font-bold">
-    <div class="flex items-center space-x-2">
-        <span class="text-sm py-1 px-3 rounded-full"
-            style="background-color: {{ $item->status == 'DITOLAK' ? '#FFC2C2FF' : '#DCFFA7FF' }}; 
-                   color: {{ $item->status == 'DITOLAK' ? '#D10000FF' : '#7fad39' }}; 
-                   box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.1);">
-            {{ $item->status }}
-        </span>
-    </div>
+            <div class="flex items-center space-x-2">
+    <span class="text-sm py-1 px-3 rounded-full"
+        style="background-color: {{ $item->status == 'DITOLAK' ? '#FFC2C2FF' : ($item->status == 'DITERIMA' ? '#CEDFFAFF' : '#DCFFA7FF') }}; 
+               color: {{ $item->status == 'DITOLAK' ? '#D10000FF' : ($item->status == 'DITERIMA' ? '#082e6a' : '#7fad39') }}; 
+               box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.1);">
+        {{ $item->status }}
+    </span>
+</div>
+
 </td>
 
         </tr>
@@ -156,41 +221,13 @@
 </table>
 
         </div>
+        
     </div>
 </div>
-
-                <div class="flex items-center justify-between mt-4">
-                    <div class="flex items-center space-x-2">
-                        <label class="text-sm" for="entries">Show</label>
-                        <select class="border rounded-lg py-1 px-2 text-sm" id="entries">
-                            <option value="10">10</option>
-                            <option value="25">25</option>
-                            <option value="50">50</option>
-                            <option value="100">100</option>
-                        </select>
-                        <span class="text-sm">
-                            Results: 1 - 1 of 1
-                        </span>
-                    </div>
-                    <div class="flex items-center space-x-2">
-                        <button class="text-gray-500">
-                            <i class="fas fa-angle-double-left"></i>
-                        </button>
-                        <button class="text-gray-500">
-                            <i class="fas fa-angle-left"></i>
-                        </button>
-                        <button class="bg-[#7fad39]  text-white py-1 px-3 rounded-full">
-                            1
-                        </button>
-                        <button class="text-gray-500">
-                            <i class="fas fa-angle-right"></i>
-                        </button>
-                        <button class="text-gray-500">
-                            <i class="fas fa-angle-double-right"></i>
-                        </button>
-                    </div>
-                </div>
-            </div>
+<div class="pagination pt-4 pb-4 justify-end">
+    {{ $data->links() }} <!-- Menampilkan pagination otomatis -->
+</div> 
+           </div>
         </div>
     </div>
 </main>

@@ -115,7 +115,7 @@ public function index1()
 {
     // Validasi input untuk memastikan ada file yang diupload
     $request->validate([
-        'file_upload.*' => 'required|file|mimes:jpeg,png,jpg,pdf|max:2048', // Validasi setiap file
+        'file_upload.*' => 'required|file|mimes:jpeg,png,jpg,pdf,doc,docx|max:2048', // Validasi setiap file
     ]);
 
     // Ambil data pengguna yang login dari tabel Pengguna
@@ -252,7 +252,7 @@ public function index1()
             ->whereHas('beasiswa', function($query) use ($companyId) {
                 $query->where('company_id', $companyId);
             })
-            ->paginate(10); 
+            ->paginate(3); 
    
         return view('perusahaan.applist1', compact('daftars'));
     }
@@ -274,17 +274,18 @@ public function index1()
 {
     $daftar = Daftar::findOrFail($id);
 
-    if ($request->action == 'lanjut') {
+    if  ($request->action == 'TES PSIKOTES') {
         if ($daftar->status == 'DIPROSES') {
             $daftar->status = 'TES PSIKOTES';
         } elseif ($daftar->status == 'TES PSIKOTES') {
             $daftar->status = 'TES WAWANCARA';
         } elseif ($daftar->status == 'TES WAWANCARA') {
-            $daftar->status = 'DITERIMA';
+            $daftar->status = 'DITERIMA'; // Status berubah menjadi DITERIMA
         }
-    } elseif ($request->action == 'ditolak') {
-        $daftar->status = 'DITOLAK';
+    } elseif ($request->action == 'DITOLAK') {
+        $daftar->status = 'DITOLAK'; // Status berubah menjadi DITOLAK
     }
+
 
     $daftar->save();
 

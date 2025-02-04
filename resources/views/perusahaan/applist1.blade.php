@@ -195,21 +195,30 @@
               
                 <td>
     <!-- Lanjut Button (for changing status) -->
-        @if($daftar->status != 'DITOLAK' && $daftar->status != 'DITERIMA')
-            <a href="{{ route('ubahStatus', [$daftar->id, 'action' => 'lanjut']) }}" 
-            class="btn btn-primary" 
-            style="{{ $daftar->status == 'DITOLAK' ? 'background-color: gray; cursor: not-allowed; opacity: 0.5;' : '' }}">
-                {{ $daftar->status }}
-            </a>
-        @endif
-<br><br>
-        <!-- Ditolak Button -->
-        <a href="{{ route('ubahStatus', [$daftar->id, 'action' => 'ditolak']) }}" 
-        class="btn btn-danger" 
-        style="{{ $daftar->status == 'DITOLAK' ? 'background-color: gray; cursor: not-allowed; opacity: 0.5;' : '' }}">
+    @if($daftar->status != 'DITOLAK' && $daftar->status != 'DITERIMA')
+        <a href="{{ route('ubahStatus', ['id' => $daftar->id, 'action' => 'TES PSIKOTES']) }}" 
+           class="btn btn-primary">
+            {{ $daftar->status == 'TES PSIKOTES' ? 'TES WAWANCARA' : ($daftar->status == 'TES WAWANCARA' ? 'DITERIMA' : 'TES PSIKOTES') }}
+        </a>
+    @endif
+    <br><br>
+
+    <!-- Ditolak Button -->
+    @if($daftar->status != 'DITOLAK' && $daftar->status != 'DITERIMA')
+        <a href="{{ route('ubahStatus', ['id' => $daftar->id, 'action' => 'ditolak']) }}" 
+           class="btn btn-danger">
             DITOLAK
         </a>
+    @else
+        <!-- Style untuk status DITOLAK atau DITERIMA -->
+        <button class="btn {{ $daftar->status == 'DITOLAK' ? 'btn-secondary' : 'btn-secondary' }}" 
+                style="{{ $daftar->status == 'DITOLAK' ? 'background-color: gray; cursor: not-allowed; opacity: 0.5;' : ($daftar->status == 'DITERIMA' ? 'background-color: gray; cursor: not-allowed; opacity: 0.5;' : '') }}" 
+                disabled>
+            {{ $daftar->status == 'DITERIMA' ? 'Telah Diterima' : 'Ditolak' }}
+        </button>
+    @endif
 </td>
+
 
 
                 <td>{{ \Carbon\Carbon::parse($daftar->created_at)->diffForHumans() }}</td>

@@ -8,6 +8,7 @@ use App\Http\Controllers\MitraController;
 use App\Http\Controllers\Auth\PerusahaanController;
 use App\Http\Controllers\BeasiswaController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\SearchController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
@@ -85,4 +86,4 @@ Route::post('/signin', [PerusahaanController::class, 'loginn'])->name('signin.po
 
 Route::get('/applicant-list/download', [UserBeasiswaController::class, 'downloadPdf'])->name('applicant.downloadPdf');
 
-Route::get('/search-beasiswa', [UserBeasiswaController::class, 'search'])->name('search.beasiswa');
+Route::get('/search', [SearchController::class, 'index'])->name('search');

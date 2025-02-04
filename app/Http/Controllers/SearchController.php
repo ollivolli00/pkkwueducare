@@ -10,14 +10,16 @@ class SearchController extends Controller
 {
     public function index(Request $request)
     {
-        $query = $request->input('query');
-        $results = [];
-
-        if ($query) {
-            // Mencari beasiswa berdasarkan nama yang sesuai dengan query
-            $results = Beasiswa::where('namabeasiswa', 'like', '%' . $query . '%')->get(['id', 'namabeasiswa']);
-        }
-
-        return view('welcome', compact('results', 'query'));
+        // Ambil query pencarian dari input
+        $searchQuery = $request->input('query');
+    
+        // Cari beasiswa yang sesuai dengan query berdasarkan namabeasiswa dan id
+        $beasiswa = Beasiswa::where('namabeasiswa', 'like', '%' . $searchQuery . '%')
+                            ->orWhere('id', $searchQuery) // Pencarian berdasarkan ID
+                            ->get();
+    
+        // Kirim hasil pencarian ke view
+        return view('search', compact('beasiswa', 'searchQuery'));
     }
+    
 }

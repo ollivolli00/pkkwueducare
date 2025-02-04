@@ -16,6 +16,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;900&display=swap" rel="stylesheet">
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
     <!-- Css Styles -->
+    <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css">
     <link rel="stylesheet" href="css/font-awesome.min.css" type="text/css">
     <link rel="stylesheet" href="css/elegant-icons.css" type="text/css">
@@ -31,8 +32,9 @@
     <div id="preloder">
         <div class="loader"></div>
     </div>
- <!-- Humberger Begin -->
- <div class="humberger__menu__overlay"></div>
+
+    <!-- Humberger Begin -->
+    <div class="humberger__menu__overlay"></div>
     <div class="humberger__menu__wrapper">
         <div class="humberger__menu__logo">
             <a href="#"><img src="img/logo.png" alt=""></a>
@@ -93,7 +95,8 @@
             </ul>
         </div>
     </div>
-       <!-- Header Section Begin -->
+    <!-- Humberger End -->
+    <!-- Header Section Begin -->
     <header class="header">
         <div class="header__top">
             <div class="container">
@@ -150,7 +153,6 @@
     @endauth
 </li>
 
-
         </ul>
         </nav>
 </div>        
@@ -162,117 +164,72 @@
             </div>
         </div>
     </header>
-   
+    
+
     <!-- Hero Section Begin -->
-    <section class="hero">
-        <div class="container">
+<section class="hero">
+    <div class="container">
+        <div class="row">  
+            <div class="col-lg-12 text-center">
+            <div class="col-lg-12 pt-12">
+                <img src="img/bannerr.png" style="width: 100%; transform: scale(1); border-radius: 40px;">
+            </div>
+            <div style="margin-top: 50px;">
+    <div id="app">
+        <search-beasiswa></search-beasiswa>
+    </div>
+
+    <div class="header__search ml-6 mr-6" style="position: relative; width: 100%;">
+    <form action="{{ route('search') }}" method="get" style="display: flex; align-items: center; width: 97%; ">
+        <input type="text" id="search-input" name="query" placeholder="Search..." style="padding: 10px; border: 1px solid #ccc; flex-grow: 1; color: #333; font-family: 'Cairo', sans-serif;">
+        <button type="submit" style="padding: 11px; width: 80px; border: none; background: #7fad39; color: white; cursor: pointer;">
+            <i class="fa fa-search" style="font-size: 16px;"></i>
+        </button>
+    </form>
+
+   
+</div>
+
+</div>
+
             
-            <!-- <div class="row"> -->
-                <!-- <div class="col-lg-3">
-                    <div class="hero__categories">
-                        <div class="hero__categories__all">
-                            <i class="fa fa-bars"></i>
-                            <span>All departments</span>
-                        </div>
-                        <ul>
-                            <li><a href="#">Fresh Meat</a></li>
-                            <li><a href="#">Vegetables</a></li>
-                            <li><a href="#">Fruit & Nut Gifts</a></li>
-                            <li><a href="#">Fresh Berries</a></li>
-                            <li><a href="#">Ocean Foods</a></li>
-                            <li><a href="#">Butter & Eggs</a></li>
-                            <li><a href="#">Fastfood</a></li>
-                            <li><a href="#">Fresh Onion</a></li>
-                            <li><a href="#">Papayaya & Crisps</a></li>
-                            <li><a href="#">Oatmeal</a></li>
-                            <li><a href="#">Fresh Bananas</a></li>
-                        </ul>
-                    </div> -->
-                <!-- </div> -->
-                <!-- <div class="col-lg-9">
-                    <div class="hero__search">
-                        <div class="hero__search__form">
-                            <form action="#">
-                                <div class="hero__search__categories">
-                                    All Categories
-                                    <span class="arrow_carrot-down"></span>
-                                </div>
-                                <input type="text" placeholder="What do yo u need?">
-                                <button type="submit" class="site-btn">SEARCH</button>
-                            </form>
-                        </div>
-                        <div class="hero__search__phone">
-                            <div class="hero__search__phone__icon">
-                                <i class="fa fa-phone"></i>
-                            </div>
-                            <div class="hero__search__phone__text">
-                                <h5>+65 11.188.888</h5>
-                                <span>support 24/7 time</span>
-                            </div>
-                        </div>
-                    </div> -->
-                   
-<!--                         
-                    </div> -->
-                    
-                        <br>
-                    
-                </div>
-            </div>
         </div>
-    </section>
-    <!-- Hero Section End -->
+    </div>
+</section>
+<!-- Hero Section End -->
+<section class="categories py-10">
+    <div class="container mx-auto">
+        <h2 class="text-2xl font-bold text-left mb-6 ml-4">Hasil Pencarian: "{{ $searchQuery }}"</h2>
 
-    <!-- Categories Section Begin -->
-    <section class="categories">
-        <div class="container">
-        
-        <div class="section-title">
-                        <h2 center>TENTANG KAMI</h2>
-                    </div>   
-                    <div class="flex items-center mb-4">
-                    <p class="text-lg" style="text-align: left; width: 80%; margin: 0 auto;">
-       Selamat datang di EduCare, EduCare adalah platform yang didedikasikan untuk membantu pelajar dan mahasiswa menemukan beasiswa yang sesuai dengan kebutuhan mereka. Kami menyediakan informasi terbaru tentang berbagai macam beasiswa, baik untuk dalam negeri maupun luar negeri, dengan tujuan mempermudah akses pendidikan bagi semua kalangan.
-                    </p>
-                    <br>
-                    <p class="text-lg" style="text-align: left; width: 80%; margin: 0 auto;">
-                    Dengan EduCare, Anda dapat menelusuri berbagai pilihan beasiswa berdasarkan kriteria seperti bidang studi, jenjang pendidikan, lokasi, dan persyaratan khusus. Kami juga memberikan panduan praktis dalam proses pendaftaran beasiswa, mulai dari persiapan dokumen hingga tips seleksi.
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 ml-4">
+    @forelse ($beasiswa as $item)
+        <a href="{{ route('beasiswaa.show', $item->id) }}" class="border rounded-2xl p-6 flex flex-col items-center bg-white shadow-md hover:shadow-lg transition-shadow duration-300">
+        <div class="w-[200px] h-[90px] flex justify-center items-center rounded-md overflow-hidden bg-gray-100">
+    <img 
+        alt="{{ $item->namabeasiswa }}" 
+        src="{{ asset('storage/images/' . $item->image2) }}" 
+        class="w-full h-full object-cover" 
+    />
+</div>
 
-Visi kami adalah menciptakan generasi yang memiliki kesempatan pendidikan yang setara dan merata, sementara misi kami adalah menyediakan informasi beasiswa yang terjangkau, akurat, dan mudah diakses oleh semua orang.      </p>
+            <h5 class="text-lg font-bold text-center mt-3 text-gray-900">{{ $item->namabeasiswa }}</h5>
+            <p class="text-gray-600 font-semibold text-center">{{ $item->deskripsi }}</p>
+            <p class="text-xs mt-2 
+    {{ \Carbon\Carbon::parse($item->batasbeasiswa)->isPast() ? 'text-red-500' : 'text-gray-500' }}">
+    Batas Waktu: {{ \Carbon\Carbon::parse($item->batasbeasiswa)->format('d M Y') }}
+</p>
 
-                    </p>
-     </div>
-    <!-- Contact Section Begin -->
-    <section class="contact spad">
-        <div class="container">
-            <div class="row justify-content-center">
-                <div class="col-lg-3 col-md-3 col-sm-6 text-center">
-                    <div class="contact__widget">
-                        <span class="icon_phone"></span>
-                        <h4>Call Center</h4>
-                        <p>+62 813-3535-9018</p>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-3 col-sm-6 text-center">
-                    <div class="contact__widget">
-                        <span class="icon_mail_alt"></span>
-                        <h4>Email</h4>
-                        <p>educare@gmail.com</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- Contact Section End -->
+        </a>
+    @empty
+        <p class="text-center col-span-4 text-gray-500">Tidak ada beasiswa yang ditemukan.</p>
+    @endforelse
+</div>
 
-            <div class="row">
-         
-                </div>
-            </div>
-        </div>
-    </section>
-  
-  <!-- Footer Section Begin --><footer class="footer spad">
+</section>
+
+
+   <!-- Footer Section Begin -->
+<footer class="footer spad">
     <div class="container">
         <!-- Konten lain dalam footer bisa tetap di dalam container jika tidak ingin full width -->
         <div class="row">
@@ -296,21 +253,27 @@ Visi kami adalah menciptakan generasi yang memiliki kesempatan pendidikan yang s
         </div>
     </div>
 </footer>
+ <!-- Footer Section End -->
 
-<!-- Include Bootstrap JS -->
+    <!-- Js Plugins -->
+     <!-- Include Bootstrap JS -->
 
-<script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"></script>
 
-<script src="{{asset('js/jquery.nice-select.min.js')}}"></script>
-<script src="{{asset('js/jquery-ui.min.js')}}"></script>
-<script src="{{asset('js/jquery.slicknav.js')}}"></script>
-<script src="{{asset('js/mixitup.min.js')}}"></script>
-<script src="{{asset('js/owl.carousel.min.js')}}"></script>
-<script src="{{asset('js/main.js')}}"></script>
 
+<script src="js/jquery.nice-select.min.js"></script>
+<script src="js/jquery-ui.min.js"></script>
+<script src="js/jquery.slicknav.js"></script>
+<script src="js/mixitup.min.js"></script>
+<script src="js/owl.carousel.min.js"></script>
+<script src="js/main.js"></script>
+<script src="{{ mix('js/app.js') }}"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 
 </body>
 
 </html>
+
