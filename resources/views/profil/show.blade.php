@@ -178,15 +178,15 @@
             <div class="mt-8">
                 <div class="mb-4">
                     <label for="namalengkap" class="block text-gray-700 text-lg"><strong>Nama Lengkap :</strong></label>
-                    <p class="w-full px-4 py-2 border rounded-lg cursor-not-allowed">{{ $penggunas->namalengkap }}</p>
+                    <p class="w-full px-4 py-2 border rounded-lg cursor-not-allowed">{{ $pengguna->namalengkap }}</p>
                 </div>
                 <div class="mb-4">
                     <label for="tanggal_lahir" class="block text-gray-700 text-lg"><strong>Tanggal Lahir :</strong></label>
-                    <p class="w-full px-4 py-2 border rounded-lg cursor-not-allowed">{{ $penggunas->tanggal_lahir }}</p>
+                    <p class="w-full px-4 py-2 border rounded-lg cursor-not-allowed">{{ $pengguna->tanggal_lahir }}</p>
                 </div>
                 <div class="mb-4">
                     <label for="jenis_kelamin" class="block text-gray-700 text-lg"><strong>Jenis Kelamin :</strong></label>
-                    <p class="w-full px-4 py-2 border rounded-lg cursor-not-allowed">{{ $penggunas->jenis_kelamin }}</p>
+                    <p class="w-full px-4 py-2 border rounded-lg cursor-not-allowed">{{ $pengguna->jenis_kelamin }}</p>
                 </div>
                 <div class="mb-4">
     <label for="email" class="block text-gray-700"><strong>Email :</strong></label>
@@ -205,17 +205,17 @@
 
                 <div class="mb-4">
                     <label for="no_telp" class="block text-gray-700 text-lg"><strong>No. Telepon :</strong></label>
-                    <p class="w-full px-4 py-2 border rounded-lg cursor-not-allowed">{{ $penggunas->no_telp }}</p>
+                    <p class="w-full px-4 py-2 border rounded-lg cursor-not-allowed">{{ $pengguna->no_telp }}</p>
                 </div>
-                @if ($penggunas->image)
+                @if ($pengguna->image)
                     <div class="mb-4">
                         <label for="image" class="block text-gray-700 text-lg"><strong>Upload File :</strong></label>
-                        <img src="{{ asset('storage/images/' . $penggunas->image) }}" alt="Upload File" class="rounded-lg" style="width: 150px; height: auto;">
+                        <img src="{{ asset('storage/images/' . $pengguna->image) }}" alt="Upload File" class="rounded-lg" style="width: 150px; height: auto;">
                     </div>
                 @endif
                 <div class="mt-10 text-center">
-                    <a href="{{ route('pengguna.edit', $penggunas->id) }}" class="btn btn-primary">Edit</a>
-                    <form action="{{ route('pengguna.destroy', $penggunas->id) }}" method="POST" style="display:inline;" onsubmit="return confirm('Apakah Anda yakin ingin menghapus data ini?');">
+                    <a href="{{ route('pengguna.edit', $pengguna->id) }}" class="btn btn-primary">Edit</a>
+                    <form action="{{ route('pengguna.destroy', $pengguna->id) }}" method="POST" style="display:inline;" onsubmit="return confirm('Apakah Anda yakin ingin menghapus data ini?');">
                         @csrf
                         @method('DELETE')
                         <button type="submit" class="btn btn-danger">Delete</button>

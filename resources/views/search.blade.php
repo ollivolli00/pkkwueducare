@@ -203,21 +203,25 @@
 
         <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 ml-4">
     @forelse ($beasiswa as $item)
-        <a href="{{ route('beasiswaa.show', $item->id) }}" class="border rounded-2xl p-6 flex flex-col items-center bg-white shadow-md hover:shadow-lg transition-shadow duration-300">
-        <div class="w-[200px] h-[90px] flex justify-center items-center rounded-md overflow-hidden bg-gray-100">
-    <img 
-        alt="{{ $item->namabeasiswa }}" 
-        src="{{ asset('storage/images/' . $item->image2) }}" 
-        class="w-full h-full object-cover" 
-    />
-</div>
+        @if(auth()->check())
+            <a href="{{ route('beasiswaa.show', $item->id) }}" class="border rounded-2xl p-6 flex flex-col items-center bg-white shadow-md hover:shadow-lg transition-shadow duration-300">
+        @else
+            <a href="#" data-bs-toggle="modal" data-bs-target="#loginModal" class="border rounded-2xl p-6 flex flex-col items-center bg-white shadow-md hover:shadow-lg transition-shadow duration-300">
+        @endif
+
+            <div class="w-[200px] h-[90px] flex justify-center items-center rounded-md overflow-hidden bg-gray-100">
+                <img 
+                    alt="{{ $item->namabeasiswa }}" 
+                    src="{{ asset('storage/images/' . $item->image2) }}" 
+                    class="w-full h-full object-cover" 
+                />
+            </div>
 
             <h5 class="text-lg font-bold text-center mt-3 text-gray-900">{{ $item->namabeasiswa }}</h5>
             <p class="text-gray-600 font-semibold text-center">{{ $item->deskripsi }}</p>
-            <p class="text-xs mt-2 
-    {{ \Carbon\Carbon::parse($item->batasbeasiswa)->isPast() ? 'text-red-500' : 'text-gray-500' }}">
-    Batas Waktu: {{ \Carbon\Carbon::parse($item->batasbeasiswa)->format('d M Y') }}
-</p>
+            <p class="text-xs mt-2 {{ \Carbon\Carbon::parse($item->batasbeasiswa)->isPast() ? 'text-red-500' : 'text-gray-500' }}">
+                Batas Waktu: {{ \Carbon\Carbon::parse($item->batasbeasiswa)->format('d M Y') }}
+            </p>
 
         </a>
     @empty
@@ -227,6 +231,25 @@
 
 </section>
 
+<!-- Modal Login -->
+<div id="loginModal" class="modal fade" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
+    <div class="modal-dialog" style="top: 5px;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="loginModalLabel">EDUCARE</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>Anda perlu login terlebih dahulu untuk melihat detail beasiswa.</p>
+                <div class="d-flex justify-content-end mt-4">
+                    <a href="{{ route('login') }}" class="primary-btn" style="background-color: #7fad39; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px;">
+                        Login
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
    <!-- Footer Section Begin -->
 <footer class="footer spad">

@@ -154,8 +154,14 @@
     @endforeach
 </tbody>
 </table>
+<!-- Pagination -->
+<div style="text-align: right; margin-top: 16px; padding: 12px 20px; background-color: #f9fafb; border-top: 1px solid #e5e7eb;">
+    {{ $perusahaan->links() }}
+</div>
+      </div><!-- Pagination -->
 
-      </div>
+
+
     </div>
   </div>
 

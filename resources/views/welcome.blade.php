@@ -488,7 +488,7 @@
             </div>
             <div class="modal-body">
                 <p>Anda perlu login terlebih dahulu untuk mendaftar beasiswa.</p>
-                <div class="d-flex justify-content-end">
+                <div class="d-flex justify-content-end mt-4">
                     <a href="{{ route('login') }}" class="primary-btn" style="background-color: #7fad39; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px;">
                         Login
                     </a>

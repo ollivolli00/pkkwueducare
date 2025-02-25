@@ -12,24 +12,24 @@ class PenggunaController extends Controller
     public function index()
     {
         // Cek apakah pengguna sudah memiliki data pengguna
-        $penggunas = Pengguna::where('id_user', Auth::id())->first();
+        $pengguna = Pengguna::where('id_user', Auth::id())->first();
 
-        return $penggunas 
-            ? redirect()->route('pengguna.show', $penggunas->id)
+        return $pengguna 
+            ? redirect()->route('pengguna.show', $pengguna->id)
             : redirect()->route('pengguna.create');
     }
 
     public function create()
-    {
-        // Cek apakah pengguna sudah memiliki data pengguna
-        if (Pengguna::where('id_user', Auth::id())->exists()) {
-            // Jika sudah, arahkan ke halaman detail pengguna
-            return redirect()->route('pengguna.show', Pengguna::where('id_user', Auth::id())->first()->id);
-        }
+{
+    $pengguna = Pengguna::where('id_user', Auth::id())->first();
 
-        // Jika belum, tampilkan form create
-        return view('profil.create');
+    if ($pengguna) {
+        return redirect()->route('pengguna.show', $pengguna->id);
     }
+
+    return view('profil.create', ['pengguna' => null]); // kirim null
+}
+
 
     public function store(Request $request)
 {
@@ -75,9 +75,9 @@ class PenggunaController extends Controller
 
     public function show($id)
     {
-        $penggunas = Pengguna::findOrFail($id);
+        $pengguna = Pengguna::findOrFail($id);
     
-        return view('profil.show', compact('penggunas'));
+        return view('profil.show', compact('pengguna'));
     }
 
     public function edit($id)

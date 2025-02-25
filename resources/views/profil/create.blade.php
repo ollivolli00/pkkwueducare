@@ -185,7 +185,7 @@
             <div class="mt-8">
             <div class="mb-4">
     <label for="namalengkap" class="block text-gray-700 text-lg"><strong>Nama Lengkap :</strong></label>
-    <input type="text" name="namalengkap" id="namalengkap" value="{{ $pengguna->namalengkap }}" class="w-full px-4 py-2 border rounded-lg @error('namalengkap') border-red-500 @enderror">
+    <input type="text" name="namalengkap" id="namalengkap" value="{{ $pengguna->namalengkap ?? '' }}" class="w-full px-4 py-2 border rounded-lg @error('namalengkap') border-red-500 @enderror">
     @error('namalengkap')
         <span class="text-red-500 text-sm">{{ $message }}</span>
     @enderror
@@ -193,7 +193,7 @@
 
 <div class="mb-4">
     <label for="tanggal_lahir" class="block text-gray-700 text-lg"><strong>Tanggal Lahir :</strong></label>
-    <input type="date" name="tanggal_lahir" id="tanggal_lahir" value="{{ $pengguna->tanggal_lahir }}" class="w-full px-4 py-2 border rounded-lg @error('tanggal_lahir') border-red-500 @enderror">
+    <input type="date" name="tanggal_lahir" id="tanggal_lahir" value="{{ $pengguna->tanggal_lahir ?? ''}}" class="w-full px-4 py-2 border rounded-lg @error('tanggal_lahir') border-red-500 @enderror">
     @error('tanggal_lahir')
         <span class="text-red-500 text-sm">{{ $message }}</span>
     @enderror
@@ -201,11 +201,17 @@
 
 <div class="mb-4">
     <label for="jenis_kelamin" class="block text-gray-700 text-lg"><strong>Jenis Kelamin :</strong></label>
-    <input type="text" name="jenis_kelamin" id="jenis_kelamin" value="{{ $pengguna->jenis_kelamin }}" class="w-full px-4 py-2 border rounded-lg text-gray-500 cursor-not-allowed" readonly>
+    <select name="jenis_kelamin" id="jenis_kelamin" class="w-full px-4 py-2 border rounded-lg text-gray-500 @error('jenis_kelamin') border-red-500 @enderror h-full">
+        <option value="" disabled selected hidden>Pilih Jenis Kelamin</option>
+        <option value="Laki-laki" {{ old('jenis_kelamin') == 'Laki-laki' ? 'selected' : '' }}>Laki-laki</option>
+        <option value="Perempuan" {{ old('jenis_kelamin') == 'Perempuan' ? 'selected' : '' }}>Perempuan</option>
+    </select>
     @error('jenis_kelamin')
         <span class="text-red-500 text-sm">{{ $message }}</span>
     @enderror
 </div>
+<br>
+<br><br>
 
 <div class="mb-4">
     <label for="email" class="block text-gray-700"><strong>Email :</strong></label>
@@ -224,7 +230,7 @@
 
 <div class="mb-4">
     <label for="no_telp" class="block text-gray-700 text-lg"><strong>No Telepon :</strong></label>
-    <input type="tel" name="no_telp" id="no_telp" class="w-full px-4 py-2 border rounded-lg @error('no_telp') border-red-500 @enderror" value="{{ old('no_telp', $pengguna->no_telp) }}" pattern="[0-9]*" oninput="validateInput(this)">
+    <input type="tel" name="no_telp" id="no_telp" class="w-full px-4 py-2 border rounded-lg @error('no_telp') border-red-500 @enderror" value="{{ old('no_telp', $pengguna->no_telp ?? '') }}" pattern="[0-9]*" oninput="validateInput(this)">
     @error('no_telp')
         <span class="text-red-500 text-sm">{{ $message }}</span>
     @enderror
@@ -256,7 +262,7 @@
     <!-- Menampilkan gambar yang sudah ada jika tersedia -->
     @if (isset($pengguna->image) && $pengguna->image)
         <div class="mb-2">
-            <img src="{{ asset('storage/images/' . $pengguna->image) }}" alt="Foto Diri" class="w-32 h-32 object-cover rounded-md">
+            <img src="{{ asset('storage/images/' . $pengguna->image ?? '') }}" alt="Foto Diri" class="w-32 h-32 object-cover rounded-md">
         </div>
     @endif
 

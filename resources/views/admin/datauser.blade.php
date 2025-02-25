@@ -140,7 +140,14 @@
 </tbody>
 
         </table>
+        <!-- Pagination -->
+<div style="text-align: right; margin-top: 16px; padding: 12px 20px; background-color: #f9fafb; border-top: 1px solid #e5e7eb;">
+    {{ $users->links() }}
+</div>
+
       </div>
+
+
     </div>
   </div>
 
